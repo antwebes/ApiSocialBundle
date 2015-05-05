@@ -41,6 +41,23 @@ class UserController extends Controller
         return $this->renderOrRedirect($user, $isXmlHttpRequest);
     }
 
+    public function channelsAction($userId, $list)
+    {
+        $user = $this->get('api_users')->findById($userId);
+        if($user == null){
+            throw $this->createNotFoundException('THe user with id ' .$userId, ' not exits');
+        }
+        $channels = array();
+        if($list == 'owner'){
+            $channels = $user->getChannels();
+        }elseif($list == 'fan'){
+            $channels = $user->getChannelsFan();
+        }elseif($list == 'moderator'){
+            $channels = $user->getChannelsModerated();
+        }
+        return $this->render('ApiSocialBundle:Show:channels.html.twig',array('user'=>$user,'channels'=>$channels, 'type'=>$list));
+    }
+
     private function findUserByUsernameOrId($username, $user_id, $asArray)
     {
         if($user_id != null){
