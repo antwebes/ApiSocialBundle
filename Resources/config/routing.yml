@@ -1,0 +1,16 @@
+ant_user_user_users:
+    path: /users/
+    defaults: { _controller: ApiSocialBundle:User:users }
+
+ant_user_user_users.page:
+    path: /users/{page}
+    defaults: { _controller: ApiSocialBundle:User:users }
+    requirements:
+      page: \d+
+
+ant_user_user_show:
+    path: /users/{username}-{user_id}
+    defaults: { _controller: ApiSocialBundle:Show:show }
+    requirements:
+       username: "[a-zA-Z0-9\-_`^{}\[\]\\~|]+"
+       user_id: \d+

@@ -1,0 +1,60 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% block head_meta_description %}{% include 'UserBundle:User:meta/index/description.html.twig'  %}{% endblock %}
+{% block head_meta_keywords %}{% include 'UserBundle:User:meta/index/keywords.html.twig' %}{% endblock %}
+{% block head_title %}{% include 'UserBundle:User:meta/index/title.html.twig' %}{% endblock %}
+
+{% block head_meta_rel_canonical %}<link rel="canonical" href="{{ url('ant_user_user_users') }}"/>{% endblock %}
+
+{% block chatea_body %}
+    <h2>{{ "Users" | trans }}</h2>
+    <div class="row-fluid">
+        <ul class="ace-thumbnails" data-behat="items-user">
+            {% for user in users %}
+                <li class="col-xs-4 col-lg-2" >
+                    <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}" alt="{{ user.username }}"  title="{{ user.username }}">
+                        {% if user.profilePhoto %}
+                            <img class="lazy img-responsive" data-original="{{ user | userProfilePhotoUrl("medium") }}" height="250px">
+                        {% else %}
+                            {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+                            <img class="lazy img-responsive" data-original="{{ asset_url }}">
+                            {% endimage %}
+                        {% endif %}
+                        <div class="tags hidden-xs">
+			            <span class="label-holder">
+			                <span class="label label-info arrowed"><strong><i class="fa fa-user"></i> {{ user.username }}</strong></span>
+			            </span>
+                            {% if user.city %}
+                                {% if user.city.name != 'no_city' %}
+                                    <span class="label-holder">
+				                <span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.name }}</span>
+				            </span>
+                                {% else %}
+                                    <span class="label-holder">
+				                	<span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.country }}</span>
+				            	</span>
+                                {% endif %}
+                            {% endif %}
+
+                        </div>
+                    </a>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <br style="clear:both;" />
+
+    {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users'} %}
+{% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    {% javascripts
+    '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+    {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+{% endblock %}

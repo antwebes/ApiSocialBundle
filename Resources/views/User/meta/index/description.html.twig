@@ -1,0 +1,4 @@
+{% trans %}
+Find interesting people to meet, share fotos and chat with them
+{% endtrans %}
+{% if users.getPage is defined and users.getPage > 1 %}- {% trans %}page{% endtrans %} {{ users.getPage }}{% endif %}

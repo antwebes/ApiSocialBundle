@@ -1,0 +1,64 @@
+{% set pageCount = pager | length %}
+{% set lastPage = pager.getLastPage() %}
+{% set current = pager.getPage %}
+{% set pageParameterName = 'page' %}
+
+{% set pagesInRange = pager.getLinks(5) %}
+
+{% if current > 4 %}
+	{% set first = 1 %}
+	{% set previous = current - 1 %}
+{% endif %}
+
+{% if current < (lastPage - 2) %}
+	{% set last = lastPage %}
+	{% if current < (lastPage - 3) %}
+		{% set next = current + 1 %}
+	{% endif %}
+{% endif %}
+
+
+{% if pageCount > 1 %}
+	 <ul class="pagination" data-behat="pagination">   
+	    {% if previous is defined %}
+	        <li>
+	            <a href="{{ path(route, {'page': previous}) }}">{{ "Prev" | trans }}</a>
+	        </li>
+	    {% endif %}
+	    
+	    {% if first is defined and current != first and first not in pagesInRange%}
+	        <li>
+	            <a href="{{ path(routeIndex) }}">1..</a>
+	        </li>
+	    {% endif %}
+
+
+	    {% for page in pagesInRange %}
+	        {% if page != current %}
+	            <li>
+	                <a href="{{ path(route, {'page': page}) }}">{{ page }}</a>
+	            </li>
+	        {% else %}
+	            <li class="active"><a href="#">{{ page }}</a></li>
+	        {% endif %}
+	    {% endfor %}
+
+	    {% if last is defined and current != last and last not in pagesInRange %}
+	    	{% if next is defined %}
+		        <li class="last">
+		            <a href="{{ path(route, {'page': last}) }}">..{{ last }}</a>
+		        </li>
+		    {% else %}
+		    	<li class="last">
+		            <a href="{{ path(route, {'page': last}) }}">{{ last }}</a>
+		        </li>
+		    {% endif %}
+	    {% endif %}
+
+	    {% if next is defined %}
+	        <li>
+	            <a href="{{ path(route, {'page': next}) }}">{{ "Next" | trans }}</a>
+	        </li>
+	    {% endif %}
+	</ul>
+{% endif %}
