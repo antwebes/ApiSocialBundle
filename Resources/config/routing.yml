@@ -10,7 +10,37 @@ ant_user_user_users.page:
 
 ant_user_user_show:
     path: /users/{username}-{user_id}
-    defaults: { _controller: ApiSocialBundle:Show:show }
+    defaults: { _controller: ApiSocialBundle:User:show }
     requirements:
        username: "[a-zA-Z0-9\-_`^{}\[\]\\~|]+"
        user_id: \d+
+
+ant_user_user_photos_show:
+    path: /users/{id}/photos
+    defaults: { _controller: ApiSocialBundle:User:photos }
+
+ant_chat_chat_show:
+    pattern: /chat/
+    defaults: { _controller: ApiSocialBundle:Chat:show }
+
+user_channel_list:
+    pattern: /users/{userId}/channels/{list}
+    defaults: { _controller: ApiSocialBundle:User:channels }
+
+user_channel_list_paged:
+    pattern: /users/{userId}/channels/{list}/{page}
+    defaults: { _controller: ApiSocialBundle:User:channels }
+
+channel_show:
+    path: /rooms/{slug}
+    defaults: { _controller: ChannelBundle:Show:show }
+
+channel_list:
+    path:  /rooms/list
+    defaults: { _controller: ChannelBundle:List:channels}
+
+channel_list_page:
+    path:  /rooms/page/{page}
+    defaults: { _controller: ChannelBundle:List:channels }
+    requirements:
+        page: \d+

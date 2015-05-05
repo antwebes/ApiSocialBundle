@@ -1,0 +1,24 @@
+<form method="get" action="{{ path("ant_chat_chat_show")}}" data-pjaxchatform="">
+    {% if channel is defined %}
+        {% if channel.ircChannel starts with "#" %}
+            {% set irc_channel = channel.ircChannel[1:] %}
+        {% else %}
+            {% set irc_channel = channel.ircChannel %}
+        {% endif %}
+        <input type="hidden" id="chat_channel" value="{{ irc_channel }},chatsfree" name="channel">
+        <input type="hidden" value="{{ channel.id }}" name="channel_id">
+        <input type="hidden" id="chat_type" value="{{channel.channelType }}" name="type">
+    {% else %}
+        <input type="hidden" id="chat_channel" value="{{ default_channel }}" name="channel">
+        <input type="hidden" id="chat_type" value="" name="type">
+    {% endif %}
+
+    <button type="submit" class="{% if class_button is defined %}{{ class_button }} {% else %}btn btn-primary btn-chat{% endif %}"><i class="fa fa-comments"></i>
+        {% if message is defined %}
+            {{ message | trans }}
+        {% else %}
+            {{ "Chat" |trans }}
+        {% endif %}
+    </button>
+
+</form>

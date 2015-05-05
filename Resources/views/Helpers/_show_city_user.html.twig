@@ -1,0 +1,1 @@
+{% if user.city %}{% if user.city != 'no_city' %}{{ user.city}}{% else %}{{ user.city.country }}{% endif %}{% endif %}

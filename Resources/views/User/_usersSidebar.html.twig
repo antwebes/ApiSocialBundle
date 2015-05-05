@@ -1,0 +1,34 @@
+       
+     <div class="col-xs-12 center">
+		<span class="profile-picture">
+		<div style="position: relative; left: 0; top: 0;">
+			{% if user.profilePhoto %}
+				<img style="position: relative; top: 0; left: 0;" class="editable img-responsive" alt="{{ user.username | capitalize }}" id="avatar2" src="{{ user | userProfilePhotoUrl("medium") }}">
+			{% else %}
+				{% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+					<img style="position: relative; top: 0; left: 0;" class="editable img-responsive" alt="{{ user.username | capitalize }}" id="avatar2" src="{{ asset_url }}">
+				{% endimage %}
+			{% endif %}
+			{# begin badge account validated #}
+			{% if user.enabled %}
+				<i style="position: absolute; top: 80%; left: 80%;" class="fa fa-check-circle-o fa-3x blue" data-toggle="tooltip" data-placement="right" data-behat="account-verified" title="Account verified"></i>
+			{% endif %}
+			{# end badge account validated #}
+		</div>
+		
+		</span>
+
+		<div class="space space-4"></div>
+
+{# 		<a href="{{ path('ant_user_register') }}" class="btn btn-sm btn-block bWtn-success">#}
+{# 			<i class="icon-plus-sign bigger-120"></i>#}
+{# 			<span class="bigger-110">{{ "Add as a friend" | trans }}</span>#}
+{# 		</a>#}
+
+		{# <a href="{{ path('_antwebes_chateaclient_login', {'redirect': path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }) }}" class="btn btn-sm btn-block btn-primary"> #}
+		<a href="{{ path('ant_chat_chat_show', {'private': user.username}) }}" class="btn btn-sm btn-block btn-primary" data-role="private-chat-link">
+		
+			<i class="icon-comments bigger-110"></i>
+			<span class="bigger-110">{{ "Chat with " | trans }}{{ user.username }}</span>
+		</a>
+	</div>
