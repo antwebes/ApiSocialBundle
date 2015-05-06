@@ -26,7 +26,7 @@
 						<div class="clearfix"></div>
 						<p>{{ channel.description | truncate(70) }}</p>
 							{#Enter chat room#}
-							{{ include ("ApiSocialBundle:Chat:button.html.twig", {'channel': channel, 'message': 'user.enter_chat_room' | trans, 'class_button': 'btn btn-info btn-sm pull-left'}) }}
+							{# { include ("ApiSocialBundle:Chat:button.html.twig", {'channel': channel, 'message': 'user.enter_chat_room' | trans, 'class_button': 'btn btn-info btn-sm pull-left'}) } #}
 							<div class="hidden-xs pull-right">
 			            		{% for fan in channel.fans(4, {'has_profile_photo':'1'}) %}
 			            			{% if fan.profilePhoto %}
@@ -45,7 +45,8 @@
 					<li><i class="fa fa-users"></i><span>&nbsp; {{ channel.numberFans }} {{ 'user.fans' | trans }}</span></li>
 					{% if channel.getChannelType is not null %}
 						{# See all chat room of same type #}
-						<li><a title="{{ "user.rooms_same_type" | trans }}" href="{{ path('channel_list') }}?filter=channelType={{ channel.getChannelType.name }}"><i class="fa fa-random"></i><span>&nbsp; {{ channel.channelType }}</span></a></li>
+						<li><i class="fa fa-random"></i><span>&nbsp; {{ channel.channelType }}</span></li>
+						{# <li><a title="{{ "user.rooms_same_type" | trans }}" href="{{ path('channel_list') }}?filter=channelType={{ channel.getChannelType.name }}"><i class="fa fa-random"></i><span>&nbsp; {{ channel.channelType }}</span></a></li> #}
 					{% endif %}
 					<li class="hidden-xs pull-right"><i class="fa fa-user"></i> {{ 'user.fans' | trans }} <span> {{ channel.owner}}</span></li>
 				</ul>

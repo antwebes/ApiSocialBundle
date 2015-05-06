@@ -26,9 +26,6 @@
 {# 		</a>#}
 
 		{# <a href="{{ path('_antwebes_chateaclient_login', {'redirect': path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }) }}" class="btn btn-sm btn-block btn-primary"> #}
-		<a href="{{ path('ant_chat_chat_show', {'private': user.username}) }}" class="btn btn-sm btn-block btn-primary" data-role="private-chat-link">
+
 		
-			<i class="icon-comments bigger-110"></i>
-			<span class="bigger-110">{{ "Chat with " | trans }}{{ user.username }}</span>
-		</a>
 	</div>
