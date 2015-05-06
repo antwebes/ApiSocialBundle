@@ -11,3 +11,6 @@ Chat: Chat
 user.owner_of_channels: 'Owner of channels'
 user.moderator_of_channels: 'Moderator of channels'
 user.fan_of_channels: 'Fan channels'
+'user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with': '__user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with'
+'Personal info of %username%': 'Personal info of %username%'
+'Personal info of %username%, see photos and chat free with %username%': 'Personal info of %username%, see photos and chat free with %username%'

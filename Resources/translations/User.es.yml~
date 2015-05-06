@@ -16,4 +16,5 @@ user.fans: Fans
 user.page_prev: Anterior
 user.page_next: Proxima
 user.enter_chat_room: 'Entrar en la sala'
-user.channel_visits: 'Visitas'
+user.channel_visits: Visitas
+user.profile: Perfil

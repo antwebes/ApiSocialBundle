@@ -11,3 +11,6 @@ Chat: Chat
 user.owner_of_channels: 'Canales de los cuales es propietario'
 user.moderator_of_channels: 'Canales de los cuales es moderador'
 user.fan_of_channels: 'Canales de los cuales es fan'
+'user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with': '__user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with'
+'Personal info of %username%': 'Información personal de %username%'
+'Personal info of %username%, see photos and chat free with %username%': 'Información personal de %username%, ve fotos y chatea gratis con %username%'

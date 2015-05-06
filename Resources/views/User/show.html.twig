@@ -6,11 +6,9 @@
 	{% endif %}
 {% endblock header_no_index %}
 
-{#
-{% block head_meta_description %}{% include 'UserBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
-{% block head_meta_keywords %}{% include 'UserBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
-{% block head_title %}{% include 'UserBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
-#}
+{% block head_meta_description %}{% include 'ApiSocialBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
+{% block head_meta_keywords %}{% include 'ApiSocialBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
+{% block head_title %}{% include 'ApiSocialBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
 
 {% block chatea_body %}
 <ul class="nav nav-tabs padding-18">
