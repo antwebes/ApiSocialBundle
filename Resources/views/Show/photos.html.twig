@@ -1,5 +1,7 @@
 {% extends "ChateaClientBundle::mainLayout.html.twig" %}
 
+{% trans_default_domain 'User' %}
+
 {#
 {% block head_meta_description %}{% include 'UserBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
 {% block head_meta_keywords %}{% include 'UserBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
@@ -12,19 +14,19 @@
             <li>
                 <a data-toggle="tab" href="#home">
                     <i class="green fa fa-user bigger-120" ></i>
-                    Profile
+                    {{ 'user.profile' }}
                 </a>
             </li>
             <li class="active">
                 <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}">
                     <i class="pink fa fa-picture-o bigger-120"></i>
-                    {{ "Pictures" | trans }}
+                    {{ "user.pictures" | trans }}
                 </a>
             </li>
         </ul>
         <br/><br/><br/>
         <div class="row-fluid">
-            <h2>{{ "Photos of %username%" | trans({'%username%': user.username}) }}</h2>
+            <h2>{{ "user.photos_of_user" | trans({'%username%': user.username}) }}</h2>
             <ul class="ace-thumbnails">
                 {% for photo in photos %}
                     <li class="col-xs-4 col-lg-2">

@@ -1,3 +1,5 @@
+{% trans_default_domain 'User' %}
+
 {% set pageCount = pager | length %}
 {% set lastPage = pager.getLastPage() %}
 {% set current = pager.getPage %}
@@ -32,7 +34,7 @@
 	<ul class="pagination" data-behat="pagination">
 		{% if previous is defined %}
 			<li>
-				<a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">{{ "Prev" | trans }}</a>
+				<a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">{{ "user.page_prev" | trans }}</a>
 			</li>
 		{% endif %}
 
@@ -67,7 +69,7 @@
 
 		{% if next is defined %}
 			<li>
-				<a href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ "Next" | trans }}</a>
+				<a href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ "user.page_next" | trans }}</a>
 			</li>
 		{% endif %}
 	</ul>

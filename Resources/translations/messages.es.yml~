@@ -1,0 +1,13 @@
+user.profile: Perfil
+Pictures: Fotos
+user.profile_of: 'Perfil de %username%'
+user.users: Usuarios
+'users, people, social, chat, make friends, find love, free chat': '__users, people, social, chat, make friends, find love, free chat'
+'Users list of Chatsfree.net, make friends and find love': '__Users list of Chatsfree.net, make friends and find love'
+page: Pagina
+'Find interesting people to meet, share fotos and chat with them': '__Find interesting people to meet, share fotos and chat with them'
+'Chat with': 'Chatear con'
+Chat: Chat
+user.owner_of_channels: 'Canales de los cuales es propietario'
+user.moderator_of_channels: 'Canales de los cuales es moderador'
+user.fan_of_channels: 'Canales de los cuales es fan'

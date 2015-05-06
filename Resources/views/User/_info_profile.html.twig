@@ -1,6 +1,8 @@
+{% trans_default_domain 'User' %}
+
 <div class="profile-user-info" data-behat="profile">
 	<div class="profile-info-row" data-behat="profile-row">
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "Username" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.username" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
 			<span>{{ user.username }}</span>
@@ -9,7 +11,7 @@
 	{% if user.city %}
 	<div class="profile-info-row" data-behat="profile-row">
 
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "Location" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.location" | trans }} </div>
 		<div class="profile-info-value" data-behat="profile-row-value">
             <i class="fa fa-map-marker light-orange bigger-110"></i> &nbsp;
             {% if user.city != "no_city" %}
@@ -22,7 +24,7 @@
 	{% endif %}
 	{% if user.profile %}
 	<div class="profile-info-row" data-behat="profile-row">
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "Age" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.age" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
 			<span>{{"now" |date("Y") - user.profile.birthday | date("Y")}}</span>
@@ -30,7 +32,7 @@
 	</div>
 	{% if user.profile.gender %}
 	<div class="profile-info-row" data-behat="profile-row">
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "Gender" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.gender" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
 			<span>{{ user.profile.gender }}</span>
@@ -39,7 +41,7 @@
 	{% endif %}
 	{% if user.profile.about %}
 	<div class="profile-info-row" data-behat="profile-row">
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "About me" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.about_me" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
 			<span>{{ user.profile.about }}</span>
@@ -48,7 +50,7 @@
 	{% endif %}
 	{% if user.profile.youWant %}
 	<div class="profile-info-row" data-behat="profile-row">
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "You want" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.you_want" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
 			<span>{{ user.profile.youWant }}</span>
@@ -57,7 +59,7 @@
 	{% endif %}
 	{% if user.lastLogin %}
 	<div class="profile-info-row" data-behat="profile-row">
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "Last Online" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.last_online" | trans }} </div>
 	
 		<div class="profile-info-value" data-behat="profile-row-value">
 			<span>{{ user.lastLogin | date }}</span>
@@ -66,7 +68,7 @@
 	{% endif %}
 	{% if user.profile.seeking %}
 	<div class="profile-info-row" data-behat="profile-row">
-		<div class="profile-info-name" data-behat="profile-row-name"> {{ "I am seeking" | trans }} </div>
+		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.i_am_seekinmg" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
 			<span>{{ user.profile.seeking }}</span>

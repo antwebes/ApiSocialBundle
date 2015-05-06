@@ -6,10 +6,10 @@
 
 {% block head_meta_rel_canonical %}<link rel="canonical" href="{{ url('ant_user_user_users') }}"/>{% endblock %}
 
-{% block chatea_title %}{{ "Users" | trans }}{% endblock %}
+{% block chatea_title %}{{ "user.users" | trans }}{% endblock %}
 
 {% block chatea_body %}
-    <h2>{{ "Users" | trans }}</h2>
+    <h2>{{ "user.users" | trans }}</h2>
     <div class="row-fluid">
         <ul class="ace-thumbnails" data-behat="items-user">
             {% for user in users %}

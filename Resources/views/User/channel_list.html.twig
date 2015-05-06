@@ -1,3 +1,5 @@
+{% trans_default_domain 'User' %}
+
 <div class="col-xs-12">
 	{% for channel in channels | slice(0, limit) %}
 	{% if loop.index is not odd %}
@@ -23,7 +25,8 @@
 						<h4><a href="{{ path('channel_show', {'slug': channel.slug})}}"><span data-behat="name-channel">{{ channel.name }}</span></a></h4>
 						<div class="clearfix"></div>
 						<p>{{ channel.description | truncate(70) }}</p>
-							{{ include ("ApiSocialBundle:Chat:button.html.twig", {'channel': channel, 'message': 'Enter chat room', 'class_button': 'btn btn-info btn-sm pull-left'}) }}
+							{#Enter chat room#}
+							{{ include ("ApiSocialBundle:Chat:button.html.twig", {'channel': channel, 'message': 'user.enter_chat_room' | trans, 'class_button': 'btn btn-info btn-sm pull-left'}) }}
 							<div class="hidden-xs pull-right">
 			            		{% for fan in channel.fans(4, {'has_profile_photo':'1'}) %}
 			            			{% if fan.profilePhoto %}
@@ -38,12 +41,13 @@
 			</div>	
 			<div>
 				<ul class="navigation">
-					<li><i class="fa fa-bar-chart-o"></i><span>&nbsp; {{ channel.CountVisits }} Visits</span></li>
-					<li><i class="fa fa-users"></i><span>&nbsp; {{ channel.numberFans }} Fans</span></li>
+					<li><i class="fa fa-bar-chart-o"></i><span>&nbsp; {{ channel.CountVisits }} {{ 'user.channel_visits' | trans }}</span></li>
+					<li><i class="fa fa-users"></i><span>&nbsp; {{ channel.numberFans }} {{ 'user.fans' | trans }}</span></li>
 					{% if channel.getChannelType is not null %}
-						<li><a title="{{ "See all chat room of same type" | trans }}" href="{{ path('channel_list') }}?filter=channelType={{ channel.getChannelType.name }}"><i class="fa fa-random"></i><span>&nbsp; {{ channel.channelType }}</span></a></li>
+						{# See all chat room of same type #}
+						<li><a title="{{ "user.rooms_same_type" | trans }}" href="{{ path('channel_list') }}?filter=channelType={{ channel.getChannelType.name }}"><i class="fa fa-random"></i><span>&nbsp; {{ channel.channelType }}</span></a></li>
 					{% endif %}
-					<li class="hidden-xs pull-right"><i class="fa fa-user"></i> Fans <span> {{ channel.owner}}</span></li>
+					<li class="hidden-xs pull-right"><i class="fa fa-user"></i> {{ 'user.fans' | trans }} <span> {{ channel.owner}}</span></li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>

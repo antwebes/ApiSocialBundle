@@ -1,3 +1,4 @@
+{% trans_default_domain 'User' %}
 <div class="row">
 	<div class="cover shadow_all">
 		<div class="col-xs-2 border-right ">
@@ -25,9 +26,11 @@
 				<p class="lead"> <i class="fa {{ icon }}"></i> <span data-behat="cover-title"> {{ text }}</span>  </p> 
 				<p>
 					{% if has_channels  %}
-						<a href="{{ path('user_channel_list', {'userId': user.id, 'list':list}) }}"><p>List all channels</p></a>
+						{# List all channels #}
+						<a href="{{ path('user_channel_list', {'userId': user.id, 'list':list}) }}"><p>{{ 'user.list_all_channels'  | trans }}</p></a>
 					{%else %}
-						{{ "There are no chat rooms" | trans }}
+						{# There are no chat rooms #}
+						{{ "user.no_chat_rooms" | trans }}
 					{% endif %}
 				</p>
 			</div>

@@ -17,7 +17,7 @@
 	<li class="active">
 		<a data-toggle="tab" href="#home">
 			<i class="green fa fa-user bigger-120" ></i>
-			Profile
+			{{ 'user.profile' | trans }}
 		</a>
 	</li>
 	<li>
@@ -33,7 +33,7 @@
 		{% include 'ApiSocialBundle:User:_usersSidebar.html.twig' with {'user': user} %}
 	</div>
 	<div class="col-xs-12 col-sm-9">
-		<h1 class="blue">{{"Profile of" | trans}} {{ user.username | capitalize }}</h1>
+		<h1 class="blue">{{ "user.profile_of" | trans({'%username%': user.username | capitalize}) }}</h1>
 		{% include "ApiSocialBundle:User:_info_profile.html.twig" %}
 	</div>
 </div>
@@ -45,19 +45,19 @@
 	</div>
         {# Begin list channels  #}
        	<div class="col-xs-12" data-behat="channels">
-			{{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'Owner of channels', 'icon' :'fa-trophy', 'list': 'owner', 'has_channels': user.channels | length > 0} ) }}
+			{{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'user.owner_of_channels' | trans, 'icon' :'fa-trophy', 'list': 'owner', 'has_channels': user.channels | length > 0} ) }}
 	        {% include 'ApiSocialBundle:User:channel_list.html.twig' with {'channels': user.channels, 'class_margin':'margin-bottom:15%;', 'limit': 6} %}
         </div>
 		{# End list channels  #}
 		{# Begin list channels_moderator  #}
         <div class="col-xs-12" data-behat="channels_moderator">
-            {{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'Moderator of channels' , 'icon' :'fa-gavel', 'list': 'moderator', 'has_channels': user.channelsModerated | length > 0} ) }}
+            {{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'user.moderator_of_channels' | trans , 'icon' :'fa-gavel', 'list': 'moderator', 'has_channels': user.channelsModerated | length > 0} ) }}
             {% include 'ApiSocialBundle:User:channel_list.html.twig' with {'channels': user.channelsModerated, 'class_margin':'margin-bottom:15%;','limit': 6} %}
         </div>
         {# End list channels_moderator  #}
         {# Begin list channels_fan  #}
         <div class="col-xs-12" data-behat="channels_fan">
-        {{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'Fan of channels' , 'icon' :'fa-star', 'list': 'fan', 'has_channels': user.channelsFan | length > 0} ) }}
+        {{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'user.fan_of_channels' | trans , 'icon' :'fa-star', 'list': 'fan', 'has_channels': user.channelsFan | length > 0} ) }}
         {% include 'ApiSocialBundle:User:channel_list.html.twig' with {'channels': user.channelsFan, 'class_margin':'margin-bottom:15%;','limit': 6} %}
         </div>
         {# End list channels_fan  #}
