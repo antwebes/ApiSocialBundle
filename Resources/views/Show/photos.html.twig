@@ -12,9 +12,9 @@
     <div class="container">
         <ul class="nav nav-tabs padding-18">
             <li>
-                <a data-toggle="tab" href="#home">
+                <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}">
                     <i class="green fa fa-user bigger-120" ></i>
-                    {{ 'user.profile' }}
+                    {{ 'user.profile' | trans }}
                 </a>
             </li>
             <li class="active">
