@@ -67,12 +67,30 @@ class UserController extends Controller
         $user = $this->get('api_users')->findById($id);
 
         if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$userId, ' not exits');
+            throw $this->createNotFoundException('THe user with id ' .$id, ' not exits');
         }
 
         $photos = $user->getPhotos($page);
 
         return $this->render('ApiSocialBundle:Show:photos.html.twig',array('user'=>$user,'photos'=> $photos));
+    }
+
+    public function showPhotoAction($idUser, $id, $page = 1)
+    {
+        $user = $this->get('api_users')->findById($idUser);
+        $photo = $this->get('api_photos')->findById($id);
+
+        if($user == null){
+            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
+        }
+
+        if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
+            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
+        }
+
+
+
+        return $this->render('ApiSocialBundle:Show:photo.html.twig',array('user'=>$user,'photo'=> $photo));
     }
 
     private function findUserByUsernameOrId($username, $user_id, $asArray)
