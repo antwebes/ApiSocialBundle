@@ -44,10 +44,13 @@ class UserController extends Controller
     public function channelsAction($userId, $list)
     {
         $user = $this->get('api_users')->findById($userId);
+
         if($user == null){
             throw $this->createNotFoundException('THe user with id ' .$userId, ' not exits');
         }
+
         $channels = array();
+
         if($list == 'owner'){
             $channels = $user->getChannels();
         }elseif($list == 'fan'){
@@ -55,7 +58,21 @@ class UserController extends Controller
         }elseif($list == 'moderator'){
             $channels = $user->getChannelsModerated();
         }
+
         return $this->render('ApiSocialBundle:Show:channels.html.twig',array('user'=>$user,'channels'=>$channels, 'type'=>$list));
+    }
+
+    public function photosAction($id, $page = 1)
+    {
+        $user = $this->get('api_users')->findById($id);
+
+        if($user == null){
+            throw $this->createNotFoundException('THe user with id ' .$userId, ' not exits');
+        }
+
+        $photos = $user->getPhotos($page);
+
+        return $this->render('ApiSocialBundle:Show:photos.html.twig',array('user'=>$user,'photos'=> $photos));
     }
 
     private function findUserByUsernameOrId($username, $user_id, $asArray)

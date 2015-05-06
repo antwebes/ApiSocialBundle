@@ -8,3 +8,8 @@ services:
     class: Ant\Bundle\ApiSocialBundle\Twig\Extension\ChannelPhotoUrlExtension
     tags:
       - { name: twig.extension }
+
+  core.twig.photo_url_extension:
+    class: Ant\Bundle\ApiSocialBundle\Twig\Extension\PhotoUrlExtension
+    tags:
+      - { name: twig.extension }

@@ -17,48 +17,58 @@
 	{% endif %}
 {% endif %}
 
+{% if app.request.get('filter') %}
+	{% set query = {'filter': app.request.get('filter')} %}
+{% else %}
+	{% set query = {} %}
+{% endif %}
+
+{% if routeParams is defined %}
+	{% set query = query | merge(routeParams) %}
+{% endif %}
+
 
 {% if pageCount > 1 %}
-	 <ul class="pagination" data-behat="pagination">   
-	    {% if previous is defined %}
-	        <li>
-	            <a href="{{ path(route, {'page': previous}) }}">{{ "Prev" | trans }}</a>
-	        </li>
-	    {% endif %}
-	    
-	    {% if first is defined and current != first and first not in pagesInRange%}
-	        <li>
-	            <a href="{{ path(routeIndex) }}">1..</a>
-	        </li>
-	    {% endif %}
+	<ul class="pagination" data-behat="pagination">
+		{% if previous is defined %}
+			<li>
+				<a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">{{ "Prev" | trans }}</a>
+			</li>
+		{% endif %}
+
+		{% if first is defined and current != first and first not in pagesInRange%}
+			<li>
+				<a href="{{ path(routeIndex, query) }}">1..</a>
+			</li>
+		{% endif %}
 
 
-	    {% for page in pagesInRange %}
-	        {% if page != current %}
-	            <li>
-	                <a href="{{ path(route, {'page': page}) }}">{{ page }}</a>
-	            </li>
-	        {% else %}
-	            <li class="active"><a href="#">{{ page }}</a></li>
-	        {% endif %}
-	    {% endfor %}
+		{% for page in pagesInRange %}
+			{% if page != current %}
+				<li>
+					<a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+				</li>
+			{% else %}
+				<li class="active"><a href="#">{{ page }}</a></li>
+			{% endif %}
+		{% endfor %}
 
-	    {% if last is defined and current != last and last not in pagesInRange %}
-	    	{% if next is defined %}
-		        <li class="last">
-		            <a href="{{ path(route, {'page': last}) }}">..{{ last }}</a>
-		        </li>
-		    {% else %}
-		    	<li class="last">
-		            <a href="{{ path(route, {'page': last}) }}">{{ last }}</a>
-		        </li>
-		    {% endif %}
-	    {% endif %}
+		{% if last is defined and current != last and last not in pagesInRange %}
+			{% if next is defined %}
+				<li class="last">
+					<a href="{{ path(route, query|merge({(pageParameterName): last})) }}">..{{ last }}</a>
+				</li>
+			{% else %}
+				<li class="last">
+					<a href="{{ path(route, query|merge({(pageParameterName): last})) }}">{{ last }}</a>
+				</li>
+			{% endif %}
+		{% endif %}
 
-	    {% if next is defined %}
-	        <li>
-	            <a href="{{ path(route, {'page': next}) }}">{{ "Next" | trans }}</a>
-	        </li>
-	    {% endif %}
+		{% if next is defined %}
+			<li>
+				<a href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ "Next" | trans }}</a>
+			</li>
+		{% endif %}
 	</ul>
 {% endif %}

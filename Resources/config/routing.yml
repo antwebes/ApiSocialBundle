@@ -19,6 +19,10 @@ ant_user_user_photos_show:
     path: /users/{id}/photos
     defaults: { _controller: ApiSocialBundle:User:photos }
 
+ant_user_user_photos_show.page:
+    path: /users/{id}/photos/{page}
+    defaults: { _controller: ApiSocialBundle:User:photos }
+
 ant_chat_chat_show:
     pattern: /chat/
     defaults: { _controller: ApiSocialBundle:Chat:show }

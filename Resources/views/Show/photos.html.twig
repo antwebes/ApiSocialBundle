@@ -1,0 +1,51 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{#
+{% block head_meta_description %}{% include 'UserBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
+{% block head_meta_keywords %}{% include 'UserBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
+{% block head_title %}{% include 'UserBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
+#}
+
+{% block chatea_body %}
+    <div class="container">
+        <ul class="nav nav-tabs padding-18">
+            <li>
+                <a data-toggle="tab" href="#home">
+                    <i class="green fa fa-user bigger-120" ></i>
+                    Profile
+                </a>
+            </li>
+            <li class="active">
+                <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}">
+                    <i class="pink fa fa-picture-o bigger-120"></i>
+                    {{ "Pictures" | trans }}
+                </a>
+            </li>
+        </ul>
+        <br/><br/><br/>
+        <div class="row-fluid">
+            <h2>{{ "Photos of %username%" | trans({'%username%': user.username}) }}</h2>
+            <ul class="ace-thumbnails">
+                {% for photo in photos %}
+                    <li class="col-xs-4 col-lg-2">
+                        <img class="lazy img-responsive" data-original="{{ photo | photoUrl("medium") }}" height="250px">
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <br style="clear:both;" />
+
+    {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': photos, 'route': 'ant_user_user_photos_show.page', 'routeIndex': 'ant_user_user_photos_show', 'routeParams': {'id': user.id}} %}
+{% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    {% javascripts
+    '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+    {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+{% endblock %}
