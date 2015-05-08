@@ -18,3 +18,17 @@ user.page_next: Next
 user.enter_chat_room: 'Enter chat room'
 user.channel_visits: Visits
 user.profile: Profile
+user.photos.has_not: The user has no photos yet
+user.profile.gender.male: Man
+user.profile.gender.female: Woman
+user.profile.gender.other: Other
+user.profile.seeking.women : Women
+user.profile.seeking.men : Men
+user.profile.seeking.both : Both, men and women
+channel.type.locale: Locale
+channel.type.friends: Friends
+channel.type.love: Love
+channel.type.sports: Sports
+user.owner_of_channels: 'Owner of channels'
+user.moderator_of_channels: 'Moderator of channels'
+user.fan_of_channels: 'Fan channels'

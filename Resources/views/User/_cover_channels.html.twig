@@ -6,7 +6,7 @@
 				<a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}" alt="{{ user.username }}"  title="{{ user.username }}">
 			{% endif %}
 			{% if user.profilePhoto %}
-				<img class="pull-left img-circle editable img-responsive" alt="{{ user.username | capitalize }}" id="avatar2" src="{{ user | userProfilePhotoUrl("small") }}">
+				<img class="pull-left img-circle editable img-responsive" alt="{{ user.username | capitalize }}" id="avatar2" src="{{ user | userProfilePhotoUrl("small") }}" title="{{ user.username}}">
 			{% else %}
 				{% image '@ApiSocialBundle/Resources/public/images/no-photo-small.png'  output="images/no-photo-medium.png" %}
 					<img class="pull-left img-circle editable img-responsive" alt="{{ user.username | capitalize }}" id="avatar2" src="{{ asset_url }}">
@@ -15,24 +15,21 @@
 			{% if photo_with_link is defined and photo_with_link %}
 				</a>
 			{% endif %}
-			
-			<div class="hidden-xs hidden-sm pull-right">
-				<h3 class="margin-none">{{ user.username }}</h3>
-				<span>{% include 'ApiSocialBundle:Helpers:_show_city_user.html.twig' with {'user': user} %}</span>
-			</div>
 		</div>
 		<div class="col-xs-10">
 			<div class="pull-left">
-				<p class="lead"> <i class="fa {{ icon }}"></i> <span data-behat="cover-title"> {{ text }}</span>  </p> 
+				<p class="lead"> <i class="fa {{ icon }}"></i> <span data-behat="cover-title"> {{ text | trans() }}</span>  </p> 
+				{% if hide_subtitle is not defined or not hide_subtitle %}
 				<p>
 					{% if has_channels  %}
 						{# List all channels #}
 						<a href="{{ path('user_channel_list', {'userId': user.id, 'list':list}) }}"><p>{{ 'user.list_all_channels'  | trans }}</p></a>
-					{%else %}
+					{% else %}
 						{# There are no chat rooms #}
 						{{ "user.no_chat_rooms" | trans }}
 					{% endif %}
 				</p>
+				{% endif %}
 			</div>
 		</div>
 		<div class="clearfix"></div>

@@ -1,3 +1,6 @@
+parameters:
+    users.language: 'es'
+
 services:
   core.twig.user_profile_photo_url_extension:
     class: Ant\Bundle\ApiSocialBundle\Twig\Extension\UserProfilePhotoUrlExtension

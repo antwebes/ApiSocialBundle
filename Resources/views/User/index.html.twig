@@ -8,7 +8,17 @@
 
 {% block chatea_title %}{{ "user.users" | trans }}{% endblock %}
 
+{% block chatea_css %}
+    {% stylesheets 
+            "@ApiSocialBundle/Resources/public/css/custom.css" 
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock chatea_css %}
+
+
 {% block chatea_body %}
+
     <h2>{{ "user.users" | trans }}</h2>
     <div class="row-fluid">
         <ul class="ace-thumbnails" data-behat="items-user">
