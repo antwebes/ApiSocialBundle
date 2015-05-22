@@ -11,7 +11,7 @@
 			{% endif %}
 			{# begin badge account validated #}
 			{% if user.enabled %}
-				<i style="position: absolute; top: 80%; left: 80%;" class="fa fa-check-circle-o fa-3x blue" data-toggle="tooltip" data-placement="right" data-behat="account-verified" title="Account verified"></i>
+				<i style="position: absolute; top: 80%; left: 80%;" class="fa fa-check-circle-o fa-3x blue" data-toggle="tooltip" data-placement="right" data-behat="account-verified" title="{{ "user.account-verified" | trans }}"></i>
 			{% endif %}
 			{# end badge account validated #}
 		</div>

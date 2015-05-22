@@ -6,6 +6,16 @@
 	{% endif %}
 {% endblock header_no_index %}
 
+{% block head_css %}
+	{{ parent() }}
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
+	{% stylesheets 
+            "@ApiSocialBundle/Resources/public/css/custom.css" 
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock head_css %}
+
 {% block head_meta_description %}{% include 'ApiSocialBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
 {% block head_meta_keywords %}{% include 'ApiSocialBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
 {% block head_title %}{% include 'ApiSocialBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
@@ -39,7 +49,7 @@
 {# Begin list channels of user  #}
 <div class="row">
 	<div class="page-header">
-		<h1>{{ user | capitalize }}'s Chats</h1>
+		<h1>{{ 'user.chats' | trans({'%username%': user | capitalize}) }}</h1>
 	</div>
         {# Begin list channels  #}
        	<div class="col-xs-12" data-behat="channels">

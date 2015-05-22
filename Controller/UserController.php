@@ -18,7 +18,7 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('ant_user_user_users'));
         }
 
-        $users = $this->get('api_users')->findAll($page);
+        $users = $this->get('api_users')->findAll($page, array('language' => $this->container->getParameter('users.language') ));
 
         return $this->render('ApiSocialBundle:User:index.html.twig', array('users' => $users));
     }

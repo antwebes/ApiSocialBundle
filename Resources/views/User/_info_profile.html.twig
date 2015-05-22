@@ -35,7 +35,7 @@
 		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.gender" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
-			<span>{{ user.profile.gender }}</span>
+			<span>{{ ('user.profile.gender.'~user.profile.gender) | trans() }}</span>
 		</div>
 	</div>
 	{% endif %}
@@ -71,7 +71,7 @@
 		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.i_am_seekinmg" | trans }} </div>
 
 		<div class="profile-info-value" data-behat="profile-row-value">
-			<span>{{ user.profile.seeking }}</span>
+			<span>{{ ('user.profile.seeking.'~user.profile.seeking) | trans() }}</span>
 		</div>
 	</div>
 	{% endif %}
