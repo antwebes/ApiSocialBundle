@@ -1,30 +1,30 @@
 ant_user_user_users:
-    path: /users/
+    path: /usuarios/
     defaults: { _controller: ApiSocialBundle:User:users }
 
 ant_user_user_users.page:
-    path: /users/{page}
+    path: /usuarios/{page}
     defaults: { _controller: ApiSocialBundle:User:users }
     requirements:
       page: \d+
 
 ant_user_user_show:
-    path: /users/{username}-{user_id}
+    path: /usuarios/{username}-{user_id}
     defaults: { _controller: ApiSocialBundle:User:show }
     requirements:
        username: "[a-zA-Z0-9\-_`^{}\[\]\\~|]+"
        user_id: \d+
 
 ant_user_user_photos_show:
-    path: /users/{id}/photos
+    path: /usuarios/{id}/fotos
     defaults: { _controller: ApiSocialBundle:User:photos }
 
 ant_user_user_photos_show.page:
-    path: /users/{id}/photos/pages/{page}
+    path: /usuarios/{id}/fotos/paginas/{page}
     defaults: { _controller: ApiSocialBundle:User:photos }
 
 ant_user_user_photo_show:
-    path: /users/{idUser}/photos/{id}
+    path: /usuarios/{idUser}/fotos/{id}
     defaults: { _controller: ApiSocialBundle:User:showPhoto }
 
 ant_chat_chat_show:
@@ -32,23 +32,23 @@ ant_chat_chat_show:
     defaults: { _controller: ApiSocialBundle:Chat:show }
 
 user_channel_list:
-    pattern: /users/{userId}/channels/{list}
+    pattern: /usuarios/{userId}/canales/{list}
     defaults: { _controller: ApiSocialBundle:User:channels }
 
 user_channel_list_paged:
-    pattern: /users/{userId}/channels/{list}/{page}
+    pattern: /usuarios/{userId}/canales/{list}/{page}
     defaults: { _controller: ApiSocialBundle:User:channels }
 
 channel_show:
-    path: /rooms/{slug}
+    path: /canales/{slug}
     defaults: { _controller: ChannelBundle:Show:show }
 
 channel_list:
-    path:  /rooms/list
+    path:  /canales/list
     defaults: { _controller: ChannelBundle:List:channels}
 
 channel_list_page:
-    path:  /rooms/page/{page}
+    path:  /canales/pagina/{page}
     defaults: { _controller: ChannelBundle:List:channels }
     requirements:
         page: \d+
