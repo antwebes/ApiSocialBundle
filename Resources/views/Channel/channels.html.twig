@@ -1,0 +1,35 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{#{% block head_meta_description %}{% include 'ChannelBundle:List:meta/description.html.twig' %}{% endblock %}#}
+{#{% block head_meta_keywords %}{% include 'ChannelBundle:List:meta/keywords.html.twig' %}{% endblock %}#}
+{#{% block head_title %}{% include 'ChannelBundle:List:meta/title.html.twig' %}{% endblock %}#}
+
+{% block head_meta_rel_canonical %}<link rel="canonical" href="{{ url('channel_list') }}"/>{% endblock %}
+
+{% block chatea_title %}{{ "channels.channels" | trans }}{% endblock %}
+
+{% block chatea_css %}
+    {% stylesheets
+    "@ApiSocialBundle/Resources/public/css/custom.css"
+    %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock chatea_css %}
+
+
+{% block chatea_body %}
+
+    <h1>{{ "channels.channels" | trans }}</h1>
+    {{ render(controller('ApiSocialBundle:Channel:renderChannels', {'page': page, 'filter': filter, 'size_image': size_image})) }}
+
+{% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    {% javascripts
+    '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+    {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+{% endblock %}

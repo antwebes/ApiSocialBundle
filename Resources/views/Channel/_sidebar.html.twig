@@ -1,0 +1,80 @@
+
+<h5 class="page-header">
+    <span class="middle">{% trans with {'%name%': channel.name} %} Statistics %name% Chat Room{% endtrans %}</span>
+</h5>
+<div class="row">
+    <div class="col-xs-5">
+        <a href="{{ path('ant_chat_chat_show', {channel: channel.ircChannel~',chatsfree'}) }}" title="{{ "Enter to chat" | trans }}">
+            {% if channel.photo %}
+                <img class="img-responsive" alt="{{ channel.name | capitalize }}" id="avatar2" src="{{ channel.photo.path }}">
+            {% else %}
+                {% image '@CoreBundle/Resources/public/images/no-photo-chatroom.jpg'  output="images/no-photo-chatroom.jpg" %}
+                <img class="img-responsive" alt="{{ channel.name | capitalize }}" id="avatar2" src="{{ asset_url }}">
+                {% endimage %}
+            {% endif %}
+        </a>
+    </div>
+    <div class="col-xs-7" id="channelStatistics">
+        <div class="row info">
+            <div class="col-xs-6">
+                <i class="fa fa-bar-chart-o"></i> {{ "Visits" | trans }}
+            </div>
+            <div class="col-xs-6">
+                {{ channel.countVisits }}
+            </div>
+        </div>
+
+        <div class="row info">
+            <div class="col-xs-6">
+                <i class="fa fa-users"></i> {{ "Fans" | trans }}
+            </div>
+            <div class="col-xs-6">
+                {{ channel.numberFans }}
+            </div>
+        </div>
+
+        <div class="row info">
+            <div class="col-xs-6">
+                <i class="fa fa-star"></i> {{ "Stars" | trans }}
+            </div>
+            <div class="col-xs-6">
+                <font color="#FBB117">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
+                </font>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="space space-4"></div>
+<br><br>
+{# code to share channel in twitter and google plus#}
+<div class="row center">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="chatsfree" data-count="none">Tweet</a>
+    <!-- Place this tag where you want the share button to render. -->
+    <div class="g-plus" data-action="share" data-annotation="none"></div>
+</div>
+{# end code share social networks#}
+
+<br><br>
+<div class="panel panel-default">
+    <div class="panel-heading">{% trans with {'%name%': channel.name} %} Fans of channel %name% {% endtrans %}</div>
+    <div class="panel-body">
+        <div class="row center">
+            <div class="col-xs-12">
+
+                <a href="{{ path('_antwebes_chateaclient_login', {'redirect': path('channel_show', {'slug': channel.slug})}) }}" class="btn btn-sm btn-block btn-success">
+                    <i class="fa fa-plus bigger-120"></i>
+                    <span class="bigger-110"> {{ " Become a fan" | trans }}</span>
+                </a>
+                <br>
+            </div>
+        </div>
+        <div class="row" id="usersFans">
+            {{ render_esi(controller('UserBundle:Widget:usersFans', {'id': channel.id, 'numberOfUsers': 12})) }}
+        </div>
+        <div class="row pull-right"><a href="{{ path('_antwebes_chateaclient_login', {'redirect': path('channel_show', {'slug': channel.slug})}) }}">{{ "View all fans" | trans }}</a></div>
+    </div>
+</div>
+
+

@@ -1,0 +1,14 @@
+<div class="col-xs-12 clearfix" style="margin-bottom:15px;">
+    {% if channels|length < limit %}
+        {% set limit = channels|length %}
+    {% endif %}
+    {% if channels|length > 0 %}
+        {% for i in 0 .. limit %}
+            <span class="type-off">
+            <a href="{{ path('channel_show', {'slug': channels[i].slug})}}" title="{% trans with {'%name%': channels[i].name} %}Enter the chat of %name%{% endtrans %}"> &nbsp; {{ channels[i].name }}
+            </a>
+        </span>
+        {% endfor %}
+    {% endif %}
+    <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{% trans with {'%name%': channel.name} %}Enter the chat of %name%{% endtrans %}">{% trans %}more {% endtrans %}...</a>
+</div>

@@ -1,0 +1,48 @@
+<form method="get" style="padding:10px;" id="form_chat" action="" data-pjaxchatform="">
+    {% if channel is defined %}
+        {% if channel.ircChannel starts with "#" %}
+            {% set irc_channel = channel.ircChannel[1:] %}
+        {% else %}
+            {% set irc_channel = channel.ircChannel %}
+        {% endif %}
+        <input type="hidden" id="chat_channel" value="{{ irc_channel }}{% if irc_channel != "mans" %},chatsfree{% endif %}" name="channel">
+        <input type="hidden" value="{{ channel.id }}" name="channel_id">
+        <input type="hidden" id="chat_type" value="{{channel.channelType }}" name="type">
+    {% else %}
+        <input type="hidden" id="chat_channel" value="{{ default_channel }}" name="channel">
+        <input type="hidden" id="chat_type" value="" name="type">
+    {% endif %}
+    <div class="row">
+        <div class="col-xs-4">
+            <img width="94" height="106" alt="{{ "Chatsfree Pacman" | trans }}" src="/images/pachatea.png">
+        </div>
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-12 pull-right" style="margin-bottom:10px;">
+
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        {% set nickName  = '' %}
+                        {% if app.user != null %}
+                            {% set nickName  = app.user.username %}
+                        {% elseif default_nick is defined  %}
+                            {% set nickName  = default_nick %}
+                        {% endif%}
+                        <input type="text" class="form-control" id="username" name="nick" placeholder="Write your nick..." value="{{ nickName }}" >
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-chat pull-right"><i class="fa fa-comments"></i> {{ "Chat" |trans }} </button>
+
+                    <a class="btn btn-social btn-facebook btn-xs pull-left btn-social-grey"  href="{{ path('hwi_oauth_service_redirect',{'service': 'facebook' } ) }}">
+                        <i class="fa fa-facebook"></i> Connect
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

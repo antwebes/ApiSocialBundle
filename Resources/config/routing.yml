@@ -41,14 +41,14 @@ user_channel_list_paged:
 
 channel_show:
     path: /rooms/{slug}
-    defaults: { _controller: ChannelBundle:Show:show }
+    defaults: { _controller: ApiSocialBundle:Channel:show }
 
 channel_list:
-    path:  /rooms/list
-    defaults: { _controller: ChannelBundle:List:channels}
+    path:  /rooms/list/
+    defaults: { _controller: ApiSocialBundle:Channel:channels}
 
 channel_list_page:
     path:  /rooms/page/{page}
-    defaults: { _controller: ChannelBundle:List:channels }
+    defaults: { _controller: ApiSocialBundle:Channel:channels }
     requirements:
         page: \d+

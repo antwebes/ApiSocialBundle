@@ -1,0 +1,96 @@
+
+{% if not channel.isEnabled() %}<div class="alert alert-danger">{% trans %}Note that this channel hasn't been moderated by administration yet.{% endtrans %}</div>{% endif %}
+
+<div class="row" id="channelInfo">
+    <div class="col-xs-3 col-sm-offset-2">
+        <h4 class="col-sm-offset-2 col-xs-12 blue">
+            <span class="middle">{% trans %}Owner{% endtrans %}</span>
+        </h4>
+        <div class="profile-users founderBox">
+            {% include 'UserBundle:User:userListItem.html.twig' with {'user': channel.owner} %}
+        </div>
+    </div>
+
+    <div class="col-xs-9 col-sm-7">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#info" role="tab" data-toggle="tab">Info</a></li>
+            <li><a href="#details" role="tab" data-toggle="tab">Details</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="info">
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> {{ "Description" | trans }} </div>
+
+                    <div class="profile-info-value">
+                        <span>{% if channel.description %}{{ channel.description }}{% else %}{{ "No description" | trans }}.{% endif %}</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> {{ "Channel Type" | trans }} </div>
+
+                    <div class="profile-info-value">
+                        {% if channel.getChannelType %}
+                            <strong id="channel_type"><a href="{{ path('channel_list') }}?filter=channelType={{ channel.getChannelType.name }}">{{ channel.getChannelType.name }}</a></strong>
+                        {% else %}
+                            <strong id="channel_type">{{ "None" | trans }}</strong>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if channel.publicatedAt %}
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> {{ "Created at" | trans }} </div>
+
+                        <div class="profile-info-value">
+                            <span>{{ channel.publicatedAt | date }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if channel.language %}
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> {{ "Language" | trans }} </div>
+
+                        <div class="profile-info-value">
+                            <span>{{ channel.language }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="tab-pane" id="details">
+
+                {% if channel.expiredAt %}
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">{% if channel.isExpired %} {{ "Expired at" | trans }}{% else %} {{ "Will expire at" | trans }} {% endif %}</div>
+
+                        <div class="profile-info-value">
+                            <span>{{ channel.expiredAt | date }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if channel.isExpired %}
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> {{ "Is expired" | trans }} </div>
+
+                        <div class="profile-info-value">
+                            <span>This chat room is expired, currently has no owner</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if channel.lastVisit %}
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> {{ "Last visit" | trans }} </div>
+
+                        <div class="profile-info-value">
+                            <span>{{ channel.lastVisit | date }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,27 @@
+{% for channel in channels %}
+    {% if loop.index is odd %}
+        <div class="row" style="margin-bottom:1%">
+    {% endif %}
+    <div class="col-xs-6">
+        <a href="{{ path('channel_show', {'slug': channel.slug})}}"><strong># {{ channel.name }}</strong></a>
+        <div class="col-xs-3">
+            <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{% trans with {'%name%': channel.name} %}Enter the chat of %name%{% endtrans %}">
+                {% if channel.photo %}
+                    <img height="100%" width="100%" class="lazy pull-left" data-original="{{ channel | channelPhotoUrl("small") }}" alt="{{ channel.name }}">
+                {% else %}
+                    {% image '@CoreBundle/Resources/public/images/no-photo-chatroom.jpg'  output="images/no-photo-chatroom.jpg" %}
+                    <img class="editable img-responsive lazy" alt="{{ channel.name | capitalize }}" id="avatar2" data-original="{{ asset_url }}">
+                    {% endimage %}
+                {% endif %}
+            </a>
+        </div>
+        <div class="col-xs-9">
+            {{ channel.description | truncate(70) }}
+        </div>
+    </div>
+    {% if loop.index is not odd %}
+		</div>
+	{% elseif loop.last %}
+		</div>
+	{% endif %}
+{% endfor %}
