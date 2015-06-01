@@ -9,6 +9,7 @@
 namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
+use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -32,6 +33,35 @@ class ChannelController extends Controller
         $channel = $this->get('api_channels')->findBySlug($slug);
 
         return $this->render('ApiSocialBundle:Channel:show.html.twig', array('channel' => $channel));
+    }
+
+    /**
+     * @APIUser
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function becomeFanAction($slug)
+    {
+        $channelsManager = $this->get('api_channels');
+        $channel = $channelsManager->findBySlug($slug);
+        $user = $this->getUser();
+
+        try{
+            $channelsManager->addFanToChannel($user, $channel);
+            $this->addFlash('notice', $this->get('translator')->trans('channels.fan_added_success', array(), 'Channels'));
+        }catch (\Exception $e){
+            try{
+                $message = json_decode($e->getMessage(), true);
+
+                if($message['errors'] == 'The user already a fan of this channel'){
+                    $this->addFlash('error', $this->get('translator')->trans('channels.fan_allready_fan', array(), 'Channels'));
+                }
+            }catch (\Exception $ejson){
+                $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('channel_show', array('slug' => $channel->getSlug())));
     }
 
     /**
@@ -150,5 +180,15 @@ class ChannelController extends Controller
             $this->prepareChannels($channel->getParent(),$channelsItems);
             $channelsItems[] = $channel;
         }
+    }
+
+    private function addFlash($level, $message)
+    {
+        $request = $this->getRequest();
+
+        $request->getSession()->getFlashBag()->add(
+            $level,
+            $message
+        );
     }
 }

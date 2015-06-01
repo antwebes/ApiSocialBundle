@@ -43,6 +43,10 @@ channel_show:
     path: /canales/{slug}
     defaults: { _controller: ApiSocialBundle:Channel:show }
 
+channel_become_fan:
+    path: /canales/{slug}/hazte-fan
+    defaults: { _controller: ApiSocialBundle:Channel:becomeFan }
+
 channel_list:
     path:  /canales/lista/
     defaults: { _controller: ApiSocialBundle:Channel:channels}

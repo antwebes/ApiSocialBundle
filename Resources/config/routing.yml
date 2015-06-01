@@ -47,6 +47,10 @@ channel_list:
     path:  /rooms/list/
     defaults: { _controller: ApiSocialBundle:Channel:channels}
 
+channel_become_fan:
+    path: /rooms/{slug}/become-fan
+    defaults: { _controller: ApiSocialBundle:Channel:becomeFan }
+
 channel_list_page:
     path:  /rooms/page/{page}
     defaults: { _controller: ApiSocialBundle:Channel:channels }

@@ -26,6 +26,9 @@ channels.visits: Visits
 channels.fans: Fans
 channels.stars: Stars
 channels.become_fan: Become a fan
+channels.fan_added_success: You've been added successfull as a fan of this channel
+channels.fan_allready_fan: You're allready fan of this channel
+channels.fan_error: An error ocurred trying to make you fan
 channels.metas.free_chat_rooms: Free chat rooms
 channels.metas.page: Page
 channels.metas.list_keywords: chat rooms, chat free, free chat, chats

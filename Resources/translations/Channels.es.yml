@@ -26,6 +26,10 @@ channels.visits: Visitas
 channels.fans: Fans
 channels.stars: Estrellas
 channels.become_fan: Hazte fan
+channels.fan_added_success: Has sido añadido como fan de este canal con éxito
+channels.fan_allready_fan: Ya eres fan de este canal
+channels.fan_error: Ha ocurrido un error intentando hacerte fan
+channels.fan_added_success: Has sido añadido como fan de esta canal con éxito
 channels.metas.free_chat_rooms: Salas de chat gratuito
 channels.metas.page: Pagina
 channels.metas.list_keywords: salas de chat, chat gratuito, chats
