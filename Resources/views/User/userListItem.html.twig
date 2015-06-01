@@ -1,0 +1,46 @@
+<div class="itemdiv memberdiv">
+    <div class="inline position-relative">
+
+        <div class="user">
+            <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}" alt="{{ user.username }}"  title="{{ user.username }}">
+                {% if user.profilePhoto %}
+                    <img src="{{ user | userProfilePhotoUrl("small") }}" width="50" height="60" alt="{{ user.username }}"  title="{{ user.username }}" class ="pull-left">
+                {% else %}
+                    {% image '@ApiSocialBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.png" %}
+                    <img src="{{ asset_url }}" width="50" height="60" alt="{{ user.username }}"  title="{{ user.username }}" class ="pull-left">
+                    {% endimage %}
+                {% endif %}
+            </a>
+        </div>
+
+        <div class="body">
+            <div class="name">
+                <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}" alt="{{ user.username }}"  title="{{ user.username }}">
+                    <span class="user-status status-online"></span>
+                    {{ user.username }}
+                </a>
+            </div>
+        </div>
+        <div class="popover">
+            <div class="arrow"></div>
+
+            <div class="popover-content">
+
+                <div class="bolder">
+                    {% if user.profile is not null and user.profile is defined%}
+                        {% if user.profile.birthday%}{{ "Age" | trans }}: {{"now" |date("Y") - user.profile.birthday | date("Y")}}{% elseif user.profile.gender %}{{ user.profile.gender }}{%else%}{{ user.username }}{% endif %}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                </div>
+                {% if user.city %}
+                    <div class="time">
+                        <i class="icon-map-marker middle bigger-120 orange"></i>
+                        <span class="green"> {{ user.city.name }} </span>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>

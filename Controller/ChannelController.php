@@ -78,6 +78,21 @@ class ChannelController extends Controller
         );
     }
 
+    /**
+     *
+     * @param int $numberOfUsers
+     * @param string $columnClass
+     * @param array $filter for example form twig: {'has_profile_photo' : 1}
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function usersFansAction($id, $numberOfUsers, $filter = null)
+    {
+        //findFans($channel_id, $page=1, array $filters = null, $limit= null)
+        $users = $this->get("api_channels")->findFans($id, 1, null, $numberOfUsers);
+
+        return $this->render('ApiSocialBundle:Channel:usersFans.html.twig', array('users' => $users));
+    }
+
     //returns if the the first page was requested by url
     private function pageOneGivenByUrl()
     {

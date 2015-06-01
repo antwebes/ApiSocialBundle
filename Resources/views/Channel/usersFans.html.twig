@@ -1,0 +1,19 @@
+{% if users %}
+    {% for user in users %}
+        <div class="col-xs-4">
+            <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}" alt="{{ user.username }}"  title="{{ user.username }}">
+                {% if user.profilePhoto %}
+                    <img class="left" style="border: 2px solid #FFF; border-radius: 4px 4px 4px 4px; max-height:150px; max-width:180px;" src="{{ user | userProfilePhotoUrl("small") }}" width="100%" height="100%" alt="{{ user.username }}"  title="{{ user.username }}" class ="pull-left">
+                {% else %}
+                    {% image '@ApiSocialBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.png" %}
+                    <img class="left" style="border: 2px solid #FFF; border-radius: 4px 4px 4px 4px;" src="{{ asset_url }}" width="100%" height="100%" alt="{{ user.username }}"  title="{{ user.username }}" class ="pull-left">
+                    {% endimage %}
+                {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+{% else %}
+
+    <p>There are no fan</p>
+
+{% endif %}

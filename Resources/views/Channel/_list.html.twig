@@ -9,7 +9,7 @@
                 {% if channel.photo %}
                     <img height="100%" width="100%" class="lazy pull-left" data-original="{{ channel | channelPhotoUrl("small") }}" alt="{{ channel.name }}">
                 {% else %}
-                    {% image '@CoreBundle/Resources/public/images/no-photo-chatroom.jpg'  output="images/no-photo-chatroom.jpg" %}
+                    {% image '@ApiSocialBundle/Resources/public/images/no-photo-chatroom.jpg'  output="images/no-photo-chatroom.jpg" %}
                     <img class="editable img-responsive lazy" alt="{{ channel.name | capitalize }}" id="avatar2" data-original="{{ asset_url }}">
                     {% endimage %}
                 {% endif %}

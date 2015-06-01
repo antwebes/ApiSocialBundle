@@ -20,10 +20,10 @@
         {% include 'ApiSocialBundle:Channel:_info.html.twig' with {'channel': channel} %}
 
         {# if this chat room has content of chatsfree, we include in the page #}
-        {% if meta is not null and meta.content %}
+        {#{% if meta is not null and meta.content %}
             <h2>Description <small>description and use of this chat room</small></h2>
             <p>{{ meta.content }}</p>
-        {% endif %}
+        {% endif %}#}
 
         {% if channel.children | length > 0 %}
             <div class="page-header"><h3>{{ "Childrens" | trans}} <small> all chat rooms of {{ channel.name }}</small></h3></div>
