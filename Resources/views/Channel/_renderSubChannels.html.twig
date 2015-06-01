@@ -5,10 +5,10 @@
     {% if channels|length > 0 %}
         {% for i in 0 .. limit %}
             <span class="type-off">
-            <a href="{{ path('channel_show', {'slug': channels[i].slug})}}" title="{% trans with {'%name%': channels[i].name} %}Enter the chat of %name%{% endtrans %}"> &nbsp; {{ channels[i].name }}
+            <a href="{{ path('channel_show', {'slug': channels[i].slug})}}" title="{{ 'channels.enter_chat_of' | trans({'%name%': channels[i].name}) }}"> &nbsp; {{ channels[i].name }}
             </a>
         </span>
         {% endfor %}
     {% endif %}
-    <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{% trans with {'%name%': channel.name} %}Enter the chat of %name%{% endtrans %}">{% trans %}more {% endtrans %}...</a>
+    <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{{ 'channels.enter_chat_of' | trans({'%name%': channels[i].name}) }}">{{ 'channels.more' }} ...</a>
 </div>

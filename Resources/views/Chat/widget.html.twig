@@ -1,3 +1,5 @@
+{% trans_default_domain 'Channels' %}
+
 <form method="get" style="padding:10px;" id="form_chat" action="" data-pjaxchatform="">
     {% if channel is defined %}
         {% if channel.ircChannel starts with "#" %}
@@ -28,7 +30,7 @@
                         {% elseif default_nick is defined  %}
                             {% set nickName  = default_nick %}
                         {% endif%}
-                        <input type="text" class="form-control" id="username" name="nick" placeholder="Write your nick..." value="{{ nickName }}" >
+                        <input type="text" class="form-control" id="username" name="nick" placeholder="{{ 'channels.write_your_nick' | trans }}" value="{{ nickName }}" >
                     </div>
 
                 </div>

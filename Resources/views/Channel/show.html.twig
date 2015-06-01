@@ -1,10 +1,12 @@
 {% extends "ChateaClientBundle::mainLayout.html.twig" %}
 
+{% trans_default_domain 'Channels' %}
+
 {% block chatea_body %}
 
     {% set urlcanonical = url('channel_show', {'slug': channel.slug}) %}
 
-    <h1 class="title">{% trans with {'%name%': channel.name} %}Free %name% Chat Room{% endtrans %}</h1>
+    <h1 class="title">{{ "channels.free_chat_rooms" | trans({'%name%': channel.name}) }}</h1>
     {{ render(controller('ApiSocialBundle:Channel:renderBreadcrumb', {'channel':  channel })) }}
     <br /><br />
     <div class="col-xs-12">
@@ -26,7 +28,7 @@
         {% endif %}#}
 
         {% if channel.children | length > 0 %}
-            <div class="page-header"><h3>{{ "Childrens" | trans}} <small> all chat rooms of {{ channel.name }}</small></h3></div>
+            <div class="page-header"><h3>{{ "channels.childrens" | trans}} <small>{{ 'channels.all_chat_rooms_of' | trans({'%name%': channel.name}) }}</small></h3></div>
             {% include 'ApiSocialBundle:Channel:_list.html.twig' with {'channels' : channel.children, 'columnClass': 'col-xs-2' } %}
         {% endif %}
     </div>

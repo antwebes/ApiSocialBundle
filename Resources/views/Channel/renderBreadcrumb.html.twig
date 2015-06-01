@@ -1,6 +1,7 @@
+{% trans_default_domain "Channels" %}
 {% if channelsItems | length > 0  %}
     <ol class="breadcrumb" id="breadcrumbs" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-        <li><a itemprop="url" href="{{ path('channel_list') }}"><spam itemprop="title">Rooms</spam></a></li>
+        <li><a itemprop="url" href="{{ path('channel_list') }}"><spam itemprop="title">{{ "channels.rooms" | trans }}</spam></a></li>
         {% for channel in channelsItems %}
             {% if loop.last %}
                 <li itemprop="child" class="active"><span itemprop="title">{{ channel.name }}</span></li>

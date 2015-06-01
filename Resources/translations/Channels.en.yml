@@ -1,0 +1,27 @@
+channels.channels: List of channels
+channels.rooms: Rooms
+channels.free_chat_rooms: Free %name% Chat Room
+channels.childrens: Childrens
+channels.all_chat_rooms_of: all chat rooms of %name%
+channels.no_fans: There are no fan
+channels.statistics: Statistics %name% Chat Room
+channels.enter_chat_of: Enter the chat of %name%
+channels.enter_chat_of_for_free: Room of chat of %name%, enter to chat for free
+channels.not_moderated_yet: Note that this channel hasn't been moderated by administration yet.
+channels.info: Info
+channels.details: Details
+channels.description: Description
+channels.none: None
+channels.type: Channel Type
+channels.created_at: Created at
+channels.language: Language
+channels.will_expire_at: Will expire at
+channels.is_expired: Is expired
+channels.is_expired_large: This chat room is expired, currently has no owner
+channels.last_visit: Last visit
+channels.created_by: Created by
+channels.write_your_nick: Write your nick...
+channels.visits: Visits
+channels.fans: Fans
+channels.stars: Stars
+channels.become_fan: Become a fan

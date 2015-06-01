@@ -1,5 +1,6 @@
+{% trans_default_domain 'Channels' %}
 
-{% if not channel.isEnabled() %}<div class="alert alert-danger">{% trans %}Note that this channel hasn't been moderated by administration yet.{% endtrans %}</div>{% endif %}
+{% if not channel.isEnabled() %}<div class="alert alert-danger">{{ 'channels.not_moderated_yet' }}</div>{% endif %}
 
 <div class="row" id="channelInfo">
     <div class="col-xs-3 col-sm-offset-2">
@@ -14,8 +15,8 @@
     <div class="col-xs-9 col-sm-7">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#info" role="tab" data-toggle="tab">Info</a></li>
-            <li><a href="#details" role="tab" data-toggle="tab">Details</a></li>
+            <li class="active"><a href="#info" role="tab" data-toggle="tab">{{ 'channels.info' | trans }}</a></li>
+            <li><a href="#details" role="tab" data-toggle="tab">{{ 'channels.details' | trans }}</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -23,26 +24,26 @@
             <div class="tab-pane active" id="info">
 
                 <div class="profile-info-row">
-                    <div class="profile-info-name"> {{ "Description" | trans }} </div>
+                    <div class="profile-info-name"> {{ "channels.description" | trans }} </div>
 
                     <div class="profile-info-value">
-                        <span>{% if channel.description %}{{ channel.description }}{% else %}{{ "No description" | trans }}.{% endif %}</span>
+                        <span>{% if channel.description %}{{ channel.description }}{% else %}{{ "channels.none" | trans }}.{% endif %}</span>
                     </div>
                 </div>
                 <div class="profile-info-row">
-                    <div class="profile-info-name"> {{ "Channel Type" | trans }} </div>
+                    <div class="profile-info-name"> {{ "channels.type" | trans }} </div>
 
                     <div class="profile-info-value">
                         {% if channel.getChannelType %}
                             <strong id="channel_type"><a href="{{ path('channel_list') }}?filter=channelType={{ channel.getChannelType.name }}">{{ channel.getChannelType.name }}</a></strong>
                         {% else %}
-                            <strong id="channel_type">{{ "None" | trans }}</strong>
+                            <strong id="channel_type">{{ "channels.none" | trans }}</strong>
                         {% endif %}
                     </div>
                 </div>
                 {% if channel.publicatedAt %}
                     <div class="profile-info-row">
-                        <div class="profile-info-name"> {{ "Created at" | trans }} </div>
+                        <div class="profile-info-name"> {{ "channels.created_at" | trans }} </div>
 
                         <div class="profile-info-value">
                             <span>{{ channel.publicatedAt | date }}</span>
@@ -51,7 +52,7 @@
                 {% endif %}
                 {% if channel.language %}
                     <div class="profile-info-row">
-                        <div class="profile-info-name"> {{ "Language" | trans }} </div>
+                        <div class="profile-info-name"> {{ "channels.language" | trans }} </div>
 
                         <div class="profile-info-value">
                             <span>{{ channel.language }}</span>
@@ -64,7 +65,7 @@
 
                 {% if channel.expiredAt %}
                     <div class="profile-info-row">
-                        <div class="profile-info-name">{% if channel.isExpired %} {{ "Expired at" | trans }}{% else %} {{ "Will expire at" | trans }} {% endif %}</div>
+                        <div class="profile-info-name">{% if channel.isExpired %} {{ "Expired at" | trans }}{% else %} {{ "channels.will_expire_at" | trans }} {% endif %}</div>
 
                         <div class="profile-info-value">
                             <span>{{ channel.expiredAt | date }}</span>
@@ -73,16 +74,16 @@
                 {% endif %}
                 {% if channel.isExpired %}
                     <div class="profile-info-row">
-                        <div class="profile-info-name"> {{ "Is expired" | trans }} </div>
+                        <div class="profile-info-name"> {{ "channels.is_expired" | trans }} </div>
 
                         <div class="profile-info-value">
-                            <span>This chat room is expired, currently has no owner</span>
+                            <span>{{ "channels.is_expired_large" | trans }}</span>
                         </div>
                     </div>
                 {% endif %}
                 {% if channel.lastVisit %}
                     <div class="profile-info-row">
-                        <div class="profile-info-name"> {{ "Last visit" | trans }} </div>
+                        <div class="profile-info-name"> {{ "channels.last_visit" | trans }} </div>
 
                         <div class="profile-info-value">
                             <span>{{ channel.lastVisit | date }}</span>

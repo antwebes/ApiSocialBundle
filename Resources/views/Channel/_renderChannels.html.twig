@@ -1,3 +1,5 @@
+{% trans_default_domain 'Channels' %}
+
 {% if channels | length > 0 %}
     <div class="clearfix" data-behat="rooms">
         {% for channel in channels %}
@@ -33,15 +35,15 @@
                 <div class="col-xs-9">
 
                     <h3 style="margin-top:0px;padding-top:0px">
-                        <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{% trans with {'%name%': channel.name} %}Enter the chat of %name%{% endtrans %}">{% trans %}Room {% endtrans %} {{ channel.name }}
+                        <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{{ 'channels.enter_chat_of' | trans({'%name%': channel.name}) }}">{{ 'channels.rooms' | trans }} {{ channel.name }}
                         </a>
                     </h3>
                     {# Get the metadata to customize subtitle of channel in page list chat rooms #}
                     {% set meta_channel = null %}
-                    <p>{% if meta_channel is not null and meta_channel.content %} {{ meta_channel.content | truncate(144)}} {% else %}{% trans with {'%name%': channel.name} %}Room of chat of %name%, enter to chat for free{% endtrans %}{% endif %}</p>
+                    <p>{% if meta_channel is not null and meta_channel.content %} {{ meta_channel.content | truncate(144)}} {% else %}{{ 'channels.enter_chat_of_for_free' | trans({ '%name': channel.name}) }}{% endif %}</p>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p class="type-off">Created by
+                            <p class="type-off">{{ 'channels.created_by' | trans }}
                                 <a href="{{ path('ant_user_user_show', {'username': channel.owner.usernameCanonical, 'user_id': channel.owner.id}) }}">{{ channel.owner }}</a>
                             </p>
                         </div>
