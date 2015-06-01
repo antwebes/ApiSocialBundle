@@ -16,6 +16,7 @@ channels.type: Channel Type
 channels.created_at: Created at
 channels.language: Language
 channels.will_expire_at: Will expire at
+channels.expired_at: Expired at
 channels.is_expired: Is expired
 channels.is_expired_large: This chat room is expired, currently has no owner
 channels.last_visit: Last visit
@@ -25,3 +26,7 @@ channels.visits: Visits
 channels.fans: Fans
 channels.stars: Stars
 channels.become_fan: Become a fan
+channels.metas.free_chat_rooms: Free chat rooms
+channels.metas.page: Page
+channels.metas.list_keywords: chat rooms, chat free, free chat, chats
+channels.metas.list_description: Chatsfree offer free chat rooms for everyone or create your own chat room to teens, adults, students can meet friends, singles and strangers with the same interest.

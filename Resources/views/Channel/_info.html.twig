@@ -65,7 +65,7 @@
 
                 {% if channel.expiredAt %}
                     <div class="profile-info-row">
-                        <div class="profile-info-name">{% if channel.isExpired %} {{ "Expired at" | trans }}{% else %} {{ "channels.will_expire_at" | trans }} {% endif %}</div>
+                        <div class="profile-info-name">{% if channel.isExpired %} {{ "channels.expired_at" | trans }}{% else %} {{ "channels.will_expire_at" | trans }} {% endif %}</div>
 
                         <div class="profile-info-value">
                             <span>{{ channel.expiredAt | date }}</span>

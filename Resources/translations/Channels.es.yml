@@ -16,6 +16,7 @@ channels.type: Tipo de canal
 channels.created_at: Fecha de creación
 channels.language: Lenguage
 channels.will_expire_at: Fecha de expiración
+channels.expired_at: Fecha en la que expiro
 channels.is_expired: Is Está expirado
 channels.is_expired_large: Esta sala de chat ha expirado, catualmente no tiene propietario
 channels.last_visit: Última visita
@@ -25,3 +26,7 @@ channels.visits: Visitas
 channels.fans: Fans
 channels.stars: Estrellas
 channels.become_fan: Hazte fan
+channels.metas.free_chat_rooms: Salas de chat gratuito
+channels.metas.page: Pagina
+channels.metas.list_keywords: salas de chat, chat gratuito, chats
+channels.metas.list_description: Le ofrecemos salas de chat para todos o crear tu propia sala de chat para adolescentes, adultos, estudiantes, encontrar amigos, estudiantes pueden encontrarse con amigos, solteros y desconocidos con el mismo interes.
