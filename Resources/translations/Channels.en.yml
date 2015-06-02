@@ -1,5 +1,6 @@
 channels.channels: List of channels
 channels.rooms: Rooms
+channels.room: Room
 channels.free_chat_rooms: Free %name% Chat Room
 channels.childrens: Childrens
 channels.all_chat_rooms_of: all chat rooms of %name%

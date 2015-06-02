@@ -1,12 +1,14 @@
 {% extends "ChateaClientBundle::mainLayout.html.twig" %}
 
+{% trans_default_domain 'Channels' %}
+
 {#{% block head_meta_description %}{% include 'ChannelBundle:List:meta/description.html.twig' %}{% endblock %}#}
 {#{% block head_meta_keywords %}{% include 'ChannelBundle:List:meta/keywords.html.twig' %}{% endblock %}#}
 {#{% block head_title %}{% include 'ChannelBundle:List:meta/title.html.twig' %}{% endblock %}#}
 
 {% block head_meta_rel_canonical %}<link rel="canonical" href="{{ url('channel_list') }}"/>{% endblock %}
 
-{% block chatea_title %}{{ "channels.channels" | trans }}{% endblock %}
+{% block head_title %}{{ "channels.channels" | trans }}{% endblock %}
 
 {% block chatea_css %}
     {% stylesheets
