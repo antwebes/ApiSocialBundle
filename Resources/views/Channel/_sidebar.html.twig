@@ -64,10 +64,17 @@
         <div class="row center">
             <div class="col-xs-12">
 
-                <a href="{{ path('_antwebes_chateaclient_login', {'redirect': path('channel_show', {'slug': channel.slug})}) }}" class="btn btn-sm btn-block btn-success">
-                    <i class="fa fa-plus bigger-120"></i>
-                    <span class="bigger-110"> {{ "channels.become_fan" | trans }}</span>
-                </a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('channel_become_fan', {'slug': channel.slug}) }}" class="btn btn-sm btn-block btn-success">
+                        <i class="fa fa-plus bigger-120"></i>
+                        <span class="bigger-110"> {{ "channels.become_fan" | trans }}</span>
+                    </a>
+                {% else %}
+                    <a href="{{ path('_antwebes_chateaclient_login', {'redirect': path('channel_become_fan', {'slug': channel.slug})}) }}" class="btn btn-sm btn-block btn-success">
+                        <i class="fa fa-plus bigger-120"></i>
+                        <span class="bigger-110"> {{ "channels.become_fan" | trans }}</span>
+                    </a>
+                {% endif %}
                 <br>
             </div>
         </div>
