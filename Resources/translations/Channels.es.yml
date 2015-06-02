@@ -1,7 +1,7 @@
 channels.channels: Lista de canales
 channels.rooms: Salas
 channels.room: Sala
-channels.free_chat_rooms: Sala de chat %name% gratuita
+channels.free_chat_rooms: Sala de chat %name%
 channels.childrens: Hijos
 channels.all_chat_rooms_of: Todas las salas de chat de %name%
 channels.no_fans: No hay fans
