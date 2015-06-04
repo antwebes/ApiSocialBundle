@@ -1,0 +1,73 @@
+{% trans_default_domain 'Channels' %}
+
+{% if channels | length > 0 %}
+    <div class="clearfix" data-behat="rooms">
+        {% for channel in channels %}
+            {% if loop.index is odd %}
+                <div class="row">
+            {% endif %}
+            <div class="col-lg-6 col-xs-12 clearfix" style="margin-bottom:15px;" data-behat="rooms-item">
+                <div class="col-xs-3">
+                    <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{% trans with {'%name%': channel.name} %}Enter the chat of %name%{% endtrans %}">
+                        {% if channel.photo %}
+                            <img class="lazy" data-original="{{ channel | channelPhotoUrl("medium") }}" width="100%" height=100% alt="Free chat room" class="pull-left">
+                        {% else %}
+                            {% if size_image == 'icon' %}
+                                {% image '@ApiSocialBundle/Resources/public/images/no-photo-chatroom-icon.jpg'  output="images/no-photo-chatroom-icon.jpg" %}
+                                <img class="lazy" data-original="{{ asset_url }}" width="100%" height="100%" alt="Free chat room" class="pull-left">
+                                {% endimage %}
+                            {% elseif size_image == 'small' %}
+                                {% image '@ApiSocialBundle/Resources/public/images/no-photo-chatroom-small.jpg'  output="images/no-photo-chatroom-small.jpg" %}
+                                <img class="lazy" data-original="{{ asset_url }}" width="100%" height="100%" alt="Free chat room" class="pull-left">
+                                {% endimage %}
+                            {% elseif size_image == 'medium' %}
+                                {% image '@ApiSocialBundle/Resources/public/images/no-photo-chatroom-medium.jpg'  output="images/no-photo-chatroom-medium.jpg" %}
+                                <img class="lazy" data-original="{{ asset_url }}" width="100%" height="100%" alt="Free chat room" class="pull-left">
+                                {% endimage %}
+                            {% else %}
+                                {% image '@ApiSocialBundle/Resources/public/images/no-photo-chatroom.jpg'  output="images/no-photo-chatroom.jpg" %}
+                                <img class="lazy" data-original="{{ asset_url }}" width="100%" height="100%" alt="Free chat room" class="pull-left">
+                                {% endimage %}
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="col-xs-9">
+
+                    <h3 style="margin-top:0px;padding-top:0px">
+                        <a href="{{ path('channel_show', {'slug': channel.slug})}}" title="{{ 'channels.enter_chat_of' | trans({'%name%': channel.name}) }}">{{ 'channels.room' | trans }} {{ channel.name }}
+                        </a>
+                    </h3>
+                    {# Get the metadata to customize subtitle of channel in page list chat rooms #}
+                    {% set meta_channel = null %}
+                    <p>{% if meta_channel is not null and meta_channel.content %} {{ meta_channel.content | truncate(144)}} {% else %}{{ 'channels.enter_chat_of_for_free' | trans({ '%name': channel.name}) }}{% endif %}</p>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="type-off">{{ 'channels.created_by' | trans }}
+                                <a href="{{ path('ant_user_user_show', {'username': channel.owner.usernameCanonical, 'user_id': channel.owner.id}) }}">{{ channel.owner }}</a>
+                            </p>
+                        </div>
+                    </div>
+                    {% if subchannels is defined and subchannels %}
+                        <div class="row">
+                            {% include 'ApiSocialBundle:Channel:_renderSubChannels.html.twig' with {'channels': channel.children, 'limit': 3 } %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if loop.index is not odd %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if pager is defined %}
+        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': pager, 'route': 'channel_list_page', 'routeIndex': 'channel_list'} %}
+    {% endif %}
+{% else %}
+    <p>
+        {% trans %}
+        No channels where found
+        {% endtrans %}
+    </p>
+{% endif %}

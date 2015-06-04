@@ -96,6 +96,40 @@ class ChannelController extends Controller
 
         return $this->render('ApiSocialBundle:Channel:_renderChannels.html.twig', $params);
     }
+    
+    /**
+     * @param Request $request
+     * @param int $page
+     * @param int $withPagination
+     * @param array $order
+     * @param null $amount
+     * @param null $size_image
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderWidgetChannelsAction(Request $request, $page = 1, $withPagination = 1, $order = array('name' => 'asc'), $amount = null, $size_image=null)
+    {
+    	//Si estamos con filtros hay que enviar filtros a la pagina siguiente
+    	$filter = $request->get('filter');
+    	if ($filter) {
+    		$filter = $this->getFilters('language=es,'.$filter);
+    	} else {
+    		$filter = $this->getFilters('language=es');
+    	}
+    
+    	$pager = $this->get('api_channels')->findAll($page, $filter, $amount, $order);
+    	$channels = $pager->getResources();
+    
+    	if ($withPagination){
+    		$params = array('channels' => $channels, 'pager' => $pager);
+    	}else{
+    		$params = array('channels' => $channels);
+    	}
+    
+    	$params['size_image'] = $size_image;
+    
+    	return $this->render('ApiSocialBundle:Channel:_renderWidgetChannels.html.twig', $params);
+    }
+    
 
     public function renderBreadcrumbAction(Channel $channel)
     {
