@@ -10,11 +10,10 @@ namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class ChannelController extends Controller
+class ChannelController extends BaseController
 {
     public function channelsAction(Request $request, $page = 1)
     {
@@ -166,40 +165,6 @@ class ChannelController extends Controller
         $request->get('page') == 1;
     }
 
-    /**
-     * a partir de channelType=2,name=aaaaa los separamos y añadimos los filtros
-     * @param unknown $filterString
-     * @return multitype:
-     */
-    private function getFilters($filterString)
-    {
-        $delimiters = array(',','=');
-
-        $filters = $this->multiexplode($delimiters, $filterString);
-
-
-        return $filters;
-    }
-
-    /**
-     *
-     * @param array $delimiters
-     * @param string $string string to explode
-     * @return multitype:
-     * @throws BadRequestHttpException
-     */
-    private function multiexplode(array $delimiters, $string)
-    {
-        $type = explode($delimiters[0], $string);
-        foreach ($type as $pair){
-            if (!strpos($pair, $delimiters[1])){
-                throw new BadRequestHttpException('invalid_request');
-            }
-            list($k, $v) = explode($delimiters[1], $pair);
-            $result[$k] = $v;
-        }
-        return $result;
-    }
 
     /**
      * This method return the channels in order 1º the channel 2º: channel->getParent(), 3º  channel->getParent()->getParent() ..

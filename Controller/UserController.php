@@ -9,8 +9,9 @@
 namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     public function usersAction($page = 1)
     {
@@ -40,6 +41,42 @@ class UserController extends Controller
 
         return $this->renderOrRedirect($user, $isXmlHttpRequest);
     }
+
+
+    /**
+     * @param Request $request
+     * @param int $page
+     * @param int $withPagination
+     * @param array $order
+     * @param null $amount
+     * @param null $size_image
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderWidgetUsersAction(Request $request, $page = 1, $withPagination = 1, $order = array('name' => 'asc'), $amount = null, $size_image=null)
+    {
+        //Si estamos con filtros hay que enviar filtros a la pagina siguiente
+        $filter = $request->get('filter');
+
+        if ($filter) {
+            $filter = $this->getFilters('language=es,'.$filter);
+        } else {
+            $filter = $this->getFilters('language=es');
+        }
+
+        $pager = $this->get('api_users')->findAll($page, $filter, $amount, $order);
+        $users = $pager->getResources();
+
+        if ($withPagination){
+            $params = array('users' => $users, 'pager' => $pager);
+        }else{
+            $params = array('users' => $users);
+        }
+
+        $params['size_image'] = $size_image;
+
+        return $this->render('ApiSocialBundle:User:_renderWidgetUsers.html.twig', $params);
+    }
+
 
     public function channelsAction($userId, $list)
     {
