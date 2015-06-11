@@ -129,6 +129,14 @@ class UserController extends BaseController
 
         return $this->render('ApiSocialBundle:Show:photo.html.twig',array('user'=>$user,'photo'=> $photo));
     }
+    
+    public function renderWidgetUserSessionAction()
+    {
+    	$user_session = $this->get('security.context')->getToken()->getUser();
+    	$user = $this->get('api_users')->findById($user_session->getId());
+    	
+    	return $this->render('ApiSocialBundle:User:_widget_user_session.html.twig', array('user'=>$user));
+    }
 
     private function findUserByUsernameOrId($username, $user_id, $asArray)
     {
