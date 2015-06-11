@@ -37,3 +37,8 @@
         {% include 'ApiSocialBundle:Channel:_sidebar.html.twig' with {'channel': channel} %}
     </div>
 {% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    {% include "ApiSocialBundle:Common:incrementChannelview.html.twig" %}
+{% endblock %}

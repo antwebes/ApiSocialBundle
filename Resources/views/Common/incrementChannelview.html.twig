@@ -1,0 +1,8 @@
+{% if  is_granted('IS_AUTHENTICATED_FULLY') or  is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+<script>
+	$.ajax({
+		type: 'PUT',
+		url: '{{ api_endpoint }}/api/channels/{{ channel.id }}/visits?access_token={{ app.user.accessToken }}'
+	});
+</script>
+{% endif %}
