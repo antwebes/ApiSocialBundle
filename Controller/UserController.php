@@ -155,7 +155,10 @@ class UserController extends BaseController
                 array('username' => $user->getUsernameCanonical(), 'user_id' => $user->getId()))
             );
         }
-        $params_to_template = array('user' => $user);
+        $params_to_template = array(
+            'user' => $user,
+            'api_endpoint' => $this->container->getParameter('api_endpoint')
+        );
 
         if ($this->container->hasParameter('affiliate_id')){
             $params_to_template['affiliate_id'] = $this->container->getParameter('affiliate_id');
