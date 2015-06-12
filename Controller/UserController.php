@@ -58,9 +58,9 @@ class UserController extends BaseController
         $filter = $request->get('filter');
 
         if ($filter) {
-            $filter = $this->getFilters('language=es,'.$filter);
+            $filter = $this->getFilters('language='.$this->container->getParameter("users.language").','.$filter);
         } else {
-            $filter = $this->getFilters('language=es');
+            $filter = $this->getFilters('language='.$this->container->getParameter('users.language'));
         }
 
         $pager = $this->get('api_users')->findAll($page, $filter, $amount, $order);
