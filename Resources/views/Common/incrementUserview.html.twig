@@ -1,0 +1,7 @@
+{% if  is_granted('IS_AUTHENTICATED_FULLY') or  is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+<script>
+	$(document).ready(function() {
+		$.post('{{ api_endpoint }}/api/users/{{ user.id }}/visits?access_token={{ app.user.accessToken }}');
+	});
+</script>
+{% endif %}

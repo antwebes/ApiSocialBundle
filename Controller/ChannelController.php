@@ -31,7 +31,7 @@ class ChannelController extends BaseController
     {
         $channel = $this->get('api_channels')->findBySlug($slug);
 
-        return $this->render('ApiSocialBundle:Channel:show.html.twig', array('channel' => $channel));
+        return $this->render('ApiSocialBundle:Channel:show.html.twig', array('channel' => $channel, 'api_endpoint' => $this->container->getParameter('api_endpoint')));
     }
 
     /**
