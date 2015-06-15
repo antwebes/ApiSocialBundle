@@ -102,12 +102,17 @@ class UserController extends BaseController
     public function photosAction($id, $page = 1)
     {
         $user = $this->get('api_users')->findById($id);
+        $isUserValidated = $this->getUser()->isValidated();
 
         if($user == null){
             throw $this->createNotFoundException('THe user with id ' .$id, ' not exits');
         }
 
-        $photos = $user->getPhotos($page);
+        if($isUserValidated) {
+            $photos = $user->getPhotos($page);
+        }else{
+            $photos = array();
+        }
 
         return $this->render('ApiSocialBundle:Show:photos.html.twig',array('user'=>$user,'photos'=> $photos));
     }
@@ -125,7 +130,9 @@ class UserController extends BaseController
             throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
         }
 
-
+        if(!$this->getUser()->isValidated()){
+            return $this->redirect($this->generateUrl('ant_user_user_photos_show', array('id' => $idUser)));
+        }
 
         return $this->render('ApiSocialBundle:Show:photo.html.twig',array('user'=>$user,'photo'=> $photo));
     }

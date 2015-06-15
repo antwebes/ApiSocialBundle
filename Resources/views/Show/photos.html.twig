@@ -43,7 +43,13 @@
                         </a>
                     </li>
                 {% else %}
-                    {{ "user.photos.has_not" | trans() }}
+                    {% if app.user.isValidated %}
+                        {{ "user.photos.has_not" | trans() }}
+                    {% else %}
+                        <div class="alert alert-warning">
+                        {{ "user.photos.need_confirmate_account" | trans() }}.  <a href="{{ path('confirm_email') }}"> {{'user.activate_account_info' | trans }}</a>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
@@ -51,7 +57,9 @@
 
     <br style="clear:both;" />
 
-    {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': photos, 'route': 'ant_user_user_photos_show.page', 'routeIndex': 'ant_user_user_photos_show', 'routeParams': {'id': user.id}} %}
+    {% if app.user.isValidated %}
+        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': photos, 'route': 'ant_user_user_photos_show.page', 'routeIndex': 'ant_user_user_photos_show', 'routeParams': {'id': user.id}} %}
+    {% endif %}
 {% endblock %}
 
 {% block body_js_end %}
