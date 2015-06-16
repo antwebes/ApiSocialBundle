@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-xs-10">
 			<div class="pull-left">
-				<p class="lead"> <i class="fa {{ icon }}"></i> <span data-behat="cover-title"> {{ text | trans() }}</span>  </p> 
+				<p class="lead"> <i class="fa {{ icon }}"></i> <span data-behat="{{ list }}"> {{ text | trans() }}</span>  </p> 
 				{% if hide_subtitle is not defined or not hide_subtitle %}
 				<p>
 					{% if has_channels  %}

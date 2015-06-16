@@ -1,0 +1,26 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+
+{% block chatea_body %}
+<div class="main-container-inner">
+	<div class="page-content">
+		<div class="row">
+			<div class="col-xs-12" id="message_header_center">
+				{% if (app.user) and ( app.user.validated == false) %}
+					<div class="alert alert-warning">
+						Hi {{ app.user.username }} {{  "Your Account could not be validated !"  | trans }}
+					</div>
+				{% endif %}
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-8" id="body_container_center">
+				{% block body_container_center %}
+	 			{% endblock %}
+	 		</div>
+	 		<div class="col-xs-12 col-sm-12 col-md-4" id="body_container_right">
+				{% block body_container_right %}
+				{% endblock %}
+			</div>		 		
+		</div>
+	</div>
+</div>
+{% endblock chatea_body %}
