@@ -1,8 +1,18 @@
-{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+{% extends "ApiSocialBundle:Channel:layout_channel.html.twig" %}
 
 {% trans_default_domain 'Channels' %}
 
-{% block chatea_body %}
+        {% block head_css %}
+        	{{ parent() }}
+            {% stylesheets 
+              "@ApiSocialBundle/Resources/public/css/main_social.css"
+               %}
+                <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+            {% endstylesheets %}
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        {% endblock %}
+
+{% block body_container_center %}
 
     {% set urlcanonical = url('channel_show', {'slug': channel.slug}) %}
 
@@ -32,11 +42,13 @@
             {% include 'ApiSocialBundle:Channel:_list.html.twig' with {'channels' : channel.children, 'columnClass': 'col-xs-2' } %}
         {% endif %}
     </div>
+{% endblock body_container_center %}
 
+{% block body_container_right %}
     <div id="channelsSidebar">
         {% include 'ApiSocialBundle:Channel:_sidebar.html.twig' with {'channel': channel} %}
     </div>
-{% endblock %}
+{% endblock body_container_right%}
 
 {% block body_js_end %}
     {{ parent() }}
