@@ -4,7 +4,7 @@ user.back: Atras
 user.username: 'Nombre de usuario'
 user.location: Localización
 user.age: Edad
-user.gender: Genero
+user.gender: Sexo
 user.about_me: 'Sobre mi'
 user.you_want: 'Tu quieres'
 user.last_online: 'Última vez online'
