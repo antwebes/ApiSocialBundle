@@ -1,4 +1,4 @@
-{% if  is_granted('IS_AUTHENTICATED_FULLY') or  is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+{% if  (is_granted('IS_AUTHENTICATED_FULLY') or  is_granted('IS_AUTHENTICATED_REMEMBERED')) and channel.owner.id != app.user.id %}
 <script>
 	$(document).ready(function(){
 		$.ajax({

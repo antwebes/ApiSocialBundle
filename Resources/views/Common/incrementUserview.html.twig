@@ -1,4 +1,4 @@
-{% if  is_granted('IS_AUTHENTICATED_FULLY') or  is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+{% if  (is_granted('IS_AUTHENTICATED_FULLY') or  is_granted('IS_AUTHENTICATED_REMEMBERED')) and app.user.id != user.id %}
 <script>
 	$(document).ready(function() {
 		$.post('{{ api_endpoint }}/api/users/{{ user.id }}/visits?access_token={{ app.user.accessToken }}');
