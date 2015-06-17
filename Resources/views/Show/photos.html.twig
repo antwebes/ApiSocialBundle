@@ -35,7 +35,7 @@
         <br/><br/><br/>
         <div class="row-fluid">
             <h2>{{ "user.photos_of_user" | trans({'%username%': user.username}) }}</h2>
-            <ul class="ace-thumbnails">
+            <ul class="ace-thumbnails" data-behat="photos">
                 {% for photo in photos %}
                     <li class="col-xs-4 col-lg-2">
                         <a href="{{ path('ant_user_user_photo_show', {'idUser': user.id, 'id': photo.id }) }}">
