@@ -22,7 +22,7 @@ class UserController extends BaseController
         $usersManager = $this->get('api_users');
 
         $users = $usersManager->findAll($page, array('language' => $this->container->getParameter('users.language') ));
-        $outstandingUsers = $usersManager->findOutstandingUsers();
+        $outstandingUsers = $usersManager->findOutstandingUsers(5);
 
         return $this->render('ApiSocialBundle:User:index.html.twig', array('users' => $users, 'outstandingUsers' => $outstandingUsers));
     }
