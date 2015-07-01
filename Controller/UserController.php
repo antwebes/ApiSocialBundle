@@ -19,9 +19,12 @@ class UserController extends BaseController
             return $this->redirect($this->generateUrl('ant_user_user_users'));
         }
 
-        $users = $this->get('api_users')->findAll($page, array('language' => $this->container->getParameter('users.language') ));
+        $usersManager = $this->get('api_users');
 
-        return $this->render('ApiSocialBundle:User:index.html.twig', array('users' => $users));
+        $users = $usersManager->findAll($page, array('language' => $this->container->getParameter('users.language') ));
+        $outstandingUsers = $usersManager->findOutstandingUsers();
+
+        return $this->render('ApiSocialBundle:User:index.html.twig', array('users' => $users, 'outstandingUsers' => $outstandingUsers));
     }
 
     /**
