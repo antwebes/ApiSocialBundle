@@ -2,6 +2,7 @@ user.profile: Profile
 Pictures: Pictures
 user.profile_of: 'Profile of %username%'
 user.users: Users
+user.outstandingusers: Outstanding users
 'users, people, social, chat, make friends, find love, free chat': 'users, people, social, chat, make friends, find love, free chat'
 'Users list of Chatsfree.net, make friends and find love': 'Users list of Chatsfree.net, make friends and find love'
 page: Page
