@@ -19,7 +19,7 @@
 	"license" : "MIT",
 	"require" : {
 		"symfony/framework-bundle" : "~2.3",
-		"antwebes/chatea-client-bundle" : "0.1.18"
+		"antwebes/chatea-client-bundle" : "0.1.19"
 	},
 	"require-dev" : {
 		"raulfraile/ladybug" : "~1.0"
