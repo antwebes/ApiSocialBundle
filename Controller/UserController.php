@@ -13,15 +13,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends BaseController
 {
-    public function usersAction($page = 1)
+    public function usersAction(Request $request, $page = 1)
     {
         if($this->pageOneGivenByUrl()){
             return $this->redirect($this->generateUrl('ant_user_user_users'));
         }
+        $filters = array('language' => $this->container->getParameter('users.language'));
+        
+        $filter = $request->get('filter');
+        if ($filter == 'customize'){
+            $globals = $this->container->get('twig')->getGlobals();
+            if (array_key_exists('id_affiliate', $globals)) {
+                $filters['affiliate'] = $globals['id_affiliate'];
+            }            
+        }
 
         $usersManager = $this->get('api_users');
 
-        $users = $usersManager->findAll($page, array('language' => $this->container->getParameter('users.language') ));
+
+        $users = $usersManager->findAll($page, $filters);
         $outstandingUsers = $usersManager->findOutstandingUsers(5);
 
         return $this->render('ApiSocialBundle:User:index.html.twig', array('users' => $users, 'outstandingUsers' => $outstandingUsers));
