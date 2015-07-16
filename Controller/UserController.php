@@ -8,8 +8,8 @@
 
 namespace Ant\Bundle\ApiSocialBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 
 class UserController extends BaseController
 {
@@ -102,6 +102,12 @@ class UserController extends BaseController
         return $this->render('ApiSocialBundle:Show:channels.html.twig',array('user'=>$user,'channels'=>$channels, 'type'=>$list));
     }
 
+    /**
+     * @param $id
+     * @param int $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
     public function photosAction($id, $page = 1)
     {
         $user = $this->get('api_users')->findById($id);
@@ -120,6 +126,13 @@ class UserController extends BaseController
         return $this->render('ApiSocialBundle:Show:photos.html.twig',array('user'=>$user,'photos'=> $photos));
     }
 
+    /**
+     * @param $idUser
+     * @param $id
+     * @param int $page
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
     public function showPhotoAction($idUser, $id, $page = 1)
     {
         $user = $this->get('api_users')->findById($idUser);
