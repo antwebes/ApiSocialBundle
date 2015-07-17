@@ -47,7 +47,7 @@
 </div>
 
 <div class="row">
-	{% if user.id == app.user.id %}
+	{% if app.user and user.id == app.user.id %}
 		{% render controller("ApiSocialBundle:User:renderWidgetUserVisitors", {'user': user, 'limit': 3}) %}
 	{% endif %}
 </div>
