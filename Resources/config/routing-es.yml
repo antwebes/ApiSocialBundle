@@ -47,6 +47,10 @@ channel_become_fan:
     path: /canales/{slug}/hazte-fan
     defaults: { _controller: ApiSocialBundle:Channel:becomeFan }
 
+channel_remove_fan:
+    path: /canales/{slug}/borrar-fan
+    defaults: { _controller: ApiSocialBundle:Channel:removeFan }
+
 channel_list:
     path:  /canales/lista/
     defaults: { _controller: ApiSocialBundle:Channel:channels}
