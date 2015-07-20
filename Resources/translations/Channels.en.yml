@@ -34,3 +34,5 @@ channels.metas.free_chat_rooms: Free chat rooms
 channels.metas.page: Page
 channels.metas.list_keywords: chat rooms, chat free, free chat, chats
 channels.metas.list_description: Chatsfree offer free chat rooms for everyone or create your own chat room to teens, adults, students can meet friends, singles and strangers with the same interest.
+channels.fan_remove_success: You've been deleted as a fan of this channel
+channels.fan.user_already_is_not_fan: You already is not fan this channel

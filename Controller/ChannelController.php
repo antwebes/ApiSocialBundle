@@ -190,4 +190,32 @@ class ChannelController extends BaseController
             $message
         );
     }
+    /**
+     * @APIUser
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeFanAction($slug)
+    {
+        $channelsManager = $this->get('api_channels');
+        $channel = $channelsManager->findBySlug($slug);
+        $user = $this->getUser();
+
+        try{
+            $channelsManager->delUserChannelFan($user, $channel);
+            $this->addFlash('notice', $this->get('translator')->trans('channels.fan_remove_success', array(), 'Channels'));
+        }catch (\Exception $e){
+            try{
+                $message = json_decode($e->getMessage(), true);
+
+                if($message['errors'] == 'The user not is fan of channel'){
+                    $this->addFlash('error', $this->get('translator')->trans('channels.fan.user_already_is_not_fan', array(), 'Channels'));
+                }
+            }catch (\Exception $ejson){
+                $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('channel_show', array('slug' => $channel->getSlug())));
+    }
 }
