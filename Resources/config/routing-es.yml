@@ -48,7 +48,7 @@ channel_become_fan:
     defaults: { _controller: ApiSocialBundle:Channel:becomeFan }
 
 channel_remove_fan:
-    path: /canales/{slug}/borrarse-fan
+    path: /canales/{slug}/borrar-fan
     defaults: { _controller: ApiSocialBundle:Channel:removeFan }
 
 channel_list:

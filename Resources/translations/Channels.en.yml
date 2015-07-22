@@ -27,6 +27,7 @@ channels.visits: Visits
 channels.fans: Fans
 channels.stars: Stars
 channels.become_fan: Become a fan
+channels.remove_fan: Delete as fan
 channels.fan_added_success: You've been added successfull as a fan of this channel
 channels.fan_allready_fan: You're allready fan of this channel
 channels.fan_error: An error ocurred trying to make you fan
