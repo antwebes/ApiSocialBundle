@@ -1,0 +1,31 @@
+<div class="page-header">
+    <h1>{{ "Last visits" | trans }}</h1>
+</div>
+
+{% if visitors | length > 0 %}
+    <div class="row">
+        {% for visitor in visitors %}
+            <div class="col-lg-4">
+                <div>
+                    <a href="{{ path('ant_user_user_show', {'user_id': visitor.id, 'username': visitor.usernameCanonical}) }}" title="{{ visitor.username }}">
+                        {% if visitor.profilePhoto %}
+                        <img src="{{ visitor | userProfilePhotoUrl("icon") }}" class="avatar avatar-50 photo" width="50" height="50" title="{{ visitor.username }}"></a>
+                    {% else %}
+                        {% image '@ApiSocialBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.jpg" %}
+                        <img src="{{ asset_url }}">
+                        {% endimage %}
+                    {% endif %}
+                    </a>
+                </div>
+
+                <div>
+                    <div>
+                        <a href="" title="{{ path('ant_user_user_show', {'user_id': visitor.id, 'username': visitor.usernameCanonical}) }}">{{ visitor.username }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>{{ "You don't have any visitors. Improve your profile to have some visits" | trans }}</p>
+{% endif %}

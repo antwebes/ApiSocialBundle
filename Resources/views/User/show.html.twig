@@ -46,6 +46,12 @@
 	</div>
 </div>
 
+<div class="row">
+	{% if app.user and user.id == app.user.id %}
+		{% render controller("ApiSocialBundle:User:renderWidgetUserVisitors", {'user': user, 'limit': 3}) %}
+	{% endif %}
+</div>
+
 {# Begin list channels of user  #}
 <div class="row">
 	<div class="page-header">

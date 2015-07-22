@@ -45,6 +45,13 @@ class UserController extends BaseController
         return $this->renderOrRedirect($user, $isXmlHttpRequest);
     }
 
+    public function renderWidgetUserVisitorsAction($user, $limit)
+    {
+        $userManager = $this->get('api_users');
+        $visitors = $userManager->getUserVisits($user, $limit);
+
+        return $this->render('ApiSocialBundle:User:widgetVisitors.html.twig', array('visitors' => $visitors));
+    }
 
     /**
      * @param Request $request
