@@ -10,6 +10,7 @@ namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
+use Ant\ChateaClient\Client\ApiException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -48,12 +49,14 @@ class ChannelController extends BaseController
         try{
             $channelsManager->addFanToChannel($user, $channel);
             $this->addFlash('notice', $this->get('translator')->trans('channels.fan_added_success', array(), 'Channels'));
-        }catch (\Exception $e){
+        }catch (ApiException $e){
             try{
                 $message = json_decode($e->getMessage(), true);
 
-                if($message['errors'] == 'The user already a fan of this channel'){
+                if(is_array($message) && isset($message['errors']) && $message['errors'] == 'The user already a fan of this channel'){
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_allready_fan', array(), 'Channels'));
+                }else{
+                    $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
                 }
             }catch (\Exception $ejson){
                 $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
