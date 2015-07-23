@@ -62,18 +62,24 @@
     <div class="panel-heading">{% trans with {'%name%': channel.name} %} Fans of channel %name% {% endtrans %}</div>
     <div class="panel-body">
         <div class="row center">
+            {% if app.user is not null %}
             <div class="col-xs-6">
+            {% else %}
+                <div class="col-xs-12">
+            {% endif %}
                 <a href="{{ path('channel_become_fan', {'slug': channel.slug}) }}" class="btn btn-sm btn-block btn-success">
                     <i class="fa fa-plus bigger-120"></i>
                     <span class="bigger-110"> {{ "channels.become_fan" | trans }}</span>
                 </a>
             </div>
+            {% if app.user is not null %}
             <div class="col-xs-6">
                 <a href="{{ path('channel_remove_fan', {'slug': channel.slug}) }}" class="btn btn-sm btn-block btn-danger">
                     <i class="fa fa-plus bigger-120"></i>
                     <span class="bigger-110"> {{ "channels.remove_fan" | trans }}</span>
                 </a>
             </div>
+            {% endif %}
         </div>
         <br/>
         <div class="row" id="usersFans">
