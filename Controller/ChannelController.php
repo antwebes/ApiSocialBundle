@@ -51,10 +51,11 @@ class ChannelController extends BaseController
             $this->addFlash('notice', $this->get('translator')->trans('channels.fan_added_success', array(), 'Channels'));
         }catch (ApiException $e){
             try{
-                $message = json_decode($e->getMessage(), true);
-
+                $message = json_decode($e->getMessage(), true);                
                 if(is_array($message) && isset($message['errors']) && $message['errors'] == 'The user already a fan of this channel'){
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_allready_fan', array(), 'Channels'));
+                }if(is_string($message) && $message== 'This user is not validated. The user need to confirm your email'){
+                    $this->addFlash('error', $this->get('translator')->trans('user.need_validate', array(), 'User'));
                 }else{
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
                 }
