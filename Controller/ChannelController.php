@@ -10,6 +10,7 @@ namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
+use Ant\ChateaClient\Client\ApiException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -48,12 +49,15 @@ class ChannelController extends BaseController
         try{
             $channelsManager->addFanToChannel($user, $channel);
             $this->addFlash('notice', $this->get('translator')->trans('channels.fan_added_success', array(), 'Channels'));
-        }catch (\Exception $e){
+        }catch (ApiException $e){
             try{
-                $message = json_decode($e->getMessage(), true);
-
-                if($message['errors'] == 'The user already a fan of this channel'){
+                $message = json_decode($e->getMessage(), true);                
+                if(is_array($message) && isset($message['errors']) && $message['errors'] == 'The user already a fan of this channel'){
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_allready_fan', array(), 'Channels'));
+                }if(is_string($message) && $message== 'This user is not validated. The user need to confirm your email'){
+                    $this->addFlash('error', $this->get('translator')->trans('user.need_validate', array(), 'User'));
+                }else{
+                    $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
                 }
             }catch (\Exception $ejson){
                 $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
@@ -189,5 +193,33 @@ class ChannelController extends BaseController
             $level,
             $message
         );
+    }
+    /**
+     * @APIUser
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeFanAction($slug)
+    {
+        $channelsManager = $this->get('api_channels');
+        $channel = $channelsManager->findBySlug($slug);
+        $user = $this->getUser();
+
+        try{
+            $channelsManager->delUserChannelFan($user, $channel);
+            $this->addFlash('notice', $this->get('translator')->trans('channels.fan_remove_success', array(), 'Channels'));
+        }catch (\Exception $e){
+            try{
+                $message = json_decode($e->getMessage(), true);
+
+                if($message['errors'] == 'The user not is fan of channel'){
+                    $this->addFlash('error', $this->get('translator')->trans('channels.fan.user_already_is_not_fan', array(), 'Channels'));
+                }
+            }catch (\Exception $ejson){
+                $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('channel_show', array('slug' => $channel->getSlug())));
     }
 }

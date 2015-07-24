@@ -25,6 +25,7 @@ user.profile.gender.other: Other
 user.profile.seeking.women : Women
 user.profile.seeking.men : Men
 user.profile.seeking.both : Both, men and women
+user.need_validate: You need confirmate your email to do this action
 channel.type.locale: Locale
 channel.type.friends: Friends
 channel.type.love: Love
