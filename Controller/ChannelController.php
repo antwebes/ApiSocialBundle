@@ -70,8 +70,8 @@ class ChannelController extends BaseController
     		  $channel = $this->get('api_channels')->findById($channelName);
             }catch(ApiException $ex){
                 $message = json_decode($ex->getMessage(), true);
+                //If the error is that the channel is not found, continue with the following channel
                 if ($message['code'] != '32'){
-                    ld('exception');
                     throw $ex;
                 }
                 continue;
