@@ -11,6 +11,7 @@ namespace Ant\Bundle\ApiSocialBundle\Controller;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 use Ant\ChateaClient\Client\ApiException;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -20,12 +21,74 @@ class ChannelController extends BaseController
     {
         $filter = $request->get('filter');
 
+        $twig_globals = $this->getGlobalsTwig();
+
+        //if not exist list_channels_customized of affiliate, redirect to url without filter=customize
+        if ($filter == 'customize' && !array_key_exists('list_channels_customized', $twig_globals)){
+            return $this->redirect($this->generateUrl('channel_list'));
+        }
 
         if($this->pageOneGivenByUrl()){
             return $this->redirect($this->generateUrl('channel_list'));
         }
 
         return $this->render('ApiSocialBundle:Channel:channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small'));
+    }
+
+    private function getGlobalsTwig()
+    {
+        $twig_globals = $this->container->get('twig')->getGlobals();
+
+        return $twig_globals;
+    }
+    
+    public function renderChannelsCustomizedAction(Request $request, $page = 1, $withPagination = 1, $order = array('name' => 'asc'), $amount = null, $size_image=null)
+    {
+        $twig_globals = $this->getGlobalsTwig();
+
+        //if not exist list_channels_customized render all list channels
+        //If not exist list, We should not we are here, renderChannels check if param exist, and if not exist redirect all list
+        if (array_key_exists('list_channels_customized', $twig_globals)){
+            $customize_channels = $twig_globals['list_channels_customized'];
+            $array_customize_channels = explode(",", $customize_channels);
+            $channelsNames = $array_customize_channels;
+        }else{
+            $response = $this->forward('ApiSocialBundle:Channel:renderChannels');
+            return $response;
+        }
+        
+    
+    	if($this->pageOneGivenByUrl()){
+    		return $this->redirect($this->generateUrl('channel_list'));
+    	}
+    	
+    	$channels = array();
+    
+    	foreach($channelsNames as $channelName){
+            //if some channel of list_channels_customized doesnt exist, not show error, channel wont show in template
+            try {
+    		  $channel = $this->get('api_channels')->findById($channelName);
+            }catch(ApiException $ex){
+                $message = json_decode($ex->getMessage(), true);
+                //If the error is that the channel is not found, continue with the following channel
+                if ($message['code'] != '32'){
+                    throw $ex;
+                }
+                continue;
+            }
+    		array_push($channels,$channel);
+    	}
+    	
+    	$params = array('channels' => $channels);
+    	
+    	$size_image = 'small';
+    	
+    	$params['size_image'] = $size_image;
+    	
+    	return $this->render('ApiSocialBundle:Channel:_renderChannels.html.twig', $params);
+
+        return $this->render('ApiSocialBundle:Channel:channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small'));
+
     }
 
     public function showAction($slug)
@@ -80,6 +143,11 @@ class ChannelController extends BaseController
     {
         //Si estamos con filtros hay que enviar filtros a la pagina siguiente
         $filter = $request->get('filter');
+
+        if ($filter == 'customize'){
+            return $this->renderChannelsCustomizedAction($request, $page, $withPagination, $order, $amount, $size_image);
+        }
+        
         if ($filter) {
             $filter = $this->getFilters('language=es,'.$filter);
         } else {
