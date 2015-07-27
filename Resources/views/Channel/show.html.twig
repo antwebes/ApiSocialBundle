@@ -20,13 +20,15 @@
     {{ render(controller('ApiSocialBundle:Channel:renderBreadcrumb', {'channel':  channel })) }}
     <br /><br />
     <div class="col-xs-12">
+        {#
+        Remove chat form
         <div class="row">
             <div class="col-sm-2 col-lg-2"></div>
             <div class="col-xs-12 col-sm-8 col-lg-8 wellchatea chatBox">
                 {% include "ApiSocialBundle:Chat:widget.html.twig" with { "channel": channel } %}
             </div>
         </div>
-
+        #}
 
 
         {% include 'ApiSocialBundle:Channel:_info.html.twig' with {'channel': channel} %}
