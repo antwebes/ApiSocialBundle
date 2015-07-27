@@ -7,7 +7,9 @@
  */
 
 namespace Ant\Bundle\ApiSocialBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BaseController extends Controller
 {
