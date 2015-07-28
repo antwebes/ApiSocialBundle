@@ -21,39 +21,15 @@
 
     <h2>{{ "user.outstandingusers" | trans }}</h2>
     <div class="row-fluid">
-        <ul class="ace-thumbnails" data-behat="items-user">
-            {% for user in outstandingUsers %}
-                <li class="col-xs-4 col-lg-2" >
-                    <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}" alt="{{ user.username }}"  title="{{ user.username }}">
-                        {% if user.profilePhoto %}
-                            <img class="lazy img-responsive" data-original="{{ user | userProfilePhotoUrl("medium") }}" height="250px">
-                        {% else %}
-                            {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
-                            <img class="lazy img-responsive" data-original="{{ asset_url }}">
-                            {% endimage %}
-                        {% endif %}
-                        <div class="tags hidden-xs">
-			            <span class="label-holder">
-			                <span class="label label-info arrowed"><strong><i class="fa fa-user"></i> {{ user.username }}</strong></span>
-			            </span>
-                            {% if user.city %}
-                                {% if user.city.name != 'no_city' %}
-                                    <span class="label-holder">
-				                <span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.name }}</span>
-				            </span>
-                                {% else %}
-                                    <span class="label-holder">
-				                	<span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.country }}</span>
-				            	</span>
-                                {% endif %}
-                            {% endif %}
-
-                        </div>
-                    </a>
-
-                </li>
-            {% endfor %}
-        </ul>
+    	{% if outstandingUsers %}
+	        <ul class="ace-thumbnails" data-behat="items-user">
+				{% include "ApiSocialBundle:User:_render_list_users.html.twig" with {'users' : outstandingUsers} %}
+	        </ul>
+    	{% endif %}
+        {% if show_button_payment and app.user and app.user.validated %}
+            <!-- Button to highlight an user -->
+        	<a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}"><i class="icon-emo-happy"></i> {% trans %}Destácate aquí{% endtrans %}</a>
+		{% endif %}
     </div>
 
     <br style="clear:both;" />
@@ -61,37 +37,7 @@
     <h2>{{ "user.users" | trans }}</h2>
     <div class="row-fluid">
         <ul class="ace-thumbnails" data-behat="items-user">
-            {% for user in users %}
-                <li class="col-xs-4 col-lg-2" >
-                    <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}" alt="{{ user.username }}"  title="{{ user.username }}">
-                        {% if user.profilePhoto %}
-                            <img class="lazy img-responsive" data-original="{{ user | userProfilePhotoUrl("medium") }}" height="250px">
-                        {% else %}
-                            {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
-                            <img class="lazy img-responsive" data-original="{{ asset_url }}">
-                            {% endimage %}
-                        {% endif %}
-                        <div class="tags hidden-xs">
-			            <span class="label-holder">
-			                <span class="label label-info arrowed"><strong><i class="fa fa-user"></i> {{ user.username }}</strong></span>
-			            </span>
-                            {% if user.city %}
-                                {% if user.city.name != 'no_city' %}
-                                    <span class="label-holder">
-				                    <span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.name }}</span>
-				            </span>
-                                {% else %}
-                                    <span class="label-holder">
-				                	<span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.country }}</span>
-				            	</span>
-                                {% endif %}
-                            {% endif %}
-
-                        </div>
-                    </a>
-
-                </li>
-            {% endfor %}
+			{% include "ApiSocialBundle:User:_render_list_users.html.twig" with {'users' : users} %}
         </ul>
     </div>
 
