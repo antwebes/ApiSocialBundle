@@ -56,3 +56,9 @@ channel_list_page:
     defaults: { _controller: ApiSocialBundle:Channel:channels }
     requirements:
         page: \d+
+
+user_profile_photo:
+    path:  /users/{id}/profile/photo/{size}
+    defaults:  { _controller: ApiSocialBundle:UserProfile:getUserProfilePhoto, size: full }
+    requirements:
+        size:  full|large|medium|small|icon
