@@ -15,7 +15,7 @@ ant_user_user_show:
        username: "[a-zA-Z0-9\-_`^{}\[\]\\~|]+"
        user_id: \d+
 
-ant_user_user_show:
+ant_user_user_show_by_name:
     path: /users/{username}
     defaults: { _controller: ApiSocialBundle:User:show }
     requirements:
