@@ -15,6 +15,12 @@ ant_user_user_show:
        username: "[a-zA-Z0-9\-_`^{}\[\]\\~|]+"
        user_id: \d+
 
+ant_user_user_show_by_name:
+    path: /usuarios/{username}
+    defaults: { _controller: ApiSocialBundle:User:show }
+    requirements:
+       username: "[a-zA-Z0-9\-_`^{}\[\]\\~|]+"
+
 ant_user_user_photos_show:
     path: /usuarios/{id}/fotos
     defaults: { _controller: ApiSocialBundle:User:photos }
