@@ -10,7 +10,7 @@
 
 namespace Ant\Bundle\ApiSocialBundle\Tests\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Ant\Bundle\ApiSocialBundle\Tests\WebTestCase;
 use Ant\Bundle\ApiSocialBundle\Controller\UserProfileController;
@@ -147,5 +147,46 @@ class UserProfileControllerTest extends WebTestCase
         $this->assertEquals(200,$response->getStatusCode());
         $this->assertEquals('image/png',$response->headers->get('Content-Type'));
         $this->assertEquals(1,$response->getContent());
+    }
+
+    public function testGetUserProfilePhotoActionUserNotFoundException()
+    {
+        $size = 'large';
+
+        $containerMock = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
+
+        $apiUserMock = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Manager\User')
+            ->disableOriginalConstructor()
+            ->setMethods(array('findById'))
+            ->getMock();
+
+        $controller = new UserProfileController();
+        $controller->setContainer($containerMock);
+
+
+        $controller = new UserProfileController();
+        $controller->setContainer($containerMock);
+
+
+        $containerMock->expects($this->at(0))
+            ->method('get')
+            ->with('api_users')
+            ->willReturn($apiUserMock);
+
+
+
+        $apiUserMock->expects($this->once())
+            ->method('findById')
+            ->with('foo')
+            ->willReturn(null);
+
+        try{
+            $controller->getUserProfilePhotoAction('foo',$size);
+
+        }catch (NotFoundHttpException $e){
+            return;
+        }
+        $this->fail('Expect throw expcetion NotFoundHttpException');
+
     }
 }

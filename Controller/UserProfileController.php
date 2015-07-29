@@ -11,6 +11,7 @@
 namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class UserProfileController
@@ -43,7 +44,7 @@ class UserProfileController extends BaseController
         $user = $this->get('api_users')->findById($username);
 
         if($user == null){
-            throw $this->createNotFoundException('The user with username ' .$username, ' not exits');
+            throw new NotFoundHttpException("The user with username  $username,  not exits");
         }
 
         // if profile photo redirect url api
