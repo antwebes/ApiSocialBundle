@@ -21,5 +21,5 @@ services:
     class: Symfony\Component\Filesystem\Filesystem
 
   ant_api_social.util.photo_profile:
-    class: Ant\Bundle\ApiSocialBundle\Util\PhotoProfile
+    class: Ant\Bundle\ApiSocialBundle\Util\PhotoProfileDefault
     arguments: [ @filesystem, %ant.api_social.images_dir% ]

@@ -20,8 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 class UserProfileController extends BaseController
 {
 
+
     /**
-     * @return \Ant\Bundle\ApiSocialBundle\Util\PhotoProfile
+     * @return \Ant\Bundle\ApiSocialBundle\Util\PhotoProfileDefault
      */
     protected function getProfilePhotoUtility()
     {
@@ -32,18 +33,19 @@ class UserProfileController extends BaseController
     /**
      * Get profile photo for one user
      *
-     * @param string $userId
+     * @param string $username
      * @param string $size
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      *
      */
-    public function getUserProfilePhotoAction($userId, $size)
+    public function getUserProfilePhotoAction($username, $size)
     {
-        $user = $this->get('api_users')->findById($userId);
+        $user = $this->get('api_users')->findById($username);
 
         if($user == null){
-            throw $this->createNotFoundException('The user with id ' .$userId, ' not exits');
+            throw $this->createNotFoundException('The user with username ' .$username, ' not exits');
         }
+
         // if profile photo redirect url api
         if($user->getProfilePhoto() != null){
             $urlRedirect = '';
@@ -76,10 +78,9 @@ class UserProfileController extends BaseController
         // Generate response
         $response = new Response();
         $profilePhotoUtility = $this->getProfilePhotoUtility();
-
         // Set headers
         $response->headers->set('Cache-Control', 'private');
-        $response->headers->set('Content-type', $profilePhotoUtility->getMineType($size));
+        $response->headers->set('Content-Type', $profilePhotoUtility->getMineType($size));
         $response->headers->set('Content-Disposition', 'attachment; filename="' . $profilePhotoUtility->getBasename($size). '";');
         $response->headers->set('Content-length', $profilePhotoUtility->getFilesize($size) );
 

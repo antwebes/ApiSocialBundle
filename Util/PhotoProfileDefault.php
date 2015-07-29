@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * Class PhotoProfile
  *
- * @package ${NAMESPACE};
+ * @package Ant\Bundle\ApiSocialBundle\Util;
  */
-class PhotoProfile
+class PhotoProfileDefault
 {
     private static $valid_sizes = array('full','large','medium','small','icon');
 
