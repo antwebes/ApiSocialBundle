@@ -117,12 +117,13 @@ class ChannelController extends BaseController
                 $message = json_decode($e->getMessage(), true);                
                 if(is_array($message) && isset($message['errors']) && $message['errors'] == 'The user already a fan of this channel'){
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_allready_fan', array(), 'Channels'));
-                }if(is_string($message) && $message== 'This user is not validated. The user need to confirm your email'){
+                }elseif(is_string($message) && $message== 'This user is not validated. The user need to confirm your email'){
                     $this->addFlash('error', $this->get('translator')->trans('user.need_validate', array(), 'User'));
                 }else{
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
                 }
             }catch (\Exception $ejson){
+                ldd($ejson);
                 $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
             }
         }
