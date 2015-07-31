@@ -1,0 +1,22 @@
+{# This template render a photo random if a user is men, or female #}
+{# You can send a style to include to img#}
+{% if user.profile %}
+    {% if user.profile.gender == 'male' %}
+        <img class="lazy img-responsive" data-original="/faces/Males_256/{{ random('ABCDEFGHIJKLMNO') }}0{{ random(range(1,5)) }}.png" {% if style is defined %}style="{{ style }}"{% endif %}/>
+    {% elseif user.profile.gender == 'female' %}
+        <img class="lazy img-responsive" data-original="/faces/Females_256/F{{ random('ABCDEGHI') }}0{{ random(range(1,5)) }}.png" {% if style is defined %}style="{{ style }}"{% endif %}/>
+    {% else %}
+    	{% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+    		<img class="lazy img-responsive" data-original="{{ asset_url }}">
+		{% endimage %}
+{#         <img class="lazy img-responsive" data-original="/images/no-photo-medium.png" style="max-width: 70%"/>#}
+	    {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+	    	<img class="lazy img-responsive" data-original="{{ asset_url }}">
+		{% endimage %}
+    {% endif %}
+{% else %}
+    {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+    	<img class="lazy img-responsive" data-original="{{ asset_url }}">
+	{% endimage %}
+{% endif %}
+{#              <img class="lazy img-responsive" data-original="/faces/Females_256/F{{ random('ABCDEGHI') }}0{{ random(range(1,5)) }}.png" style="max-width: 70%"/>#}
