@@ -4,9 +4,7 @@
         {% if user.profilePhoto %}
             <img class="lazy img-responsive" data-original="{{ user | userProfilePhotoUrl("medium") }}" height="250px">
         {% else %}
-            {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
-            <img class="lazy img-responsive" data-original="{{ asset_url }}">
-            {% endimage %}
+        	{% include "ApiSocialBundle:User:_render_photo_profile_anonymous.html.twig" with {"style": "max-width: 70%"} %}            
         {% endif %}
         <div class="tags hidden-xs">
         <span class="label-holder">
