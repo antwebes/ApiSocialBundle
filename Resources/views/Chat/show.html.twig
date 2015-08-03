@@ -4,13 +4,21 @@
 
 <style type="text/css">
     html, body, div, iframe { margin:0; padding:0; height:100%; }
-    iframe { position: absolute; display:block; height: 98%;  width:100%; border:none; }
+    #cgs-webchat { position: absolute; display:block; height: 98%;  width:100%; border:none; }
 </style>
+<div id="cgs-webchat"></div>
+{% if app.request.query.has('channel') %}
+    {%  set channel = app.request.query.get('channel') %}
+{% else %}
+    {%  set channel = channel_affiliate %}
+{% endif %}
 
-<iframe src="https://kiwi1.chatsfree.net/?{{params}}">
- <p>Your browser does not support iframes. You can chat from <a href="https://kiwi1.chatsfree.net">https://kiwi1.chatsfree.net</a></p>
-</iframe>
+{% if app.user %}
+    {% set nick = app.user.username %}
+{% else %}
+    {% set nick = nick_affiliate ~ '????' %}
+{% endif %}
 
-
+{% include "ApiSocialBundle:Chat:script.html.twig" with {enter_channel: channel, chat_nick: nick } %}
 </body>
 </html>
