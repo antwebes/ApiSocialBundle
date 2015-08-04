@@ -7,8 +7,8 @@
     #cgs-webchat { position: absolute; display:block; height: 98%;  width:100%; border:none; }
 </style>
 <div id="cgs-webchat"></div>
-{% if app.request.query.has('channel') %}
-    {%  set channel = app.request.query.get('channel') %}
+{% if params_array.channel is defined %}
+ 	{%  set channel = params_array.channel~','~channel_affiliate %}
 {% else %}
     {%  set channel = channel_affiliate %}
 {% endif %}
@@ -18,7 +18,6 @@
 {% else %}
     {% set nick = nick_affiliate ~ '????' %}
 {% endif %}
-
 {% include "ApiSocialBundle:Chat:script.html.twig" with {enter_channel: channel, chat_nick: nick } %}
 </body>
 </html>

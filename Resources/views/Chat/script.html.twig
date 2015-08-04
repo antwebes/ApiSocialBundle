@@ -18,6 +18,8 @@
             {% if app.user%}
             "auto_connect" : true,
             "token" : "{{ app.user.accessToken }}"
+            {% else %}
+            "auto_connect" : false,
             {% endif %}
         };
 
