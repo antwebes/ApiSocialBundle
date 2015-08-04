@@ -5,7 +5,7 @@
 </h5>
 <div class="row">
     <div class="col-xs-5">
-        <a href="{{ path('ant_chat_chat_show', {channel: channel.ircChannel~',chatsfree'}) }}" title="{{ "Enter to chat" | trans }}">
+        <a href="{{ path('ant_chat_chat_show', {channel: channel.ircChannel}) }}" title="{{ "Enter to chat" | trans }}">
             {% if channel.photo %}
                 <img class="img-responsive" alt="{{ channel.name | capitalize }}" id="avatar2" src="{{ channel.photo.path }}">
             {% else %}
