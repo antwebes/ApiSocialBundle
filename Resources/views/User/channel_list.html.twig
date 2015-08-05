@@ -13,7 +13,7 @@
 					<div class="pull-left">
 						<a href="{{ path('channel_show', {'slug': channel.slug})}}">
 						{% if channel.photo %}
-                                <img style="display: block;" src="{{ channel | channelPhotoUrl('small') }}" class="img-rounded img-responsive lazy" data-original="{{ channel | channelPhotoUrl('small') }}" alt="{{ channel.name }}" width="100px" height="100px">
+                                <img style="display: block;" class="img-rounded img-responsive lazy" data-original="{{ channel | channelPhotoUrl('small') }}" alt="{{ channel.name }}" width="100px" height="100px">
                             {% else %}
                                 {% image '@ApiSocialBundle/Resources/public/images/no-photo-chatroom.jpg'  output="images/no-photo-chatroom.jpg" %}
                                     <img style="display: block;" class="img-rounded img-responsive lazy" data-original="{{ asset_url }}" alt="{{ channel.name }}" width="100px" height="100px">

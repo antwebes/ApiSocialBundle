@@ -29,3 +29,14 @@
         </div>
     </div>
 {% endblock %}
+
+{% block body_js_end %}
+{{ parent() }}
+{# js to jquerylazyload#}
+	{% javascripts
+	            '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+            %}
+		<script src="{{ asset(asset_url) }}"></script>	
+   	{% endjavascripts %}
+{% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+{% endblock %}
