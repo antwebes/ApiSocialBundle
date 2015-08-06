@@ -1,0 +1,11 @@
+{# Begin Code to button go to chat #}
+	{% javascripts
+    '@ApiSocialBundle/Resources/public/js/chat-bridge.js'
+    %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script>
+    newChatButton("{{ channel.ircChannel }}", "{% if not chat_url %}{{ path('ant_chat_chat_show', {channel: channel.ircChannel } )}}{% else %}{{chat_url}}?channel={{ channel.ircChannel  | url_encode}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}{% endif %}");
+</script>
+{# Finish Code to button go to chat #}
