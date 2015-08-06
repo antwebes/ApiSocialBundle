@@ -85,10 +85,23 @@
 {{ parent() }}
 {# js to jquerylazyload#}
 	{% javascripts
-	            '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
-            %}
+		'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+	%}
 		<script src="{{ asset(asset_url) }}"></script>	
    	{% endjavascripts %}
 {% include "ApiSocialBundle:Common:incrementUserview.html.twig" %}
 {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+
+{# Begin Code to button go to chat #}
+	{% javascripts 
+		'@AppBundle/Resources/public/js/chat-bridge.js'
+		%}
+    	<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}                    
+                    
+	<script>
+	    newChatButton("{{ user.username }}", "{% if not chat_url %}{{ path('ant_chat_chat_show', {user: user.username } )}}{% else %}{{chat_url}}?user={{ user.username  | url_encode}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}{% endif %}");
+	</script>
+{# Finish Code to button go to chat #}
+
 {% endblock %}

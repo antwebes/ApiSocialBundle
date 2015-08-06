@@ -1,11 +1,4 @@
 {% if has_chat %}
-    {% if not chat_url %}
-        <a class="btn btn-primary" disabled="disabled" id="chatBtnConnect" title="{{ channel.name }}">
-        {#<a title="{{ channel.name }}" href="{{ path('ant_chat_chat_show') }}?channel={{ channel.ircChannel}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}">{% endif %}#}
-    {% else %}
-        <a class="btn btn-primary" disabled="disabled" id="chatBtnConnect" title="{{ channel.name }}">
-    {% endif %}
-    <script>
-        newChatButton("{{ channel.ircChannel }}", "{% if not chat_url %}{{ path('ant_chat_chat_show', {channel: channel.ircChannel } )}}{% else %}{{chat_url}}?channel={{ channel.ircChannel  | url_encode}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}{% endif %}");
-    </script>
+	<a class="btn btn-primary" disabled="disabled" id="chatBtnConnect" title="{{ channel.name }}"></a>
+	{#<a title="{{ channel.name }}" href="{{ path('ant_chat_chat_show') }}?channel={{ channel.ircChannel}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}">{% endif %}#}
 {% endif %}
