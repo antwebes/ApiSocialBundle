@@ -36,13 +36,15 @@
 	</li>
 </ul>
 <br/><br/><br/>
-<div class="row">
+    <div class="row">
 	<div class="col-xs-12 col-sm-3">
 		{% include 'ApiSocialBundle:User:_usersSidebar.html.twig' with {'user': user} %}
 	</div>
 	<div class="col-xs-12 col-sm-9">
 		<h1 class="blue">{{ "user.profile_of" | trans({'%username%': user.username | capitalize}) }}</h1>
 		{% include "ApiSocialBundle:User:_info_profile.html.twig" %}
+
+        <a id="chatBtnConnect" target="_blank" class="btn btn-primary" disabled="disabled"></a>
 	</div>
 </div>
 
@@ -82,6 +84,9 @@
 
 {% block body_js_end %}
 {{ parent() }}
+    <script>
+        newChatButton("{{ user.username }}");
+    </script>
 {# js to jquerylazyload#}
 	{% javascripts
 	            '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
