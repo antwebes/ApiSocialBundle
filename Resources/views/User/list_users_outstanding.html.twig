@@ -1,5 +1,7 @@
 {% if show_users_outstanding is defined and show_users_outstanding %}
+	{% if (show_button_payment and app.user and app.user.validated) or outstandingUsers%}
 	<h2>{{ "user.outstandingusers" | trans }}</h2>
+	{% endif %}
 	<div class="row-fluid">
 		{% if outstandingUsers %}
 	        <ul class="ace-thumbnails" data-behat="items-user">
