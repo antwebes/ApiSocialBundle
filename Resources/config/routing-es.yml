@@ -34,7 +34,7 @@ ant_user_user_photo_show:
     defaults: { _controller: ApiSocialBundle:User:showPhoto }
 
 ant_chat_chat_show:
-    pattern: /chat/
+    pattern: /webchat/
     defaults: { _controller: ApiSocialBundle:Chat:show }
 
 user_channel_list:
