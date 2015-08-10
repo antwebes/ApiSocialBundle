@@ -10,6 +10,7 @@ namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserController extends BaseController
 {
@@ -169,6 +170,42 @@ class UserController extends BaseController
 
         return $this->render('ApiSocialBundle:Show:photo.html.twig',array('user'=>$user,'photo'=> $photo));
     }
+
+    /**
+     * @param $idUser
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
+    public function removePhotoAction($idUser, $id)
+    {
+        $user = $this->get('api_users')->findById($idUser);
+        $photo = $this->get('api_photos')->findById($id);
+
+        if($user == null){
+            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
+        }
+
+        if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
+            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
+        }
+
+        if($this->getUser()->getId() !== $user->getId()){
+            throw new AccessDeniedHttpException($this->translate('user.photo.remove.not_owner'));
+        }
+
+        try{
+            $this->get('api_photos')->delete($photo->getId());
+
+            $this->addFlashNotice('notice', $this->translate('user.photo.remove.success'));
+
+            return $this->redirect($this->generateUrl('ant_user_user_photos_show', array('id' => $user->getId())));
+        }catch(\Exception $e){
+            $this->addFlashNotice('error', $this->translate('user.photo.remove.failure'));
+
+            return $this->redirect($this->generateUrl('ant_user_user_photo_show', array('idUser' => $user->getId(), 'id' => $photo->getId())));
+        }
+    }
     
     public function renderWidgetUserSessionAction()
     {
@@ -224,5 +261,18 @@ class UserController extends BaseController
         $user_id = $request->get('user_id');
 
         return $user_id == null || $user->getUsernameCanonical() != $username;
+    }
+
+    private function translate($message, $parameters = array())
+    {
+        return $this->get('translator')->trans($message, $parameters);
+    }
+
+    private function addFlashNotice($level, $message)
+    {
+        $this->getRequest()->getSession()->getFlashBag()->add(
+            $level,
+            $message
+        );
     }
 }

@@ -35,3 +35,11 @@ channel.type.love: Amor
 channel.type.sports: Deportes
 user.photos.need_confirmate_account: Para ver fotos de usuarios necesitas tener la cuenta validada.
 user.activate_account_info: Aquí tienes toda la información necesaria
+user.photo.remove: Eliminar foto
+user.photo.remove.title: Eliminar foto
+user.photo.remove.message: "¿Está seguro de querer eliminar esta foto? &hellip;"
+user.photo.remove.not_owner: "No eres propietario de esta foto"
+user.photo.remove.success: "Tu foto ha sido eliminada con éxito"
+user.photo.remove.failure: "Ha ocurrido un error al intentar eliminar la foto"
+user.photo.remove.yes: Si
+user.photo.remove.close: Cerrar

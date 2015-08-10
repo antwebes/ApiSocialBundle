@@ -29,11 +29,22 @@
         </div>
         <br/>
         <div class="row">
+            {% if app.user and app.user.id == user.id %}
+                <a data-path="{{ path('ant_user_user_photo_remove', {idUser: user.id, id: photo.id }) }}"
+                   class="btn btn-info btn-sm pull-left open-DeleteDialog"
+                   data-toggle="modal" data-target="#delete-dialog"
+                   data-message="{{ 'user.photo.remove.message' | trans }}"
+                   data-title="{{ 'user.photo.remove.title' | trans }}">
+                    {{ 'user.photo.remove' | trans }}
+                </a>
+            {% endif %}
             <a href="{{ path('ant_user_user_photos_show', {id: user.id}) }}" class="btn btn-info btn-sm pull-left">
                 {{ 'user.back' | trans }}
             </a>
         </div>
     </div>
+
+    {% include "ApiSocialBundle:Common:delete-dialog.html.twig" %}
 
 {% endblock %}
 
@@ -41,6 +52,7 @@
     {{ parent() }}
     {% javascripts
     '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+    '@ApiSocialBundle/Resources/public/js/deleteDialog.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
