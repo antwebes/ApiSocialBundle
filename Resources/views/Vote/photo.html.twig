@@ -52,6 +52,7 @@
         }
 
         function nextUser() {
+            console.log(users);
             if(users.length == 0) getUsers();
             else {
                 showUser();
@@ -65,19 +66,20 @@
         }
 
         function sendScore(score, user) {
+            /*
             $.ajax({
                         type: "POST",
                         url: window.api_endpoint + "/api/users/"+user.id+"/vote",
-                        data: {"photo": user.profile.profile_photo, "score": }
                         beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + token); }
                     }
             );
+            */
         }
 
         $('#raty').raty({
             number: 10, path: '/bundles/apisocial/raty/images/',
             click: function(score, evt) {
-                showUser();
+                nextUser();
                 sendScore(score, current_user);
                 return false;
             }
