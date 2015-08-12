@@ -11,7 +11,7 @@ define([
                     }
                 },
                 schema: {
-                    body:      { validators: ['required'], type: 'TextArea', editorClass: "wysiwyg-editor", editorAttrs: { "cols": "120", "rows": "50", "placeholder": "Message" } }
+                    body:      { validators: ['required'], type: 'TextArea', editorClass: "wysiwyg-editor", editorAttrs: { "cols": "120", "rows": "10", "placeholder": "Message" } }
                 },
                 toJSON: function(){
                     var data = Backbone.Model.prototype.toJSON.apply(this, arguments);

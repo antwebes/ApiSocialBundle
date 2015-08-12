@@ -43,28 +43,18 @@ define(["app"],
             };
 
             App.on("messages:index", function(){
-                App.navigate("me/messages/");
                 API.index();
             });
 
             App.on("messages:sent", function(){
-                App.navigate("me/messages/sent");
                 API.sent();
             });
 
             App.on("messages:showThread", function(threadId){
-                App.navigate("me/messages/"+threadId);
                 API.showThread(threadId);
             });
 
             App.on("messages:compose", function(username, noLayout){
-                var url = "me/messages/compose";
-
-                if(username){
-                    url = url + '/' + username;
-                }
-
-                App.navigate(url);
                 API.compose(username, noLayout);
             });
 
