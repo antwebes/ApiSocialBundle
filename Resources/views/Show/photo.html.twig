@@ -41,8 +41,10 @@
     {{ parent() }}
     {% javascripts
     '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+    '@ApiSocialBundle/Resources/public/lightbox.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+    {% include "ApiSocialBundle:Show:_photo_js.twig" %}
 {% endblock %}

@@ -9,10 +9,19 @@
 {% block head_css %}
     {{ parent() }}
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
-    {% stylesheets 
-            "@ApiSocialBundle/Resources/public/css/custom.css" 
-        %}
-        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% stylesheets
+            "@ApiSocialBundle/Resources/public/css/custom.css"
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+
+    {% stylesheets
+    'bundles/apisocial/lightbox2/css/*'
+    'bundles/apisocial/photoswipe/default-skin/default-skin.css'
+    'bundles/apisocial/photoswipe/photoswipe.css'
+    filter='cssrewrite'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
     {% endstylesheets %}
 {% endblock head_css %}
 
@@ -35,13 +44,9 @@
         <br/><br/><br/>
         <div class="row-fluid">
             <h2>{{ "user.photos_of_user" | trans({'%username%': user.username}) }}</h2>
-            <ul class="ace-thumbnails" data-behat="photos">
+            <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" data-behat="photos">
                 {% for photo in photos %}
-                    <li class="col-xs-4 col-lg-2">
-                        <a href="{{ path('ant_user_user_photo_show', {'idUser': user.id, 'id': photo.id }) }}">
-                            <img class="lazy img-responsive" data-original="{{ photo | photoUrl("medium") }}" height="250px">
-                        </a>
-                    </li>
+                    {% include "ApiSocialBundle:Show:_photo_list.html.twig" with { 'photo': photo } %}
                 {% else %}
                     {% if app.user.isValidated %}
                         {{ "user.photos.has_not" | trans() }}
@@ -51,7 +56,9 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-            </ul>
+            </div>
+            {% include "ApiSocialBundle:Show:photoswipe.html.twig" %}
+
         </div>
     </div>
 
@@ -66,8 +73,15 @@
     {{ parent() }}
     {% javascripts
     '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+    '@ApiSocialBundle/Resources/public/photoswipe/photoswipe.js'
+    '@ApiSocialBundle/Resources/public/photoswipe/photoswipe-ui-default.js'
+    '@ApiSocialBundle/Resources/public/lightbox2/js/lightbox.js'
+    '@ApiSocialBundle/Resources/public/lightbox2/lightbox_app.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+    <script>
+        initPhotoSwipeFromDOM('.my-gallery');
+    </script>
 {% endblock %}
