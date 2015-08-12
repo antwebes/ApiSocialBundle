@@ -1,0 +1,1 @@
+define(["app","apps/static/show/show_view"],function(e,t){return e.module("StaticApp.Show",function(e,n,r,i,s,o){e.Controller={show:function(e){var r=n.root+"_static/"+e+"?standalone=true";s.ajax({url:r,success:function(e){var r=new t.Show({html:e});n.body_container_main_Region.show(r)}})}}}),e.StaticApp.Show.Controller});

@@ -1,0 +1,114 @@
+{{#ifCond enabled false}}
+<div class="alert alert-danger">Note that this channel hasn't been moderated by administration yet.</div>
+{{/ifCond}}
+<div class="row">
+    <h4 class="col-sm-offset-2 col-xs-12 blue">
+        <span class="middle">Info {{ name }} Chat Room</span>
+    </h4>
+</div>
+<div class="row" id="channelInfo">
+    <div class="col-xs-3 col-sm-offset-2">
+            <div class="profile-users founderBox">
+                <div class="itemdiv memberdiv">
+                    <div class="inline position-relative">
+                        
+                        <a href="/users/{{ owner.username }}-{{ owner.id }}" alt="{{ owner.username }}"  title="{{ owner.username }}">
+                            <div class="user">
+                              <img class="lazy" data-original="{{#if owner.profile.profile_photo}}{{owner.profile.profile_photo.path_icon}}{{else}}{{ globalVar "default_user_image_icon" }}{{/if}}" width="50" height="60" alt="{{ owner.username }}"  title="{{ owner.username }}" class ="pull-left">
+                            </div>
+                         
+                            <div class="body">
+                                <div class="name">
+                                    <span class="user-status status-online"></span>
+                                    {{ owner.username }}
+                            </div>
+                        </a>
+                        </div>
+                        <div class="popover">
+                            <div class="arrow"></div>
+                            <div class="popover-content">
+                                <div class="bolder"> {{ owner.username }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>  
+
+    <div class="col-xs-9 col-sm-7">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#info" class="no_navigate" role="tab" data-toggle="tab">Info</a></li>
+            <li><a href="#details" role="tab" class="no_navigate" data-toggle="tab">Details</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="info">
+          
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Irc Channel </div>
+                    <div class="profile-info-value">
+                        <span>{{ irc_channel }}</span>
+                    </div>
+                </div>
+                <div class="profile-info-row">  
+                        <div class="profile-info-name"> Description </div>
+        
+                        <div class="profile-info-value">
+                            <span>{{ description }}</span>
+                        </div>
+                    </div>
+                    {{#with channel_type}}
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Channel Type </div>
+        
+                        <div class="profile-info-value">
+                            <span><strong><a href="/rooms/list?filter=channelType={{ name }}">{{ name }}</a></strong></span>
+                        </div>
+                    </div>
+                    {{/with}}
+                                
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Created at </div>
+            
+                        <div class="profile-info-value">
+                            <span>{{ publicated_at }}</span>
+                        </div>
+                </div>  
+            </div>
+          
+            <div class="tab-pane" id="details">
+        
+                {{#with expired_at}}
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Date to expire: </div>
+        
+                    <div class="profile-info-value">
+                        <span>{{ expired_at }}</span>
+                    </div>
+                </div>
+                {{/with}}
+                {{#with is_expired}}
+                <div class="profile-info-row">
+                    <div class="profile-info-name">Is expired </div>
+        
+                    <div class="profile-info-value">
+                        <span>This chat room is expired, currently has no owner</span>
+                    </div>
+                </div>
+                {{/with}}
+                {{#with last_visit}}
+                <div class="profile-info-row">  
+                    <div class="profile-info-name"> Last visit </div>
+    
+                    <div class="profile-info-value">
+                        <span>{{ last_visit }}</span>
+                    </div>
+                </div>
+                {{/with}}
+        
+            </div>
+        </div>
+    </div>      
+</div>

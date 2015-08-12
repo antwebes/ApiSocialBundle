@@ -1,0 +1,16 @@
+<script>
+    window.user_id = {{ app.user.id }};
+    window.token = "{{ app.user.accessToken }}";
+    window.api_endpoint = "{{ social_endpoint }}";
+    {% if app.environment == 'dev' %}
+    window.debug_mode = true;
+    {%else%}
+    window.debug_mode = false;
+    {% endif %}
+</script>
+{% javascripts
+filter='?requirejs'
+'@ApiSocialBundle/Resources/public/js/social/app/app.js'
+%}
+    {{ require_js_initialize({ 'main' : asset_url }) }}
+{% endjavascripts %}

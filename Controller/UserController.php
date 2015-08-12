@@ -144,6 +144,22 @@ class UserController extends BaseController
     }
 
     /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
+    public function messageAction($id)
+    {
+        $user = $this->get('api_users')->findById($id);
+
+        if($user == null){
+            throw $this->createNotFoundException('THe user with id ' .$id, ' not exits');
+        }
+
+        return $this->render('ApiSocialBundle:User:message.html.twig',array('user'=>$user));
+    }
+
+    /**
      * @param $idUser
      * @param $id
      * @param int $page
@@ -176,6 +192,15 @@ class UserController extends BaseController
     	$user = $this->get('api_users')->findById($user_session->getId());
     	
     	return $this->render('ApiSocialBundle:User:_widget_user_session.html.twig', array('user'=>$user));
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
+    public function messagesAction()
+    {
+        return $this->render('ApiSocialBundle:User:messages.html.twig');
     }
 
     private function findUserByUsernameOrId($username, $user_id, $asArray)

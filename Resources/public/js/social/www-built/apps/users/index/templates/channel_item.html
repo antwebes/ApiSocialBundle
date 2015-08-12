@@ -1,0 +1,24 @@
+<script>
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-xs-12">
+            <a href="/<%= slug %>"><h2 style="font-size:16px"><%= name %></h2></a>
+            </div>
+            <div class="col-xs-6 col-md-6 text-center">
+                <a href="/<%= slug %>">
+                    <img class="img-rounded img-responsive lazy" height=<%= sizeImage.height %> width=<%= sizeImage.width %> data-original=<% if (typeof(photo) != "undefined") { %>"<%=photo.path_medium %>"<% } else { %>"<%= window.default_chat_image  %>"<% } %> alt="<%= name %>">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-6 section-box">
+                <p><%= description.substr(0, 50) %></p>
+                <hr />
+            <div class="row rating-desc">
+              <div class="col-md-12">
+                    <i class="fa fa-bar-chart-o"></i> <%= count_visits %>&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-users"></i> <%= number_fans %>
+              </div>
+            </div>
+         </div>
+        </div>
+    </div>
+</script>

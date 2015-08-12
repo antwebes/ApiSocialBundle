@@ -1,0 +1,30 @@
+<script>
+	<a data-rel="colorbox" class="cboxElement user-detail-link">
+		<img class="img-responsive lazy" width=<%= sizeImage.width %> height=<%= sizeImage.height %> style="border: 1px solid #DDDDDD; border-radius: 4px 4px 4px 4px;" data-original=<% if ((typeof(profile) != "undefined") && (typeof(profile.profile_photo) != "undefined")) { %>
+								"<%= profile.profile_photo.path_large %>"
+							<% } else { %>
+								"<%= window.default_user_image_large %>"
+							<% } %> title="<%= username %>">
+		<div class="tags hidden-xs">
+	        <span class="label-holder">
+	            <span class="label label-info arrowed"><strong><i class="fa fa-user"></i> <%= username %></strong></span>
+	        </span>
+			
+	        <span class="label-holder">
+	        	<% if (typeof(city)!= "undefined") { %>
+	        		<% if (city.name === 'no_city') { %>
+	            		<span class="label label-danger"><i class="fa fa-map-marker"></i> <%= city.country.name %></span>
+	            	<% } else { %>
+	            		<span class="label label-danger"><i class="fa fa-map-marker"></i> <%= city.name %></span>
+	            	<% } %>
+	            <% } %>
+	        </span>
+	        
+	    </div>
+	</a>
+	<div class="tools tools-top">
+		<a id="chat-with-user">
+			<i class=" fa fa-comment"></i> Chat
+		</a>
+	</div>
+</script>

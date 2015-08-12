@@ -1,5 +1,7 @@
 {% extends "ChateaClientBundle::mainLayout.html.twig" %}
 
+{% trans_default_domain 'User' %}
+
 {% block header_no_index %} 
 	{% if (affiliate_id is defined) and (affiliate_id is not null) and (user.client.affiliate.id != affiliate_id) %}
 		<meta name="robots" content="noindex"> 
@@ -34,6 +36,12 @@
 			{{ "Pictures" | trans }}
 		</a>
 	</li>
+    <li>
+        <a href="{{ path('ant_user_user_message', {'id': user.id}) }}">
+            <i class="blue fa fa-envelope bigger-120"></i>
+            {{ "user.write_message" | trans }}
+        </a>
+    </li>
 </ul>
 <br/><br/><br/>
     <div class="row">

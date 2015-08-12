@@ -1,0 +1,31 @@
+<script>
+<div class="row">
+        <div class="col-xs-4">
+            <img width="94" height="106" alt="{{ "Chatsfree Pacman" | trans }}" src="/images/pachatea.png">
+        </div>
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-12 pull-right" style="margin-bottom:10px;">
+
+            <div class="input-group input-group-lg">
+              <% if(typeof(window.chat_connected) == 'undefined' || window.chat_connected == false){ %>
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  <% if(typeof(nick) != 'undefined'){ %>
+                      <input type="text" class="form-control" id="username" name="_username" value="<%= nick %>">
+                  <% }else{ %>
+                      <input type="text" class="form-control" id="username" name="_username" placeholder="Write your nick...">
+                  <% } %>
+              <% } %>
+            </div>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-chat pull-right" id="goChat"><i class="fa fa-comments"></i> Chat </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -33,6 +33,14 @@ ant_user_user_photo_show:
     path: /usuarios/{idUser}/fotos/{id}
     defaults: { _controller: ApiSocialBundle:User:showPhoto }
 
+ant_user_user_message:
+    path: /usuarios/{id}/mensaje
+    defaults: { _controller: ApiSocialBundle:User:message }
+
+ant_user_user_messages:
+    path: /mensajes
+    defaults: { _controller: ApiSocialBundle:User:messages }
+
 ant_chat_chat_show:
     pattern: /webchat/
     defaults: { _controller: ApiSocialBundle:Chat:show }

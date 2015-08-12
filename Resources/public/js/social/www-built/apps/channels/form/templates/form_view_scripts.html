@@ -1,0 +1,23 @@
+<script>
+	<script>
+		$(".field-modes").on("keyup", "input[type=text]", function(e){
+			
+			//input where I write
+			var value_input_where_write = $(this).val();
+			//name of the mode
+			var name_input_on_click = $(this).attr("name");
+			var parent = $(this).parent();
+			var new_value = '{"mode":"'+name_input_on_click.charAt(0).toLowerCase()+'","value":"'+value_input_where_write+'"}';
+
+			//override new value
+			parent.children("input[type=checkbox]").val(new_value);
+
+		});
+		$(".field-modes div").hide();
+		$(".field-modes").append('<div class="col-sm-10 show_modes"><i class="fa fa-angle-double-down"></i> Show Modes Irc</div>');
+		$(".show_modes").on("click", function(e){
+			$(".field-modes div").show();
+			$(".show_modes").hide();
+		});
+	</script>
+</script>

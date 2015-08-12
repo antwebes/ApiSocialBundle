@@ -1,0 +1,13 @@
+{
+  "name": "brandymint-easyXDM",
+  "homepage": "https://github.com/BrandyMint/easyxdm",
+  "_release": "5021238ac1",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5021238ac1077216eb0f322ac0c4ec21311d0401"
+  },
+  "_source": "git://github.com/BrandyMint/easyxdm.git",
+  "_target": "*",
+  "_originalSource": "brandymint-easyXDM"
+}

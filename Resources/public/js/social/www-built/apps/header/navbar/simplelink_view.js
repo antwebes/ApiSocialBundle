@@ -1,0 +1,1 @@
+define(["app"],function(e){return e.module("HeaderApp.Navbar.View",function(e,t,n,r,i,s){e.SimpleLink=r.View.extend({tagName:"li",link:null,initialize:function(e){this.link=e},render:function(){return i(this.el).append('<a href="'+this.link.href+'">'+this.link.name+"</a>"),this}})}),e.HeaderApp.Navbar.View});

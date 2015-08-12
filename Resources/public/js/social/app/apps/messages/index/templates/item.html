@@ -1,0 +1,17 @@
+<div class="row message-item {{#unless is_readed}}message-unread{{/unless}}">
+    <div class="col-xs-2">
+        <span title="{{created_by.username}}"><img src="{{#if created_by.profile.profile_photo}}{{created_by.profile.profile_photo.path_icon}}{{else}}{{ globalVar "default_user_image_icon" }}{{/if}}"> {{created_by.username}}</span>
+    </div>
+
+    <div class="col-xs-4">
+        {{#each participants}}
+            <span title="{{this.username}}"> {{this.username}}</span>{{#unless @last}},{{/unless}}
+        {{/each}}
+    </div>
+    
+    <div class="col-xs-4 summary">
+        <span class="text">{{subject}}</span>
+    </div>
+
+    <span class="col-xs-1">{{ relativeFromNow created_at}}</span>
+</div>

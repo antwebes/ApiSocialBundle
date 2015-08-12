@@ -1,0 +1,13 @@
+<div id="photo">
+  {{#if title}}
+    <h2>{{title}}</h2>
+  {{else}}
+    <h2>Photo {{id}}</h2>
+  {{/if}}
+  {{#if score}}
+    <p>Score: {{score}} | Voted:  {{number_votes}} </p>
+  {{/if}}
+  <p>Publicated at: {{publicated_at}} {{#album}} in {{title}} {{/album}}</p>
+  <p><button class="btn btn-edit">Back</button></p>
+  <img src={{ path }}>
+</div>

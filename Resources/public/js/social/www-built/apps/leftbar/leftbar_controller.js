@@ -1,0 +1,1 @@
+define(["app","apps/leftbar/leftbar_view"],function(e,t){return e.module("LeftbarApp",function(e,n,r,i,s,o){var u=new t.Leftbar;e.Controller={showLeftbar:function(){n.leftRegion.attachView(u)},addLink:function(e,t){}}}),e.LeftbarApp.Controller});

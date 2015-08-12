@@ -1,0 +1,1 @@
+define(["app","apps/photos/upload/upload_view"],function(e,t){return e.module("PhotosApp.Upload",function(e,n,r,i,s,o){e.Controller={uploadPhoto:function(e){e=e||{},e.profile_hidden=!1,n.container_center_Region.show(new t.FormItem({configure:e}))}}}),e.PhotosApp.Upload.Controller});

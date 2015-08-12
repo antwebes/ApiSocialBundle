@@ -1,0 +1,1 @@
+define(["app","apps/photos/show/show_view","handlebars","text!apps/users/photos/templates/show_photo.html"],function(e,t,n,r){return e.module("UsersApp.Show.Photo.View",function(e,i,s,o,u,a){e.PhotoView=t.ShowPhoto.extend({template:n.compile(r),onEdit:function(){this.trigger("photo:back")}})}),e.UsersApp.Show.Photo.View});

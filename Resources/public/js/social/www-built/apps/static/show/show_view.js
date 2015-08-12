@@ -1,0 +1,1 @@
+define(["app"],function(e){return e.module("StaticApp.Show.View",function(e,t,n,r,i,s){e.Show=r.ItemView.extend({initialize:function(e){this.template=e.html},render:function(){this.$el.html(this.template)}})}),e.StaticApp.Show.View});

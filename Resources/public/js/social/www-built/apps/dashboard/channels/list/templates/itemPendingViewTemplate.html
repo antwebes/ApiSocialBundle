@@ -1,0 +1,38 @@
+<script>
+
+	<div class="col-xs-3">
+	<a href="/<%= slug %>" data-rel="colorbox" class="cboxElement">
+		<% if (typeof(photo) != "undefined") { %>
+			<img height="100%" width="100%" class="pull-left lazy" data-original="<%=photo.path_medium %>" alt="<%= 	name %>">
+		<% } else { %>
+			<img height="100%" width="100%" class="pull-left lazy" data-original="<%=window.default_chat_image%>" alt="<%= 	name %>">
+		<% } %>
+	</div>
+	<div class="col-xs-9 box-basic">
+		<h3>Room <%= name %></h3>
+		<p class="hidden-xs">Room of chat of <%=name%>, enter to chat for free</p>
+		<div class="row">
+			<div class="col-xs-4 border-right">
+				<img width="34" height="34" class="pull-left frame-profile lazy" data-original=
+				<% if ((typeof(owner.profile) != "undefined") && (typeof(owner.profile.profile_photo) != "undefined")) { %>
+					"<%= owner.profile.profile_photo.path_icon %>"
+				<% } else { %>
+					"<%= window.default_user_image_icon %>"
+				<% } %>
+				><a href="/users/<%=owner.username_canonical%>-<%=owner.id%>"><%= owner.username %></a>
+				<p class="type-off">Founder</p>
+			</div>
+			<div class="col-xs-4 border-right">
+				<i class="fa fa-user"></i> <%= count_visits %>
+				<p class="type-off">Visitors</p>
+			</div>	
+			<div class="col-xs-4">
+				<i class="fa fa-bullhorn"></i><% if (typeof(channel_type) != "undefined") { %><a href="/rooms/list?filter=channelType=<%= channel_type.name %>"><b> <%= channel_type.name %></b></a><% } else { %><b> not defined</b><% } %>
+				<p class="type-off">Channel Type</p>
+			</div>				
+		</div>	
+	</div>
+	</a>
+	<button id="getChannel" class="btn btn-danger">Pending of moderate</button>
+</div>		
+</script>

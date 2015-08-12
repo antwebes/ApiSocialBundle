@@ -1,0 +1,32 @@
+<% if(isPrivateChat){ %>
+    <div class="row">
+        <div class="col-sm-10">
+            <input readonly="readonly" id="private_chat_url" class="form-control" name="private_chat_url" type="text" value="<%= window.location.href %>">
+        </div>
+        <div class="col-sm-2">
+            <button id="copy_url" data-clipboard-target="private_chat_url" class="btn btn-primary">Copy</button>
+        </div>
+    </div>
+<% } %>
+<iframe src="<%= window.webchat_url %>?<% if (typeof(channel) != "undefined") { %>channel=<%=channel.substring(1)%><% } %><%if (typeof(nick) != "undefined") { %>&nick=<%=nick%><% }%><%if (typeof(private) != "undefined") { %>&private=<%=private%><% }%>"width="100%" height="550px" id="iframe_chat"frameborder="0"></iframe>
+
+<script type="text/javascript">
+
+// Controlar que cambiamos de url, para que se oculte automáticamente el chat
+    $(document).delegate("a", "click", function(evt) {
+        if ($(this).attr('target') == '_blank'){
+            return;
+        }else{
+            // Get the anchor href and protcol
+            var href = $(this).attr("href");
+            var protocol = this.protocol + "//";
+             
+            if (typeof(href) != "undefined"){
+                if(href.indexOf("/chat") === -1){
+                    $(".social").show();
+                    $(".chat").hide();
+                };
+            }
+        }
+    });  
+</script>

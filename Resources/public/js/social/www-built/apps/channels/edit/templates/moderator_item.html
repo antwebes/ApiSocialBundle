@@ -1,0 +1,21 @@
+<div class="inline position-relative">
+
+  <div class="user">
+      <img src="{{#if profile.profile_photo}}{{ profile.profile_photo.path_icon }}{{else}}{{ globalVar "default_user_image_icon" }}{{/if}}" width="50" height="60" alt="pmetz" title="{{ username }}" class="pull-left">
+  </div>
+
+
+  <div class="body">
+    <div class="name">
+        <span class="user-status status-online"></span>
+        {{ username }}
+    </div>
+  </div>
+</div>
+<div class="popover">
+    <div class="arrow"></div>
+    <div class="popover-content">
+        <div class="bolder"> {{ username }}</div>
+    </div>
+</div>
+    <button class="btn btn-danger delete">Delete</button>

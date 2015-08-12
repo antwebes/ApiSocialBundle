@@ -21,6 +21,12 @@
                     {{ "user.pictures" | trans }}
                 </a>
             </li>
+            <li>
+                <a href="{{ path('ant_user_user_message', {'id': user.id}) }}">
+                    <i class="blue fa fa-envelope bigger-120"></i>
+                    {{ "user.write_message" | trans }}
+                </a>
+            </li>
         </ul>
         <br/><br/><br/>
         <div class="row-fluid">

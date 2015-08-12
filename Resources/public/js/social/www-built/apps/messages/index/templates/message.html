@@ -1,0 +1,27 @@
+<div class="message-item {{#unless message.is_readed}}message-unread{{/unless}}">
+    <div class="message-content" id="id-message-content">
+        <div class="message-header-wrapper">
+            <div class="message-header clearfix">
+                <div class="pull-left">
+
+                    &nbsp;
+                    <img class="middle" src="{{message.sender.profile.profile_photo.path_icon}}">
+                    &nbsp;
+                    <a href="/users/{{ message.sender.username_canonical }}-{{ message.sender.id }}" class="sender">{{message.sender.username}}</a>
+
+                    &nbsp;
+                    <i class="fa fa-clock-o bigger-110 orange middle"></i>
+                    <span class="time">{{ relativeFromNow message.created_at }}</span>
+                </div>
+            </div>
+
+            <div class="hr hr-double"></div>
+        </div>
+
+        <!--<div class="message-more">...</div>-->
+
+        <div class="message-body-wrapper slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;">
+            <div class="message-body" style="overflow: hidden; width: auto; height: 200px;">{{message.body}}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<%
+var currentPage = state.currentPage;
+var firstPage = state.firstPage;
+%>
+
+<% if (totalPages > 1) { %>
+<div class="text-center">
+  <ul class="pagination">
+    <% if (currentPage > firstPage) { %>
+      <li><a href="#" class="prev">&laquo; Anterior</a></li>
+    <% } %>
+
+    <% var start = currentPage - 2 %>
+    <% var final = currentPage + 2 %>
+    <% start = start < 1 ? 1 : start %>
+    <% final = final >= totalPages ? totalPages : final %>
+
+    <% if (firstPage != currentPage && start >= 2) { %>
+      <li><a href="#" class="page"><%- firstPage%></a></li>
+      <li class="disabled"><a>...</a></li>
+    <% } %>
+
+    <% for (var p = start; p <= final; p++) { %>
+      <% if (currentPage === p) { %>
+        <li class="active"><a class="page"><%- p %> <span class="sr-only">(actual)</span></a></li>
+      <% } else { %>
+        <li><a href="#" class="page"><%- p %></a></li>
+      <% } %>
+    <% } %>
+
+    <% if (totalPages != currentPage && totalPages - final > 0) { %>
+      <li class="disabled"><a>...</a></li>
+      <li><a href="#" class="page"><%- totalPages%></a></li>
+    <% } %>
+    
+    <% if (currentPage < totalPages) { %>
+      <li><a href="#" class="next">Siguiente &raquo;</a></li>
+    <% } %>
+  </ul>
+</div>
+<% } %>

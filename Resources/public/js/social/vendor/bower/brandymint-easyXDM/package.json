@@ -1,0 +1,19 @@
+{
+  "name": "brandymint-easyXDM",
+  "description": "easyXDM bower package",
+  "version": "3.2.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BrandyMint/easyXDM.git"
+  },
+  "licenses": [
+    {
+      "type": "SIL OFL 1.1",
+      "url": "http://scripts.sil.org/OFL"
+    },
+    {
+      "type": "MIT License",
+      "url": "http://opensource.org/licenses/mit-license.html"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% trans_default_domain 'User' %}
+
+{% block head_meta_description %}{% include 'ApiSocialBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
+{% block head_meta_keywords %}{% include 'ApiSocialBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
+{% block head_title %}{% include 'ApiSocialBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
+
+{% block header_no_index %}
+		<meta name="robots" content="noindex">
+{% endblock header_no_index %}
+
+{% block head_css %}
+    {{ parent() }}
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
+    {% stylesheets
+    "@ApiSocialBundle/Resources/public/css/custom.css"
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock head_css %}
+
+{% block chatea_body %}
+    <div class="container">
+        <ul class="nav nav-tabs padding-18">
+            <li>
+                <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}">
+                    <i class="green fa fa-user bigger-120" ></i>
+                    {{ 'user.profile' | trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}">
+                    <i class="pink fa fa-picture-o bigger-120"></i>
+                    {{ "user.pictures" | trans }}
+                </a>
+            </li>
+            <li class="active">
+                <a href="{{ path('ant_user_user_message', {'id': user.id}) }}">
+                    <i class="blue fa fa-envelope bigger-120"></i>
+                    {{ "user.write_message" | trans }}
+                </a>
+            </li>
+        </ul>
+        <br/><br/><br/>
+        <div class="row-fluid">
+            <div id="body_container_main"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    {% include "ApiSocialBundle:Common:_socialjscommon.html.twig" %}
+
+    <script>
+        require(["app"],function(App){
+            App.vent.on('socialapp:loaded', function (){
+                App.trigger('messages:compose', "{{ user.username }}", true);
+            });
+            App.start();
+        });
+    </script>
+{% endblock %}
