@@ -1,0 +1,20 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% block chatea_body %}
+    <h1>Votar fotos</h1>
+    <div id="vote_container">
+
+    </div>
+{% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    <script>
+        var token ="YmQ1MDRiN2Y5M2E1ZjIxYTY4NDFkYmUzZDQ3MWIzM2JhNTE5NTBhMTJjZjkzNzY5MTZhMjViYjlhODMxOWUwZnJ1MDE0NDA1Nzg1ODBiY2VjMDY3OTM2YWQwYjRlYThjZDlkZjRjMWRhYTkzYjk0MjRkMDZjODUwZDk4OTJmMTcwYTlhOWQwMDM5Yzdh";
+
+        $.ajax({
+            url: "http://api.chatsfree.lo/app_dev.php/"
+        }).done(function(data){p186636.sendUserProfile(getXmlString(data));}).fail(function(){p186636.sendUserProfile('');});}
+    </script>
+
+{% endblock %}

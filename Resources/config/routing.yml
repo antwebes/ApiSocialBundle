@@ -68,3 +68,9 @@ user_profile_photo:
     defaults:  { _controller: ApiSocialBundle:UserProfile:getUserProfilePhoto, size: full }
     requirements:
         size:  full|large|medium|small|icon
+
+user_vote:
+    path: /vote-photos
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    Vote/photo.html.twig
