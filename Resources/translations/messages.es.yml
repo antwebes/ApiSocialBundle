@@ -17,3 +17,6 @@ user.fan_of_channels: 'Canales de los cuales es fan'
 'Personal info of %username%, see photos and chat free with %username%': 'Información personal de %username%, ve fotos y chatea gratis con %username%'
 user.account-verified: Cuenta verificada
 user.chats: Canales de %username%
+user.view_all_visitis: "Ver todas"
+user.view_visits.not_premium: "Para poder ver todos los usuarios que han visitado su perfil usted debe ser un usuario destacado"
+user.buy_outstanding: "Hacerse usuario destacado"

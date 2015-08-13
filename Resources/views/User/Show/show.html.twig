@@ -49,7 +49,7 @@
 
 <div class="row">
 	{% if app.user and user.id == app.user.id %}
-		{% render controller("ApiSocialBundle:Visit:renderWidgetUserVisitors", {'user': user, 'limit': 3}) %}
+		{% render controller("ApiSocialBundle:Visit:renderWidgetUserVisitors", {'user': user, 'limit': true, 'expand': true}) %}
 	{% endif %}
 </div>
 

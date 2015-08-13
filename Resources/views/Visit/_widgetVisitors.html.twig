@@ -9,7 +9,7 @@
             	<a href="{{ path('ant_user_user_show', {'user_id': visitor.id, 'username': visitor.usernameCanonical}) }}" title="{{ visitor.username }}">
                 	<div>
                         {% if visitor.profilePhoto %}
-	                        <img src="{{ visitor | userProfilePhotoUrl("icon") }}" class="avatar avatar-50 photo" width="50" height="50" title="{{ visitor.username }}"></a>
+	                        <img src="{{ visitor | userProfilePhotoUrl("icon") }}" class="avatar avatar-50 photo" width="50" height="50" title="{{ visitor.username }}">
 	                    {% else %}
 	                        {% image '@ApiSocialBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.jpg" %}
 	                        <img src="{{ asset_url }}">
@@ -24,6 +24,9 @@
                 </a>
             </div>
         {% endfor %}
+        {% if expand %}
+            <a href="{{ path('ant_user_user_show_all_visits', {'username': app.user.username, 'user_id': app.user.id}) }}">{{ "user.view_all_visitis" | trans }}</a>
+        {% endif %}
     </div>
 {% else %}
     <p>{{ "You don't have any visitors. Improve your profile to have some visits" | trans }}</p>
