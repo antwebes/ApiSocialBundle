@@ -16,6 +16,9 @@ hearsay_require_js:
         entities:
             location: @ApiSocialBundle/Resources/public/js/social/app/entities
             external: false
+        translations:
+            location: @ApiSocialBundle/Resources/public/js/social/app/translations
+            external: false
         vendor:
             location: @ApiSocialBundle/Resources/public/js/social/vendor # Required
             external: false
@@ -24,6 +27,9 @@ hearsay_require_js:
             external: false
         iecors:
             location: @ApiSocialBundle/Resources/public/js/social/app/lib/iecors
+            external: false
+        translate:
+            location: @ApiSocialBundle/Resources/public/js/social/app/lib/translate.min
             external: false
         jquery:
             location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery/dist/jquery.min

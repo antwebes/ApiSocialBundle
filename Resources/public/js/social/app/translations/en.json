@@ -1,0 +1,19 @@
+{
+  "messages": {
+    "messages": "Messages",
+    "message": "Message",
+    "back": "Back",
+    "sender": "Sender",
+    "participant": "Participants",
+    "subject": "Subject",
+    "created_at": "Created at",
+    "no_messages": "There are no messages",
+    "write_mail": "Write mail",
+    "inbox": "Inbox",
+    "sent": "Sent",
+    "cancel": "Cancel",
+    "send": "Send",
+    "recipient": "Recipient",
+    "successfull_sent": "The message has been successfull sent"
+  }
+}

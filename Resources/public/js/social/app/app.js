@@ -1,4 +1,6 @@
-define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'],
+// libreria de traducción pillada de https://github.com/musterknabe/translate.js
+
+define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors', 'translate'],
     function (Marionette, Backbone, _, Handlebars, moment) {
         var originalBackboneModelParse = Backbone.Model.prototype.parse;
 
@@ -21,8 +23,6 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
             return attrs;
         };
 
-        //moment.lang('es');
-
         Handlebars.registerHelper("formatDate", function(datetime, format) {
             return moment(datetime).format(format);
         });
@@ -34,6 +34,7 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
         Handlebars.registerHelper("globalVar", function(name){
             return window[name];
         });
+
 
         var App = new Marionette.Application();
 
@@ -91,54 +92,67 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
 
         // After initialize
         App.on('initialize:after', function (options) {
+            var language = 'en';
 
+            if(typeof options.lang != 'undefined'){
+                language = options.lang;
+            }
 
-            //require(["apps/header/header_app", "apps/leftbar/leftbar_app"], function(){
-                require(["apps/messages/messages_app"], function(){
+            moment.lang(language);
 
-                    Backbone.history.start({ pushState: true, root: App.root });
+            require(["text!translations/"+language+".json"], function(tranlationsText){
+                var tranlations = JSON.parse(tranlationsText);
+                var trans = window.libTranslate.getTranslationFunction(tranlations);
 
-                    if (Backbone.history && Backbone.history._hasPushState) {
-
-                        // Use delegation to avoid initial DOM selection and allow all matching elements to bubble
-                        $(document).delegate("a", "click", function(evt) {
-                            if ($(this).hasClass('no_navigate') || $(this).attr('target') == '_blank'){
-                                return;
-                            }
-                            // Get the anchor href and protcol
-                            var href = $(this).attr("href");
-                            var protocol = this.protocol + "//";
-
-
-
-                            if (typeof(href) != "undefined"){
-                                if(href.indexOf("/auth/logout") != -1) return;
-                                // Ensure the protocol is not part of URL, meaning its relative.
-                                // Stop the event bubbling to ensure the link will not cause a page refresh.
-                                if (href.slice(protocol.length) !== protocol) {
-                                    evt.preventDefault();
-
-                                    // Note by using Backbone.history.navigate, router events will not be
-                                    // triggered. If this is a problem, change this to navigate on your
-                                    // router.
-
-                                    Backbone.history.navigate(href, true);
-
-                                    return false;
-                                }
-                            }
-                        });
-                    }
-
-                    Backbone.history.on("route", function(name, id){
-                        //Esto funciona cuando le doy para adelante y para atrás en el navegador
-                        //en el navigate no
-                        App.onPostNavigate();
-                    });
-
-                    App.vent.trigger('socialapp:loaded');
+                Handlebars.registerHelper("t", function(){
+                    return trans.apply(null, arguments);
                 });
-            //});
+            });
+
+            require(["apps/messages/messages_app"], function(){
+
+                Backbone.history.start({ pushState: true, root: App.root });
+
+                if (Backbone.history && Backbone.history._hasPushState) {
+
+                    // Use delegation to avoid initial DOM selection and allow all matching elements to bubble
+                    $(document).delegate("a", "click", function(evt) {
+                        if ($(this).hasClass('no_navigate') || $(this).attr('target') == '_blank'){
+                            return;
+                        }
+                        // Get the anchor href and protcol
+                        var href = $(this).attr("href");
+                        var protocol = this.protocol + "//";
+
+
+
+                        if (typeof(href) != "undefined"){
+                            if(href.indexOf("/auth/logout") != -1) return;
+                            // Ensure the protocol is not part of URL, meaning its relative.
+                            // Stop the event bubbling to ensure the link will not cause a page refresh.
+                            if (href.slice(protocol.length) !== protocol) {
+                                evt.preventDefault();
+
+                                // Note by using Backbone.history.navigate, router events will not be
+                                // triggered. If this is a problem, change this to navigate on your
+                                // router.
+
+                                Backbone.history.navigate(href, true);
+
+                                return false;
+                            }
+                        }
+                    });
+                }
+
+                Backbone.history.on("route", function(name, id){
+                    //Esto funciona cuando le doy para adelante y para atrás en el navegador
+                    //en el navigate no
+                    App.onPostNavigate();
+                });
+
+                App.vent.trigger('socialapp:loaded');
+            });
         });
 
         //prefente links from doing its default behaviour and send an marionette event instead

@@ -58,7 +58,7 @@
             App.vent.on('socialapp:loaded', function (){
                 App.trigger('messages:compose', "{{ user.username }}", true);
             });
-            App.start();
+            App.start({ lang: "{{ app.request.getLocale() }}" });
         });
     </script>
 {% endblock %}

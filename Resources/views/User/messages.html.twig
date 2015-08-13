@@ -37,7 +37,7 @@
             App.vent.on('socialapp:loaded', function (){
                 App.trigger("messages:index");
             });
-            App.start();
+            App.start({lang: "{{ app.request.getLocale() }}"});
         });
     </script>
 {% endblock %}

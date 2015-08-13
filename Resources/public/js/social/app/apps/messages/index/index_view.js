@@ -11,7 +11,7 @@ define([
     function(App, Layout, IndexTemplate, ItemTemplate, MessagesTemplate, MessageTemplate, NoMessagesTemplate, Handlebars){
         App.module("MessagesApp.Index.View", function(View, App, Backbone, Marionette, $, _){
             View.Layout = Marionette.Layout.extend({
-                template: Layout,
+                template: Handlebars.compile(Layout),
                 events: {
                     "click #compose": "composeLinkClicked",
                     "click #inbox-tab": "inboxClicked",
@@ -86,7 +86,7 @@ define([
 
             View.Threads = Marionette.CompositeView.extend({
                 tagName: 'div',
-                template: IndexTemplate,
+                template: Handlebars.compile(IndexTemplate),
                 itemView: View.Thread,
                 emptyView: View.NoMessages
             });

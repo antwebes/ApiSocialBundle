@@ -1,0 +1,19 @@
+{
+  "messages": {
+    "messages": "Mensajes",
+    "message": "Mensaje",
+    "back": "Atrás",
+    "sender": "Remitente",
+    "participant": "Participantes",
+    "subject": "Asunto",
+    "created_at": "Fecha de creación",
+    "no_messages": "No hay mensajes",
+    "write_mail": "Redactar mensaje",
+    "inbox": "Bandeja de entrada",
+    "sent": "Enviados",
+    "cancel": "Cancelar",
+    "send": "Enviar",
+    "recipient": "Destinatario",
+    "successfull_sent": "El mensaje ha sido enviado con éxito"
+  }
+}
