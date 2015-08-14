@@ -22,26 +22,7 @@
 
 {% block chatea_body %}
     <div class="container">
-        <ul class="nav nav-tabs padding-18">
-            <li>
-                <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}">
-                    <i class="green fa fa-user bigger-120" ></i>
-                    {{ 'user.profile' | trans }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}">
-                    <i class="pink fa fa-picture-o bigger-120"></i>
-                    {{ "user.pictures" | trans }}
-                </a>
-            </li>
-            <li class="active">
-                <a href="{{ path('ant_user_user_message', {'id': user.id}) }}">
-                    <i class="blue fa fa-envelope bigger-120"></i>
-                    {{ "user.write_message" | trans }}
-                </a>
-            </li>
-        </ul>
+        {% include "ApiSocialBundle:User:_user_tabs.html.twig" %}
         <br/><br/><br/>
         <div class="row-fluid">
             <div id="body_container_main"></div>
