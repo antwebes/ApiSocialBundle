@@ -14,6 +14,11 @@
     "cancel": "Cancel",
     "send": "Send",
     "recipient": "Recipient",
-    "successfull_sent": "The message has been successfull sent"
+    "successfull_sent": "The message has been successfull sent",
+    "cannot_send_to_youself": "You cannot send a message to yourself",
+    "message_too_short": "The message is too short",
+    "subject_too_short": "The subject is too short",
+    "limit_exceded": "You can't post more messages, limit exceced",
+    "no_recipient_specified": "No recipient specified or the specified recipient doesn't exist"
   }
 }

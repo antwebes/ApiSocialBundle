@@ -103,10 +103,13 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
             require(["text!translations/"+language+".json"], function(tranlationsText){
                 var tranlations = JSON.parse(tranlationsText);
                 var trans = window.libTranslate.getTranslationFunction(tranlations);
-
-                Handlebars.registerHelper("t", function(){
+                var _translate = function(){
                     return trans.apply(null, arguments);
-                });
+                };
+
+                App.reqres.setHandler("trans", _translate);
+
+                Handlebars.registerHelper("t", _translate);
             });
 
             require(["apps/messages/messages_app"], function(){

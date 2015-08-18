@@ -83,14 +83,32 @@ define([
 
                     //poner una condicion de que sea obligatorio que existe xhr.responseJSON.errors, ahora si no existe peta
                     if (response.code === 32 || response.code === 40) {
-                        error = xhr.responseJSON.errors;
+                        error = self.trans(xhr.responseJSON.errors);
                     } else {
                         $.each(response.errors,function(index, value){
-                            error += index + ' : ' + value.message + '\n';
+                            error += self.trans(index) + ' : ' + self.trans(value.message) + '<br>';
                         });
                     }
 
                     showAlert(this.$el.find('#alert-danger'), this.$el.find('#alert-success'), error);
+                },
+                trans: function(msg){
+                    var map = {
+                        'body': 'messages::message',
+                        'recipient': 'messages::recipient',
+                        'You cannot send a message to yourself': 'messages::cannot_send_to_youself',
+                        'The body is too short': 'messages::message_too_short',
+                        'subject': 'messages::subject',
+                        'The subject is too short': 'messages::subject_too_short',
+                        'You can\'t post more messages, limit exceced': 'messages::limit_exceded',
+                        'No recipient specified': 'messages::no_recipient_specified'
+                    };
+
+                    if(typeof map[msg] != 'undefined'){
+                        msg = map[msg];
+                    }
+
+                    return App.request("trans", msg);
                 }
             });
 

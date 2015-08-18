@@ -14,6 +14,11 @@
     "cancel": "Cancelar",
     "send": "Enviar",
     "recipient": "Destinatario",
-    "successfull_sent": "El mensaje ha sido enviado con éxito"
+    "successfull_sent": "El mensaje ha sido enviado con éxito",
+    "cannot_send_to_youself": "No puedes enviarte mensajes a ti mismo",
+    "message_too_short": "El mensaje es demasiado corto",
+    "subject_too_short": "El asunto es demasiado corto",
+    "limit_exceded": "No puedes enviar más mensajes, limite excedido",
+    "no_recipient_specified": "No has introducido un destinatario o el introducido no existe"
   }
 }
