@@ -1,6 +1,12 @@
+{% trans_default_domain 'User' %}
+
 <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
     <a href="{{ photo | photoUrl("large") }}" itemprop="contentUrl" data-size="600x400">
         <img src="{{ photo | photoUrl("medium") }}" itemprop="thumbnail" alt="Image description" />
     </a>
-    <figcaption itemprop="caption description">{{ photo.title }}</figcaption>
+    <figcaption itemprop="caption description">
+        {{ photo.title }}
+        <br/>
+        <a href="{{ path('ant_user_user_photo_report', {'idUser': user.id, 'id': photo.id}) }}" class="btn">{{ "user.photos.report.title" | trans }}</a>
+    </figcaption>
 </figure>

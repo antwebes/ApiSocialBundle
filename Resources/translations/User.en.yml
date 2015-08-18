@@ -35,3 +35,9 @@ user.moderator_of_channels: 'Moderator of channels'
 user.fan_of_channels: 'Fan channels'
 user.photos.need_confirmate_account: To view users's photos you need to have the account validated.
 user.activate_account_info: Here you have all the requested information
+user.photos.report.title: "Report photo"
+user.photos.report.reason_label: Reason
+user.photos.report.reason_placeholder: "Please write the reason to report this photo"
+user.photos.report.send_button: "Report"
+user.photos.report.success: "The photo has been reported successfully"
+user.photos.report.allready_reported: "You've allready reported this photo previously"

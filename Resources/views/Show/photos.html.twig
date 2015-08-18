@@ -46,7 +46,7 @@
             <h2>{{ "user.photos_of_user" | trans({'%username%': user.username}) }}</h2>
             <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" data-behat="photos">
                 {% for photo in photos %}
-                    {% include "ApiSocialBundle:Show:_photo_list.html.twig" with { 'photo': photo } %}
+                    {% include "ApiSocialBundle:Show:_photo_list.html.twig" with { 'photo': photo, 'user': user } %}
                 {% else %}
                     {% if app.user.isValidated %}
                         {{ "user.photos.has_not" | trans() }}
