@@ -13,17 +13,27 @@
 
 {% block chatea_body %}
     <div class="row">
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2">
 
             <div id="vote_container">
 
-                <h1>Votar foto <span id="username"></span></h1>
+                <h1>Votar foto <span id="username"></span> <a href="#" class="btn btn-primary pull-right" id="go_to_next">Siguiente</a></h1>
                 <div id="raty"></div>
-                <img src="" id="profile_photo" />
-            </div>
+                <br>
+                <div class="row col-xs-12" >
+                    <img src="" id="profile_photo" />
+                </div>
+                <p>&nbsp;&nbsp;</p>
 
+            </div>
         </div>
     </div>
+    <br>
+    <div class="row col-md-5 col-md-offset-2">
+        <a href="#" class="btn btn-danger" id="go_report">Denunciar</a>
+
+    </div>
+    <br style="clear:both">
 {% endblock %}
 
 {% block body_js_end %}
@@ -35,7 +45,7 @@
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     <script>
-        var token ="YmQ1MDRiN2Y5M2E1ZjIxYTY4NDFkYmUzZDQ3MWIzM2JhNTE5NTBhMTJjZjkzNzY5MTZhMjViYjlhODMxOWUwZnJ1MDE0NDA1Nzg1ODBiY2VjMDY3OTM2YWQwYjRlYThjZDlkZjRjMWRhYTkzYjk0MjRkMDZjODUwZDk4OTJmMTcwYTlhOWQwMDM5Yzdh";
+        var token ="MTA3ZTMyZTE0ZjBkNzgzMDZmZmE5YTZmM2Q1OTMyN2FlNzBkMDNkMGExNTIwOWMxMGIyYWNmMmZmNmE5ODhlNXJ1MDE0NDExMDkyNTdlNzQzMGRlOGE3MjU3ZDZjNzM3OWMyNWEwNjY2OWZkMDM0ZWQwNjZkZjM3OGVmYWNjOWI5MjRlYzE2MWU3NjM5";
         window.api_endpoint = "http://api.chatsfree.lo/app_dev.php";
         var users = [];
         var current_user;
@@ -51,8 +61,11 @@
             );
         }
 
+        $("#go_to_next").click(function () {
+            nextUser();
+        });
+
         function nextUser() {
-            console.log(users);
             if(users.length == 0) getUsers();
             else {
                 showUser();
@@ -66,14 +79,18 @@
         }
 
         function sendScore(score, user) {
-            /*
-            $.ajax({
+            $.ajax(
+                    {
                         type: "POST",
-                        url: window.api_endpoint + "/api/users/"+user.id+"/vote",
-                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + token); }
+                        accept: "application/json",
+                        url: window.api_endpoint + "/api/users/{{ app.user.id }}/vote",
+                        data: {"_format":"json", "vote[photo]": user.profile.profile_photo.id, "vote[score]": score },
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader('Authorization','Bearer ' + token);
+                        }
                     }
             );
-            */
+
         }
 
         $('#raty').raty({
