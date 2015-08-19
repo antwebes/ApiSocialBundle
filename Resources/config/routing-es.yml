@@ -76,5 +76,4 @@ user_profile_photo:
 user_vote:
     path: /votar-foto
     defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    ApiSocialBundle:Vote:photo.html.twig
+        _controller: ApiSocialBundle:Vote:showVote
