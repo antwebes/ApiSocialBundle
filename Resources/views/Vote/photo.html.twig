@@ -60,15 +60,13 @@
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     <script>
-        var token ="MTA3ZTMyZTE0ZjBkNzgzMDZmZmE5YTZmM2Q1OTMyN2FlNzBkMDNkMGExNTIwOWMxMGIyYWNmMmZmNmE5ODhlNXJ1MDE0NDExMDkyNTdlNzQzMGRlOGE3MjU3ZDZjNzM3OWMyNWEwNjY2OWZkMDM0ZWQwNjZkZjM3OGVmYWNjOWI5MjRlYzE2MWU3NjM5";
-        window.api_endpoint = "http://api.chatsfree.lo/app_dev.php";
         var users = [];
         var current_user = null;
         var last_score = 0;
         function getUsers(callback) {
             $.ajax({
                         url: window.api_endpoint + "/api/users?filters=language%3Des%2Chas_profile_photo%3D1&limit=30&offset=0&order=randomly%3Dasc",
-                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + token); },
+                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + window.token); },
                         success: function(data, status) {
                             users = data.resources;
                             showUser();
