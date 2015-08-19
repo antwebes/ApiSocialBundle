@@ -15,7 +15,6 @@ lib/iecors.js
 lib/translate.js
 app.js
 main.js
-apps/messages/messages_app.js
 text!apps/messages/index/templates/layout.html
 text!apps/messages/index/templates/index.html
 text!apps/messages/index/templates/item.html
@@ -26,6 +25,7 @@ apps/messages/index/index_view.js
 entities/messages.js
 entities/threads.js
 apps/messages/index/index_controller.js
+apps/messages/messages_app.js
 text!translations/es.json
 text!translations/en.json
 

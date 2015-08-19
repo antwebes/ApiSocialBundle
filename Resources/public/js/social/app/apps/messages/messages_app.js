@@ -1,4 +1,4 @@
-define(["app"],
+define(["app", "apps/messages/index/index_controller"],
     function(App, IndexController){
         App.module("MessagesApp", function(MessagesApp, App, Backbone, Marionette, $, _){
             MessagesApp.startWithParent = false;
@@ -21,24 +21,16 @@ define(["app"],
 
             var API = {
                 index: function(){
-                    requireAndStartSubApp(["apps/messages/index/index_controller"], function(IndexController){
-                        IndexController.Index();
-                    });
+                    IndexController.Index();
                 },
                 sent: function(){
-                    requireAndStartSubApp(["apps/messages/index/index_controller"], function(IndexController){
-                        IndexController.Sent();
-                    });
+                    IndexController.Sent();
                 },
                 showThread: function(threadId){
-                    requireAndStartSubApp(["apps/messages/index/index_controller"], function(IndexController){
-                        IndexController.ShowThread(threadId);
-                    });
+                    IndexController.ShowThread(threadId);
                 },
                 compose: function(username, noLayout){
-                    requireAndStartSubApp(["apps/messages/index/index_controller"], function(IndexController){
-                        IndexController.Compose(username, noLayout);
-                    });
+                    IndexController.Compose(username, noLayout);
                 }
             };
 
