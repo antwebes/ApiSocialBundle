@@ -8,9 +8,3 @@
     window.debug_mode = false;
     {% endif %}
 </script>
-{% javascripts
-filter='?requirejs'
-'@ApiSocialBundle/Resources/public/js/social/app/app.js'
-%}
-    {{ require_js_initialize({ 'main' : asset_url }) }}
-{% endjavascripts %}

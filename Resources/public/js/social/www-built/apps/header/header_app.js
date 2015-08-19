@@ -1,1 +1,0 @@
-define(["app","apps/header/navbar/navbar_controller"],function(e,t){return e.module("HeaderApp",function(e,n,r,i,s,o){var u={showHeader:function(){t.showHeader()},updateUnreadedThreads:function(){t.updateUnreadedThreads()}};n.addInitializer(function(){n.module("HeaderApp").start(),u.showHeader(),u.updateUnreadedThreads()})}),e.HeaderApp});

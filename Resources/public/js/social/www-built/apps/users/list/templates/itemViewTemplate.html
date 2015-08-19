@@ -1,9 +1,0 @@
-<script>
-	<a class="cboxElement user-detail-link user-detail-link">
-		<img width=<%= sizeImage.width %> height=<%= sizeImage.height %> style="border: 1px solid #DDDDDD; border-radius: 4px 4px 4px 4px;" src="<% if ((typeof(profile) != "undefined") && (typeof(profile.profile_photo) != "undefined")) { %>
-								<%= profile.profile_photo.path_small %>
-							<% } else { %>
-								<%= window.default_user_image_icon %>
-							<% } %>" title="<%= username %>">
-	</a>
-</script>

@@ -1,7 +1,7 @@
 <form id="id-message-form">
     <div>
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Recipient:</label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">{{ t "messages::recipient" }}:</label>
 
             <div class="col-sm-9">
                 <span class="input-icon">
@@ -13,10 +13,10 @@
         <div class="hr hr-18 dotted"></div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Subject:</label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-subject">{{ t "messages::subject" }}:</label>
 
-            <div class="col-sm-6 col-xs-12">
-                <div class="input-icon block col-xs-12 no-padding">
+            <div class="col-sm-9">
+                <div class="input-icon">
                     <div data-editors="subject"></div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right">
                 <span class="inline space-24 hidden-480"></span>
-                Message:
+                {{ t "messages::message" }}:
             </label>
 
             <div class="col-sm-9">

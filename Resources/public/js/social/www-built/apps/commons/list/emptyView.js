@@ -1,1 +1,0 @@
-define(["app","text!apps/commons/list/templates/empty.html","handlebars"],function(e,t,n){return e.module("Commons.List.Empty.View",function(e,r,i,s,o,u){e.EmptyView=s.View.extend({template:t,render:function(){var e=n.compile(t);this.$el.append(e())}})}),e.Commons.List.Empty.View});

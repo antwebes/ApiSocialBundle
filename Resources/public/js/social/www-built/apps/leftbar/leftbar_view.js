@@ -1,1 +1,0 @@
-define(["app","handlebars"],function(e,t){return e.module("LeftbarApp.View",function(e,t,n,r,i,s){e.Leftbar=r.ItemView.extend({el:i("#sidebar")})}),e.LeftbarApp.View});

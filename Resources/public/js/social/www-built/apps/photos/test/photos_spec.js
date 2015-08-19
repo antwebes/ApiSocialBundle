@@ -1,1 +1,0 @@
-define(["apps/photos/photos_app"],function(e){return describe("Photos Module",function(){it("should have a route bla bla",function(){})}),{name:"photospec"}});

@@ -5,7 +5,7 @@
 */
 // This is the runtime configuration file.  It complements the Gruntfile.js by
 // supplementing shared properties.
-/*require.config({
+require.config({
     config: {
         text:{
             useXhr: function (url, protocol, hostname, port) {
@@ -23,8 +23,7 @@
 
         // Opt for Lo-Dash Underscore compatibility build over Underscore.
         "underscore": "../vendor/bower/lodash/dist/lodash",
-        "spin.jquery" : "lib/spin.jquery",
-        "spin" : "lib/spin",
+        "translate": "lib/translate",
         "iecors": "lib/iecors",
         // Map remaining ../vendor dependencies.
         "jquery": ["//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min",
@@ -34,20 +33,20 @@
         "backbone-bootstrap": "../vendor/bower/backbone-forms/distribution.amd/templates/bootstrap3",
         //"marionette": "../vendor/bower/marionette/lib/backbone.marionette.min",
         //es necesario la librería AMD porque es la única que funciona al comprimir, ojo en la version 2 de marionette no hay amd
-        marionette: '../vendor/bower/marionette/lib/core/amd/backbone.marionette.min.js',
-        'backbone.babysitter': '../vendor/bower/backbone.babysitter/lib/backbone.babysitter.js',
-        'backbone.wreqr': '../vendor/bower/backbone.wreqr/lib/backbone.wreqr.js',
+        'marionette': '../vendor/bower/marionette/lib/core/amd/backbone.marionette.min',
+        'backbone.babysitter': '../vendor/bower/backbone.babysitter/lib/backbone.babysitter',
+        'backbone.wreqr': '../vendor/bower/backbone.wreqr/lib/backbone.wreqr',
 
         "list"           : "lib/list-form-amd",
         "text"           : "lib/text",
         "jquery.updater" : "lib/jquery.updater",
-        "paginator"      : "../vendor/bower/backbone.paginator/lib/backbone.paginator.min.js",
+        "paginator"      : "../vendor/bower/backbone.paginator/lib/backbone.paginator.min",
 
-        'jquery_iframe_transport': '../vendor/bower/jquery-file-upload/js/jquery.iframe-transport.js',
-        'jquery.fileupload': '../vendor/bower/jquery-file-upload/js/jquery.fileupload.js',
-        'jquery.fileupload-image': '../vendor/bower/jquery-file-upload/js/jquery.fileupload-image.js',
-        'jquery.fileupload-process': '../vendor/bower/jquery-file-upload/js/jquery.fileupload-process.js',
-        "jquery.ui.widget" : "../vendor/bower/jquery-file-upload/js/vendor/jquery.ui.widget.js",
+        'jquery_iframe_transport': '../vendor/bower/jquery-file-upload/js/jquery.iframe-transport',
+        'jquery.fileupload': '../vendor/bower/jquery-file-upload/js/jquery.fileupload',
+        'jquery.fileupload-image': '../vendor/bower/jquery-file-upload/js/jquery.fileupload-image',
+        'jquery.fileupload-process': '../vendor/bower/jquery-file-upload/js/jquery.fileupload-process',
+        "jquery.ui.widget" : "../vendor/bower/jquery-file-upload/js/vendor/jquery.ui.widget",
         'load-image': '../vendor/bower/blueimp-load-image/js/load-image',
 
         'load-image-ios': '../vendor/bower/blueimp-load-image/js/load-image-ios',
@@ -80,8 +79,8 @@
         "jQuery.XDomainRequest": "../vendor/bower/jQuery.XDomainRequest/jQuery.XDomainRequest",
         "toastr": "../vendor/bower/toastr/toastr.min.js",
         "toastr_css": "../vendor/bower/toastr/toastr.min.css",
-        "backbone.autocomplete": "../vendor/bower/backbone-autocomplete/src/backbone.autocomplete.js",
-        "backbone_autocomplete_css": "../vendor/bower/backbone-autocomplete/src/backbone.autocomplete-min.css",
+        "backbone.autocomplete": "../vendor/bower/backbone-autocomplete/src/backbone.autocomplete",
+        "backbone_autocomplete_css": "../vendor/bower/backbone-autocomplete/src/backbone.autocomplete-min",
         'easyXDM': "../vendor/bower/brandymint-easyXDM/easyXDM"
     },
     // bundles: {
@@ -137,9 +136,12 @@
         },
         "backbone.autocomplete": {
             "deps": ["backbone"]
+        },
+        'translate': {
+            "exports": "translate"
         }
     }
-});*/
+});
 
 require(["app"],function(App) {
     // Define your master router on the application namespace and trigger all

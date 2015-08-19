@@ -1,1 +1,0 @@
-define(["jquery-lazyload"],function(){var e=function(e){var t=!1;e.on("show",function(){e.$el.find("img.lazy").lazyload({effect:"fadeIn"}),e.on("after:item:added",function(e){e.$el.find("img.lazy").lazyload({effect:"fadeIn"}),e.on("show",function(){e.$el.find("img.lazy").lazyload({effect:"fadeIn"}),t=!0})})})};return e});

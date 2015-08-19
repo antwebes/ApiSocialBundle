@@ -1,1 +1,0 @@
-define(["backbone-forms","underscore"],function(e,t){var n=e.extend({Field:e.Field.extend({template:t.template("                <div>                  <div>                    <span data-editor></span>                    <div data-error></div>                    <div><%= help %></div>                  </div>                </div>              ")})});return n});

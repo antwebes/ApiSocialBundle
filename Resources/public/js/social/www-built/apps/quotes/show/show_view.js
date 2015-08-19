@@ -1,1 +1,0 @@
-define(["app","text!apps/quotes/show/templates/quotes_show_template.html"],function(e,t){return e.module("QuotesApp.Show.View",function(e,n,r,i,s,o){e.show=i.ItemView.extend({template:t})}),e.QuotesApp.Show.View});

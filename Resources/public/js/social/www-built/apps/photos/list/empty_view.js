@@ -1,1 +1,0 @@
-define(["app","text!apps/photos/list/templates/empty_view.html","handlebars"],function(e,t,n){return e.module("PhotosApp.List.Empty.View",function(e,r,i,s,o,u){e.EmptyView=s.View.extend({template:t,render:function(){var e=n.compile(t);this.$el.append(e())}})}),e.PhotosApp.List.Empty.View});

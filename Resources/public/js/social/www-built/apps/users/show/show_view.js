@@ -1,1 +1,0 @@
-define(["app","text!apps/users/show/templates/user_layout.html","handlebars"],function(e,t,n){return e.module("UsersApp.Show.View",function(e,r,i,s,o,u){e.Layout=s.Layout.extend({template:n.compile(t),regions:{users_show_Region:"#users_show",users_show_left_Region:"#users_show_left",body_container_top_Region:"#body_container_top"}})}),e.UsersApp.Show.View});

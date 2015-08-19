@@ -1,1 +1,0 @@
-define(["app","text!apps/commons/socialNetwork/templates/shareSocialNetwork.html"],function(e,t){return e.module("Commons.SocialNetwork",function(e,n,r,i,s,o){e.ShareSocialNetwork=i.ItemView.extend({template:t,render:function(){var e=o.template(t,this.options);return s(this.el).append(e),this}})}),e.Commons.SocialNetwork});

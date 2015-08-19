@@ -1,1 +1,0 @@
-App.collections.Menuitems=App.collections.Collection.extend({model:App.models.Menuitem,initialize:function(e){}});

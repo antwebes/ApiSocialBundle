@@ -100,8 +100,16 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
 
             moment.lang(language);
 
-            require(["text!translations/"+language+".json"], function(tranlationsText){
-                var tranlations = JSON.parse(tranlationsText);
+            require(["text!translations/es.json", "text!translations/en.json"], function(tranlationsTextEs, tranlationsTextEn){
+                var translationsText = "{}";
+
+                if(language == 'es'){
+                    translationsText = tranlationsTextEs;
+                }else if(language == 'en'){
+                    translationsText = tranlationsTextEn;
+                }
+
+                var tranlations = JSON.parse(translationsText);
                 var trans = window.libTranslate.getTranslationFunction(tranlations);
                 var _translate = function(){
                     return trans.apply(null, arguments);

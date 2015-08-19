@@ -1,9 +1,0 @@
-<script>
-	<a href="/users/<%= username_canonical %>-<%= id %>" data-rel="colorbox" class="cboxElement">
-		<img width=<%= sizeImage.width %> height=<%= sizeImage.height %> style="border: 2px solid #FFF; border-radius: 4px 4px 4px 4px; max-height:150px; max-width:180px;" <%=src_or_data()%>"<% if ((typeof(profile) != "undefined") && (typeof(profile.profile_photo) != "undefined")) { %>
-								<%= profile.profile_photo.path_small %>
-							<% } else { %>
-								<%= window.default_user_image_icon %>
-							<% } %>" title="<%= username %>">
-	</a>
-</script>
