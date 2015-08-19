@@ -1,7 +1,7 @@
 <script>
     window.user_id = {{ app.user.id }};
     window.token = "{{ app.user.accessToken }}";
-    window.api_endpoint = "{{ social_endpoint }}";
+    window.api_endpoint = "{{ api_endpoint }}";
     {% if app.environment == 'dev' %}
     window.debug_mode = true;
     {%else%}
