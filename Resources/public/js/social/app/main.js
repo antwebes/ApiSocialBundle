@@ -123,7 +123,7 @@ require.config({
         //Marionette
         "marionette":{
             "deps":["jquery", "underscore", "backbone"],
-            "exports":"Marionette"
+            "exports": "Marionette"
         },
         "jasmine-fixture": {
             "deps": ["jquery"]
@@ -135,10 +135,8 @@ require.config({
             "deps": ["jquery"]
         },
         "backbone.autocomplete": {
-            "deps": ["backbone"]
-        },
-        'translate': {
-            "exports": "translate"
+            "deps": ["backbone"],
+            "exports": "AutoCompleteView"
         }
     }
 });

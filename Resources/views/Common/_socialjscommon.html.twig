@@ -8,3 +8,9 @@
     window.debug_mode = false;
     {% endif %}
 </script>
+{% javascripts
+'@ApiSocialBundle/Resources/public/js/social/vendor/bower/requirejs/require.js'
+'@ApiSocialBundle/Resources/public/js/social/www-built/main.js'
+%}
+<script src="{{ asset(asset_url) }}"></script>
+{% endjavascripts %}

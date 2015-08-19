@@ -1,9 +1,12 @@
 define([
     "app",
     "apps/messages/index/index_view",
+    "apps/messages/composer/compose_view",
+    "text!apps/messages/composer/templates/reply.html",
+    "text!apps/messages/composer/templates/reply_form.html",
     "entities/messages",
     "entities/threads"
-    ],function(App, View, Entities){
+],function(App, View, ComposeView, ReplyTemplate, FormTemplate, Entities){
 
 
         App.module("MessagesApp.Index", function(Index, App, Backbone, Marionette, $, _){
@@ -62,22 +65,16 @@ define([
                 },
                 _showReplayThread: function(thread){
                     var self = this;
-                    requirejs([
-                        "apps/messages/composer/compose_view",
-                        "text!apps/messages/composer/templates/reply.html",
-                        "text!apps/messages/composer/templates/reply_form.html"],
-                        function(View, ReplyTemplate, FormTemplate){
-                            var message = new Entities.Message({thread: thread});
-                            var composeView = new View.ComposeView({model: message, formTemplate: FormTemplate});
-                            var callback = _.bind(self._replayThread, self, thread);
+                    var message = new Entities.Message({thread: thread});
+                    var composeView = new ComposeView.ComposeView({model: message, formTemplate: FormTemplate});
+                    var callback = _.bind(self._replayThread, self, thread);
 
-                            composeView.on("compose:submit", callback);
-                            composeView.on("compose:back", function(){
-                                composeView.remove();
-                            });
+                    composeView.on("compose:submit", callback);
+                    composeView.on("compose:back", function(){
+                        composeView.remove();
+                    });
 
-                            self.layout.mainRegion.currentView.showReply(composeView);
-                        });
+                    self.layout.mainRegion.currentView.showReply(composeView);
                 },
                 _deleteThread: function(thread){
                     var self = this;

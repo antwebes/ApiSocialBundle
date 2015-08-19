@@ -5,17 +5,32 @@ define([
     "text!apps/messages/composer/templates/message_successfull_sended.html",
     "backbone-bootstrap",
     "backbone-forms",
-    "backbone.autocomplete",
     "entities/messages",
-    "handlebars"
+    "handlebars",
+    "text!backbone_autocomplete_css.css",
+    "backbone.autocomplete"
     ],
-    function(App, ComposeTemplate, FormTemplate, MessageSuccessfullSendedTemplate, BackboneBootstrap, BackboneForm, BackboneAutocomplete, Messages, Handlebars){
-        function loadCss(url) {
-            var link = document.createElement("link");
-            link.type = "text/css";
-            link.rel = "stylesheet";
-            link.href = url;
-            document.getElementsByTagName("head")[0].appendChild(link);
+    function(App, ComposeTemplate, FormTemplate, MessageSuccessfullSendedTemplate, BackboneBootstrap, BackboneForm, Messages, Handlebars, AutocompleteCss){
+        var cssTags = {};
+
+        function loadCss(tag, css) {
+            if(typeof cssTags[tag] != 'undefined'){
+                return;
+            }
+
+            var head = document.head || document.getElementsByTagName('head')[0],
+                style = document.createElement('style');
+
+            style.type = 'text/css';
+            if (style.styleSheet){
+                style.styleSheet.cssText = css;
+            } else {
+                style.appendChild(document.createTextNode(css));
+            }
+
+            head.appendChild(style);
+
+            cssTags[tag] = true;
         }
 
         App.module("MessagesApp.Composer.View", function(View, App, Backbone, Marionette, $, _){
@@ -38,7 +53,7 @@ define([
                     }
                 },
                 onRender: function () {
-                    loadCss(require.toUrl('backbone_autocomplete_css'));
+                    loadCss("autocompleteCss", AutocompleteCss);
                     form = new BackboneForm({
                             model: this.model,
                             template: Handlebars.compile(this.formTemplate)

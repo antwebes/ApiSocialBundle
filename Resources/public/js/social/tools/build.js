@@ -45,6 +45,59 @@
         // jquery: "../vendor/bower/jquery/dist/jquery.min",
         jquery: "../vendor/bower/jquery/dist/jquery.min"
         // jquery: "empty:",
-    }
+    },
+    shim: {
+        app: ['marionette'],
+        // This is required to ensure Backbone works as expected within the AMD
+        // environment.
+        "backbone": {
+            // These are the two hard dependencies that will be loaded first.
+            deps: ["jquery", "underscore"],
 
+            // This maps the global `Backbone` object to `require("backbone")`.
+            exports: "Backbone"
+        },
+        "underscore" : {
+            deps: ["text"],
+            exports : '_'
+        },
+        "jquery.fileapi": {
+            deps: ["FileApi", "jquery.jcrop", "jquery.modal", "FileApi.exif", "jquery"]
+        },
+        "FileApi.exif": {
+            deps: ["FileApi"]
+        },
+        "paginator": {
+            deps: ['backbone'],
+            exports: 'Backbone.Paginator'
+        },
+        "handlebars": {
+            exports: 'Handlebars'
+        },
+        "bootstrap-modal": {
+            "deps": ["jquery", "backbone"]
+        },
+        "backbone-bootstrap-modal":{
+            "deps":["jquery", "underscore", "backbone", "bootstrap-modal"]
+        },
+        //Marionette
+        "marionette":{
+            "deps":["jquery", "underscore", "backbone"],
+            "exports":"Marionette"
+        },
+        "jasmine-fixture": {
+            "deps": ["jquery"]
+        },
+        "jquery-lazyload": {
+            "deps": ["jquery"]
+        },
+        "jquery.updater": {
+            "deps": ["jquery"]
+        },
+        "backbone.autocomplete": {
+            "deps": ["backbone"],
+            "exports": "AutoCompleteView"
+        }
+    },
+    wrapShim: true
 })

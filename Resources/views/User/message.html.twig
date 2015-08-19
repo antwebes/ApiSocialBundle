@@ -33,11 +33,6 @@
 {% block body_js_end %}
     {{ parent() }}
     {% include "ApiSocialBundle:Common:_socialjscommon.html.twig" %}
-    {% javascripts
-    '@ApiSocialBundle/Resources/public/js/social/www-built/main.js'
-    %}
-    <script src="{{ asset(asset_url) }}"></script>
-    {% endjavascripts %}
     <script>
         require(["app"],function(App){
             App.vent.on('socialapp:loaded', function (){
