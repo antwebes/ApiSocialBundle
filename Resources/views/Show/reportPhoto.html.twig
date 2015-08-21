@@ -6,72 +6,49 @@
 {% block head_meta_keywords %}{% include 'ApiSocialBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
 {% block head_title %}{% include 'ApiSocialBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
 
-{% block head_css %}
-    {{ parent() }}
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
-    {% stylesheets
-    "@ApiSocialBundle/Resources/public/css/custom.css"
-    %}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-    {% endstylesheets %}
-{% endblock head_css %}
 
 {% block chatea_body %}
-    <div class="container">
-        <ul class="nav nav-tabs padding-18">
-            <li>
-                <a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}">
-                    <i class="green fa fa-user bigger-120" ></i>
-                    {{ 'user.profile' | trans }}
-                </a>
-            </li>
-            <li class="active">
-                <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}">
-                    <i class="pink fa fa-picture-o bigger-120"></i>
-                    {{ "user.pictures" | trans }}
-                </a>
-            </li>
-        </ul>
-        <br/><br/><br/>
-        <div class="row-fluid">
-            <h2>{{ "user.photos.report.title" | trans }}</h2>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h2>{{ "user.photos.report.title" | trans }}</h2>
 
-            <img class="lazy img-responsive" data-original="{{ photo | photoUrl("medium") }}" height="250px">
+                <img class="lazy img-responsive" data-original="{{ photo | photoUrl("medium") }}" height="250px">
 
 
-            {% if not success %}
-                {% if apiError is not null %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ apiError }}
+                {% if not success %}
+                    {% if apiError is not null %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ apiError }}
+                        </div>
+                    {% endif %}
+                    <form action="{{ path('ant_user_user_photo_report', {'idUser': user.id, 'id': photo.id}) }}" method="post">
+                        <div class="form-group">
+                            <label class="col-lg-12 control-label" for="user_profile_youWant">{{ "user.photos.report.reason_label" | trans }}</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                {{ form_errors(form.reason) }}
+                                {{ form_widget(form.reason, {'attr': {'class': 'form-control', 'placeholder': 'user.photos.report.reason_placeholder' | trans } }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <a href="{{ path('ant_user_user_photos_show', {id: user.id}) }}" class="btn btn-info btn-sm pull-left">
+                                    {{ 'user.back' | trans }}
+                                </a>
+                                <button class="btn btn-info btn-sm">{{ "user.photos.report.send_button" | trans }}</button>
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+                    </form>
+                {% else %}
+                    <div class="alert alert-success" role="alert">
+                        {{ "user.photos.report.success" | trans }}
                     </div>
                 {% endif %}
-                <form action="{{ path('ant_user_user_photo_report', {'idUser': user.id, 'id': photo.id}) }}" method="post">
-                    <div class="form-group">
-                        <label class="col-lg-12 control-label" for="user_profile_youWant">{{ "user.photos.report.reason_label" | trans }}</label>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            {{ form_errors(form.reason) }}
-                            {{ form_widget(form.reason, {'attr': {'class': 'form-control', 'placeholder': 'user.photos.report.reason_placeholder' | trans } }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            <a href="{{ path('ant_user_user_photos_show', {id: user.id}) }}" class="btn btn-info btn-sm pull-left">
-                                {{ 'user.back' | trans }}
-                            </a>
-                            <button class="btn btn-info btn-sm">{{ "user.photos.report.send_button" | trans }}</button>
-                        </div>
-                    </div>
-                    {{ form_rest(form) }}
-                </form>
-            {% else %}
-                <div class="alert alert-success" role="alert">
-                    {{ "user.photos.report.success" | trans }}
-                </div>
-            {% endif %}
+            </div>
         </div>
-    </div>
+    <br><br>
 
 {% endblock %}
 
