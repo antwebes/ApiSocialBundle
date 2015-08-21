@@ -33,6 +33,10 @@ ant_user_user_photo_show:
     path: /usuarios/{idUser}/fotos/{id}
     defaults: { _controller: ApiSocialBundle:User:showPhoto }
 
+ant_user_user_photo_report:
+    path: /usuarios/{idUser}/fotos/{id}/reportar
+    defaults: { _controller: ApiSocialBundle:User:reportPhoto }
+
 ant_user_user_photo_remove:
     path: /usuarios/{idUser}/fotos/{id}/eliminar
     defaults: { _controller: ApiSocialBundle:User:removePhoto }

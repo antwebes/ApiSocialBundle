@@ -43,3 +43,9 @@ user.photo.remove.success: "Your photo was deleted with success"
 user.photo.remove.failure: "An error ocurred trying to delete the photo"
 user.photo.remove.yes: Yes
 user.photo.remove.close: Close
+user.photos.report.title: "Report photo"
+user.photos.report.reason_label: Reason
+user.photos.report.reason_placeholder: "Please write the reason to report this photo"
+user.photos.report.send_button: "Report"
+user.photos.report.success: "The photo has been reported successfully"
+user.photos.report.allready_reported: "You've allready reported this photo previously"

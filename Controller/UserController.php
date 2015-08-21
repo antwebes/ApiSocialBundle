@@ -8,6 +8,7 @@
 
 namespace Ant\Bundle\ApiSocialBundle\Controller;
 
+use Ant\Bundle\ApiSocialBundle\Form\ReportPhotoType;
 use Symfony\Component\HttpFoundation\Request;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -215,6 +216,63 @@ class UserController extends BaseController
     	return $this->render('ApiSocialBundle:User:_widget_user_session.html.twig', array('user'=>$user));
     }
 
+    /**
+     * @param $idUser
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
+    public function reportPhotoAction(Request $request, $idUser, $id)
+    {
+        $photosManager = $this->get('api_photos');
+        $user = $this->get('api_users')->findById($idUser);
+        $photo = $photosManager->findById($id);
+        $form = $this->createForm(new ReportPhotoType());
+        $success = false;
+        $apiError = null;
+
+        if($user == null){
+            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
+        }
+
+        if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
+            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
+        }
+
+        if($request->isMethod('POST')){
+            $form->submit($request);
+            if($form->isValid()){
+                $data = $form->getData();
+
+                try{
+                    $photosManager->reportPhoto($photo, $data['reason']);
+                    $success = true;
+                }catch(\Exception $e){
+                    try{
+                        $error = json_decode($e->getMessage(), true);
+
+                        if(isset($error['errors'])){
+                            $apiError = $this->translateServerError($error['errors']);
+                        }
+                    }catch(\Exception $ee   ){
+
+                    }
+
+                }
+            }
+        }
+
+        $templateVars = array(
+            'form' => $form->createView(),
+            'user' => $user,
+            'photo' => $photo,
+            'success' => $success,
+            'apiError' => $apiError
+        );
+
+        return $this->render('ApiSocialBundle:Show:reportPhoto.html.twig', $templateVars);
+    }
+
     private function findUserByUsernameOrId($username, $user_id, $asArray)
     {
         if($user_id != null){
@@ -263,6 +321,7 @@ class UserController extends BaseController
         return $user_id == null || $user->getUsernameCanonical() != $username;
     }
 
+
     private function translate($message, $parameters = array())
     {
         return $this->get('translator')->trans($message, $parameters);
@@ -274,5 +333,19 @@ class UserController extends BaseController
             $level,
             $message
         );
+    }
+
+    private function translateServerError($errorMessage, $translationContext = 'User')
+    {
+        $translator = $this->get('translator');
+        $errorMapping = array(
+            "The report already exists" => "user.photos.report.allready_reported",
+        );
+
+        if(isset($errorMapping[$errorMessage])){
+            return $translator->trans($errorMapping[$errorMessage], array(), $translationContext);
+        }
+
+        return $errorMessage;
     }
 }

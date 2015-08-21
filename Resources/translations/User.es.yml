@@ -35,6 +35,12 @@ channel.type.love: Amor
 channel.type.sports: Deportes
 user.photos.need_confirmate_account: Para ver fotos de usuarios necesitas tener la cuenta validada.
 user.activate_account_info: Aquí tienes toda la información necesaria
+user.photos.report.title: "Reportar foto"
+user.photos.report.reason_label: Motivo
+user.photos.report.reason_placeholder: "Por favor escribe el motivo para reportar est foto"
+user.photos.report.send_button: "Reportar"
+user.photos.report.success: "La foto ha sido reportada con éxito"
+user.photos.report.allready_reported: "Ya has reportado esta foto anteriormente"
 user.photo.remove: Eliminar foto
 user.photo.remove.title: Eliminar foto
 user.photo.remove.message: "¿Está seguro de querer eliminar esta foto? &hellip;"
