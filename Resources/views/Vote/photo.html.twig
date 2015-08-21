@@ -12,7 +12,7 @@
 {% endblock head_css %}
 
 {% block chatea_body %}
-    <div class="row">
+    <div class="row col-md-offset-2">
         <div class="col-md-8">
 
             <div id="vote_container">
@@ -45,7 +45,7 @@
     </div>
     <br>
     <div class="row col-md-5 col-md-offset-2">
-        <a href="#" class="btn btn-danger" id="go_report">Denunciar</a>
+        <a class="btn btn-danger" id="go_to_report">Denunciar</a>
 
     </div>
     <br style="clear:both">
@@ -79,6 +79,13 @@
         $("#go_to_next").click(function () {
             nextUser();
         });
+
+
+
+        $("#go_to_report").click(function () {
+           window.location = "{{ app.request.baseUrl }}/usuarios/"+current_user.id+"/fotos/"+current_user.profile.profile_photo.id+"/reportar";
+        });
+
 
         function nextUser() {
             if(users.length == 0) getUsers();
