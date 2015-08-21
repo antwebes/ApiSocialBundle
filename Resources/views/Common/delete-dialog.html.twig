@@ -1,0 +1,18 @@
+<div class="modal fade" id="delete-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modal-delete-path" />
+                <p class="dialog-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="delete-dialog-close">{{ 'user.photo.remove.close' | trans }}</button>
+                <button type="button" class="btn btn-primary" id="delete-dialog-ok">{{ 'user.photo.remove.yes' | trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
