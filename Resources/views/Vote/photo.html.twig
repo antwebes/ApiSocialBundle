@@ -107,9 +107,6 @@
                 var score = parseFloat(user.profile.profile_photo.score) || 0;
                 var number_votes = parseInt(user.profile.profile_photo.number_votes);
 
-                console.log(user.profile.profile_photo.score);
-                console.log(user.profile.profile_photo.number_votes);
-                console.log("("+score+" * "+ number_votes + ") + " +last_score + ") / (" + number_votes +" + 1)");
                 new_score = ((score * number_votes) + last_score) / (number_votes + 1);
 
                 number_votes++;
