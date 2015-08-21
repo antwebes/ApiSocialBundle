@@ -35,6 +35,7 @@ define([
 
         App.module("MessagesApp.Composer.View", function(View, App, Backbone, Marionette, $, _){
             var form = null;
+            var sending = false;
 
             View.ComposeView = Marionette.ItemView.extend({
                 tagName: "div",
@@ -73,10 +74,16 @@ define([
                     return this;
                 },
                 submit: function(){
+                    if(sending){
+                        return;
+                    }
+
                     var errors = form.commit({ validate: true });
 
+                    sending = true;
+
                     if(typeof errors === "undefined"){
-                        showAlert(this.$el.find('#alert-success'), this.$el.find('#alert-danger'), 'Sending messsage...');
+                        showAlert(this.$el.find('#alert-success'), this.$el.find('#alert-danger'), this.trans('messages::sending_message')+'...');
                         this.trigger("compose:submit", this.model);
                     }
                 },
@@ -89,6 +96,8 @@ define([
                 onError : function(model, xhr, options) {
                     var self = this;
                     var error = '';
+
+                    sending = false;
 
                     if (xhr.responseJSON !== undefined){
                         response = xhr.responseJSON;
