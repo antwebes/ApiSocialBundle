@@ -1,0 +1,170 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% block head_css %}
+    {{ parent() }}
+
+    {% stylesheets
+    'bundles/apisocial/raty/jquery.raty.css'
+    filter='cssrewrite'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock head_css %}
+
+{% block chatea_body %}
+    <div class="row">
+        <div class="col-md-8">
+
+            <div id="vote_container">
+
+                <h1>Votar foto <span id="username"></span> </h1>
+                <div class="row">
+                    <div class="col-xs-8"><div id="raty"></div></div>
+                    <div class="col-xs-2"><a href="#" class="btn btn-primary pull-right" id="go_to_next">Siguiente</a></div>
+                </div>
+                <div class="row col-xs-12" >
+                    <img src="" id="profile_photo" />
+                </div>
+                <p>&nbsp;&nbsp;</p>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div id="previus_user">
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div id="next_user">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row col-md-5 col-md-offset-2">
+        <a href="#" class="btn btn-danger" id="go_report">Denunciar</a>
+
+    </div>
+    <br style="clear:both">
+{% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    {% javascripts
+    '@ApiSocialBundle/Resources/public/raty/jquery.raty.js'
+
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+    <script>
+        var users = [];
+        var current_user = null;
+        var last_score = 0;
+        function getUsers(callback) {
+            $.ajax({
+                        url: window.api_endpoint + "/api/users?filters=language%3Des%2Chas_profile_photo%3D1&limit=30&offset=0&order=randomly%3Dasc",
+                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + window.token); },
+                        success: function(data, status) {
+                            users = data.resources;
+                            showUser();
+                            if( callback != undefined) callback(users);
+                        }
+                    }
+            );
+        }
+
+        $("#go_to_next").click(function () {
+            nextUser();
+        });
+
+        function nextUser() {
+            if(users.length == 0) getUsers();
+            else {
+                showUser();
+            }
+        }
+
+        function previsualizeUser(user, container, next) {
+            var title= "";
+            $(container).empty();
+            if(next) {
+                title = "Siguiente";
+            } else {
+                title = "Anterior";
+            }
+            var txt = $('<legend>');
+            txt.html(title);
+            txt.appendTo(container);
+
+            var img = $('<img>');
+            img.attr('src', user.profile.profile_photo.path_medium);
+            img.appendTo(container);
+
+            if(!next) {
+                var score = parseFloat(user.profile.profile_photo.score) || 0;
+                var number_votes = parseInt(user.profile.profile_photo.number_votes);
+
+                new_score = ((score * number_votes) + last_score) / (number_votes + 1);
+
+                number_votes++;
+                var txt = $('<p>');
+                txt.html("Votos: " + number_votes + " Puntuación: " + new_score);
+                txt.appendTo(container);
+
+                }
+        }
+
+        function showUser() {
+            if (current_user != null) {
+                previsualizeUser(current_user,"#previus_user", false);
+            }
+            current_user = users.shift();
+            $("#username").html(current_user.username);
+            $("#profile_photo").attr("src",current_user.profile.profile_photo.path_large);
+
+            if(users[0] != undefined) {
+                    previsualizeUser(users[0],"#next_user", true);
+            } else {
+                getUsers(function (users) {
+                    previsualizeUser(users[0],"#next_user", true);
+                });
+            }
+
+        }
+
+        function sendScore(score, user) {
+            $.ajax(
+                    {
+                        type: "POST",
+                        accept: "application/json",
+                        url: window.api_endpoint + "/api/users/{{ app.user.id }}/vote",
+                        data: {"_format":"json", "vote[photo]": user.profile.profile_photo.id, "vote[score]": score },
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader('Authorization','Bearer ' + token);
+                        }
+                    }
+            );
+
+        }
+
+        $('#raty').raty({
+            number: 10, path: '/bundles/apisocial/raty/images/',
+            click: function(score, evt) {
+
+                last_score = score;
+                console.log(score);
+                nextUser();
+                sendScore(score, current_user);
+                return false;
+            }
+        });
+
+
+
+        nextUser();
+    </script>
+
+{% endblock %}
