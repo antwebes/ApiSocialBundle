@@ -43,7 +43,7 @@
 
   //Reset to users' template settings
   _.templateSettings = _interpolateBackup;
-  
+
 
   var Modal = Backbone.View.extend({
 
@@ -114,7 +114,7 @@
 
     /**
      * Creates the DOM element
-     * 
+     *
      * @api private
      */
     render: function() {
@@ -187,7 +187,7 @@
 
           self.trigger('cancel');
         });
-        
+
         $(document).one('keyup.dismiss.modal', function (e) {
           e.which == 27 && self.trigger('cancel');
 
@@ -207,7 +207,7 @@
       if (cb) {
         self.on('ok', cb);
       }
-      
+
       return this;
     },
 
@@ -253,23 +253,25 @@
     count: 0
   });
 
-
-  //EXPORTS
-  //CommonJS
-  if (typeof require == 'function' && typeof module !== 'undefined' && exports) {
-    module.exports = Modal;
-  }
-
-  //AMD / RequireJS
-  if (typeof define === 'function' && define.amd) {
-    return define(function() {
-      Backbone.BootstrapModal = Modal;
-    })
-  }
-
-  //Regular; add to Backbone.Bootstrap.Modal
-  else {
-    Backbone.BootstrapModal = Modal;
-  }
+  Backbone.BootstrapModal = Modal;
+  //
+  //
+  ////EXPORTS
+  ////CommonJS
+  //if (typeof require == 'function' && typeof module !== 'undefined' && exports) {
+  //  module.exports = Modal;
+  //}
+  //
+  ////AMD / RequireJS
+  //if (typeof define === 'function' && define.amd) {
+  //  return define(function() {
+  //    Backbone.BootstrapModal = Modal;
+  //  })
+  //}
+  //
+  ////Regular; add to Backbone.Bootstrap.Modal
+  //else {
+  //  Backbone.BootstrapModal = Modal;
+  //}
 
 })(jQuery, _, Backbone);

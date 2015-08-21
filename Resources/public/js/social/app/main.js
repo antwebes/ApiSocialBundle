@@ -66,7 +66,7 @@ require.config({
                 "../vendor/bower/moment/min/moment-with-langs.min"],
         
         "bootstrap-modal": "../vendor/bower/bootstrap/js/modal",
-        "backbone-bootstrap-modal": "../vendor/bower/backbone.bootstrap-modal/src/backbone.bootstrap-modal.js",
+        "backbone-bootstrap-modal": "../vendor/bower/backbone.bootstrap-modal/src/backbone.bootstrap-modal",
         "jquery-lazyload": "../vendor/bower/jquery.lazyload/jquery.lazyload.min.js",
         "jasny-fileinput": "../vendor/bower/jasny-bootstrap/js/fileinput",
         "ZeroClipboard": "../vendor/bower/zeroclipboard/ZeroClipboard.min.js",
@@ -137,7 +137,7 @@ require.config({
         "backbone.autocomplete": {
             "deps": ["backbone"],
             "exports": "AutoCompleteView"
-        }
+        },
     }
 });
 

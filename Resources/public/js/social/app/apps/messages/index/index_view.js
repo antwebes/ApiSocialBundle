@@ -6,9 +6,10 @@ define([
     "text!apps/messages/index/templates/messages.html",
     "text!apps/messages/index/templates/message.html",
     "text!apps/messages/index/templates/no_messages.html",
+    "apps/commons/dialog/dialog_view",
     "handlebars"
     ],
-    function(App, Layout, IndexTemplate, ItemTemplate, MessagesTemplate, MessageTemplate, NoMessagesTemplate, Handlebars){
+    function(App, Layout, IndexTemplate, ItemTemplate, MessagesTemplate, MessageTemplate, NoMessagesTemplate, DialogView, Handlebars){
         App.module("MessagesApp.Index.View", function(View, App, Backbone, Marionette, $, _){
             View.Layout = Marionette.Layout.extend({
                 template: Handlebars.compile(Layout),
@@ -115,16 +116,16 @@ define([
                     e.preventDefault();
                     e.stopPropagation();
                     var self = this;
+                    var dialogTitle = App.request("trans", "messages::delete_thread_title");
+                    var dialogMessage = App.request("trans", "messages::delete_thread_message");
 
-                    require(["apps/commons/dialog/dialog_view"],function(DialogView){
-                        DialogView
-                            .confirm("Are you sure you want to delete this thread?", "Delete thread")
-                            .then(function(confirmed){console.log('me han borrado');
-                                if(confirmed){
-                                    self.trigger("thread:delete", self.collection.models[0].get('thread'));
-                                }
-                            });
-                    });
+                    DialogView
+                        .confirm(dialogMessage, dialogTitle)
+                        .then(function(confirmed){console.log('me han borrado');
+                            if(confirmed){
+                                self.trigger("thread:delete", self.collection.models[0].get('thread'));
+                            }
+                        });
                 },
                 /*onCompositeRendered: function(){
                     var $messagesBodies = this.$el.find('.message-body-wrapper');

@@ -19,6 +19,8 @@
     "message_too_short": "The message is too short",
     "subject_too_short": "The subject is too short",
     "limit_exceded": "You can't post more messages, limit exceced",
-    "no_recipient_specified": "No recipient specified or the specified recipient doesn't exist"
+    "no_recipient_specified": "No recipient specified or the specified recipient doesn't exist",
+    "delete_thread_title": "Delete thread",
+    "delete_thread_message": "Are you sure you want to delete this thread?"
   }
 }

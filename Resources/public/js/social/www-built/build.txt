@@ -21,6 +21,10 @@ text!apps/messages/index/templates/item.html
 text!apps/messages/index/templates/messages.html
 text!apps/messages/index/templates/message.html
 text!apps/messages/index/templates/no_messages.html
+text!apps/commons/dialog/templates/dialog_template.html
+/home/ant4/webprojects/chatBoilerplate/vendor/antwebes/api-social-bundle/Ant/Bundle/ApiSocialBundle/Resources/public/js/social/vendor/bower/bootstrap/js/modal.js
+/home/ant4/webprojects/chatBoilerplate/vendor/antwebes/api-social-bundle/Ant/Bundle/ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone.bootstrap-modal/src/backbone.bootstrap-modal.js
+apps/commons/dialog/dialog_view.js
 apps/messages/index/index_view.js
 text!apps/messages/composer/templates/compose.html
 text!apps/messages/composer/templates/compose_form.html
@@ -60,6 +64,10 @@ text!apps/messages/index/templates/item.html
 text!apps/messages/index/templates/messages.html
 text!apps/messages/index/templates/message.html
 text!apps/messages/index/templates/no_messages.html
+text!apps/commons/dialog/templates/dialog_template.html
+/home/ant4/webprojects/chatBoilerplate/vendor/antwebes/api-social-bundle/Ant/Bundle/ApiSocialBundle/Resources/public/js/social/vendor/bower/bootstrap/js/modal.js
+/home/ant4/webprojects/chatBoilerplate/vendor/antwebes/api-social-bundle/Ant/Bundle/ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone.bootstrap-modal/src/backbone.bootstrap-modal.js
+apps/commons/dialog/dialog_view.js
 apps/messages/index/index_view.js
 text!apps/messages/composer/templates/compose.html
 text!apps/messages/composer/templates/compose_form.html

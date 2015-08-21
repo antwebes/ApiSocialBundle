@@ -19,6 +19,8 @@
     "message_too_short": "El mensaje es demasiado corto",
     "subject_too_short": "El asunto es demasiado corto",
     "limit_exceded": "No puedes enviar más mensajes, limite excedido",
-    "no_recipient_specified": "No has introducido un destinatario o el introducido no existe"
+    "no_recipient_specified": "No has introducido un destinatario o el introducido no existe",
+    "delete_thread_title": "Eliminar conversación",
+    "delete_thread_message": "¿Estás seguro que deseas eliminar esta conversación?"
   }
 }
