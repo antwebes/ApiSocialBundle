@@ -144,10 +144,9 @@ require.config({
 require(["app"],function(App) {
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.
-    App.addInitializer(function () {});
-    App.start();
-
-    if(typeof window.onSocialApp != 'undefined'){
-        window.onSocialApp();
-    }
+    App.addInitializer(function () {
+        if(typeof window.onSocialApp != 'undefined'){
+            window.onSocialApp();
+        }
+    });
 });
