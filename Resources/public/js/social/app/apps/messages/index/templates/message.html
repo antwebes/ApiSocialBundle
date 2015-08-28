@@ -7,7 +7,7 @@
                     &nbsp;
                     <img class="middle" src="{{message.sender.profile.profile_photo.path_icon}}">
                     &nbsp;
-                    {{message.sender.username}}
+                    <a href="{{ route route="user_profile" id=this.id username=this.username }}" title="{{this.username}}" class="text external">{{message.sender.username}}</a>
 
                     &nbsp;
                     <i class="fa fa-clock-o bigger-110 orange middle"></i>

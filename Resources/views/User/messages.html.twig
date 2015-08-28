@@ -36,7 +36,7 @@
             App.vent.on('socialapp:loaded', function (){
                 App.trigger("messages:index");
             });
-            App.start({lang: "{{ app.request.getLocale() }}"});
+            App.start(mail_app_options);
         });
     </script>
 {% endblock %}

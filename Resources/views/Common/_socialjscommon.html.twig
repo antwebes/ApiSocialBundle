@@ -1,3 +1,4 @@
+{% trans_default_domain 'User' %}
 <script>
     window.user_id = {{ app.user.id }};
     window.token = "{{ app.user.accessToken }}";
@@ -7,6 +8,13 @@
     {%else%}
     window.debug_mode = false;
     {% endif %}
+
+    var mail_app_options = {
+        lang: "{{ app.request.getLocale() }}",
+        routes: {
+            user_profile: '{{ 'user_profile_route' | trans }}'
+        }
+    };
 </script>
 {% javascripts
 '@ApiSocialBundle/Resources/public/js/social/vendor/bower/requirejs/require.js'

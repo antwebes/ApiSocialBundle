@@ -96,6 +96,23 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
 
                 App.vent.trigger('socialapp:loaded');
             });
+
+            var routes = options.routes || {};
+
+            var route = function(options){
+                var params = options.hash;
+                var r = routes[params.route] || '';
+
+                if(typeof params != 'undefined'){
+                    for(param in params){
+                        r = r.replace('{' + param + '}', params[param]);
+                    }
+                }
+
+                return r;
+            };
+
+            Handlebars.registerHelper("route", route);
         });
 
         App.on('start', function(options){

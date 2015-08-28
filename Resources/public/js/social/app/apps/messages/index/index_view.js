@@ -62,23 +62,23 @@ define([
             View.Thread = Marionette.ItemView.extend({
                 tagName: "div",
                 template: Handlebars.compile(ItemTemplate),
-                triggers: {
-                    "click .message-item": "thread:show"
+                events: {
+                    "click .message-item": "navigate"
+                },
+                navigate: function(e){
+                    $e = $(e.target);
+
+                    if(!$e.hasClass('external')){
+                        e.preventDefault();
+                        this.trigger("thread:show", this.model);
+                        return false;
+                    }
                 }
             });
 
             View.Message = Marionette.ItemView.extend({
                 tagName: "div",
                 template: Handlebars.compile(MessageTemplate)
-                /*events: {
-                    'click .message-header-wrapper': "expandBody"
-                },
-                expandBody: function(){
-                    it(!this.body.isShowen){
-                    this.$el.find('.message-body-wrapper').show();
-                    this.$el.find('.message-more').hide();
-                    }
-                }*/
             });
 
             View.NoMessages = Marionette.ItemView.extend({

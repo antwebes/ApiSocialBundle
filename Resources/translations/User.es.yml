@@ -36,3 +36,4 @@ channel.type.sports: Deportes
 user.photos.need_confirmate_account: Para ver fotos de usuarios necesitas tener la cuenta validada.
 user.activate_account_info: Aquí tienes toda la información necesaria
 user.write_message: Escribir mensaje
+user_profile_route: '/usuarios/{username}-{id}'
