@@ -19,11 +19,11 @@
 	"license" : "MIT",
 	"require" : {
 		"symfony/framework-bundle" : "~2.3",
-		"antwebes/chatea-client-bundle" : "0.1.21"
+		"antwebes/chatea-client-bundle" : "0.1.22"
 	},
 	"require-dev" : {
-	  	"phpunit/phpunit": "@stable",
-	  	"mockery/mockery": "@stable",
+		"phpunit/phpunit" : "@stable",
+		"mockery/mockery" : "@stable",
 		"raulfraile/ladybug" : "~1.0"
 	},
 	"autoload" : {
