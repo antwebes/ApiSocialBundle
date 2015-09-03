@@ -32,7 +32,7 @@ class ChannelController extends BaseController
             return $this->redirect($this->generateUrl('channel_list'));
         }
 
-        return $this->render('ApiSocialBundle:Channel:channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small'));
+        return $this->render('ApiSocialBundle:Channel:List/channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small'));
     }
 
     private function getGlobalsTwig()
@@ -85,9 +85,9 @@ class ChannelController extends BaseController
     	
     	$params['size_image'] = $size_image;
     	
-    	return $this->render('ApiSocialBundle:Channel:_renderChannels.html.twig', $params);
+    	return $this->render('ApiSocialBundle:Channel:List/_renderChannels.html.twig', $params);
 
-        return $this->render('ApiSocialBundle:Channel:channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small'));
+        return $this->render('ApiSocialBundle:Channel:List/channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small'));
 
     }
 
@@ -95,7 +95,7 @@ class ChannelController extends BaseController
     {
         $channel = $this->get('api_channels')->findBySlug($slug);
 
-        return $this->render('ApiSocialBundle:Channel:show.html.twig', array('channel' => $channel, 'api_endpoint' => $this->container->getParameter('api_endpoint')));
+        return $this->render('ApiSocialBundle:Channel:Show/show.html.twig', array('channel' => $channel, 'api_endpoint' => $this->container->getParameter('api_endpoint')));
     }
 
     /**
@@ -166,7 +166,7 @@ class ChannelController extends BaseController
 
         $params['size_image'] = $size_image;
 
-        return $this->render('ApiSocialBundle:Channel:_renderChannels.html.twig', $params);
+        return $this->render('ApiSocialBundle:Channel:List/_renderChannels.html.twig', $params);
     }
     
     /**
@@ -199,7 +199,7 @@ class ChannelController extends BaseController
     
     	$params['size_image'] = $size_image;
     
-    	return $this->render('ApiSocialBundle:Channel:_renderWidgetChannels.html.twig', $params);
+    	return $this->render('ApiSocialBundle:Channel:List/_renderWidgetChannels.html.twig', $params);
     }
     
 
@@ -226,7 +226,7 @@ class ChannelController extends BaseController
         //findFans($channel_id, $page=1, array $filters = null, $limit= null)
         $users = $this->get("api_channels")->findFans($id, 1, null, $numberOfUsers);
 
-        return $this->render('ApiSocialBundle:Channel:usersFans.html.twig', array('users' => $users));
+        return $this->render('ApiSocialBundle:Channel:Fan/usersFans.html.twig', array('users' => $users));
     }
 
     //returns if the the first page was requested by url

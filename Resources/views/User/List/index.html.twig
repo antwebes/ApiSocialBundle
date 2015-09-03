@@ -19,15 +19,15 @@
 
 {% block chatea_body %}
 
-	{% include "ApiSocialBundle:User:list_users_outstanding.html.twig" %}
+	{% include "ApiSocialBundle:User:Outstander/_list_users_outstanding.html.twig" %}
 	
     <br style="clear:both;" />
 
     <h2>{{ "user.users" | trans }}</h2>
-{#     {% include "ApiSocialBundle:User:_render_list_users_customized.html.twig" with {'users' : users} %}#}
+{#     {% include "ApiSocialBundle:User:List/_render_list_users_customized.html.twig" with {'users' : users} %}#}
     <div class="row-fluid">
         <ul class="ace-thumbnails" data-behat="items-user">
-			{% include "ApiSocialBundle:User:_render_list_users.html.twig" with {'users' : users} %}
+			{% include "ApiSocialBundle:User:List/_render_list_users.html.twig" with {'users' : users} %}
         </ul>
     </div>
 

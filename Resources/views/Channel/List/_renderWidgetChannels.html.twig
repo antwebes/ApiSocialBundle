@@ -40,7 +40,7 @@
                     </h3>
                     {# Get the metadata to customize subtitle of channel in page list chat rooms #}
                     {% set meta_channel = null %}
-                    <p>{% if meta_channel is not null and meta_channel.content %} {{ meta_channel.content | truncate(144)}} {% else %}{{ 'channels.enter_chat_of_for_free' | trans({ '%name%': channel.name}) }}{% endif %}</p>
+                    <p>{% if meta_channel is not null and meta_channel.content %} {{ meta_channel.content | truncate(144)}} {% else %}{{ 'channels.enter_chat_of_for_free' | trans({ '%name': channel.name}) }}{% endif %}</p>
                     <div class="row">
                         <div class="col-xs-12">
                             <p class="type-off">{{ 'channels.created_by' | trans }}
@@ -50,7 +50,7 @@
                     </div>
                     {% if subchannels is defined and subchannels %}
                         <div class="row">
-                            {% include 'ApiSocialBundle:Channel:_renderSubChannels.html.twig' with {'channels': channel.children, 'limit': 3 } %}
+                            {% include 'ApiSocialBundle:Channel:List/_renderSubChannels.html.twig' with {'channels': channel.children, 'limit': 3 } %}
                         </div>
                     {% endif %}
                 </div>

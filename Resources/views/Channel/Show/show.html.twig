@@ -31,8 +31,8 @@
         #}
 
 
-        {% include 'ApiSocialBundle:Channel:_info.html.twig' with {'channel': channel} %}
-        {% include 'ApiSocialBundle:Common:chat_channel_button.html.twig' with {'channel': channel} %}
+        {% include 'ApiSocialBundle:Channel:Show/_info.html.twig' with {'channel': channel} %}
+        {% include 'ApiSocialBundle:Channel:Common/chat_channel_button.html.twig' with {'channel': channel} %}
 
 
 
@@ -44,19 +44,19 @@
 
         {% if channel.children | length > 0 %}
             <div class="page-header"><h3>{{ "channels.childrens" | trans}} <small>{{ 'channels.all_chat_rooms_of' | trans({'%name%': channel.name}) }}</small></h3></div>
-            {% include 'ApiSocialBundle:Channel:_list.html.twig' with {'channels' : channel.children, 'columnClass': 'col-xs-2' } %}
+            {% include 'ApiSocialBundle:Channel:List/_list.html.twig' with {'channels' : channel.children, 'columnClass': 'col-xs-2' } %}
         {% endif %}
     </div>
 {% endblock body_container_center %}
 
 {% block body_container_right %}
     <div id="channelsSidebar">
-        {% include 'ApiSocialBundle:Channel:_sidebar.html.twig' with {'channel': channel} %}
+        {% include 'ApiSocialBundle:Channel:Show/_sidebar.html.twig' with {'channel': channel} %}
     </div>
 {% endblock body_container_right%}
 
 {% block body_js_end %}
     {{ parent() }}
 
-    {% include "ApiSocialBundle:Common:incrementChannelview.html.twig" %}
+    {% include "ApiSocialBundle:Channel:Visit/_incrementChannelview.html.twig" %}
 {% endblock %}

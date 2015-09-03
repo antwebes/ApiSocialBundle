@@ -16,9 +16,9 @@
     {% endstylesheets %}
 {% endblock head_css %}
 
-{% block head_meta_description %}{% include 'ApiSocialBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
-{% block head_meta_keywords %}{% include 'ApiSocialBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
-{% block head_title %}{% include 'ApiSocialBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
+{% block head_meta_description %}{% include 'ApiSocialBundle:User:Show/meta/description.html.twig' with {'user': user} %}{% endblock %}
+{% block head_meta_keywords %}{% include 'ApiSocialBundle:User:Show/meta/keywords.html.twig' with {'user': user} %}{% endblock %}
+{% block head_title %}{% include 'ApiSocialBundle:User:Show/meta/title.html.twig' with {'user': user} %}{% endblock %}
 
 {% block chatea_body %}
 <ul class="nav nav-tabs padding-18">
@@ -38,18 +38,18 @@
 <br/><br/><br/>
     <div class="row">
 	<div class="col-xs-12 col-sm-3">
-		{% include 'ApiSocialBundle:User:_usersSidebar.html.twig' with {'user': user} %}
+		{% include 'ApiSocialBundle:User:Show/_usersSidebar.html.twig' with {'user': user} %}
 	</div>
 	<div class="col-xs-12 col-sm-9">
 		<h1 class="blue">{{ "user.profile_of" | trans({'%username%': user.username | capitalize}) }}</h1>
-		{% include "ApiSocialBundle:User:_info_profile.html.twig" %}
-        {% include "ApiSocialBundle:Common:chat_user_button.html.twig" with {"user": user} %}
+		{% include "ApiSocialBundle:User:Show/_info_profile.html.twig" %}
+        {% include "ApiSocialBundle:Chat:Common/chat_user_button.html.twig" with {"user": user} %}
 	</div>
 </div>
 
 <div class="row">
 	{% if app.user and user.id == app.user.id %}
-		{% render controller("ApiSocialBundle:User:renderWidgetUserVisitors", {'user': user, 'limit': 3}) %}
+		{% render controller("ApiSocialBundle:Visit:renderWidgetUserVisitors", {'user': user, 'limit': 3}) %}
 	{% endif %}
 </div>
 
@@ -60,20 +60,20 @@
 	</div>
         {# Begin list channels  #}
        	<div class="col-xs-12" data-behat="channels">
-			{{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'user.owner_of_channels' | trans, 'icon' :'fa-trophy', 'list': 'owner', 'has_channels': user.channels | length > 0} ) }}
-	        {% include 'ApiSocialBundle:User:channel_list.html.twig' with {'channels': user.channels, 'class_margin':'margin-bottom:15%;', 'limit': 6} %}
+			{{ include ('ApiSocialBundle:User:Channel/_cover_channels.html.twig' , {'text' : 'user.owner_of_channels' | trans, 'icon' :'fa-trophy', 'list': 'owner', 'has_channels': user.channels | length > 0} ) }}
+	        {% include 'ApiSocialBundle:User:Channel/_channel_list.html.twig' with {'channels': user.channels, 'class_margin':'margin-bottom:15%;', 'limit': 6} %}
         </div>
 		{# End list channels  #}
 		{# Begin list channels_moderator  #}
         <div class="col-xs-12" data-behat="channels_moderator">
-            {{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'user.moderator_of_channels' | trans , 'icon' :'fa-gavel', 'list': 'moderator', 'has_channels': user.channelsModerated | length > 0} ) }}
-            {% include 'ApiSocialBundle:User:channel_list.html.twig' with {'channels': user.channelsModerated, 'class_margin':'margin-bottom:15%;','limit': 6} %}
+            {{ include ('ApiSocialBundle:User:Channel/_cover_channels.html.twig' , {'text' : 'user.moderator_of_channels' | trans , 'icon' :'fa-gavel', 'list': 'moderator', 'has_channels': user.channelsModerated | length > 0} ) }}
+            {% include 'ApiSocialBundle:User:Channel/_channel_list.html.twig' with {'channels': user.channelsModerated, 'class_margin':'margin-bottom:15%;','limit': 6} %}
         </div>
         {# End list channels_moderator  #}
         {# Begin list channels_fan  #}
         <div class="col-xs-12" data-behat="channels_fan">
-        {{ include ('ApiSocialBundle:User:_cover_channels.html.twig' , {'text' : 'user.fan_of_channels' | trans , 'icon' :'fa-star', 'list': 'fan', 'has_channels': user.channelsFan | length > 0} ) }}
-        {% include 'ApiSocialBundle:User:channel_list.html.twig' with {'channels': user.channelsFan, 'class_margin':'margin-bottom:15%;','limit': 6} %}
+        {{ include ('ApiSocialBundle:User:Channel/_cover_channels.html.twig' , {'text' : 'user.fan_of_channels' | trans , 'icon' :'fa-star', 'list': 'fan', 'has_channels': user.channelsFan | length > 0} ) }}
+        {% include 'ApiSocialBundle:User:Channel/_channel_list.html.twig' with {'channels': user.channelsFan, 'class_margin':'margin-bottom:15%;','limit': 6} %}
         </div>
         {# End list channels_fan  #}
 </div>
@@ -89,8 +89,8 @@
 	%}
 		<script src="{{ asset(asset_url) }}"></script>	
    	{% endjavascripts %}
-{% include "ApiSocialBundle:Common:incrementUserview.html.twig" %}
+{% include "ApiSocialBundle:User:Visit/incrementUserview.html.twig" %}
 {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
-{% include "ApiSocialBundle:User:_user_chat_button_js.html.twig" %}
+{% include "ApiSocialBundle:Chat:Common/_user_chat_button_js.html.twig" %}
 
 {% endblock %}

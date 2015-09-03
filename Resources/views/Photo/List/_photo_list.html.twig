@@ -1,0 +1,18 @@
+<div class="row-fluid">
+    <h2>{{ "user.photos_of_user" | trans({'%username%': user.username}) }}</h2>
+    <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" data-behat="photos">
+        {% for photo in photos %}
+            {% include "ApiSocialBundle:Photo:List/_photo_item_list.html.twig" with { 'photo': photo, 'user': user } %}
+        {% else %}
+            {% if app.user.isValidated %}
+                {{ "user.photos.has_not" | trans() }}
+            {% else %}
+                <div class="alert alert-warning">
+                {{ "user.photos.need_confirmate_account" | trans() }}.  <a href="{{ path('confirm_email') }}"> {{'user.activate_account_info' | trans }}</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% include "ApiSocialBundle:Photo:_photoswipe.html.twig" %}
+
+</div>

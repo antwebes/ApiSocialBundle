@@ -36,7 +36,7 @@ class UserController extends BaseController
         $users = $usersManager->findAll($page, $filters);
         $outstandingUsers = $usersManager->findOutstandingUsers(5);
 
-        return $this->render('ApiSocialBundle:User:index.html.twig', array('users' => $users, 'outstandingUsers' => $outstandingUsers));
+        return $this->render('ApiSocialBundle:User:List/index.html.twig', array('users' => $users, 'outstandingUsers' => $outstandingUsers));
     }
 
     /**
@@ -55,14 +55,6 @@ class UserController extends BaseController
         $user = $this->findUserByUsernameOrId($username, $user_id, $isXmlHttpRequest);
 
         return $this->renderOrRedirect($user, $isXmlHttpRequest);
-    }
-
-    public function renderWidgetUserVisitorsAction($user, $limit)
-    {
-        $userManager = $this->get('api_users');
-        $visitors = $userManager->getUserVisits($user, $limit);
-
-        return $this->render('ApiSocialBundle:User:widgetVisitors.html.twig', array('visitors' => $visitors));
     }
 
     /**
@@ -96,7 +88,7 @@ class UserController extends BaseController
 
         $params['size_image'] = $size_image;
 
-        return $this->render('ApiSocialBundle:User:_renderWidgetUsers.html.twig', $params);
+        return $this->render('ApiSocialBundle:User:Common/_renderWidgetUsers.html.twig', $params);
     }
 
 
@@ -118,94 +110,7 @@ class UserController extends BaseController
             $channels = $user->getChannelsModerated();
         }
 
-        return $this->render('ApiSocialBundle:Show:channels.html.twig',array('user'=>$user,'channels'=>$channels, 'type'=>$list));
-    }
-
-    /**
-     * @param $id
-     * @param int $page
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @APIUser()
-     */
-    public function photosAction($id, $page = 1)
-    {
-        $user = $this->get('api_users')->findById($id);
-        $isUserValidated = $this->getUser()->isValidated();
-
-        if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$id, ' not exits');
-        }
-
-        if($isUserValidated) {
-            $photos = $user->getPhotos($page);
-        }else{
-            $photos = array();
-        }
-
-        return $this->render('ApiSocialBundle:Show:photos.html.twig',array('user'=>$user,'photos'=> $photos));
-    }
-
-    /**
-     * @param $idUser
-     * @param $id
-     * @param int $page
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @APIUser()
-     */
-    public function showPhotoAction($idUser, $id, $page = 1)
-    {
-        $user = $this->get('api_users')->findById($idUser);
-        $photo = $this->get('api_photos')->findById($id);
-
-        if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
-        }
-
-        if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
-            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
-        }
-
-        if(!$this->getUser()->isValidated()){
-            return $this->redirect($this->generateUrl('ant_user_user_photos_show', array('id' => $idUser)));
-        }
-
-        return $this->render('ApiSocialBundle:Show:photo.html.twig',array('user'=>$user,'photo'=> $photo));
-    }
-
-    /**
-     * @param $idUser
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @APIUser()
-     */
-    public function removePhotoAction($idUser, $id)
-    {
-        $user = $this->get('api_users')->findById($idUser);
-        $photo = $this->get('api_photos')->findById($id);
-
-        if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
-        }
-
-        if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
-            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
-        }
-
-        if($this->getUser()->getId() !== $user->getId()){
-            throw new AccessDeniedHttpException($this->translate('user.photo.remove.not_owner'));
-        }
-
-        try{
-            $this->get('api_photos')->delete($photo->getId());
-
-            $this->addFlashNotice('notice', $this->translate('user.photo.remove.success'));
-
-            return $this->redirect($this->generateUrl('ant_user_user_photos_show', array('id' => $user->getId())));
-        }catch(\Exception $e){
-            $this->addFlashNotice('error', $this->translate('user.photo.remove.failure'));
-
-            return $this->redirect($this->generateUrl('ant_user_user_photo_show', array('idUser' => $user->getId(), 'id' => $photo->getId())));
-        }
+        return $this->render('ApiSocialBundle:User:Channel/channels.html.twig',array('user'=>$user,'channels'=>$channels, 'type'=>$list));
     }
     
     public function renderWidgetUserSessionAction()
@@ -213,65 +118,10 @@ class UserController extends BaseController
     	$user_session = $this->get('security.context')->getToken()->getUser();
     	$user = $this->get('api_users')->findById($user_session->getId());
     	
-    	return $this->render('ApiSocialBundle:User:_widget_user_session.html.twig', array('user'=>$user));
+    	return $this->render('ApiSocialBundle:User:Common/_widget_user_session.html.twig', array('user'=>$user));
     }
 
-    /**
-     * @param $idUser
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @APIUser()
-     */
-    public function reportPhotoAction(Request $request, $idUser, $id)
-    {
-        $photosManager = $this->get('api_photos');
-        $user = $this->get('api_users')->findById($idUser);
-        $photo = $photosManager->findById($id);
-        $form = $this->createForm(new ReportPhotoType());
-        $success = false;
-        $apiError = null;
 
-        if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
-        }
-
-        if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
-            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
-        }
-
-        if($request->isMethod('POST')){
-            $form->submit($request);
-            if($form->isValid()){
-                $data = $form->getData();
-
-                try{
-                    $photosManager->reportPhoto($photo, $data['reason']);
-                    $success = true;
-                }catch(\Exception $e){
-                    try{
-                        $error = json_decode($e->getMessage(), true);
-
-                        if(isset($error['errors'])){
-                            $apiError = $this->translateServerError($error['errors']);
-                        }
-                    }catch(\Exception $ee   ){
-
-                    }
-
-                }
-            }
-        }
-
-        $templateVars = array(
-            'form' => $form->createView(),
-            'user' => $user,
-            'photo' => $photo,
-            'success' => $success,
-            'apiError' => $apiError
-        );
-
-        return $this->render('ApiSocialBundle:Show:reportPhoto.html.twig', $templateVars);
-    }
 
     private function findUserByUsernameOrId($username, $user_id, $asArray)
     {
@@ -299,7 +149,7 @@ class UserController extends BaseController
             $params_to_template['affiliate_id'] = $this->container->getParameter('affiliate_id');
         }
 
-        return $this->render('ApiSocialBundle:User:show.html.twig', $params_to_template);
+        return $this->render('ApiSocialBundle:User:Show/show.html.twig', $params_to_template);
     }
 
     /**
@@ -321,31 +171,4 @@ class UserController extends BaseController
         return $user_id == null || $user->getUsernameCanonical() != $username;
     }
 
-
-    private function translate($message, $parameters = array())
-    {
-        return $this->get('translator')->trans($message, $parameters);
-    }
-
-    private function addFlashNotice($level, $message)
-    {
-        $this->getRequest()->getSession()->getFlashBag()->add(
-            $level,
-            $message
-        );
-    }
-
-    private function translateServerError($errorMessage, $translationContext = 'User')
-    {
-        $translator = $this->get('translator');
-        $errorMapping = array(
-            "The report already exists" => "user.photos.report.allready_reported",
-        );
-
-        if(isset($errorMapping[$errorMessage])){
-            return $translator->trans($errorMapping[$errorMessage], array(), $translationContext);
-        }
-
-        return $errorMessage;
-    }
 }

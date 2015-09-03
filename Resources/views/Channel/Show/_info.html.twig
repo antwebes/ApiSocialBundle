@@ -8,7 +8,7 @@
             <span class="middle">{% trans %}Owner{% endtrans %}</span>
         </h4>
         <div class="profile-users founderBox">
-            {% include 'ApiSocialBundle:User:userListItem.html.twig' with {'user': channel.owner} %}
+            {% include 'ApiSocialBundle:User:Show/_userListItem.html.twig' with {'user': channel.owner} %}
         </div>
     </div>
 

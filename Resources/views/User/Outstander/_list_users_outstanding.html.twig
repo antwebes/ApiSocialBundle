@@ -5,7 +5,7 @@
 	<div class="row-fluid">
 		{% if outstandingUsers %}
 	        <ul class="ace-thumbnails" data-behat="items-user">
-				{% include "ApiSocialBundle:User:_render_list_users.html.twig" with {'users' : outstandingUsers} %}
+				{% include "ApiSocialBundle:User:List/_render_list_users.html.twig" with {'users' : outstandingUsers} %}
 	        </ul>
 		{% endif %}
 	    {% if show_button_payment and app.user and app.user.validated %}

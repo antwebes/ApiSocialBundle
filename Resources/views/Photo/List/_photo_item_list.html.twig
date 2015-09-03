@@ -6,7 +6,7 @@
     </a>
     <figcaption itemprop="caption description">
         {{ photo.title }}
-<div> Votos {{ photo.numberVotes }} Puntuación: {{ photo.score }} </div>
+		<div> Votos {{ photo.numberVotes }} Puntuación: {{ photo.score }} </div>
         <br/>
         <a href="{{ path('ant_user_user_photo_report', {'idUser': user.id, 'id': photo.id}) }}" class="btn btn-danger">{{ "user.photos.report.title" | trans }}</a>
     </figcaption>

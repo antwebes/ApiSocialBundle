@@ -23,23 +23,23 @@ ant_user_user_show_by_name:
 
 ant_user_user_photos_show:
     path: /users/{id}/photos
-    defaults: { _controller: ApiSocialBundle:User:photos }
+    defaults: { _controller: ApiSocialBundle:Photo:photos }
 
 ant_user_user_photos_show.page:
     path: /users/{id}/photos/pages/{page}
-    defaults: { _controller: ApiSocialBundle:User:photos }
+    defaults: { _controller: ApiSocialBundle:Photo:photos }
 
 ant_user_user_photo_show:
     path: /users/{idUser}/photos/{id}
-    defaults: { _controller: ApiSocialBundle:User:showPhoto }
+    defaults: { _controller: ApiSocialBundle:Photo:showPhoto }
 
 ant_user_user_photo_remove:
     path: /users/{idUser}/photos/{id}/remove
-    defaults: { _controller: ApiSocialBundle:User:removePhoto }
+    defaults: { _controller: ApiSocialBundle:Photo:removePhoto }
 
 ant_user_user_photo_report:
     path: /users/{idUser}/photos/{id}/report
-    defaults: { _controller: ApiSocialBundle:User:reportPhoto }
+    defaults: { _controller: ApiSocialBundle:Photo:reportPhoto }
 
 ant_chat_chat_show:
     pattern: /webchat/
