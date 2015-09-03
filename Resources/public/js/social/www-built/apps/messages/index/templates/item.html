@@ -1,6 +1,6 @@
 <div class="row message-item {{#unless is_readed}}message-unread{{/unless}}">
     <div class="col-xs-2">
-        <span title="{{created_by.username}}" class="text"><img src="{{#if created_by.profile.profile_photo}}{{created_by.profile.profile_photo.path_icon}}{{else}}{{ globalVar "default_user_image_icon" }}{{/if}}"> {{created_by.username}}</span>
+        <img src="{{#if created_by.profile.profile_photo}}{{created_by.profile.profile_photo.path_icon}}{{else}}{{ globalVar "default_user_image_icon" }}{{/if}}"> <span title="{{created_by.username}}" class="text">{{created_by.username}}</span>
     </div>
 
     <div class="col-xs-4">
