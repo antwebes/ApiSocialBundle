@@ -5,7 +5,7 @@
 
     <div class="col-xs-4">
         {{#each participants}}
-            <a href="{{ route route="user_profile" id=this.id username=this.username }}" title="{{this.username}}" class="text external"> {{this.username}}</a>{{#unless @last}},{{/unless}}
+            {{this.username}}{{#unless @last}}, {{/unless}}
         {{/each}}
     </div>
     
