@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('api_social');
 
         $rootNode->children()
-            ->scalarNode('visits_limit')
+            ->integerNode('visits_limit')
             ->defaultValue(3)
             ->end();
 
