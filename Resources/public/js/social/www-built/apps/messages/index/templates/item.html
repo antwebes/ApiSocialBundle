@@ -3,9 +3,9 @@
         <span title="{{created_by.username}}" class="text"><img src="{{#if created_by.profile.profile_photo}}{{created_by.profile.profile_photo.path_icon}}{{else}}{{ globalVar "default_user_image_icon" }}{{/if}}"> {{created_by.username}}</span>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-4 text">
         {{#each participants}}
-            <a href="{{ route route="user_profile" id=this.id username=this.username }}" title="{{this.username}}" class="text external"> {{this.username}}</a>{{#unless @last}},{{/unless}}
+            {{this.username}}{{#unless @last}}, {{/unless}}
         {{/each}}
     </div>
     
