@@ -37,7 +37,7 @@
 </ul>
 
 <div class="row">
-    {% render controller("ApiSocialBundle:UserProfile:renderWidgetUserVisitors", {'user': user, 'limit': not user.isOutstanded}) %}
+    {% render controller("ApiSocialBundle:Visit:renderWidgetUserVisitors", {'user': user, 'limit': not user.isOutstanded}) %}
 
     {% if not user.isOutstanded and show_button_payment is defined and show_button_payment%}
         <br/>
@@ -58,8 +58,8 @@
 	%}
 		<script src="{{ asset(asset_url) }}"></script>	
    	{% endjavascripts %}
-{% include "ApiSocialBundle:Common:incrementUserview.html.twig" %}
+{% include "ApiSocialBundle:User:Visit/incrementUserview.html.twig" %}
 {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
-{% include "ApiSocialBundle:User:_user_chat_button_js.html.twig" %}
+{% include "ApiSocialBundle:Chat:Common/_user_chat_button_js.html.twig" %}
 
 {% endblock %}
