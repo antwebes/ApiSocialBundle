@@ -97,7 +97,7 @@ class UserController extends BaseController
         $user = $this->get('api_users')->findById($userId);
 
         if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$userId, ' not exits');
+            throw $this->createNotFoundException('The user with id ' .$userId, ' not exits');
         }
 
         $channels = array();
