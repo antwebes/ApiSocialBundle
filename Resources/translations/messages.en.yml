@@ -20,3 +20,4 @@ user.chats: "%username%'s chats"
 user.view_all_visitis: "View all"
 user.view_visits.not_premium: "In order to view all users that visited your profile you need to be an outstanded user"
 user.buy_outstanding: "Become an outstanded user."
+user.last_visits: Last Visits

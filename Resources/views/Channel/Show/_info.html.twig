@@ -1,6 +1,6 @@
 {% trans_default_domain 'Channels' %}
 
-{% if not channel.isEnabled() %}<div class="alert alert-danger">{{ 'channels.not_moderated_yet' }}</div>{% endif %}
+{% if not channel.isEnabled() %}<div class="alert alert-danger">{{ 'channels.not_moderated_yet' | trans }}</div>{% endif %}
 
 <div class="row" id="channelInfo">
     <div class="col-xs-3 col-sm-offset-2">

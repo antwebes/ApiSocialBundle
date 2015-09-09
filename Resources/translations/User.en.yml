@@ -8,7 +8,7 @@ user.gender: Gender
 user.about_me: 'About me'
 user.you_want: 'You want'
 user.last_online: 'Last online'
-user.i_am_seekinmg: 'I am seeking'
+user.i_am_seeking: 'I am seeking'
 user.list_all_channels: 'List all channels'
 user.no_chat_rooms: 'No chat rooms'
 user.rooms_same_type: 'See all chat room of same type'
@@ -25,6 +25,7 @@ user.profile.gender.other: Other
 user.profile.seeking.women : Women
 user.profile.seeking.men : Men
 user.profile.seeking.both : Both, men and women
+user.date_of_birth: Date Of Birth
 user.need_validate: You need confirmate your email to do this action
 channel.type.locale: Locale
 channel.type.friends: Friends

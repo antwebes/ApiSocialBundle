@@ -8,7 +8,8 @@ user.gender: Sexo
 user.about_me: 'Sobre mi'
 user.you_want: 'Tu quieres'
 user.last_online: 'Última vez online'
-user.i_am_seekinmg: 'Estoy buscando'
+user.i_am_seeking: 'Estoy buscando'
+user.date_of_birth: Nacimiento
 user.list_all_channels: 'Listar todos los canales'
 user.no_chat_rooms: 'No hay salas de chat'
 user.rooms_same_type: 'Ver todas las salas de este tipo'
