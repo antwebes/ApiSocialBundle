@@ -29,5 +29,5 @@
         {% endif %}
     </div>
 {% else %}
-    <p>{{ "You don't have any visitors. Improve your profile to have some visits" | trans }}</p>
+	<p>{{ "not_visit_in_profile.message" | trans({'%profile_link%':path('chatea_client_update_profile_index')},'PrettyBundle') | raw}}</p>
 {% endif %}

@@ -21,3 +21,4 @@ user.view_all_visitis: "Ver todas"
 user.view_visits.not_premium: "Para poder ver todos los usuarios que han visitado su perfil usted debe ser un usuario destacado"
 user.buy_outstanding: "Hacerse usuario destacado"
 user.last_visits: Te han visto
+not_visit_in_profile.message: No tienes ninguna visita. <a href="%profile_link%"> Para tener visitas te sugerimos que mejores tu perfíl.</a>
