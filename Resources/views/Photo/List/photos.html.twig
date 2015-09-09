@@ -43,6 +43,7 @@
         </ul>
         <br/><br/><br/>
         {% include "ApiSocialBundle:Photo:List/_photo_list.html.twig" %}
+        {% include "ApiSocialBundle:Common:delete-dialog.html.twig" %}
     </div>
 
     <br style="clear:both;" />
@@ -60,6 +61,7 @@
     '@ApiSocialBundle/Resources/public/photoswipe/photoswipe-ui-default.js'
     '@ApiSocialBundle/Resources/public/lightbox2/js/lightbox.js'
     '@ApiSocialBundle/Resources/public/lightbox2/lightbox_app.js'
+    '@ApiSocialBundle/Resources/public/js/deleteDialog.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
