@@ -101,7 +101,12 @@
                 title = "Siguiente";
             } else {
                 title = "Anterior";
+
+                user_link = "{{ app.request.baseUrl }}/usuarios/"+user.username+"-"+user.id;
+
+                title = title + '<br><a href="'+user_link+'">'+user.username+'</a>';
             }
+
             var txt = $('<legend>');
             txt.html(title);
             txt.appendTo(container);
@@ -110,7 +115,7 @@
             img.attr('src', user.profile.profile_photo.path_medium);
             img.appendTo(container);
 
-            if(!next) {
+            if(!next){
                 var score = parseFloat(user.profile.profile_photo.score) || 0;
                 var number_votes = parseInt(user.profile.profile_photo.number_votes);
 
@@ -120,8 +125,7 @@
                 var txt = $('<p>');
                 txt.html("Votos: " + number_votes + " Puntuación: " + new_score);
                 txt.appendTo(container);
-
-                }
+            }
         }
 
         function showUser() {
@@ -129,7 +133,10 @@
                 previsualizeUser(current_user,"#previus_user", false);
             }
             current_user = users.shift();
-            $("#username").html(current_user.username);
+
+            user_link = "{{ app.request.baseUrl }}/usuarios/"+current_user.username+"-"+current_user.id;
+
+            $("#username").html('<a href="'+user_link+'">'+current_user.username+'</a>');
             $("#profile_photo").attr("src",current_user.profile.profile_photo.path_large);
 
             if(users[0] != undefined) {
