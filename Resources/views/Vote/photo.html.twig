@@ -14,7 +14,20 @@
 {% block chatea_body %}
     <div class="row col-md-offset-2">
         <div class="col-md-8">
-
+            <form data-id="form-select-gender" class="form-inline">
+                <div class="form-group">
+                    <button data-id="btn-gender" value="All" type="button" class="form-control btn-success">{{ "button.gender.all" | trans}}</button>
+                </div>
+                <div class="form-group">
+                    <button data-id="btn-gender" value="Male" type="button" class="form-control">{{ "button.gender.male" | trans}}</button>
+                </div>
+                <div class="form-group">
+                    <button data-id="btn-gender" value="Female" type="button" class="form-control">{{ "button.gender.female" | trans}}</button>
+                </div>
+                <div class="form-group">
+                    <button data-id="btn-gender" value="Other" type="button" class="form-control">{{ "button.gender.other" | trans}}</button>
+                </div>
+            </form>
             <div id="vote_container">
 
                 <h1>Votar foto <span id="username"></span> </h1>
@@ -60,17 +73,81 @@
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     <script>
+        var usersFemale = [];
+        var usersMale = [];
+        var usersOther = [];
+        var usersAll = [];
         var users = [];
         var current_user = null;
         var last_score = 0;
+
+
+        $('button[data-id="btn-gender"]').click(function( event ) {
+            $('[data-id="btn-gender"]').each(function( index ){
+                $( this ).removeClass('btn-success')
+            });
+            $( this ).addClass('btn-success');
+            var buttonSelected = $( this ).val();
+
+
+            if(buttonSelected == 'All'){
+                users = usersAll;
+            }else if(buttonSelected == 'Male'){
+                users = usersMale;
+            }else if(buttonSelected == 'Female'){
+                users = usersFemale;
+            }else if(buttonSelected == 'Other'){
+                users = usersOther;
+            }else{
+                users = usersAll;
+            }
+            showUser();
+        });
+
+        //this function return all users type male
         function getUsers(callback) {
+
             $.ajax({
-                        url: window.api_endpoint + "/api/users?filters=language%3Des%2Chas_profile_photo%3D1&limit=30&offset=0&order=randomly%3Dasc",
+                        url: window.api_endpoint + '/api/users?limit=30&offset=0&order=randomly%3Dasc&filters=language%3Des%2Chas_profile_photo%3D1',
                         beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + window.token); },
                         success: function(data, status) {
+                            usersAll = data.resources;
                             users = data.resources;
                             showUser();
-                            if( callback != undefined) callback(users);
+                            if( callback != undefined) callback(usersAll);
+                        }
+                    }
+            );
+
+            $.ajax({
+                        url: window.api_endpoint + '/api/users?limit=30&offset=0&order=randomly%3Dasc&filters=language%3Des%2Chas_profile_photo%3D1%2Cgender=Female',
+                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + window.token); },
+                        success: function(data, status) {
+                            usersFemale = data.resources;
+                            current_user = data.resources[0];
+                            showUser();
+                            if( callback != undefined) callback(usersFemale);
+                        }
+                    }
+            );
+
+            $.ajax({
+                        url: window.api_endpoint + '/api/users?limit=30&offset=0&order=randomly%3Dasc&filters=language%3Des%2Chas_profile_photo%3D1%2Cgender=Male',
+                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + window.token); },
+                        success: function(data, status) {
+                            usersMale = data.resources;
+                            showUser();
+                            if( callback != undefined) callback(usersMale);
+                        }
+                    }
+            );
+            $.ajax({
+                        url: window.api_endpoint + '/api/users?limit=30&offset=0&order=randomly%3Dasc&filters=language%3Des%2Chas_profile_photo%3D1%2Cgender=Other',
+                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + window.token); },
+                        success: function(data, status) {
+                            usersOther = data.resources;
+                            showUser();
+                            if( callback != undefined) callback(usersOther);
                         }
                     }
             );
@@ -129,6 +206,7 @@
                 previsualizeUser(current_user,"#previus_user", false);
             }
             current_user = users.shift();
+
             $("#username").html(current_user.username);
             $("#profile_photo").attr("src",current_user.profile.profile_photo.path_large);
 
@@ -171,7 +249,7 @@
 
 
 
-        nextUser();
+        getUsers();
     </script>
 
 {% endblock %}
