@@ -17,6 +17,8 @@ class UserController extends BaseController
 {
     public function usersAction(Request $request, $page = 1)
     {
+        $search = $request->get('search',null);
+
         if($this->pageOneGivenByUrl()){
             return $this->redirect($this->generateUrl('ant_user_user_users'));
         }
@@ -31,12 +33,24 @@ class UserController extends BaseController
         }
 
         $usersManager = $this->get('api_users');
+        $users = array();
+        if($search != null){
 
+            $users = $usersManager->searchUserByNamePaginated($search, $page, $filter);
+        }else{
+            $users = $usersManager->findAll($page, $filters);
+        }
 
-        $users = $usersManager->findAll($page, $filters);
         $outstandingUsers = $usersManager->findOutstandingUsers(5);
 
-        return $this->render('ApiSocialBundle:User:List/index.html.twig', array('users' => $users, 'outstandingUsers' => $outstandingUsers));
+        return $this->render('ApiSocialBundle:User:List/index.html.twig',
+            array(
+                'users' => $users,
+                'outstandingUsers' => $outstandingUsers,
+                'search' => $search
+            )
+
+        );
     }
 
     /**
