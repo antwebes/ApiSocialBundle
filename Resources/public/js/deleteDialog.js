@@ -1,7 +1,7 @@
 $(function(){
     $(document).on("click", ".open-DeleteDialog", function (e) {
         e.preventDefault();
-
+        e.stopPropagation();
         var $this = $(this);
         var dataPath = $this.data('path');
         var message = $this.data('message');
