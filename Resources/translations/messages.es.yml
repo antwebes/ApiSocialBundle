@@ -9,6 +9,7 @@ page: Página
 'Find interesting people to meet, share fotos and chat with them': 'Encuentra gente interesante para conocer, comparte fotos y chatea con ell@s'
 'Chat with': 'Chatear con'
 Chat: Chat
+chat.enter: Entrar al chat
 user.owner_of_channels: 'Canales de los cuales es propietario'
 user.moderator_of_channels: 'Canales de los cuales es moderador'
 user.fan_of_channels: 'Canales de los cuales es fan'

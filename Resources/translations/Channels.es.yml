@@ -36,5 +36,9 @@ channels.metas.free_chat_rooms: Salas de chat gratuito
 channels.metas.page: Pagina
 channels.metas.list_keywords: salas de chat, chat gratuito, chats
 channels.metas.list_description: Le ofrecemos salas de chat para todos o crear tu propia sala de chat para adolescentes, adultos, estudiantes, encontrar amigos, estudiantes pueden encontrarse con amigos, solteros y desconocidos con el mismo interes.
+channels.not_found: No se han encontrado canales
 channels.fan_remove_success:  Ha sido eliminado como fan de este canal
 channels.fan.user_already_is_not_fan: Tu ya no eres fan de este canal
+
+channel.owner: Propietario
+channel.fans: Fans del canal %name%

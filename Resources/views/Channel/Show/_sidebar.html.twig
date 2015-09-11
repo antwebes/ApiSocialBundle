@@ -7,9 +7,9 @@
     <div class="col-xs-5">
     	{% if has_chat %}
     		{% if not chat_url %}
-        		<a href="{{ path('ant_chat_chat_show', {channel: channel.ircChannel}) }}" title="{{ "Enter to chat" | trans }}">
+        		<a href="{{ path('ant_chat_chat_show', {channel: channel.ircChannel}) }}" title="{{ "chat.enter" | trans({}, 'messages') }}">
         	{% else %}
-        		<a href="{{ chat_url }}" title="{{ "Enter to chat" | trans }}">
+        		<a href="{{ chat_url }}" title="{{ "chat.enter" | trans({}, 'messages') }}">
         	{% endif %}
         {% endif %}
             {% if channel.photo %}
@@ -65,7 +65,7 @@
 
 <br><br>
 <div class="panel panel-default">
-    <div class="panel-heading">{% trans with {'%name%': channel.name} %} Fans of channel %name% {% endtrans %}</div>
+    <div class="panel-heading">{{ 'channel.fans' | trans({'%name%': channel.name }, 'Channels') }}</div>
     <div class="panel-body">
         <div class="row center">
             {% if app.user is not null and app.user.validated %}

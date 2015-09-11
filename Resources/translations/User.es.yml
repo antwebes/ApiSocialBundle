@@ -50,3 +50,5 @@ user.photo.remove.success: "Tu foto ha sido eliminada con éxito"
 user.photo.remove.failure: "Ha ocurrido un error al intentar eliminar la foto"
 user.photo.remove.yes: Si
 user.photo.remove.close: Cerrar
+
+oustand.you: Destácate aquí
