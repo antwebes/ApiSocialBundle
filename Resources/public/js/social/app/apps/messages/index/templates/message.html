@@ -5,7 +5,7 @@
                 <div class="pull-left">
 
                     &nbsp;
-                    <img class="middle" src="{{message.sender.profile.profile_photo.path_icon}}">
+                    <img class="middle" src="{{#if message.sender.profile.profile_photo}}{{message.sender.profile.profile_photo.path_icon}}{{else}}{{ globalVar "default_user_image_icon" }}{{/if}}">
                     &nbsp;
                     <a href="{{ route route="user_profile" id=message.sender.id username=message.sender.username }}" title="{{this.username}}" class="text external">
                         {{message.sender.username}}

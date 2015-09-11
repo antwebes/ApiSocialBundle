@@ -3,6 +3,9 @@
     window.user_id = {{ app.user.id }};
     window.token = "{{ app.user.accessToken }}";
     window.api_endpoint = "{{ api_endpoint }}";
+    {% image '@ApiSocialBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.png" %}
+        window.default_user_image_icon = "{{ asset_url }}";
+    {% endimage %}
     {% if app.environment == 'dev' %}
     window.debug_mode = true;
     {%else%}
