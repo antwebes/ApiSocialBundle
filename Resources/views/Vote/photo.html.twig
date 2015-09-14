@@ -88,8 +88,9 @@
 
 
         function nextUser() {
-            if(users.length == 0) getUsers();
-            else {
+            if(users.length == 0) {
+                getUsers();
+            } else {
                 showUser();
             }
         }
@@ -146,7 +147,6 @@
                     previsualizeUser(users[0],"#next_user", true);
                 });
             }
-
         }
 
         function sendScore(score, user) {
@@ -170,8 +170,8 @@
 
                 last_score = score;
                 console.log(score);
-                nextUser();
                 sendScore(score, current_user);
+                nextUser();
                 return false;
             }
         });
