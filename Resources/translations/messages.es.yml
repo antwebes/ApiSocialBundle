@@ -23,6 +23,10 @@ user.view_visits.not_premium: "Para poder ver todos los usuarios que han visitad
 user.buy_outstanding: "Hacerse usuario destacado"
 user.last_visits: Te han visto
 not_visit_in_profile.message: No tienes ninguna visita. <a href="%profile_link%"> Para tener visitas te sugerimos que mejores tu perfíl.</a>
+button.search: Buscar
+button.clean: Borrar
+form.members_search.placeholder: Buscar usuarios ...
+form.members_search.min.length.message: 0 o (3 caracteres mínimo).
 button.gender.all: Todos
 button.gender.male: Hombres
 button.gender.female: Mujeres
