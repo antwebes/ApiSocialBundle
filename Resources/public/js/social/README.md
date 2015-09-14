@@ -33,6 +33,10 @@ compress files with require.js
 
 >r.js -o tools/build.js
 
+
+It will create a dist file in www-public/main.js witch is the file to include to use the message app.
+  
+  
 This command compress all files, and its dependences.
 
 Upload files of www-built to s3:
