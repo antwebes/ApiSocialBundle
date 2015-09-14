@@ -23,3 +23,8 @@ user.view_visits.not_premium: "In order to view all users that visited your prof
 user.buy_outstanding: "Become an outstanded user."
 user.last_visits: Last Visits
 not_visit_in_profile.message: You don't have any visitors. <a href="%profile_link%"> Improve your profile to have some visits</a>
+button.gender.all: All
+button.gender.male: Man
+button.gender.female: women
+button.gender.other: Others
+gender: gender
