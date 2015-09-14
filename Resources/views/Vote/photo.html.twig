@@ -12,18 +12,22 @@
 {% endblock head_css %}
 
 {% block chatea_body %}
+	<div class="page-header text-center" style="margin-top:1%">
+	  <h1>Votar fotos aleatorias</h1>
+	  <small>a continuación puedes filtrar por sexo</small>
+	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="col-xs-3 well" data-js-gender="">
+			<div class="col-xs-3 well" data-js-gender="" style="cursor:pointer">
 			  <p class="text-center" >{{ "button.gender.all" | trans}}</p>
 			</div>
-			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.male" | trans}}">
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.male" | trans}}" style="cursor:pointer">
 			  <p class="text-center">{{ "button.gender.male" | trans}}</p>
 			</div>
-			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.female" | trans}}">
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.female" | trans}}" style="cursor:pointer">
 			  <p class="text-center">{{ "button.gender.female" | trans}}</p>
 			</div>
-			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.other" | trans}}">
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.other" | trans}}" style="cursor:pointer">
 			  <p class="text-center">{{ "button.gender.other" | trans}}</p>
 			</div>
 		</div>
@@ -32,10 +36,10 @@
         <div class="col-md-8">
             <div id="vote_container">
 
-                <h1>Votar foto <span id="username"></span> </h1>
+                <h1>Votar foto de <span id="username"></span> </h1>
                 <div class="row">
                     <div class="col-xs-8"><div id="raty"></div></div>
-                    <div class="col-xs-2"><a href="#" class="btn btn-primary pull-right" id="go_to_next">Siguiente</a></div>
+                    <div class="col-xs-2"><a class="btn btn-primary pull-right" id="go_to_next">Siguiente</a></div>
                 </div>
                 <div class="row col-xs-12" >
                     <img src="" id="profile_photo" />
