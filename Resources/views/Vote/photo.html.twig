@@ -16,16 +16,22 @@
         <div class="col-md-8">
             <form data-id="form-select-gender" class="form-inline">
                 <div class="form-group">
-                    <button data-id="btn-gender" value="All" type="button" class="form-control btn-success">{{ "button.gender.all" | trans}}</button>
+                    <button data-id="btn-gender" type="button" class="form-control {% if gender == '' %}btn-success{% endif %}">{{ "button.gender.all" | trans}}</button>
                 </div>
                 <div class="form-group">
-                    <button data-id="btn-gender" value="Male" type="button" class="form-control">{{ "button.gender.male" | trans}}</button>
+                    <button data-id="btn-gender"  value="{{ "Male" | trans}}" type="button" class="form-control {% if gender == 'Male' | trans %}btn-success{% endif %} ">
+                        {{ "button.gender.male" | trans}}
+                    </button>
                 </div>
                 <div class="form-group">
-                    <button data-id="btn-gender" value="Female" type="button" class="form-control">{{ "button.gender.female" | trans}}</button>
+                    <button data-id="btn-gender" value="{{ "Female" | trans}}" type="button" class="form-control {% if gender == 'Female' | trans %}btn-success{% endif %}">
+                        {{ "button.gender.female" | trans}}
+                    </button>
                 </div>
                 <div class="form-group">
-                    <button data-id="btn-gender" value="Other" type="button" class="form-control">{{ "button.gender.other" | trans}}</button>
+                    <button data-id="btn-gender" value="{{ "Other" | trans}}" type="button" class="form-control  {% if gender == 'Other' | trans %}btn-success{% endif %}">
+                        {{ "button.gender.other" | trans}}
+                    </button>
                 </div>
             </form>
             <div id="vote_container">
@@ -70,6 +76,9 @@
         var app_user_id = "{{  app.user.id }}";
         var app_request_base_url = "{{  app.request.baseUrl }}";
         var app_request_locale = "{{  app.request.locale }}";
+        var vote_photos_path = "{{ path('user_vote') }}";
+        var gender_selected = "{{ gender }}";
+
     </script>
 
     {% javascripts

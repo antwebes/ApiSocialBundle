@@ -13,7 +13,19 @@ class VoteController extends Controller
      */
     public function showVoteAction()
     {
-        return $this->render('ApiSocialBundle:Vote:photo.html.twig');
+
+        $request = $this->container->get('request');
+        $translator = $this->container->get('translator');
+
+
+        $gender = $request->get($translator->trans('gender'));
+
+
+        return $this->render('ApiSocialBundle:Vote:photo.html.twig',
+
+            array('gender'=>$gender
+            )
+        );
     }
 
 }

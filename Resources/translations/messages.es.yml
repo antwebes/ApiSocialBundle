@@ -26,3 +26,8 @@ button.gender.all: Todos
 button.gender.male: Hombres
 button.gender.female: Mujeres
 button.gender.other: Otros
+# trnaslate parmaeters
+gender: genero
+Male: hombres
+Female: mujeres
+Other: otros
