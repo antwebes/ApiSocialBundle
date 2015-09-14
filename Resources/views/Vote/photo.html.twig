@@ -12,28 +12,24 @@
 {% endblock head_css %}
 
 {% block chatea_body %}
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="col-xs-3 well" data-js-gender="">
+			  <p class="text-center" >{{ "button.gender.all" | trans}}</p>
+			</div>
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.male" | trans}}">
+			  <p class="text-center">{{ "button.gender.male" | trans}}</p>
+			</div>
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.female" | trans}}">
+			  <p class="text-center">{{ "button.gender.female" | trans}}</p>
+			</div>
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.other" | trans}}">
+			  <p class="text-center">{{ "button.gender.other" | trans}}</p>
+			</div>
+		</div>
+	</div>
     <div class="row col-md-offset-2">
         <div class="col-md-8">
-            <form data-id="form-select-gender" class="form-inline">
-                <div class="form-group">
-                    <button data-id="btn-gender" type="button" class="form-control {% if gender == '' %}btn-success{% endif %}">{{ "button.gender.all" | trans}}</button>
-                </div>
-                <div class="form-group">
-                    <button data-id="btn-gender"  value="{{ "Male" | trans}}" type="button" class="form-control {% if gender == 'Male' | trans %}btn-success{% endif %} ">
-                        {{ "button.gender.male" | trans}}
-                    </button>
-                </div>
-                <div class="form-group">
-                    <button data-id="btn-gender" value="{{ "Female" | trans}}" type="button" class="form-control {% if gender == 'Female' | trans %}btn-success{% endif %}">
-                        {{ "button.gender.female" | trans}}
-                    </button>
-                </div>
-                <div class="form-group">
-                    <button data-id="btn-gender" value="{{ "Other" | trans}}" type="button" class="form-control  {% if gender == 'Other' | trans %}btn-success{% endif %}">
-                        {{ "button.gender.other" | trans}}
-                    </button>
-                </div>
-            </form>
             <div id="vote_container">
 
                 <h1>Votar foto <span id="username"></span> </h1>

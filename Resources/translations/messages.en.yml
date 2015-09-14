@@ -27,6 +27,3 @@ button.gender.male: Man
 button.gender.female: women
 button.gender.other: Others
 gender: gender
-Male: man
-Female: woman
-Other: other

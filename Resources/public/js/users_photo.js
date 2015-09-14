@@ -2,10 +2,12 @@ var users = [];
 var current_user = null;
 var last_score = 0;
 
-$('button[data-id="btn-gender"]').click(function( event ) {
-    if($( this ).val() != ''){
+$('[data-js-gender]').click(function( event ) {
+    if($( this ).attr('data-js-gender').toLowerCase() != ''){
         var parameter_gender_key = users_photos_messages[app_request_locale].parameter_gender;
-        window.location = vote_photos_path + '?' +parameter_gender_key+'='+$( this ).val();
+        window.location = vote_photos_path + '?' +parameter_gender_key+'='+$( this ).attr('data-js-gender').toLowerCase();
+    }else{
+    	window.location = vote_photos_path;
     }
 
 });
@@ -20,7 +22,7 @@ function getUsers(callback) {
         },
         "en":{
             "man":"Male",
-            "woman":"Female",
+            "women":"Female",
             "other": "Other",
         }
     };
