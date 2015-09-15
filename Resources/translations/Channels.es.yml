@@ -8,7 +8,7 @@ channels.no_fans: No hay fans
 channels.statistics: Estadisticas de la sala de chat %name%
 channels.enter_chat_of: Entra a chatear en %name%
 channels.enter_chat_of_for_free: Sala de chat %name%, entra para chatear gratis
-channels.not_moderated_yet: Note que este canal aún no ha sido moderado por los administradores.
+channels.not_moderated_yet: Tenga en cuenta que este canal aún no ha sido moderado por los administradores.
 channels.info: Información
 channels.details: Detalles
 channels.description: Descripción
@@ -36,5 +36,9 @@ channels.metas.free_chat_rooms: Salas de chat gratuito
 channels.metas.page: Pagina
 channels.metas.list_keywords: salas de chat, chat gratuito, chats
 channels.metas.list_description: Le ofrecemos salas de chat para todos o crear tu propia sala de chat para adolescentes, adultos, estudiantes, encontrar amigos, estudiantes pueden encontrarse con amigos, solteros y desconocidos con el mismo interes.
+channels.not_found: No se han encontrado canales
 channels.fan_remove_success:  Ha sido eliminado como fan de este canal
 channels.fan.user_already_is_not_fan: Tu ya no eres fan de este canal
+
+channel.owner: Propietario
+channel.fans: Fans del canal %name%

@@ -11,7 +11,9 @@
 namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 
 /**
  * Class UserProfileController
@@ -91,5 +93,46 @@ class UserProfileController extends BaseController
         $response->setContent($profilePhotoUtility->readfile($size));
 
         return $response;
+    }
+
+    /**
+     * @param $username
+     * @param null $user_id
+     * @return mixed
+     * @ApiUser
+     */
+    public function showAllVisitsAction($username, $user_id = null)
+    {
+        $user = null;
+        $isXmlHttpRequest = $this->getRequest()->isXmlHttpRequest();
+        $user = $this->findUserByUsernameOrId($username, $user_id, $isXmlHttpRequest);
+
+        if($user == null){
+            throw new NotFoundHttpException();
+        }
+
+        if($user->getId() !== $this->getUser()->getId()){
+            throw new AccessDeniedHttpException();
+        }
+
+        $params_to_template = array(
+            'user' => $user,
+            'api_endpoint' => $this->container->getParameter('api_endpoint')
+        );
+
+        if ($this->container->hasParameter('affiliate_id')){
+            $params_to_template['affiliate_id'] = $this->container->getParameter('affiliate_id');
+        }
+
+        return $this->render('ApiSocialBundle:User:showAllVisits.html.twig', $params_to_template);
+    }
+
+    private function findUserByUsernameOrId($username, $user_id, $asArray)
+    {
+        if($user_id != null){
+            return $this->get('api_users')->findById($user_id, $asArray);
+        }else{
+            return $this->get('api_users')->findById($username, $asArray);
+        }
     }
 }

@@ -28,7 +28,7 @@
 
                 <div class="bolder">
                     {% if user.profile is not null and user.profile is defined%}
-                        {% if user.profile.birthday%}{{ "Age" | trans }}: {{"now" |date("Y") - user.profile.birthday | date("Y")}}{% elseif user.profile.gender %}{{ user.profile.gender }}{%else%}{{ user.username }}{% endif %}
+                        {% if user.profile.birthday%}{{ "user.age" | trans({}, 'User') }}: {{"now" |date("Y") - user.profile.birthday | date("Y")}}{% elseif user.profile.gender %}{{ user.profile.gender }}{%else%}{{ user.username }}{% endif %}
                     {% else %}
                         {{ user.username }}
                     {% endif %}

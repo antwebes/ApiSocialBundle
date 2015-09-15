@@ -1,11 +1,11 @@
 {% trans_default_domain 'Channels' %}
 
-{% if not channel.isEnabled() %}<div class="alert alert-danger">{{ 'channels.not_moderated_yet' }}</div>{% endif %}
+{% if not channel.isEnabled() %}<div class="alert alert-danger">{{ 'channels.not_moderated_yet' | trans }}</div>{% endif %}
 
 <div class="row" id="channelInfo">
     <div class="col-xs-3 col-sm-offset-2">
         <h4 class="col-sm-offset-2 col-xs-12 blue">
-            <span class="middle">{% trans %}Owner{% endtrans %}</span>
+            <span class="middle">{{'channel.owner' | trans({}, 'Channels')}}</span>
         </h4>
         <div class="profile-users founderBox">
             {% include 'ApiSocialBundle:User:Show/_userListItem.html.twig' with {'user': channel.owner} %}

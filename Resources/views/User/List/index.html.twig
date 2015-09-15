@@ -20,11 +20,11 @@
 {% block chatea_body %}
 
 	{% include "ApiSocialBundle:User:Outstander/_list_users_outstanding.html.twig" %}
-	
+    {% include "ApiSocialBundle:User:List/_form_members_search.html.twig"  with {'search': search , 'enable_buton_clean' : true } %}
+
     <br style="clear:both;" />
 
     <h2>{{ "user.users" | trans }}</h2>
-{#     {% include "ApiSocialBundle:User:List/_render_list_users_customized.html.twig" with {'users' : users} %}#}
     <div class="row-fluid">
         <ul class="ace-thumbnails" data-behat="items-user">
 			{% include "ApiSocialBundle:User:List/_render_list_users.html.twig" with {'users' : users} %}
@@ -33,13 +33,22 @@
 
     <br style="clear:both;" />
 
-    {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users'} %}
+    {% if search is not empty %}
+        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users','routeParams':{'search':search }} %}
+    {% else %}
+        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users' } %}
+    {% endif %}
+
 {% endblock %}
 
 {% block body_js_end %}
     {{ parent() }}
+    <script type="application/javascript">
+        var ant_user_user_users = "{{ path('ant_user_user_users') }}";
+    </script>
     {% javascripts
     '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+        '@ApiSocialBundle/Resources/public/js/search-members.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}

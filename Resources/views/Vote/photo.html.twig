@@ -12,15 +12,34 @@
 {% endblock head_css %}
 
 {% block chatea_body %}
+	<div class="page-header text-center" style="margin-top:1%">
+	  <h1>Votar fotos aleatorias</h1>
+	  <small>a continuación puedes filtrar por sexo</small>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="col-xs-3 well" data-js-gender="" style="cursor:pointer">
+			  <p class="text-center" >{{ "button.gender.all" | trans}}</p>
+			</div>
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.male" | trans}}" style="cursor:pointer">
+			  <p class="text-center">{{ "button.gender.male" | trans}}</p>
+			</div>
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.female" | trans}}" style="cursor:pointer">
+			  <p class="text-center">{{ "button.gender.female" | trans}}</p>
+			</div>
+			<div class="col-xs-3 well" data-js-gender="{{ "button.gender.other" | trans}}" style="cursor:pointer">
+			  <p class="text-center">{{ "button.gender.other" | trans}}</p>
+			</div>
+		</div>
+	</div>
     <div class="row col-md-offset-2">
         <div class="col-md-8">
-
             <div id="vote_container">
 
-                <h1>Votar foto <span id="username"></span> </h1>
+                <h1>Votar foto de <span id="username"></span> </h1>
                 <div class="row">
                     <div class="col-xs-8"><div id="raty"></div></div>
-                    <div class="col-xs-2"><a href="#" class="btn btn-primary pull-right" id="go_to_next">Siguiente</a></div>
+                    <div class="col-xs-2"><a class="btn btn-primary pull-right" id="go_to_next">Siguiente</a></div>
                 </div>
                 <div class="row col-xs-12" >
                     <img src="" id="profile_photo" />
@@ -53,125 +72,21 @@
 
 {% block body_js_end %}
     {{ parent() }}
+    <script>
+        var app_user_id = "{{  app.user.id }}";
+        var app_request_base_url = "{{  app.request.baseUrl }}";
+        var app_request_locale = "{{  app.request.locale }}";
+        var vote_photos_path = "{{ path('user_vote') }}";
+        var gender_selected = "{{ gender }}";
+
+    </script>
+
     {% javascripts
     '@ApiSocialBundle/Resources/public/raty/jquery.raty.js'
-
+    '@ApiSocialBundle/Resources/public/js/users_photo.js'
+    '@ApiSocialBundle/Resources/public/js/translations/users_photo.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
-    <script>
-        var users = [];
-        var current_user = null;
-        var last_score = 0;
-        function getUsers(callback) {
-            $.ajax({
-                        url: window.api_endpoint + "/api/users?filters=language%3Des%2Chas_profile_photo%3D1&limit=30&offset=0&order=randomly%3Dasc",
-                        beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization','Bearer ' + window.token); },
-                        success: function(data, status) {
-                            users = data.resources;
-                            showUser();
-                            if( callback != undefined) callback(users);
-                        }
-                    }
-            );
-        }
-
-        $("#go_to_next").click(function () {
-            nextUser();
-        });
-
-
-
-        $("#go_to_report").click(function () {
-           window.location = "{{ app.request.baseUrl }}/usuarios/"+current_user.id+"/fotos/"+current_user.profile.profile_photo.id+"/reportar";
-        });
-
-
-        function nextUser() {
-            if(users.length == 0) getUsers();
-            else {
-                showUser();
-            }
-        }
-
-        function previsualizeUser(user, container, next) {
-            var title= "";
-            $(container).empty();
-            if(next) {
-                title = "Siguiente";
-            } else {
-                title = "Anterior";
-            }
-            var txt = $('<legend>');
-            txt.html(title);
-            txt.appendTo(container);
-
-            var img = $('<img>');
-            img.attr('src', user.profile.profile_photo.path_medium);
-            img.appendTo(container);
-
-            if(!next) {
-                var score = parseFloat(user.profile.profile_photo.score) || 0;
-                var number_votes = parseInt(user.profile.profile_photo.number_votes);
-
-                new_score = ((score * number_votes) + last_score) / (number_votes + 1);
-
-                number_votes++;
-                var txt = $('<p>');
-                txt.html("Votos: " + number_votes + " Puntuación: " + new_score);
-                txt.appendTo(container);
-
-                }
-        }
-
-        function showUser() {
-            if (current_user != null) {
-                previsualizeUser(current_user,"#previus_user", false);
-            }
-            current_user = users.shift();
-            $("#username").html(current_user.username);
-            $("#profile_photo").attr("src",current_user.profile.profile_photo.path_large);
-
-            if(users[0] != undefined) {
-                    previsualizeUser(users[0],"#next_user", true);
-            } else {
-                getUsers(function (users) {
-                    previsualizeUser(users[0],"#next_user", true);
-                });
-            }
-
-        }
-
-        function sendScore(score, user) {
-            $.ajax(
-                    {
-                        type: "POST",
-                        accept: "application/json",
-                        url: window.api_endpoint + "/api/users/{{ app.user.id }}/vote",
-                        data: {"_format":"json", "vote[photo]": user.profile.profile_photo.id, "vote[score]": score },
-                        beforeSend: function(xhr, settings) {
-                            xhr.setRequestHeader('Authorization','Bearer ' + token);
-                        }
-                    }
-            );
-
-        }
-
-        $('#raty').raty({
-            number: 10, path: '/bundles/apisocial/raty/images/',
-            click: function(score, evt) {
-
-                last_score = score;
-                console.log(score);
-                nextUser();
-                sendScore(score, current_user);
-                return false;
-            }
-        });
-
-
-
-        nextUser();
-    </script>
 
 {% endblock %}

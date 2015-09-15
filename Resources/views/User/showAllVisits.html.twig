@@ -1,0 +1,65 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% block header_no_index %} 
+	{% if (affiliate_id is defined) and (affiliate_id is not null) and (user.client.affiliate.id != affiliate_id) %}
+		<meta name="robots" content="noindex"> 
+	{% endif %}
+{% endblock header_no_index %}
+
+{% block head_css %}
+	{{ parent() }}
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
+	{% stylesheets 
+            "@ApiSocialBundle/Resources/public/css/custom.css" 
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock head_css %}
+
+{% block head_meta_description %}{% include 'ApiSocialBundle:Show:meta/description.html.twig' with {'user': user} %}{% endblock %}
+{% block head_meta_keywords %}{% include 'ApiSocialBundle:Show:meta/keywords.html.twig' with {'user': user} %}{% endblock %}
+{% block head_title %}{% include 'ApiSocialBundle:Show:meta/title.html.twig' with {'user': user} %}{% endblock %}
+
+{% block chatea_body %}
+<ul class="nav nav-tabs padding-18">
+	<li class="active">
+		<a href="{{ path('ant_user_user_show', {'user_id': user.id, 'username': user.usernameCanonical}) }}">
+			<i class="green fa fa-user bigger-120" ></i>
+			{{ 'user.profile' | trans }}
+		</a>
+	</li>
+	<li>
+		<a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}">
+			<i class="pink fa fa-picture-o bigger-120"></i>
+			{{ "Pictures" | trans }}
+		</a>
+	</li>
+</ul>
+
+<div class="row">
+    {% render controller("ApiSocialBundle:Visit:renderWidgetUserVisitors", {'user': user, 'limit': not user.isOutstanded}) %}
+
+    {% if not user.isOutstanded and show_button_payment is defined and show_button_payment%}
+        <br/>
+        <p>{{ "user.view_visits.not_premium" | trans }}</p>
+        <a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}">
+            <i class="icon-emo-happy"></i> {{ "user.buy_outstanding" | trans }}
+        </a>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block body_js_end %}
+{{ parent() }}
+{# js to jquerylazyload#}
+	{% javascripts
+		'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+	%}
+		<script src="{{ asset(asset_url) }}"></script>	
+   	{% endjavascripts %}
+{% include "ApiSocialBundle:User:Visit/incrementUserview.html.twig" %}
+{% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+{% include "ApiSocialBundle:Chat:Common/_user_chat_button_js.html.twig" %}
+
+{% endblock %}

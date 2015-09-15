@@ -17,6 +17,8 @@ class UserController extends BaseController
 {
     public function usersAction(Request $request, $page = 1)
     {
+        $search = $request->get('search',null);
+
         if($this->pageOneGivenByUrl()){
             return $this->redirect($this->generateUrl('ant_user_user_users'));
         }
@@ -31,12 +33,24 @@ class UserController extends BaseController
         }
 
         $usersManager = $this->get('api_users');
+        $users = array();
+        if($search != null){
 
+            $users = $usersManager->searchUserByNamePaginated($search, $page, $filter);
+        }else{
+            $users = $usersManager->findAll($page, $filters);
+        }
 
-        $users = $usersManager->findAll($page, $filters);
         $outstandingUsers = $usersManager->findOutstandingUsers(5);
 
-        return $this->render('ApiSocialBundle:User:List/index.html.twig', array('users' => $users, 'outstandingUsers' => $outstandingUsers));
+        return $this->render('ApiSocialBundle:User:List/index.html.twig',
+            array(
+                'users' => $users,
+                'outstandingUsers' => $outstandingUsers,
+                'search' => $search
+            )
+
+        );
     }
 
     /**
@@ -97,7 +111,7 @@ class UserController extends BaseController
         $user = $this->get('api_users')->findById($userId);
 
         if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$userId, ' not exits');
+            throw $this->createNotFoundException('The user with id ' .$userId, ' not exits');
         }
 
         $channels = array();
@@ -119,6 +133,17 @@ class UserController extends BaseController
     	$user = $this->get('api_users')->findById($user_session->getId());
     	
     	return $this->render('ApiSocialBundle:User:Common/_widget_user_session.html.twig', array('user'=>$user));
+    }
+    
+    /*
+     * @ToDo this function and function above, in future merge and configure.
+     */
+    public function renderWidgetPhotoIconUserSessionAction()
+    {
+    	$user_session = $this->get('security.context')->getToken()->getUser();
+    	$user = $this->get('api_users')->findById($user_session->getId());
+    	 
+    	return $this->render('ApiSocialBundle:User:Common/_widget_photo_icon_user_session.html.twig', array('user'=>$user));
     }
 
 

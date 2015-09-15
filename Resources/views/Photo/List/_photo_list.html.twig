@@ -1,8 +1,27 @@
+{% trans_default_domain 'User' %}
+
+<style>
+    .delete-photo{
+        margin-top: 5px;
+        margin-left: -25px;
+        font-size: 1.5em;
+    }
+</style>
 <div class="row-fluid">
     <h2>{{ "user.photos_of_user" | trans({'%username%': user.username}) }}</h2>
     <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" data-behat="photos">
         {% for photo in photos %}
             {% include "ApiSocialBundle:Photo:List/_photo_item_list.html.twig" with { 'photo': photo, 'user': user } %}
+            {% if app.user and app.user.id == user.id %}
+                <a data-path="{{ path('ant_user_user_photo_remove', {idUser: user.id, id: photo.id }) }}"
+                   class="pull-left open-DeleteDialog delete-photo skip-photo-swipe"
+                   data-toggle="modal" data-target="#delete-dialog"
+                   data-message="{{ 'user.photo.remove.message' | trans }}"
+                   data-title="{{ 'user.photo.remove.title' | trans }}"
+                   href="#">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            {% endif %}
         {% else %}
             {% if app.user.isValidated %}
                 {{ "user.photos.has_not" | trans() }}

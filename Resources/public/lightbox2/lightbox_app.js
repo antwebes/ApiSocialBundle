@@ -1,5 +1,15 @@
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
+    var skipElementFromSwipe = function(figureEl){
+        /*
+         * This differs from the official example of photoswipe: http://photoswipe.com/documentation/getting-started.html in the section "How to build an array of slides from a list of links"
+         *
+         * we add the option to skip elements with the class "skip-photo-swipe" so we can add additional elements not being part of the swipe but visible in the list of elements
+         *
+         */
+        return figureEl.nodeType !== 1 || /\bskip-photo-swipe\b/.test(figureEl.className);
+    };
+
 // parse slide data (url, title, size ...) from DOM elements
 // (children of gallerySelector)
     var parseThumbnailElements = function(el) {
@@ -15,8 +25,8 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             figureEl = thumbElements[i]; // <figure> element
 
-            // include only element nodes
-            if(figureEl.nodeType !== 1) {
+            // include only element nodes that don't have the class "skip-photo-swipe"
+            if(skipElementFromSwipe(figureEl)) {
                 continue;
             }
 
@@ -80,7 +90,8 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             index;
 
         for (var i = 0; i < numChildNodes; i++) {
-            if(childNodes[i].nodeType !== 1) {
+            // include only element nodes that don't have the class "skip-photo-swipe"
+            if(skipElementFromSwipe(childNodes[i])) {
                 continue;
             }
 

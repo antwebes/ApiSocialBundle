@@ -9,6 +9,7 @@ page: Page
 'Find interesting people to meet, share fotos and chat with them': 'Find interesting people to meet, share fotos and chat with them'
 'Chat with': 'Chat with'
 Chat: Chat
+chat.enter: Enter to chat
 user.owner_of_channels: 'Owner of channels'
 user.moderator_of_channels: 'Moderator of channels'
 user.fan_of_channels: 'Fan channels'
@@ -17,3 +18,19 @@ user.fan_of_channels: 'Fan channels'
 'Personal info of %username%, see photos and chat free with %username%': 'Personal info of %username%, see photos and chat free with %username%'
 user.account-verified: Account verified
 user.chats: "%username%'s chats"
+user.view_all_visitis: "View all"
+user.view_visits.not_premium: "In order to view all users that visited your profile you need to be an outstanded user"
+user.buy_outstanding: "Become an outstanded user."
+user.last_visits: Last Visits
+not_visit_in_profile.message: You don't have any visitors. <a href="%profile_link%"> Improve your profile to have some visits</a>
+button.search: Search
+button.clean: Clean
+form.members_search.placeholder: Search Members...
+form.members_search.min.length.message: Either 0 OR (3 chars minimum)
+button.gender.all: All
+button.gender.male: Man
+button.gender.female: women
+button.gender.other: Others
+gender: gender
+button.chat: Chat
+user.edit_profile: Edit profile

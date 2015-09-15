@@ -8,7 +8,8 @@ user.gender: Sexo
 user.about_me: 'Sobre mi'
 user.you_want: 'Tu quieres'
 user.last_online: 'Última vez online'
-user.i_am_seekinmg: 'Estoy buscando'
+user.i_am_seeking: 'Estoy buscando'
+user.date_of_birth: Nacimiento
 user.list_all_channels: 'Listar todos los canales'
 user.no_chat_rooms: 'No hay salas de chat'
 user.rooms_same_type: 'Ver todas las salas de este tipo'
@@ -29,6 +30,7 @@ user.owner_of_channels: 'Canales de los cuales es propietario'
 user.moderator_of_channels: 'Canales de los cuales es moderador'
 user.fan_of_channels: 'Canales de los cuales es fan'
 user.need_validate: Necesitas confirmar tu email para realizar esta acción
+user.view_profile: "Ver perfil de "
 channel.type.locale: Local
 channel.type.friends: Amigos
 channel.type.love: Amor
@@ -49,3 +51,5 @@ user.photo.remove.success: "Tu foto ha sido eliminada con éxito"
 user.photo.remove.failure: "Ha ocurrido un error al intentar eliminar la foto"
 user.photo.remove.yes: Si
 user.photo.remove.close: Cerrar
+
+oustand.you: Destácate aquí
