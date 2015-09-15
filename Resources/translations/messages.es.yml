@@ -33,3 +33,5 @@ button.gender.female: Mujeres
 button.gender.other: Otros
 # trnaslate parmaeters
 gender: genero
+button.chat: Chat
+user.edit_profile: Editar perfil
