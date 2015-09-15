@@ -1,6 +1,6 @@
-var refresh = 20;
+var refresh = 10;
 var refresh_time = parseInt(localStorage.getItem("connection_refresh")) | 0;
-var debug_chat_bride = false;
+var debug_chat_bride = true;
 
 if (window.addEventListener) {
     // Normal browsers
@@ -81,6 +81,15 @@ function newChatButton(target, url) {
                 });
                 disableBtn();
             } else {
+                var checkConnection = setInterval(function () {
+                    if(isConnected()) {
+                        setTimeout(function () {
+                            localStorage.setItem("data", '{"event": "openPrivate", "arguments": "'+target+'"}');
+                            clearInterval(checkConnection);
+                        }, 5000);
+                    }
+                }, 5000);
+
                 if(url == undefined) {
                     window.open(window.chat_url+ "?target=" + target);
                 } else {
