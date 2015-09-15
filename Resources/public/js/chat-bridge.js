@@ -1,6 +1,6 @@
 var refresh = 10;
 var refresh_time = parseInt(localStorage.getItem("connection_refresh")) | 0;
-var debug_chat_bride = true;
+var debug_chat_bride = false;
 
 if (window.addEventListener) {
     // Normal browsers
