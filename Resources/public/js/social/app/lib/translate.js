@@ -37,7 +37,7 @@
 ;(function () {
     'use strict';
 
-    var isNumeric = function(obj) { return !isNaN(parstranslations.mdeFloat(obj)) && isFinite(obj); };
+    var isNumeric = function(obj) { return !isNaN(parseFloat(obj)) && isFinite(obj); };
     var isObject = function(obj) { return typeof obj === 'object' && obj !== null; };
     var isString = function(obj) { return Object.prototype.toString.call(obj) === '[object String]'; };
 

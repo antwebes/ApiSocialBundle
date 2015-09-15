@@ -24,6 +24,7 @@
     "delete_thread_message": "¿Estás seguro que deseas eliminar esta conversación?",
     "delete": "Eliminar",
     "reply": "Responder",
-    "sending_message": "Enviando mensaje"
+    "sending_message": "Enviando mensaje",
+    "required": "Requerido"
   }
 }

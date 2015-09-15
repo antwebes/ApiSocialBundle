@@ -92,11 +92,6 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
 
         // After initialize
         App.on('initialize:after', function (options) {
-            require(["apps/messages/messages_app"], function(){
-
-                App.vent.trigger('socialapp:loaded');
-            });
-
             var routes = options.routes || {};
 
             var route = function(options){
@@ -142,6 +137,11 @@ define(['marionette', 'backbone', 'underscore', 'handlebars', 'moment', 'iecors'
                 App.reqres.setHandler("trans", _translate);
 
                 Handlebars.registerHelper("t", _translate);
+
+                require(["apps/messages/messages_app"], function(){
+
+                    App.vent.trigger('socialapp:loaded');
+                });
             });
         });
 

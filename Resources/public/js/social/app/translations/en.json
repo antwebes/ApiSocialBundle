@@ -24,6 +24,7 @@
     "delete_thread_message": "Are you sure you want to delete this thread?",
     "delete": "Delete",
     "reply": "Reply",
-    "sending_message": "Sending messsage"
+    "sending_message": "Sending messsage",
+    "required": "Required"
   }
 }

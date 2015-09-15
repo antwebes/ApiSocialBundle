@@ -79,13 +79,26 @@ define([
                         return;
                     }
 
+                    for(field in form.fields){
+                        $field = this.$el.find('*[data-editors="'+field+'"]');
+                        $field.removeClass('has-error');
+                        $field.find('*[data-error="'+field+'"]').remove();
+                    }
+
                     var errors = form.commit({ validate: true });
 
-                    this.sending = true;
 
                     if(typeof errors === "undefined"){
+                        this.sending = true;
+
                         showAlert(this.$el.find('#alert-success'), this.$el.find('#alert-danger'), this.trans('messages::sending_message')+'...');
                         this.trigger("compose:submit", this.model);
+                    }else{
+                        for(field in errors){
+                            $field = this.$el.find('*[data-editors="'+field+'"]');
+                            $field.addClass('has-error');
+                            $field.append('<p class="help-block" data-error="' + field + '">' + errors[field].message + '</p>');
+                        }
                     }
                 },
                 back: function(e){

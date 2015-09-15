@@ -20,9 +20,30 @@ define([
             Entities.NewThread = Backbone.Model.extend({
                 urlRoot: window.api_endpoint + '/api/users/'+window.user_id+'/threads',
                 schema: {
-                    recipient: { validators: ['required'], editorAttrs: { id: 'form-field-recipient', type: "email", placeholder: "Recipeint" }  },
-                    subject: { validators: ['required'], editorAttrs: { placeholder: "Subject" } },
-                    body: { validators: ['required'], type: 'TextArea', editorClass: "wysiwyg-editor", editorAttrs: { cols: "100", rows: "10", placeholder: "Message" } }
+                    recipient: {
+                        validators: [ { type: 'required', message: App.request('trans', "messages::required") } ],
+                        editorAttrs: {
+                            id: 'form-field-recipient',
+                            type: "email",
+                            placeholder: App.request('trans', "messages::recipient")
+                        }
+                    },
+                    subject: {
+                        validators: [ { type: 'required', message: App.request('trans', "messages::required") } ],
+                        editorAttrs: {
+                            placeholder: App.request('trans', "messages::subject")
+                        }
+                    },
+                    body: {
+                        validators: [ { type: 'required', message: App.request('trans', "messages::required") } ],
+                        type: 'TextArea',
+                        editorClass: "wysiwyg-editor",
+                        editorAttrs: {
+                            cols: "100",
+                            rows: "10",
+                            placeholder: App.request('trans', "messages::message")
+                        }
+                    }
                 },
                 toJSON: function(){
                     var data = Backbone.Model.prototype.toJSON.apply(this, arguments);
