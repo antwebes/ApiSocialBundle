@@ -1,0 +1,203 @@
+hearsay_require_js:
+    require_js_src:      //cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js
+    initialize_template: HearsayRequireJSBundle::initialize.html.twig
+    base_url:            js
+    base_dir:            @ApiSocialBundle/Resources/public/js/social
+    paths:
+        main:
+            location: @ApiSocialBundle/Resources/public/js/social/app/main
+            external: false
+        app:
+            location: @ApiSocialBundle/Resources/public/js/social/app/app
+            external: false
+        apps:
+            location: @ApiSocialBundle/Resources/public/js/social/app/apps
+            external: false
+        entities:
+            location: @ApiSocialBundle/Resources/public/js/social/app/entities
+            external: false
+        translations:
+            location: @ApiSocialBundle/Resources/public/js/social/app/translations
+            external: false
+        vendor:
+            location: @ApiSocialBundle/Resources/public/js/social/vendor # Required
+            external: false
+        underscore:
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/lodash/dist/lodash
+            external: false
+        iecors:
+            location: @ApiSocialBundle/Resources/public/js/social/app/lib/iecors
+            external: false
+        translate:
+            location: @ApiSocialBundle/Resources/public/js/social/app/lib/translate.min
+            external: false
+        jquery:
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery/dist/jquery.min
+            external: false
+        backbone:
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone/backbone
+            external: false
+        "backbone-forms":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone-forms/distribution.amd/backbone-forms
+            external: false
+        "backbone-bootstrap":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone-forms/distribution.amd/templates/bootstrap3
+            external: false
+        marionette:
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/marionette/lib/core/amd/backbone.marionette.min
+            external: false
+        "backbone.babysitter":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone.babysitter/lib/backbone.babysitter
+            external: false
+        "backbone.wreqr":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone.wreqr/lib/backbone.wreqr
+            external: false
+        text:
+            location: @ApiSocialBundle/Resources/public/js/social/app/lib/text
+            external: false
+        paginator:
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone.paginator/lib/backbone.paginator.min
+            external: false
+        "jquery_iframe_transport":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery-file-upload/js/jquery.iframe-transport
+            external: false
+        "jquery.fileupload":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery-file-upload/js/jquery.fileupload
+            external: false
+        "jquery.fileupload-image":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery-file-upload/js/jquery.fileupload-image
+            external: false
+        "jquery.fileupload-process":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery-file-upload/js/jquery.fileupload-process
+            external: false
+        "jquery.ui.widget":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery-file-upload/js/vendor/jquery.ui.widget
+            external: false
+        "load-image":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/blueimp-load-image/js/load-image
+            external: false
+        "load-image-ios":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/blueimp-load-image/js/load-image-ios
+            external: false
+        "load-image-meta":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/blueimp-load-image/js/load-image-meta
+            external: false
+        "load-image-exif":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/blueimp-load-image/js/load-image-exif
+            external: false
+        "canvas-to-blob":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/blueimp-canvas-to-blob/js/canvas-to-blob
+            external: false
+        handlebars:
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/handlebars/handlebars.min
+            external: false
+        util:
+            location: @ApiSocialBundle/Resources/public/js/social/app/util
+            external: false
+        "moment":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/moment/min/moment-with-langs.min
+            external: false
+        "bootstrap-modal":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/bootstrap/js/modal
+            external: false
+        "backbone-bootstrap-modal":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone.bootstrap-modal/src/backbone.bootstrap-modal
+            external: false
+        "jquery-lazyload":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery.lazyload/jquery.lazyload.min
+            external: false
+        "jasny-fileinput":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jasny-bootstrap/js/fileinput
+            external: false
+        "ZeroClipboard":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/zeroclipboard/ZeroClipboard.min
+            external: false
+        "ZeroClipboardSwf":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/zeroclipboard/ZeroClipboard.swf
+            external: false
+        "FileApi":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery.fileapi/FileAPI/FileAPI.min
+            external: false
+        "FileApi.exif":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery.fileapi/FileAPI/FileAPI.exif
+            external: false
+        "jquery.fileapi":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery.fileapi/jquery.fileapi.min
+            external: false
+        "jquery.jcrop":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery.fileapi/jcrop/jquery.Jcrop.min
+            external: false
+        "jquery.modal":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/jquery.fileapi/statics/jquery.modal
+            external: false
+        "toastr":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/toastr/toastr.min
+            external: false
+        "toastr_css":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/toastr/toastr.min.css
+            external: false
+        "backbone.autocomplete":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone-autocomplete/src/backbone.autocomplete
+            external: false
+        "backbone_autocomplete_css":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/backbone-autocomplete/src/backbone.autocomplete-min.css
+            external: false
+        "easyXDM":
+            location: @ApiSocialBundle/Resources/public/js/social/vendor/bower/brandymint-easyXDM/easyXDM
+            external: false
+    shim:
+        # Prototype
+#        name:
+#            deps:    []
+#            exports: ~
+
+        #app: ['marionette']
+        backbone:
+            deps: ["jquery", "underscore"]
+            exports: "Backbone"
+        "underscore":
+            deps: ["text"]
+            exports : '_'
+        "jquery.fileapi":
+            deps: ["FileApi", "jquery.jcrop", "jquery.modal", "FileApi.exif", "jquery"]
+        "FileApi.exif":
+            deps: ["FileApi"]
+        "paginator":
+            deps: ['backbone']
+            exports: 'Backbone.Paginator'
+        "handlebars":
+            exports: 'Handlebars'
+        "bootstrap-modal":
+            deps: ["jquery", "backbone"]
+        "backbone-bootstrap-modal":
+            deps: ["jquery", "underscore", "backbone", "bootstrap-modal"]
+        "marionette":
+            deps: ["jquery", "underscore", "backbone"]
+            exports: "Marionette"
+        "jasmine-fixture":
+            deps: ["jquery"]
+        "jquery-lazyload":
+            deps: ["jquery"]
+        "jquery.updater":
+            deps: ["jquery"]
+        "backbone.autocomplete":
+            deps: ["backbone"]
+    options:
+        # Prototype
+        name:
+            value: ~ # Required
+    optimizer:
+        path:                    @ApiSocialBundle/Resources/public/js/social/r.js # Required
+        hide_unoptimized_assets: false
+        almond_path:             ~
+        exclude:                 []
+        modules:
+            # Prototype
+            name:
+                include: ~
+                exclude: ~
+        options:
+            # Prototype
+            name:
+                value: e # Required
+        timeout: 60

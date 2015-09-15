@@ -1,0 +1,27 @@
+{% trans_default_domain 'User' %}
+<script>
+    window.user_id = {{ app.user.id }};
+    window.token = "{{ app.user.accessToken }}";
+    window.api_endpoint = "{{ api_endpoint }}";
+    {% image '@ApiSocialBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.png" %}
+        window.default_user_image_icon = "{{ asset_url }}";
+    {% endimage %}
+    {% if app.environment == 'dev' %}
+    window.debug_mode = true;
+    {%else%}
+    window.debug_mode = false;
+    {% endif %}
+
+    var mail_app_options = {
+        lang: "{{ app.request.getLocale() }}",
+        routes: {
+            user_profile: '{{ 'user_profile_route' | trans }}'
+        }
+    };
+</script>
+{% javascripts
+'@ApiSocialBundle/Resources/public/js/social/vendor/bower/requirejs/require.js'
+'@ApiSocialBundle/Resources/public/js/social/www-built/main.js'
+%}
+<script src="{{ asset(asset_url) }}"></script>
+{% endjavascripts %}

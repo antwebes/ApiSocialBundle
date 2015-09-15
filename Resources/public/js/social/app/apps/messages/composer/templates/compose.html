@@ -1,0 +1,14 @@
+<form class="form-horizontal message-form  col-xs-12" style="z-index: 10;">
+    <div class="compose-wrapper"></div>
+
+    <span class="form-group inline btn-send-message col-xs-12">
+        <button type="button" class="btn btn-sm btn-primary no-border" id="cancel-send">
+            {{ t "messages::cancel" }}
+        </button>
+        <button type="button" class="btn btn-big btn-primary no-border pull-right" id="send">
+            <span>{{ t "messages::send" }}</span>
+        </button>
+    </span>
+</form>
+<div id="alert-danger" class="alert-danger alert hide"></div>
+<div id="alert-success" class="alert-success alert hide"></div>

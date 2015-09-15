@@ -1,0 +1,29 @@
+{
+  "name": "social-chat",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-jslint": "~1.1.12",
+    "grunt-s3": "~0.2.0-alpha.3",
+    "grunt-contrib-uglify": "~0.5.1"
+  },
+  "peerDependencies": {
+    "bower": "*",
+    "grunt-cli": "*",
+    "coveralls": "*"
+  },
+  "scripts": {
+    "test": "grunt karma:run coveralls"
+  },
+  "description": "![Boilerplate](https://github.com/backbone-boilerplate/backbone-boilerplate/raw/assets/header.png)",
+  "main": "npm install grunt",
+  "directories": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "grunt-contrib-uglify": "~0.5.1"
+  }
+}

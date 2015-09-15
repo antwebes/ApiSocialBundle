@@ -1,0 +1,30 @@
+{
+  "messages": {
+    "messages": "Mensajes",
+    "message": "Mensaje",
+    "back": "Atrás",
+    "sender": "Remitente",
+    "participant": "Participantes",
+    "subject": "Asunto",
+    "created_at": "Fecha de creación",
+    "no_messages": "No hay mensajes",
+    "write_mail": "Redactar mensaje",
+    "inbox": "Bandeja de entrada",
+    "sent": "Enviados",
+    "cancel": "Cancelar",
+    "send": "Enviar",
+    "recipient": "Destinatario",
+    "successfull_sent": "El mensaje ha sido enviado con éxito",
+    "cannot_send_to_youself": "No puedes enviarte mensajes a ti mismo",
+    "message_too_short": "El mensaje es demasiado corto",
+    "subject_too_short": "El asunto es demasiado corto",
+    "limit_exceded": "No puedes enviar más mensajes, limite excedido",
+    "no_recipient_specified": "No has introducido un destinatario o el introducido no existe",
+    "delete_thread_title": "Eliminar conversación",
+    "delete_thread_message": "¿Estás seguro que deseas eliminar esta conversación?",
+    "delete": "Eliminar",
+    "reply": "Responder",
+    "sending_message": "Enviando mensaje",
+    "required": "Requerido"
+  }
+}

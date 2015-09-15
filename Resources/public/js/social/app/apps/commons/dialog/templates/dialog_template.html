@@ -1,0 +1,21 @@
+  <div class="modal-dialog">
+              <div class="modal-content">
+    <% if (title) { %>
+        <div class="modal-header">
+          <% if (allowCancel) { %>
+            <a class="close">×</a>
+          <% } %>
+          <h3><%= title %></h3>
+        </div>
+      <% } %>
+      <div class="modal-body"><%= content %></div>
+      <div class="modal-footer">
+        <% if (allowCancel) { %>
+          <% if (cancelText) { %>
+            <a class="btn cancel"><%= cancelText %></a>
+          <% } %>
+        <% } %>
+        <a class="btn ok btn-primary"><%= okText %></a>
+      </div>
+    </div>
+  </div>

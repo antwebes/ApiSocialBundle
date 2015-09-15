@@ -32,6 +32,14 @@ ant_user_user_photos_show:
     path: /users/{id}/photos
     defaults: { _controller: ApiSocialBundle:Photo:photos }
 
+ant_user_user_message:
+    path: /users/{id}/message
+    defaults: { _controller: ApiSocialBundle:User:message }
+
+ant_user_user_messages:
+    path: /messages
+    defaults: { _controller: ApiSocialBundle:User:messages }
+
 ant_user_user_photos_show.page:
     path: /users/{id}/photos/pages/{page}
     defaults: { _controller: ApiSocialBundle:Photo:photos }

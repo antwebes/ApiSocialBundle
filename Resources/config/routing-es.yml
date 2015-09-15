@@ -48,6 +48,14 @@ ant_user_user_photo_remove:
     path: /usuarios/{idUser}/fotos/{id}/eliminar
     defaults: { _controller: ApiSocialBundle:Photo:removePhoto }
 
+ant_user_user_message:
+    path: /usuarios/{id}/mensaje
+    defaults: { _controller: ApiSocialBundle:User:message }
+
+ant_user_user_messages:
+    path: /mensajes
+    defaults: { _controller: ApiSocialBundle:User:messages }
+
 ant_chat_chat_show:
     pattern: /webchat/
     defaults: { _controller: ApiSocialBundle:Chat:show }

@@ -1,0 +1,37 @@
+<style>
+    .message-item.message-unread .text {
+        color: #609fc4;
+        font-weight: bold;
+    }
+</style>
+<div class="message-list-container">
+
+    <div id="id-message-list-navbar" class="message-navbar align-center clearfix row">
+        <div class="message-bar">
+            <div class="message-infobar" id="id-message-infobar">
+            </div>
+        </div>
+    </div>
+
+    <div class="row message-item">
+        <div class="col-xs-2">
+            <strong>{{ t "messages::sender" }}</strong>
+        </div>
+
+        <div class="col-xs-4">
+            <strong>{{ t "messages::participant" }}</strong>
+        </div>
+        
+        <div class="col-xs-4 summary">
+            <strong>{{ t "messages::subject" }}</strong>
+        </div>
+
+        <div class="col-xs-2">
+            <strong>{{ t "messages::created_at" }}</strong>
+        </div>
+    </div>
+
+    <div class="message-list">
+        
+    </div>
+</div>

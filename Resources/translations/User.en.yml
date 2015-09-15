@@ -54,3 +54,6 @@ user.photos.report.allready_reported: "You've allready reported this photo previ
 
 
 oustand.you: Highlight you here
+
+user.write_message: Write Message
+user_profile_route: '/users/{username}-{id}'

@@ -134,6 +134,15 @@ class UserController extends BaseController
     	
     	return $this->render('ApiSocialBundle:User:Common/_widget_user_session.html.twig', array('user'=>$user));
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
+    public function messagesAction()
+    {
+        return $this->render('ApiSocialBundle:User:messages.html.twig');
+    }
     
     /*
      * @ToDo this function and function above, in future merge and configure.

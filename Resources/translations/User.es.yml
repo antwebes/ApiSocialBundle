@@ -53,3 +53,6 @@ user.photo.remove.yes: Si
 user.photo.remove.close: Cerrar
 
 oustand.you: Destácate aquí
+
+user.write_message: Escribir mensaje
+user_profile_route: '/usuarios/{username}-{id}'
