@@ -42,7 +42,7 @@
     {% if not user.isOutstanded and web_param.show_button_payment is defined and web_param.show_button_payment%}
         <br/>
         <p>{{ "user.view_visits.not_premium" | trans }}</p>
-        <a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}">
+        <a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ web_param.client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}">
             <i class="icon-emo-happy"></i> {{ "user.buy_outstanding" | trans }}
         </a>
     {% endif %}

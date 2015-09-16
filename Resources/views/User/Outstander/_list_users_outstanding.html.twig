@@ -10,7 +10,7 @@
 		{% endif %}
 	    {% if web_param.show_button_payment and app.user and app.user.validated %}
 	        <!-- Button to highlight an user -->
-	    	<a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}"><i class="icon-emo-happy"></i> {{'oustand.you' | trans({}, 'User')}}</a>
+	    	<a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ web_param.client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}"><i class="icon-emo-happy"></i> {{'oustand.you' | trans({}, 'User')}}</a>
 		{% endif %}
 	</div>
 {% endif %}
