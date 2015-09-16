@@ -1,13 +1,15 @@
 <script>
 
     $( document ).on( 'click', '.vote_option', function (event) {
-        $(".vote_table input").attr('disabled',true);
         var target = $( event.target );
+        var photo_id =$(target).data("photo");
+        $(".photo_"+photo_id).attr('disabled',true);
+
         $(target).attr('checked', true);
         $(target).attr('disabled', false);
         var score = ($(target).val());
         var user_id = $(target).data("user");
-        var photo_id =$(target).data("photo");
+
         $.ajax(
                 {
                     type: "POST",
