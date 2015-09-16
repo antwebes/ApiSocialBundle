@@ -6,7 +6,45 @@
     </a>
     <figcaption itemprop="caption description">
         {{ photo.title }}
-		<div> Votos {{ photo.numberVotes }} Puntuación: {{ photo.score }} </div>
+
+        <table class="vote_table">
+            <tr>
+                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="1">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="2">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="3">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="4">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="5">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="6">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="7">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="8">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="9">
+                </td>
+                <td>
+                    <input type="radio" class="vote_option" data-user="{{ app.user.id }}" data-photo="{{ photo.id }}" name="value" value="10">
+                </td>
+            </tr>
+            </table>
+            <div> Votos {{ photo.numberVotes }} Puntuación: {{ photo.score }} </div>
         <br/>
         <a href="{{ path('ant_user_user_photo_report', {'idUser': user.id, 'id': photo.id}) }}" class="btn btn-danger">{{ "user.photos.report.title" | trans }}</a>
     </figcaption>

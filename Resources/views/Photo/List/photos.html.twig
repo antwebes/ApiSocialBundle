@@ -53,7 +53,9 @@
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+
     <script>
         initPhotoSwipeFromDOM('.my-gallery');
     </script>
+    {% include "ApiSocialBundle:Photo:List/_script_votes.html.twig" %}
 {% endblock %}
