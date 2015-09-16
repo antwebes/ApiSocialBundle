@@ -19,6 +19,7 @@ user.page_next: Siguiente
 user.enter_chat_room: 'Entrar en la sala'
 user.channel_visits: Visitas
 user.profile: Perfil
+user.profile_of: 'Perfil de %username%'
 user.photos.has_not: El usuario no tienen ninguna foto
 user.profile.gender.male: Hombre
 user.profile.gender.female: Mujer
@@ -35,6 +36,8 @@ channel.type.locale: Local
 channel.type.friends: Amigos
 channel.type.love: Amor
 channel.type.sports: Deportes
+
+user.chats: Canales de %username%
 user.photos.need_confirmate_account: Para ver fotos de usuarios necesitas tener la cuenta validada.
 user.activate_account_info: Aquí tienes toda la información necesaria
 user.photos.report.title: "Reportar foto"

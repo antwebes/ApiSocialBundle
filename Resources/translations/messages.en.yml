@@ -1,6 +1,5 @@
 user.profile: Profile
 Pictures: Pictures
-user.profile_of: 'Profile of %username%'
 user.users: Users
 user.outstandingusers: Outstanding users
 'users, people, social, chat, make friends, find love, free chat': 'users, people, social, chat, make friends, find love, free chat'
@@ -17,7 +16,6 @@ user.fan_of_channels: 'Fan channels'
 'Personal info of %username%': 'Personal info of %username%'
 'Personal info of %username%, see photos and chat free with %username%': 'Personal info of %username%, see photos and chat free with %username%'
 user.account-verified: Account verified
-user.chats: "%username%'s chats"
 user.view_all_visitis: "View all"
 user.view_visits.not_premium: "In order to view all users that visited your profile you need to be an outstanded user"
 user.buy_outstanding: "Become an outstanded user."
