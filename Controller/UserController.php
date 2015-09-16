@@ -154,6 +154,20 @@ class UserController extends BaseController
     	 
     	return $this->render('ApiSocialBundle:User:Common/_widget_photo_icon_user_session.html.twig', array('user'=>$user));
     }
+    
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @APIUser()
+     */
+    public function messageAction($id)
+    {
+    	$user = $this->get('api_users')->findById($id);
+    	if($user == null){
+    		throw $this->createNotFoundException('THe user with id ' .$id, ' not exits');
+    	}
+    	return $this->render('ApiSocialBundle:User:message.html.twig',array('user'=>$user));
+    }
 
 
 
