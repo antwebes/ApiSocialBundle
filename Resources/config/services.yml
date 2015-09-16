@@ -2,11 +2,6 @@ parameters:
     users.language: 'es'
 
 services:
-  core.twig.user_profile_photo_url_extension:
-    class: Ant\Bundle\ApiSocialBundle\Twig\Extension\UserProfilePhotoUrlExtension
-    tags:
-      - { name: twig.extension }
-
   core.twig.channel_photo_url_extension:
     class: Ant\Bundle\ApiSocialBundle\Twig\Extension\ChannelPhotoUrlExtension
     tags:
