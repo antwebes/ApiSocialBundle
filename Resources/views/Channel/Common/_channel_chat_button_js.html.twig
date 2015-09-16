@@ -6,6 +6,6 @@
 {% endjavascripts %}
 
 <script>
-    newChatButton("{{ channel.ircChannel }}", "{% if not chat_url %}{{ path('ant_chat_chat_show', {channel: channel.ircChannel } )}}{% else %}{{chat_url}}?channel={{ channel.ircChannel  | url_encode}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}{% endif %}");
+    newChatButton("{{ channel.ircChannel }}", "{% if not web_param.chat_url %}{{ path('ant_chat_chat_show', {channel: channel.ircChannel } )}}{% else %}{{web_param.chat_url}}?channel={{ channel.ircChannel  | url_encode}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}{% endif %}");
 </script>
 {# Finish Code to button go to chat #}

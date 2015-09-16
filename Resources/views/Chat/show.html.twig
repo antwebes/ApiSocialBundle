@@ -8,15 +8,15 @@
 </style>
 <div id="cgs-webchat"></div>
 {% if params_array.channel is defined %}
- 	{%  set channel = params_array.channel~','~channel_affiliate %}
+ 	{%  set channel = params_array.channel~','~ web_param.channel_affiliate %}
 {% else %}
-    {%  set channel = channel_affiliate %}
+    {%  set channel = web_param.channel_affiliate %}
 {% endif %}
 
 {% if app.user %}
     {% set nick = app.user.username %}
 {% else %}
-    {% set nick = nick_affiliate ~ '????' %}
+    {% set nick = web_param.nick_affiliate ~ '????' %}
 {% endif %}
 {% include "ApiSocialBundle:Chat:script.html.twig" with {enter_channel: channel, chat_nick: nick } %}
 </body>

@@ -1,5 +1,5 @@
-{% if show_users_outstanding is defined and show_users_outstanding %}
-	{% if (show_button_payment and app.user and app.user.validated) or outstandingUsers%}
+{% if web_param.show_users_outstanding is defined and web_param.show_users_outstanding %}
+	{% if (web_param.show_button_payment and app.user and app.user.validated) or outstandingUsers%}
 	<h2>{{ "user.outstandingusers" | trans }}</h2>
 	{% endif %}
 	<div class="row-fluid">
@@ -8,7 +8,7 @@
 				{% include "ApiSocialBundle:User:List/_render_list_users.html.twig" with {'users' : outstandingUsers} %}
 	        </ul>
 		{% endif %}
-	    {% if show_button_payment and app.user and app.user.validated %}
+	    {% if web_param.show_button_payment and app.user and app.user.validated %}
 	        <!-- Button to highlight an user -->
 	    	<a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}"><i class="icon-emo-happy"></i> {{'oustand.you' | trans({}, 'User')}}</a>
 		{% endif %}

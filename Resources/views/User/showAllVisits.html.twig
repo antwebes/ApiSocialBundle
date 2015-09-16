@@ -39,7 +39,7 @@
 <div class="row">
     {% render controller("ApiSocialBundle:Visit:renderWidgetUserVisitors", {'user': user, 'limit': not user.isOutstanded}) %}
 
-    {% if not user.isOutstanded and show_button_payment is defined and show_button_payment%}
+    {% if not user.isOutstanded and web_param.show_button_payment is defined and web_param.show_button_payment%}
         <br/>
         <p>{{ "user.view_visits.not_premium" | trans }}</p>
         <a class="btn btn-success" href="{{ payment_endpoint }}?user_id={{ app.user.id }}&client_id={{ client }}&type=user&resource_id={{ app.user.id }}&redirect_url={{ app.request.uri }}">

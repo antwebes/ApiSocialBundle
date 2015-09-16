@@ -1,4 +1,4 @@
-{% if has_chat %}
+{% if web_param.has_chat %}
 	<a class="btn btn-primary" disabled="disabled" id="chatBtnConnect" title="{{ channel.name }}"></a>
 	{#<a title="{{ channel.name }}" href="{{ path('ant_chat_chat_show') }}?channel={{ channel.ircChannel}}{% if app.user is not null %}&nick={{  app.user.username}}{% endif %}">{% endif %}#}
 {% endif %}

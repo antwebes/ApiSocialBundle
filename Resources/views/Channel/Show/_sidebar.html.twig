@@ -5,11 +5,11 @@
 </h5>
 <div class="row">
     <div class="col-xs-5">
-    	{% if has_chat %}
-    		{% if not chat_url %}
+    	{% if web_param.has_chat %}
+    		{% if not web_param.chat_url %}
         		<a href="{{ path('ant_chat_chat_show', {channel: channel.ircChannel}) }}" title="{{ "chat.enter" | trans({}, 'messages') }}">
         	{% else %}
-        		<a href="{{ chat_url }}" title="{{ "chat.enter" | trans({}, 'messages') }}">
+        		<a href="{{ web_param.chat_url }}" title="{{ "chat.enter" | trans({}, 'messages') }}">
         	{% endif %}
         {% endif %}
             {% if channel.photo %}
@@ -19,7 +19,7 @@
                 <img class="img-responsive" alt="{{ channel.name | capitalize }}" id="avatar2" src="{{ asset_url }}">
                 {% endimage %}
             {% endif %}
-        {% if has_chat %}</a>{% endif %}
+        {% if web_param.has_chat %}</a>{% endif %}
     </div>
     <div class="col-xs-7" id="channelStatistics">
         <div class="row info">
