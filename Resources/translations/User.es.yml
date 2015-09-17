@@ -32,10 +32,6 @@ user.moderator_of_channels: 'Canales de los cuales es moderador'
 user.fan_of_channels: 'Canales de los cuales es fan'
 user.need_validate: Necesitas confirmar tu email para realizar esta acción
 user.view_profile: "Ver perfil de "
-channel.type.locale: Local
-channel.type.friends: Amigos
-channel.type.love: Amor
-channel.type.sports: Deportes
 
 user.chats: Canales de %username%
 user.photos.need_confirmate_account: Para ver fotos de usuarios necesitas tener la cuenta validada.

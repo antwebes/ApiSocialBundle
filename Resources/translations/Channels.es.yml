@@ -18,8 +18,8 @@ channels.created_at: Fecha de creación
 channels.language: Lenguage
 channels.will_expire_at: Fecha de expiración
 channels.expired_at: Fecha en la que expiro
-channels.is_expired: Is Está expirado
-channels.is_expired_large: Esta sala de chat ha expirado, catualmente no tiene propietario
+channels.is_expired: Está expirado
+channels.is_expired_large: Esta sala de chat ha expirado, actualmente no tiene propietario
 channels.last_visit: Última visita
 channels.created_by: Creado por
 channels.write_your_nick: Escribe tu nick...
@@ -42,3 +42,9 @@ channels.fan.user_already_is_not_fan: Tu ya no eres fan de este canal
 
 channel.owner: Propietario
 channel.fans: Fans del canal %name%
+channel.moderators: Moderadores
+
+locale: Local
+friends: Amistad
+love: Amor
+sports: Deportes

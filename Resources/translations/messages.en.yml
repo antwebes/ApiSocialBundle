@@ -32,3 +32,5 @@ button.gender.other: Others
 gender: gender
 button.chat: Chat
 user.edit_profile: Edit profile
+
+visits: visits

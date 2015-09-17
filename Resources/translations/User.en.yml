@@ -29,10 +29,6 @@ user.profile.seeking.both : Both, men and women
 user.date_of_birth: Date Of Birth
 user.need_validate: You need confirmate your email to do this action
 user.view_profile: "View profile of "
-channel.type.locale: Locale
-channel.type.friends: Friends
-channel.type.love: Love
-channel.type.sports: Sports
 
 user.chats: "%username%'s chats"
 user.owner_of_channels: 'Owner of channels'
