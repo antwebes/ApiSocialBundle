@@ -62,7 +62,7 @@
     </div>
 
     {% if pager is defined %}
-        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': pager, 'route': 'channel_list_page', 'routeIndex': 'channel_list'} %}
+        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': pager, 'route': 'channel_list_page', 'routeIndex': 'channel_list','routeParams':{'search':search }} %}
     {% endif %}
 {% else %}
     <p>

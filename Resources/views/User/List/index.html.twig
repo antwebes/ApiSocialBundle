@@ -20,7 +20,9 @@
 {% block chatea_body %}
 
 	{% include "ApiSocialBundle:User:Outstander/_list_users_outstanding.html.twig" %}
-    {% include "ApiSocialBundle:User:List/_form_members_search.html.twig"  with {'search': search , 'enable_buton_clean' : true } %}
+    {% include 'ApiSocialBundle:Common:form_search.html.twig'
+        with {'search': search , 'enable_buton_clean' : true, 'search_placeholder': 'form.members_search.placeholder'}
+    %}
 
     <br style="clear:both;" />
 
@@ -43,14 +45,16 @@
 
 {% block body_js_end %}
     {{ parent() }}
-    <script type="application/javascript">
-        var ant_user_user_users = "{{ path('ant_user_user_users') }}";
-    </script>
     {% javascripts
-    '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+        '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
         '@ApiSocialBundle/Resources/public/js/search-members.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+    <script>
+        $( document ).ready(function() {
+            initSearchBox("{{ path('ant_user_user_users') }}");
+        });
+    </script>
 {% endblock %}

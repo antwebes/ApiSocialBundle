@@ -23,6 +23,7 @@ user.last_visits: Last Visits
 not_visit_in_profile.message: You don't have any visitors. <a href="%profile_link%"> Improve your profile to have some visits</a>
 button.search: Search
 button.clean: Clean
+members_search_title_message: Buscar
 form.members_search.placeholder: Search Members...
 form.members_search.min.length.message: Either 0 OR (3 chars minimum)
 button.gender.all: All

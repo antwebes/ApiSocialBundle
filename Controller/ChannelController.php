@@ -19,7 +19,8 @@ class ChannelController extends BaseController
 {
     public function channelsAction(Request $request, $page = 1)
     {
-        $filter = $request->get('filter');
+        $filter = $request->get('filter','');
+        $search = $request->get('search',null);
 
         $twig_globals = $this->getGlobalsTwig();
 
@@ -29,10 +30,16 @@ class ChannelController extends BaseController
         }
 
         if($this->pageOneGivenByUrl()){
-            return $this->redirect($this->generateUrl('channel_list'));
+            $parameters = array();
+            if($search != null){
+                $parameters['search']= $search;
+                $parameters['page']= $page;
+            }
+
+            return $this->redirect($this->generateUrl('channel_list',$parameters));
         }
 
-        return $this->render('ApiSocialBundle:Channel:List/channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small'));
+        return $this->render('ApiSocialBundle:Channel:List/channels.html.twig', array('page' => $page, 'filter' => $filter, 'size_image' => 'small','search'=>$search));
     }
 
     private function getGlobalsTwig()
@@ -78,7 +85,7 @@ class ChannelController extends BaseController
             }
     		array_push($channels,$channel);
     	}
-    	
+
     	$params = array('channels' => $channels);
     	
     	$size_image = 'small';
@@ -144,7 +151,7 @@ class ChannelController extends BaseController
     {
         //Si estamos con filtros hay que enviar filtros a la pagina siguiente
         $filter = $request->get('filter');
-
+        $search = $request->get('search',null);
         if ($filter == 'customize'){
             return $this->renderChannelsCustomizedAction($request, $page, $withPagination, $order, $amount, $size_image);
         }
@@ -153,6 +160,10 @@ class ChannelController extends BaseController
             $filter = $this->getFilters('language=es,'.$filter);
         } else {
             $filter = $this->getFilters('language=es');
+        }
+
+        if($search != null){
+            $filter['partialName']= $search;
         }
 
         $pager = $this->get('api_channels')->findAll($page, $filter, $amount, $order);
@@ -165,7 +176,7 @@ class ChannelController extends BaseController
         }
 
         $params['size_image'] = $size_image;
-
+        $params['search'] = $search;
         return $this->render('ApiSocialBundle:Channel:List/_renderChannels.html.twig', $params);
     }
     
@@ -198,7 +209,7 @@ class ChannelController extends BaseController
     	}
     
     	$params['size_image'] = $size_image;
-    
+        $params['search'] = $request->get('search',null);
     	return $this->render('ApiSocialBundle:Channel:List/_renderWidgetChannels.html.twig', $params);
     }
     
