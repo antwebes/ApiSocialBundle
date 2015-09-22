@@ -22,6 +22,10 @@ class ChannelController extends BaseController
         $filter = $request->get('filter','');
         $search = $request->get('search',null);
 
+        if($search != null){
+            $filter = 'partialName='.$search;
+
+        }
         $twig_globals = $this->getGlobalsTwig();
 
         //if not exist list_channels_customized of affiliate, redirect to url without filter=customize
@@ -130,6 +134,7 @@ class ChannelController extends BaseController
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
                 }
             }catch (\Exception $ejson){
+                ldd($ejson);
                 $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
             }
         }
@@ -146,7 +151,7 @@ class ChannelController extends BaseController
      * @param null $size_image
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function renderChannelsAction(Request $request, $page = 1, $withPagination = 1, $order = array('countVisits'=>'desc'), $amount = null, $size_image=null)
+    public function renderChannelsAction(Request $request, $page = 1, $withPagination = 1, $order = array('name' => 'asc'), $amount = null, $size_image=null)
     {
         //Si estamos con filtros hay que enviar filtros a la pagina siguiente
         $filter = $request->get('filter');
@@ -175,7 +180,7 @@ class ChannelController extends BaseController
         }
 
         $params['size_image'] = $size_image;
-        $params['search'] = $search;
+        $params['search'] = $request->get('search',null);
         return $this->render('ApiSocialBundle:Channel:List/_renderChannels.html.twig', $params);
     }
     
@@ -208,7 +213,6 @@ class ChannelController extends BaseController
     	}
     
     	$params['size_image'] = $size_image;
-        $params['search'] = $request->get('search',null);
     	return $this->render('ApiSocialBundle:Channel:List/_renderWidgetChannels.html.twig', $params);
     }
     

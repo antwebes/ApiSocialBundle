@@ -25,5 +25,3 @@ function initSearchBox(url_search_action)
         });
     }
 }
-
-
