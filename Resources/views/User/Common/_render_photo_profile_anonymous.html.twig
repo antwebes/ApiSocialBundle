@@ -10,9 +10,6 @@
     		<img class="lazy img-responsive" data-original="{{ asset_url }}">
 		{% endimage %}
 {#         <img class="lazy img-responsive" data-original="/images/no-photo-medium.png" style="max-width: 70%"/>#}
-	    {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
-	    	<img class="lazy img-responsive" data-original="{{ asset_url }}">
-		{% endimage %}
     {% endif %}
 {% else %}
     {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
