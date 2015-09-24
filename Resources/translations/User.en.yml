@@ -50,6 +50,8 @@ user.photos.report.reason_placeholder: "Please write the reason to report this p
 user.photos.report.send_button: "Report"
 user.photos.report.success: "The photo has been reported successfully"
 user.photos.report.allready_reported: "You've allready reported this photo previously"
+user.photos.votes: "Votes"
+user.photos.score: "Score"
 
 
 oustand.you: Highlight you here

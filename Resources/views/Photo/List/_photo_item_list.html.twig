@@ -44,7 +44,7 @@
                 </td>
             </tr>
             </table>
-            <div> Votos {{ photo.numberVotes }} Puntuación: {{ photo.score }} </div>
+            <div> {{ "user.photos.votes" | trans }}: <span class="number_votes_photo_{{ photo.id }}">{{ photo.numberVotes }}</span> {{ "user.photos.score" | trans }}: <span class="score_photo_{{ photo.id }}">{{ photo.score }}</span> </div>
         <br/>
         <a href="{{ path('ant_user_user_photo_report', {'idUser': user.id, 'id': photo.id}) }}" class="btn btn-danger">{{ "user.photos.report.title" | trans }}</a>
     </figcaption>

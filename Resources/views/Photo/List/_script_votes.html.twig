@@ -10,7 +10,7 @@
         var score = ($(target).val());
         var user_id = $(target).data("user");
 
-        $.ajax(
+        votePromise = $.ajax(
                 {
                     type: "POST",
                     accept: "application/json",
@@ -21,5 +21,23 @@
                     }
                 }
         );
+
+        votePromise.done(function(data){
+            photoDataPromise = $.ajax(
+                    {
+                        accept: "application/json",
+                        url: window.api_endpoint + "/api/photos/"+data.photo.id,
+                        data: {"_format":"json" },
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader('Authorization','Bearer ' + window.token);
+                        }
+                    }
+            );
+
+            photoDataPromise.done(function(data){
+                $(".score_photo_"+photo_id).html(data.score);
+                $(".number_votes_photo_"+photo_id).html(data.number_votes);
+            });
+        });
     });
 </script>
