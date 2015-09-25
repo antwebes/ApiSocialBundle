@@ -130,7 +130,6 @@ class ChannelController extends BaseController
                     $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
                 }
             }catch (\Exception $ejson){
-                ldd($ejson);
                 $this->addFlash('error', $this->get('translator')->trans('channels.fan_error', array(), 'Channels'));
             }
         }
