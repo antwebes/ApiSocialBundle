@@ -29,7 +29,7 @@
     <div class="container">
         {% include "ApiSocialBundle:User:_user_tabs.html.twig" %}
         <br/><br/><br/>
-        {% include "ApiSocialBundle:Photo:List/_photo_list.html.twig" %}
+        {% include "ApiSocialBundle:Photo:List/_photo_list.html.twig" with { 'showVoteButtons': app.user.id != user.id } %}
         {% include "ApiSocialBundle:Common:delete-dialog.html.twig" %}
     </div>
 

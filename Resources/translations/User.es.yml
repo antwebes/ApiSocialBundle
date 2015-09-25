@@ -52,6 +52,7 @@ user.photo.remove.yes: Si
 user.photo.remove.close: Cerrar
 user.photos.votes: "Votos"
 user.photos.score: "Puntuación"
+user.photos.votes.allready_voted: "Ya has votado esta foto"
 
 oustand.you: Destácate aquí
 

@@ -1,43 +1,56 @@
 <script>
+    (function(){ //avoid putting vars in global object
+        var errorMapping = {
+            "You have already voted this photo": "{{ 'user.photos.votes.allready_voted' | trans({}, 'User') }}"
+        };
 
-    $( document ).on( 'click', '.vote_option', function (event) {
-        var target = $( event.target );
-        var photo_id =$(target).data("photo");
-        $(".photo_"+photo_id).attr('disabled',true);
+        $( document ).on( 'click', '.vote_option', function (event) {
+            var target = $( event.target );
+            var photo_id =$(target).data("photo");
+            $(".photo_"+photo_id).attr('disabled',true);
 
-        $(target).attr('checked', true);
-        $(target).attr('disabled', false);
-        var score = ($(target).val());
-        var user_id = $(target).data("user");
+            $(target).attr('checked', true);
+            $(target).attr('disabled', false);
+            var score = ($(target).val());
+            var user_id = $(target).data("user");
 
-        votePromise = $.ajax(
-                {
-                    type: "POST",
-                    accept: "application/json",
-                    url: window.api_endpoint + "/api/users/"+user_id+"/vote",
-                    data: {"_format":"json", "vote[photo]": photo_id, "vote[score]": score },
-                    beforeSend: function(xhr, settings) {
-                        xhr.setRequestHeader('Authorization','Bearer ' + window.token);
-                    }
-                }
-        );
-
-        votePromise.done(function(data){
-            photoDataPromise = $.ajax(
+            votePromise = $.ajax(
                     {
+                        type: "POST",
                         accept: "application/json",
-                        url: window.api_endpoint + "/api/photos/"+data.photo.id,
-                        data: {"_format":"json" },
+                        url: window.api_endpoint + "/api/users/"+user_id+"/vote",
+                        data: {"_format":"json", "vote[photo]": photo_id, "vote[score]": score },
                         beforeSend: function(xhr, settings) {
                             xhr.setRequestHeader('Authorization','Bearer ' + window.token);
                         }
                     }
             );
 
-            photoDataPromise.done(function(data){
-                $(".score_photo_"+photo_id).html(data.score);
-                $(".number_votes_photo_"+photo_id).html(data.number_votes);
+            votePromise.done(function(data){
+                photoDataPromise = $.ajax(
+                        {
+                            accept: "application/json",
+                            url: window.api_endpoint + "/api/photos/"+data.photo.id,
+                            data: {"_format":"json" },
+                            beforeSend: function(xhr, settings) {
+                                xhr.setRequestHeader('Authorization','Bearer ' + window.token);
+                            }
+                        }
+                );
+
+                photoDataPromise.done(function(data){
+                    $(".score_photo_"+photo_id).html(data.score);
+                    $(".number_votes_photo_"+photo_id).html(data.number_votes);
+                });
+            }).fail(function(data){
+                error = data.responseJSON.errors;
+
+                if(typeof(errorMapping[error]) != 'undefined'){
+                    error = errorMapping[error];
+                }
+
+                $(".error_votes_photo_"+photo_id).html(error);
             });
         });
-    });
+    })();
 </script>
