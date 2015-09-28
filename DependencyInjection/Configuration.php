@@ -25,6 +25,11 @@ class Configuration implements ConfigurationInterface
             ->defaultValue(3)
             ->end();
 
+        $rootNode->children()
+            ->arrayNode('users_orders')
+                ->prototype('scalar')->end()
+            ->end();
+
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.

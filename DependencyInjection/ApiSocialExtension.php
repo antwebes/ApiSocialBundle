@@ -25,6 +25,11 @@ class ApiSocialExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        if(count($config['users_orders']) == 0){
+            $config['users_orders'] = null;
+        }
+
         $container->setParameter('visits_limit', $config['visits_limit']);
+        $container->setParameter('users_orders', $config['users_orders']);
     }
 }

@@ -33,12 +33,11 @@ class UserController extends BaseController
         }
 
         $usersManager = $this->get('api_users');
-        $users = array();
-        if($search != null){
 
-            $users = $usersManager->searchUserByNamePaginated($search, $page, $filter);
+        if($search != null){
+            $users = $usersManager->searchUserByNamePaginated($search, $page, $filter, null, $this->getDefaultOrder());
         }else{
-            $users = $usersManager->findAll($page, $filters);
+            $users = $usersManager->findAll($page, $filters, null, $this->getDefaultOrder());
         }
 
         $outstandingUsers = $usersManager->findOutstandingUsers(5);
@@ -217,6 +216,14 @@ class UserController extends BaseController
         $user_id = $request->get('user_id');
 
         return $user_id == null || $user->getUsernameCanonical() != $username;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getDefaultOrder()
+    {
+        return $this->container->getParameter('users_orders');
     }
 
 }
