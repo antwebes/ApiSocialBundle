@@ -1,5 +1,10 @@
 <script>
     (function(){ //avoid putting vars in global object
+        function precise_round(num, decimals) {
+            var t=Math.pow(10, decimals);
+            return (Math.round((num * t) + (decimals>0?1:0)*(Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+        }
+
         var errorMapping = {
             "You have already voted this photo": "{{ 'user.photos.votes.allready_voted' | trans({}, 'User') }}"
         };
@@ -36,21 +41,14 @@
             );
 
             votePromise.done(function(data){
-                photoDataPromise = $.ajax(
-                        {
-                            accept: "application/json",
-                            url: window.api_endpoint + "/api/photos/"+data.photo.id,
-                            data: {"_format":"json" },
-                            beforeSend: function(xhr, settings) {
-                                xhr.setRequestHeader('Authorization','Bearer ' + window.token);
-                            }
-                        }
-                );
+                var numberVotes = parseInt($(".number_votes_photo_"+photo_id).html());
+                var photoScore = parseInt($(".score_photo_"+photo_id).html());
+                score = parseInt(score);
 
-                photoDataPromise.done(function(data){
-                    $(".score_photo_"+photo_id).html(data.score);
-                    $(".number_votes_photo_"+photo_id).html(data.number_votes);
-                });
+                score = precise_round((numberVotes * photoScore + score) / (numberVotes + 1), 2);
+
+                $(".score_photo_"+photo_id).html(score);
+                $(".number_votes_photo_"+photo_id).html(numberVotes + 1);
             }).fail(function(data){
                 error = data.responseJSON.errors;
 

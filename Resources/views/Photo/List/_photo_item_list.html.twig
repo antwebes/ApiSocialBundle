@@ -20,7 +20,7 @@
                 </tr>
             </table>
         {% endif %}
-        <div> {{ "user.photos.votes" | trans }}: <span class="number_votes_photo_{{ photo.id }}">{{ photo.numberVotes }}</span> {{ "user.photos.score" | trans }}: <span class="score_photo_{{ photo.id }}">{{ photo.score }}</span> </div>
+        <div> {{ "user.photos.votes" | trans }}: <span class="number_votes_photo_{{ photo.id }}">{{ photo.numberVotes }}</span> {{ "user.photos.score" | trans }}: <span class="score_photo_{{ photo.id }}">{{ photo.score | number_format(2) }}</span> </div>
         <span class="error_votes_photo_{{ photo.id }} text-danger"></span>
         <br/>
         <br/>
