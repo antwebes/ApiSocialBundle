@@ -11,6 +11,15 @@
 
             $(target).attr('checked', true);
             $(target).attr('disabled', false);
+
+            // if we allready clicked this we return, yes its a hack so we can show its selected
+            if($(target).data('isdisabled') == '1'){
+                return;
+            }
+
+            // we mark it with isdisabled to mark it as visited
+            $(target).data('isdisabled', '1');
+
             var score = ($(target).val());
             var user_id = $(target).data("user");
 
