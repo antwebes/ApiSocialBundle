@@ -18,3 +18,11 @@ services:
   ant_api_social.util.photo_profile:
     class: Ant\Bundle\ApiSocialBundle\Util\PhotoProfileDefault
     arguments: [ @filesystem, %ant.api_social.images_dir% ]
+
+  ant_api_social.file_locator:
+    class: Symfony\Component\Config\FileLocator
+    arguments: [ %ant_api_social.parameters_service_dir%]
+
+  ant_api_social.services.parameters_service:
+     class: Ant\Bundle\ApiSocialBundle\Services\ParametersService
+     arguments: [ @ant_api_social.file_locator,  %ant_api_social.parameters_service_file%, %kernel.environment% ]

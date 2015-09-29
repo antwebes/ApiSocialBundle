@@ -21,6 +21,29 @@ class ApiSocialExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('visits_limit', $config['visits_limit']);
+
+        $parameters_service_dir = $config['parameters_service_yml']['file_dir'];
+        $parameters_service_file = $config['parameters_service_yml']['file_name'];
+        $parameters_service = $config['parameters_service'];
+
+
+        if($parameters_service_dir == 'ant_api_social.config_dir'){
+            $parameters_service_dir = $container->getParameter('ant_api_social.config_dir');
+        }
+
+        if($parameters_service != Configuration::PARAMETER_SERVICE_YML && $parameters_service !=  Configuration::PARAMETER_SERVICE_ANT ){
+            throw new ParameterNotFoundException('parameters_service',$config['parameters_service']);
+        }
+
+        if(!file_exists($parameters_service_dir.DIRECTORY_SEPARATOR.$parameters_service_file)){
+            throw new ParameterNotFoundException($parameters_service_dir,$parameters_service,'file_name');
+        }
+
+        $container->setParameter('ant_api_social.parameters_service',$config['parameters_service']);
+        $container->setParameter('ant_api_social.parameters_service_dir',$parameters_service_dir);
+        $container->setParameter('ant_api_social.parameters_service_file',$parameters_service_file);
+
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

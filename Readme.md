@@ -32,7 +32,28 @@ parameters:
     users.language: 'en'
 
 ```
+- In config file put:
 
+```
+api_social:
+    visits_limit: 3 # default value is 3
+    parameters_service: [parameters_in_yml|ant_web_site_parameters] # default value is parameters_in_yml
+    parameters_service_yml:
+        file_dir: <bundle_root_dir>/Resources/config # the directory with parameters file
+        file_name: parameters.yml # the parameters file
+```
+    
+Services:
+---------
+
+ This bundle define the service 'ant_parameters_service', this use in layout with format web_param.<parameter_name>.
+ 
+ The service 'ant_parameters_service' load configuration from Resources/config/parameters.yml.
+  
+ If the bundle "website-parameters" is installed, and api_social_bundle has configurated the 
+ parameter "parameters_service" as ant_web_site_parameters, this use the service 
+ "ant_web_site_parameters.services.web_sites_parameters_service" of  "website-parameters"   
+ 
 You also can establish the limit of the last visits or voyeur to show in the app confing (```app/config/config.yml```) under the api_social. If you don't configure it the default value is 3.
 
 ```

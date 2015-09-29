@@ -13,7 +13,18 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritdoc}
+     * this constant define the load parameter from yml
+     */
+    const PARAMETER_SERVICE_YML = 'parameters_in_yml';
+    /**
+     * this constant define the load parameter from WebSiteParametersBundle
+     */
+    const PARAMETER_SERVICE_ANT = 'ant_web_site_parameters';
+
+    /**
+     * Generates the configuration tree builder.
+     *
+     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
      */
     public function getConfigTreeBuilder()
     {
@@ -22,8 +33,20 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->integerNode('visits_limit')
-            ->defaultValue(3)
-            ->end();
+                ->defaultValue(3)
+                ->end()
+            ->enumNode('parameters_service')
+                ->values(array(self::PARAMETER_SERVICE_YML, self::PARAMETER_SERVICE_ANT))
+                    ->defaultValue(self::PARAMETER_SERVICE_ANT)
+            ->end()
+            ->arrayNode('parameters_service_yml')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode('file_dir')->isRequired()->cannotBeEmpty()->defaultValue('ant_api_social.config_dir')->end()
+                    ->scalarNode('file_name')->isRequired()->cannotBeEmpty()->defaultValue('parameters.yml')->end()
+                ->end()
+            ->end()
+        ->end();
 
         $rootNode->children()
             ->arrayNode('users_orders')
@@ -40,7 +63,6 @@ class Configuration implements ConfigurationInterface
                 ->defaultValue('http://127.0.0.1:8000')
             ->end()
         ;
-
 
         return $treeBuilder;
     }

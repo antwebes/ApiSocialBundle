@@ -1,0 +1,52 @@
+parameters:
+    twig:
+        client: 13
+        affiliate_name: 'Chat' # add web_param
+        brand_image_url: 'http://chateagratis.net/images/logo.png' # add web_parm
+        welcome_message: Main title of layout # add web_param
+        welcome_message_extended: Message after main title in layout # add web_param
+        slider_bottom_message: Estadisticas # add web_param
+        users_widget_message: Listado de mensajes # add web_param
+        advantage_section_title: advantage_section_title # add web_param
+        advantage_title_1: advantage_title_1 # web_param
+        advantage_message_1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet enim dolor, sit amet fringilla ipsum euismod at. Ut imperdiet pulvinar tincidunt. Nam consectetur nisl nec diam tincidunt, at pretium justo consectetur. Phasellus sit amet dolor consectetur, dignissim justo ut, rutrum ligula. Maecenas non feugiat nibh. Etiam interdum lobortis odio, vitae pellentesque ligula laoreet nec. Phasellus laoreet metus quis ante sagittis, nec tempor erat consectetur. Etiam cursus lacus leo, sit amet blandit turpis faucibus nec. Etiam quis lacus pellentesque, lobortis nibh eget, sollicitudin risus. Suspendisse volutpat risus augue, egestas hendrerit nunc hendrerit in. # web param
+        advantage_title_2: advantage_title_2
+        advantage_message_2: Nullam tristique maximus eleifend. Nam non eros vitae elit scelerisque tristique a et justo. Vestibulum dignissim turpis luctus, iaculis turpis id, hendrerit sem. Donec ultrices mi justo, vel scelerisque est suscipit in. Nulla volutpat metus auctor auctor gravida. Morbi mollis vehicula ex, id condimentum metus vulputate hendrerit. Etiam faucibus in purus sed tempor. Mauris ultricies rhoncus nibh quis pellentesque.
+        advantage_title_3: advantage_title_3
+        advantage_message_3: Curabitur malesuada cursus sapien, quis bibendum augue. Vivamus ac lectus purus. Nam lacinia felis risus, et mattis libero luctus eu. Suspendisse odio turpis, vulputate a faucibus in, lacinia eu nisl. Nam condimentum quam massa, a placerat diam porta in. Praesent imperdiet justo fermentum odio sollicitudin, interdum placerat ligula bibendum. Integer ac lacus nulla. Aliquam lobortis a lacus porttitor sagittis. Integer eget hendrerit eros. Aliquam eu dui id sapien vehicula auctor vel nec metus.
+        about_us: Etiam finibus augue odio, et eleifend libero accumsan eget. Aenean varius lectus nibh, non viverra tortor efficitur eu. Curabitur blandit tincidunt ligula, at mattis eros. Nulla non feugiat urna. Nunc finibus fermentum tellus sed mollis. Suspendisse tempor lectus at arcu volutpat, id volutpat quam commodo. Aenean consequat porttitor turpis suscipit dictum. Integer ullamcorper augue erat, sit amet bibendum neque molestie eu. Sed sollicitudin ligula ut volutpat varius. Curabitur ut pellentesque ante. Maecenas et tellus sollicitudin, consequat erat at, efficitur est. Pellentesque et odio in elit semper faucibus quis id orci. Donec eleifend sit amet mi eu volutpat. Morbi non metus sit amet dolor aliquet cursus. Maecenas aliquet enim vel commodo sollicitudin.
+        #chat
+        chat_url: null # add web_param
+        has_chat: true # add web_param
+        navbar_color: '#9ac02f' #add web_param
+        navbar_links_color: '#fff'
+        navbar_link: '#000' #add web_param
+        navbar_link_hover: '#fff' #add web_param
+        navbar_link_vote_photos: false #add web_param
+        email: contacto@yourHost.com #add web_param
+        index_chat: false #If you want that page of index will render a chat #add web_param #add web_param #add web_param
+        nick_affiliate: guest #nick with user join to chat by default
+        channel_affiliate: "movil" #chatroom with user join to chat by default
+        meta_title_base: 'Title of page by default' #add web_param
+        radio_index: true
+        radio_src_iframe: http://players.emitironline.com/radiolider/
+        radio_iframe_width: 560
+        radio_iframe_height: 90
+        radio_apps_template: radio_lider_apps
+        access_pretty_bundle: false
+        favicon: null
+        extra_html: '<h1>Extra html</h1>' #add web_param
+        navbar_link_channels_to_channels_customize: false
+        show_all_list_channels: false
+        navbar_link_users_to_users_customize: false
+        show_all_list_users: false
+        widget_users_filter_affiliate: false
+        widget_users_photo_profile: true
+        id_affiliate: ~
+        navbar_link_chat: false
+        chat_version: 'html'
+        #payments
+        show_button_payment: false
+        show_users_outstanding: false
+    container:
+        sample_parameter: 1
