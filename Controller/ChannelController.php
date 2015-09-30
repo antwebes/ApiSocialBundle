@@ -272,7 +272,7 @@ class ChannelController extends BaseController
         }
     }
 
-    private function addFlash($level, $message)
+    protected function addFlash($level, $message)
     {
         $request = $this->getRequest();
 
@@ -281,6 +281,7 @@ class ChannelController extends BaseController
             $message
         );
     }
+
     /**
      * @APIUser
      * @param $slug
