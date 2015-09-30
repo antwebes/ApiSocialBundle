@@ -33,5 +33,5 @@ button.gender.other: Others
 gender: gender
 button.chat: Chat
 user.edit_profile: Edit profile
-
+members_search_title_message: The search must be at least 3 characters
 visits: visits
