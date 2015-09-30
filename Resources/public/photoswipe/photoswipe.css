@@ -176,3 +176,8 @@
 .pswp__error-msg a {
   color: #CCC;
   text-decoration: underline; }
+
+
+.vote_table td{
+    padding-left: 10px;
+}

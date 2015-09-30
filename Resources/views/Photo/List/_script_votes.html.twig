@@ -1,0 +1,63 @@
+<script>
+    (function(){ //avoid putting vars in global object
+        function precise_round(num, decimals) {
+            var t=Math.pow(10, decimals);
+            return (Math.round((num * t) + (decimals>0?1:0)*(Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+        }
+
+        var errorMapping = {
+            "You have already voted this photo": "{{ 'user.photos.votes.allready_voted' | trans({}, 'User') }}"
+        };
+
+        $( document ).on( 'click', '.vote_option', function (event) {
+            var target = $( event.target );
+            var photo_id =$(target).data("photo");
+            $(".photo_"+photo_id).attr('disabled',true);
+
+            $(target).attr('checked', true);
+            $(target).attr('disabled', false);
+
+            // if we allready clicked this we return, yes its a hack so we can show its selected
+            if($(target).data('isdisabled') == '1'){
+                return;
+            }
+
+            // we mark it with isdisabled to mark it as visited
+            $(target).data('isdisabled', '1');
+
+            var score = ($(target).val());
+            var user_id = $(target).data("user");
+
+            votePromise = $.ajax(
+                    {
+                        type: "POST",
+                        accept: "application/json",
+                        url: window.api_endpoint + "/api/users/"+user_id+"/vote",
+                        data: {"_format":"json", "vote[photo]": photo_id, "vote[score]": score },
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader('Authorization','Bearer ' + window.token);
+                        }
+                    }
+            );
+
+            votePromise.done(function(data){
+                var numberVotes = parseInt($(".number_votes_photo_"+photo_id).html());
+                var photoScore = parseInt($(".score_photo_"+photo_id).html());
+                score = parseInt(score);
+
+                score = precise_round((numberVotes * photoScore + score) / (numberVotes + 1), 2);
+
+                $(".score_photo_"+photo_id).html(score);
+                $(".number_votes_photo_"+photo_id).html(numberVotes + 1);
+            }).fail(function(data){
+                error = data.responseJSON.errors;
+
+                if(typeof(errorMapping[error]) != 'undefined'){
+                    error = errorMapping[error];
+                }
+
+                $(".error_votes_photo_"+photo_id).html(error);
+            });
+        });
+    })();
+</script>
