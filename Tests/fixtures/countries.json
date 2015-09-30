@@ -1,0 +1,26 @@
+[
+  {
+    "country_code": "AF",
+    "name": "Afghanistan",
+    "has_cities": false,
+    "city_default": 502456
+  },
+  {
+    "country_code": "AX",
+    "name": "Aland Islands",
+    "has_cities": false,
+    "city_default": 502467
+  },
+  {
+    "country_code": "AL",
+    "name": "Albania",
+    "has_cities": false,
+    "city_default": 502459
+  },
+  {
+    "country_code": "DZ",
+    "name": "Algeria",
+    "has_cities": false,
+    "city_default": 502512
+  }
+]

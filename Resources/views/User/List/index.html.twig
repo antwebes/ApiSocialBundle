@@ -24,6 +24,8 @@
         with {'search': search , 'enable_buton_clean' : true, 'search_placeholder': 'form.members_search.placeholder'}
     %}
 
+    {{ render(controller('ApiSocialBundle:User:renderAdvancedSearch', {'options': advancedSearch})) }}
+
     <br style="clear:both;" />
 
     <h2>{{ "user.users" | trans }}</h2>
@@ -35,8 +37,8 @@
 
     <br style="clear:both;" />
 
-    {% if search is not empty %}
-        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users','routeParams':{'search':search }} %}
+    {% if search is not empty or advancedSearch is not empty %}
+        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users','routeParams':{'search':search, 'advanced_search': advancedSearch }} %}
     {% else %}
         {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users' } %}
     {% endif %}

@@ -38,28 +38,29 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
                 ->disableOriginalConstructor()
                 ->getMock();
 
+        $routerMock = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $routerMock->expects($this->once())
+            ->method('generate')
+            ->with('channel_list', array('search' => 'search_value', 'page' => 1))
+            ->will($this->returnValue('anurl'));
+
         $request = new Request();
         $request->query->set('search','search_value');
+        $request->query->set('page','1');
+        $request->attributes->set('_route', 'channel_list_page');
 
         $container = new ContainerBuilder();
         $container->set('request',$request);
         $container->set('templating',$templatingMock);
         $container->set('twig',$twigMock);
+        $container->set('router', $routerMock);
 
         $channelController = new ChannelController();
         $channelController->setContainer($container);
 
-        $view = 'ApiSocialBundle:Channel:List/channels.html.twig';
-        $parameters = array('page' => 1, 'filter' => '', 'size_image' => 'small','search'=>'search_value');
-
-        $templatingMock->expects($this->once())
-            ->method('renderResponse')
-            ->with($view,$parameters,null)
-            ->willReturn(new Response());
-
         $response = $channelController->channelsAction($request,1);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(302, $response->getStatusCode());
     }
 
     /**

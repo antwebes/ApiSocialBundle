@@ -66,7 +66,7 @@ class ChannelControllerTestTest extends \PHPUnit_Framework_TestCase
 
         $view = 'ApiSocialBundle:Channel:List/_renderChannels.html.twig';
 
-        $parameters = array('channels'=>$channelCollection,'pager'=>$pagerMock,'size_image'=>'small');
+        $parameters = array('channels'=>$channelCollection,'pager'=>$pagerMock,'size_image'=>'small', 'search' => null);
         $templatingMock->expects($this->once())
             ->method('renderResponse')
             ->with($view,$parameters,null)
