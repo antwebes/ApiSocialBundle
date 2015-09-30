@@ -27,7 +27,7 @@ class ParametersCompilerPass implements CompilerPassInterface
             if(!$container->hasDefinition('ant_web_site_parameters.services.web_sites_parameters_service')){
                 throw new ServiceNotFoundException('ant_web_site_parameters.services.web_sites_parameters_service',Configuration::PARAMETER_SERVICE_ANT);
             }
-            $parameterServiceName = 'ant_web_site_parameters.services.web_sites_parameters_service';
+            $parameterServiceName = 'ant_api_social.services.web_sites_parameters_service_wrapper';
 
         }else{
             $parameterServiceName = 'ant_api_social.services.parameters_service';

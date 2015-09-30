@@ -26,3 +26,7 @@ services:
   ant_api_social.services.parameters_service:
      class: Ant\Bundle\ApiSocialBundle\Services\ParametersService
      arguments: [ @ant_api_social.file_locator,  %ant_api_social.parameters_service_file%, %kernel.environment% ]
+
+  ant_api_social.services.web_sites_parameters_service_wrapper:
+    class: Ant\Bundle\ApiSocialBundle\Services\WebSitesParametersServiceWrapper
+    arguments: [ @?ant_web_site_parameters.services.web_sites_parameters_service ]

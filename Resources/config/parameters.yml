@@ -1,7 +1,5 @@
 parameters:
     twig:
-        client: 13
-        affiliate_name: 'Chat' # add web_param
         brand_image_url: 'http://chateagratis.net/images/logo.png' # add web_parm
         welcome_message: Main title of layout # add web_param
         welcome_message_extended: Message after main title in layout # add web_param
@@ -33,7 +31,7 @@ parameters:
         radio_iframe_width: 560
         radio_iframe_height: 90
         radio_apps_template: radio_lider_apps
-        access_pretty_bundle: false
+        theme: defaul
         favicon: null
         extra_html: '<h1>Extra html</h1>' #add web_param
         navbar_link_channels_to_channels_customize: false
@@ -49,4 +47,5 @@ parameters:
         show_button_payment: false
         show_users_outstanding: false
     container:
-        sample_parameter: 1
+        client: 13
+        affiliate_name: 'Chat' # add web_param

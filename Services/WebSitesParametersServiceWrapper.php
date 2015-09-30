@@ -10,18 +10,32 @@
 
 namespace Ant\Bundle\ApiSocialBundle\Services;
 
+use Ant\Bundle\ApiSocialBundle\Services\ParametersServiceInterface;
+use Ant\WebSiteParametersBundle\Services\WebSitesParametersServiceInterface;
 use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 
 /**
- * Interface ParametersServiceInterface
+ * Class WebSitesParametersServiceWrapper
  *
- * @package Ant\Bundle\PrettyBundle\Services
+ * @package Ant\Bundle\ApiSocialBundle\Services;
  */
-interface ParametersServiceInterface
+class WebSitesParametersServiceWrapper implements ParametersServiceInterface
 {
-    const PARAMETER_TYPE_CONTAINER = 'Container';
-    const PARAMETER_TYPE_TWIG = 'Twig';
-    const PARAMETER_THEME = 'theme';
+
+    /**
+     * @var WebSitesParametersServiceInterface
+     */
+    private $webSitesParametersService;
+
+    /**
+     * WebSitesParametersService constructor.
+     *
+     * @param WebSitesParametersServiceInterface $webSitesParametersService
+     */
+    public function __construct(WebSitesParametersServiceInterface $webSitesParametersService)
+    {
+        $this->webSitesParametersService = $webSitesParametersService;
+    }
 
     /***
      * Get parameter value
@@ -35,7 +49,10 @@ interface ParametersServiceInterface
      * @throws ParameterNotFoundException this exception is throw if parameterType or  $parameterName not exits in
      *                                    collection
      */
-    public function getParameter($parameterType, $parameterName);
+    public function getParameter($parameterType, $parameterName)
+    {
+        return $this->webSitesParametersService->getParameter($parameterType, $parameterName);
+    }
 
     /***
      * Has parameter exits in collection
@@ -47,12 +64,18 @@ interface ParametersServiceInterface
      * @return bool the parameter is defined in collection
      *
      */
-    public function hasParameter($parameterType, $parameterName);
+    public function hasParameter($parameterType, $parameterName)
+    {
+        return $this->webSitesParametersService->hasParameter($parameterType, $parameterName);
+    }
 
     /**
      * Clears all parameters.
      */
-    public function clear();
+    public function clear()
+    {
+        $this->webSitesParametersService->clear();
+    }
 
     /**
      * Gets the parameters for one website.
@@ -62,7 +85,10 @@ interface ParametersServiceInterface
      * @return array An array of parameters
      *
      */
-    public function all($parameterType = null);
+    public function all($parameterType = null)
+    {
+        return $this->webSitesParametersService->all($parameterType);
+    }
 
 
     /**
@@ -73,7 +99,10 @@ interface ParametersServiceInterface
      * @return bool true if the parameter name is defined, false otherwise
      *
      */
-    public function hasParameterType($parameterType);
+    public function hasParameterType($parameterType)
+    {
+        return $this->webSitesParametersService->hasParameterType($parameterType);
+    }
 
 
     /**
@@ -84,5 +113,9 @@ interface ParametersServiceInterface
      *
      * @return null|string the parameter value
      */
-    public function __call($name, $argumets);
+    public function __call($name, $argumets)
+    {
+        return $this->webSitesParametersService->__call($name, $argumets);
+    }
+
 }
