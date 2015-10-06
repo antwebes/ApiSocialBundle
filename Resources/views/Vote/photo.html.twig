@@ -32,7 +32,12 @@
 			</div>
 		</div>
 	</div>
-    <div class="row col-md-offset-2">
+    <div class="row">
+    	<div class="col-md-2">
+    		<!--adsense-->
+				{{ render(controller('ApiSocialBundle:Util:generateBlockAdsense')) }}
+    		<!--end adsense-->
+    	</div>
         <div class="col-md-8">
             <div id="vote_container">
 
@@ -44,6 +49,9 @@
                 <div class="row col-xs-12" >
                     <img src="" id="profile_photo" />
                 </div>
+                <div class="row col-md-5 col-md-offset-2">
+			        <a class="btn btn-danger" id="go_to_report">Denunciar</a>
+			    </div>
                 <p>&nbsp;&nbsp;</p>
 
             </div>
@@ -61,11 +69,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <div class="row col-md-5 col-md-offset-2">
-        <a class="btn btn-danger" id="go_to_report">Denunciar</a>
-
     </div>
     <br style="clear:both">
 {% endblock %}

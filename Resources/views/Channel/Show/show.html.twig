@@ -47,6 +47,11 @@
             {% include 'ApiSocialBundle:Channel:List/_list.html.twig' with {'channels' : channel.children, 'columnClass': 'col-xs-2' } %}
         {% endif %}
     </div>
+    
+	<!--adsense-->
+		<div class="clearfix"></div>
+		{{ render(controller('ApiSocialBundle:Util:generateBlockAdsense')) }}
+	<!--end adsense-->
 {% endblock body_container_center %}
 
 {% block body_container_right %}

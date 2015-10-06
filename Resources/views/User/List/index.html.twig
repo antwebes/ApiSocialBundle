@@ -41,6 +41,9 @@
         {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': users, 'route': 'ant_user_user_users.page', 'routeIndex': 'ant_user_user_users' } %}
     {% endif %}
 
+	<!--adsense-->
+		{{ render(controller('ApiSocialBundle:Util:generateBlockAdsense')) }}
+	<!--end adsense-->
 {% endblock %}
 
 {% block body_js_end %}

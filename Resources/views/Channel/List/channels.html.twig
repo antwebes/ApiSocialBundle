@@ -26,6 +26,9 @@
     <h1>{{ "channels.channels" | trans }}</h1>
     {{ render(controller('ApiSocialBundle:Channel:renderChannels', {'page': page, 'filter': filter, 'size_image': size_image,'search':search})) }}
 
+	<!--adsense-->
+		{{ render(controller('ApiSocialBundle:Util:generateBlockAdsense')) }}
+	<!--end adsense-->
 {% endblock %}
 
 {% block body_js_end %}
