@@ -34,9 +34,13 @@ class Configuration implements ConfigurationInterface
             ->integerNode('voyeur_limit')
             ->defaultValue(3)
             ->end();
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+
+        $rootNode->children()
+            ->scalarNode('realtime_endpoint')
+                ->defaultValue('http://127.0.0.1:8000')
+            ->end()
+        ;
+
 
         return $treeBuilder;
     }

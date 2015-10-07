@@ -1,7 +1,7 @@
        
      <div class="col-xs-12 center">
 		<span class="profile-picture">
-		<div style="position: relative; left: 0; top: 0;">
+		<div style="position: relative; left: 0; top: 0;" data-js-field="image">
 			{% if app.user and app.user.id == user.id %}
 				<a href="{{ path('chatea_client_update_profile_photo') }}">
 			{% endif %}
@@ -17,7 +17,10 @@
 			{% endif %}
 			{# begin badge account validated #}
 			{% if user.enabled %}
-				<i style="position: absolute; top: 80%; left: 80%;" class="fa fa-check-circle-o fa-3x blue" data-toggle="tooltip" data-placement="right" data-behat="account-verified" title="{{ "user.account-verified" | trans }}"></i>
+				<div data-js-id="userBadge">
+					<i style="position: absolute; top: 80%; left: 80%;" class="fa fa-check-circle-o fa-3x blue" data-toggle="tooltip" data-placement="right" data-behat="account-verified" title="{{ "user.account-verified" | trans }}"></i>
+				</div>
+
 			{% endif %}
 			{# end badge account validated #}
 		</div>

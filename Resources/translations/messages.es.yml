@@ -37,3 +37,5 @@ user.edit_profile: Editar perfil
 members_search_title_message: La búsqueda debe de tener al menos 3 caracteres
 visits: visitas
 user.last_voyeur: Has visitado
+user.off_line: El usuario no está conectado
+user.on_line: El usuario está conectado

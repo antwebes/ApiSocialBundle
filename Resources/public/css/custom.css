@@ -778,4 +778,17 @@ li[class*="item-"] {
 
 /* finish styles to list users  */
 
-
+.userOnLineOff {
+    position: absolute;
+    cursor: pointer;
+    top: 3%;
+    left: 3%;
+    color: red;
+}
+.userOnLineOn {
+    position: absolute;
+    cursor: pointer;
+    top: 3%;
+    left: 3%;
+    color: green;
+}

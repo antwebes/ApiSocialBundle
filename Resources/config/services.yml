@@ -18,3 +18,9 @@ services:
   ant_api_social.util.photo_profile:
     class: Ant\Bundle\ApiSocialBundle\Util\PhotoProfileDefault
     arguments: [ @filesystem, %ant.api_social.images_dir% ]
+
+  ant_api_social.event_listener.twig_parameter_listener:
+    class: Ant\Bundle\ApiSocialBundle\EventListener\TwigParameterListener
+    arguments: [ @twig, { realtime_endpoint: %api_social.realtime_endpoint% } ]
+    tags:
+        - { name: kernel.event_subscriber }

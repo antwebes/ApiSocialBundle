@@ -36,3 +36,5 @@ user.edit_profile: Edit profile
 members_search_title_message: The search must be at least 3 characters
 visits: visits
 user.last_voyeur: You have visited
+user.off_line: The user is offline
+user.on_line: The user is online

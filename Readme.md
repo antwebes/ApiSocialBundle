@@ -47,5 +47,8 @@ Also, you can specify the columns to order the user list with the users_orders o
 api_social:
     users_orders:
         lastLogin: desc
-        hasProfilePhoto: desc
+        hasProfilePhoto: desc    
+        
 ```
+Other parameters:
+    realtime_endpoint: http://127.0.0.1:8000

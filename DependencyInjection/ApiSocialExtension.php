@@ -32,6 +32,7 @@ class ApiSocialExtension extends Extension
         $container->setParameter('visits_limit', $config['visits_limit']);
         $container->setParameter('users_orders', $config['users_orders']);
         $container->setParameter('api_social.voyeur_limit', $config['voyeur_limit']);
+        $container->setParameter('api_social.realtime_endpoint',$config['realtime_endpoint']);
 
     }
 }

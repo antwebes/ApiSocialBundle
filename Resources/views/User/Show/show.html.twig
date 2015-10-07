@@ -78,8 +78,11 @@
 {% block body_js_end %}
 {{ parent() }}
 {# js to jquerylazyload#}
-	{% javascripts'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js' %}
-		<script src="{{ asset(asset_url) }}"></script>	
+	{% javascripts
+		'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+		'@ApiSocialBundle/Resources/public/js/real_time.js'
+	%}
+		<script src="{{ asset(asset_url) }}"></script>
    	{% endjavascripts %}
 
 
@@ -111,5 +114,14 @@
 {% include "ApiSocialBundle:User:Visit/incrementUserview.html.twig" %}
 {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
 {% include "ApiSocialBundle:Chat:Common/_user_chat_button_js.html.twig" %}
+    <script type="text/javascript">
+        var messages = {
+            user_off_line: "{{ 'user.off_line' | trans }}",
+            user_on_line: "{{ 'user.on_line' | trans }}",
+        };
+        jQuery( document ).ready(function( $ ) {
+            findUserOnline("{{ realtime_endpoint }}","{{ user.username }}",messages);
+        });
 
+    </script>
 {% endblock %}
