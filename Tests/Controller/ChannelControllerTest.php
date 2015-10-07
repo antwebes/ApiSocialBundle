@@ -33,11 +33,6 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
                 ->disableOriginalConstructor()
                 ->getMock();
 
-        $templatingMock =
-            $this->getMockBuilder('Symfony\Bundle\TwigBundle\TwigEngine')
-                ->disableOriginalConstructor()
-                ->getMock();
-
         $routerMock = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $routerMock->expects($this->once())
             ->method('generate')
@@ -51,13 +46,12 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
 
         $container = new ContainerBuilder();
         $container->set('request',$request);
-        $container->set('templating',$templatingMock);
         $container->set('twig',$twigMock);
         $container->set('router', $routerMock);
 
         $channelController = new ChannelController();
         $channelController->setContainer($container);
-
+        
         $response = $channelController->channelsAction($request,1);
 
         $this->assertEquals(302, $response->getStatusCode());

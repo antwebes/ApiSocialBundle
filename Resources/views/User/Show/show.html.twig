@@ -43,6 +43,7 @@
 
 <div class="row">
 	{% if app.user and user.id == app.user.id %}
+		{% include '@ApiSocial/Visit/_widgetVoyeur.html.twig' with {'user': user, 'limit': true, 'expand': true} %}
 		{% render controller("ApiSocialBundle:Visit:renderWidgetUserVisitors", {'user': user, 'limit': true, 'expand': true}) %}
 	{% endif %}
 </div>
@@ -72,17 +73,41 @@
         {# End list channels_fan  #}
 </div>
 {# End List channels of user  #}
-
 {% endblock %}
 
 {% block body_js_end %}
 {{ parent() }}
 {# js to jquerylazyload#}
-	{% javascripts
-		'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
-	%}
+	{% javascripts'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js' %}
 		<script src="{{ asset(asset_url) }}"></script>	
    	{% endjavascripts %}
+
+
+    {% if app.user and user.id == app.user.id %}
+        {% javascripts '@ApiSocialBundle/Resources/public/js/user_voyeur.js' %}
+        <script src="{{ asset(asset_url) }}"></script>
+        {% endjavascripts %}
+        <script type="text/javascript">
+            //config for configUserVoyeur
+            var configUserVoyeur = {
+                api_endpoint: '{{ api_endpoint }}',
+                resource_route: '/api/users/{{ user.id }}/voyeur',
+                token: '{{ app.user.accessToken }}',
+                {% image '@ApiSocialBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.jpg" %}
+                noPhotoSource : '{{ asset_url }}',
+                {% endimage %}
+                limit: '{{ voyeur_limit }}',
+                showUserPath: '{{ path('ant_user_user_show_by_name', {'username': '{param}'}) }}',
+                access_pretty: "{{ access_pretty_bundle }}"
+            };
+
+            $( document ).ready(function() {
+                findUserVoyeur(configUserVoyeur );
+            });
+
+        </script>
+    {% endif %}
+
 {% include "ApiSocialBundle:User:Visit/incrementUserview.html.twig" %}
 {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
 {% include "ApiSocialBundle:Chat:Common/_user_chat_button_js.html.twig" %}

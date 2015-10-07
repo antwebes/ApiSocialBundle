@@ -191,6 +191,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
                 'countries' => $countries,
                 'selectedCountry' => '',
                 'selectedGender' => '',
+                'optionsDesign' => array('btn-delete' => true)
             );
 
         $this->templatingMock->expects($this->once())
@@ -213,6 +214,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             'countries' => $countries,
             'selectedCountry' => 'DZ',
             'selectedGender' => '',
+            'optionsDesign' => array('btn-delete' => true)
         );
 
         $this->templatingMock->expects($this->once())
@@ -235,6 +237,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             'countries' => $countries,
             'selectedCountry' => 'AX',
             'selectedGender' => 'Male',
+            'optionsDesign' => array('btn-delete' => true)
         );
 
         $this->templatingMock->expects($this->once())
@@ -242,7 +245,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->with('ApiSocialBundle:User:Common/advanced_user_search.html.twig', $parameters)
             ->willReturn(new Response());
 
-        $this->userController->renderAdvancedSearchAction(array('country' => 'AX', 'gender' => 'Male'));
+        $this->userController->renderAdvancedSearchAction(array('country' => 'AX', 'gender' => 'Male', ));
     }
 
     private function loadCountries()

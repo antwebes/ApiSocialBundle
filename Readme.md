@@ -33,14 +33,15 @@ parameters:
 
 ```
 
-You also can stablish the limit of the last visits to show in the app confing (```app/config/config.yml```) under the api_social. If you don't configure it the default value is 3.
+You also can establish the limit of the last visits or voyeur to show in the app confing (```app/config/config.yml```) under the api_social. If you don't configure it the default value is 3.
 
 ```
 api_social;
     visits_limit: 5
+    voyeur_limit: 5
 ```
 
-Also, you can sepcify the columns to order the user list with the users_orders option (by default no order is specified). Form example:
+Also, you can specify the columns to order the user list with the users_orders option (by default no order is specified). Form example:
 
 ```
 api_social:

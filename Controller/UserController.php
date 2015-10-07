@@ -241,7 +241,8 @@ class UserController extends BaseController
         }
         $params_to_template = array(
             'user' => $user,
-            'api_endpoint' => $this->container->getParameter('api_endpoint')
+            'api_endpoint' => $this->container->getParameter('api_endpoint'),
+            'voyeur_limit' => $this->container->getParameter('api_social.voyeur_limit')
         );
 
         if ($this->container->hasParameter('affiliate_id')){
