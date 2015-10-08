@@ -63,4 +63,4 @@ user_profile_route: '/users/{username}-{id}'
 form.gender.male: Male
 form.gender.female: Female
 form.gender.other: "Not defined"
-form.country: "Countrt"
+form.country: "Country"
