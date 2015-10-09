@@ -180,12 +180,19 @@ class UserController extends BaseController
     	return $this->render('ApiSocialBundle:User:message.html.twig',array('user'=>$user));
     }
 
-    public function renderAdvancedSearchAction($options = null)
+    /**
+     * 
+     * @param array $options
+     * @param array $optionsDesign | array('btn-delete' : false|true , 'style' : index|rightbar , 'btn-search': 'white | success')
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderAdvancedSearchAction($options = array(), $optionsDesign = array())
     {
-        if($options == null){
-            $options = array();
-        }
-
+    	//by default btn delete has exist
+    	if (!array_key_exists('btn-delete', $optionsDesign)){
+    		$optionsDesign['btn-delete'] = true;
+    	}
+    	
         $countriesPath = $this->container->getParameter('chatea_client.countries_file');
         $countries = $this->loadCountries($countriesPath);
         $userOnline = $this->getOnlineUserFromApi();
@@ -208,9 +215,10 @@ class UserController extends BaseController
 
         return $this->render('ApiSocialBundle:User:Common/advanced_user_search.html.twig',
             array(
-                'countries' => $countries,
-                'selectedCountry' => $selectedCountry,
-                'selectedGender' => $selectedGender
+                'countries'			=> $countries,
+                'selectedCountry' 	=> $selectedCountry,
+                'selectedGender' 	=> $selectedGender,
+            	'optionsDesign'		=> $optionsDesign
             ));
     }
 

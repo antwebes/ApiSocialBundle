@@ -54,6 +54,9 @@ user.photos.votes: "Votos"
 user.photos.score: "Puntuación"
 user.photos.votes.allready_voted: "Ya has votado esta foto"
 
+user.search.particular: Buscar usuario concreto
+user.search.advanced: Busqueda avanzada
+
 oustand.you: Destácate aquí
 
 user.write_message: Escribir mensaje

@@ -54,6 +54,8 @@ user.photos.votes: "Votes"
 user.photos.score: "Score"
 user.photos.votes.allready_voted: "You have already voted this photo"
 
+user.search.particular: Search for particular user
+user.search.advanced: Advanced search
 
 oustand.you: Highlight you here
 

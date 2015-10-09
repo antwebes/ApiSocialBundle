@@ -1,8 +1,18 @@
+{% if optionsDesign is defined and optionsDesign['style'] is defined and optionsDesign['style']=='index' %}
+<style>
+label {
+	color:#fff;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+</style>
+{% endif %}
+
 <form class="form-horizontal" id="advanced_search_form" action="{{ path('ant_user_user_users') }}" method="get">
     <div class="form-group">
-        <label class="col-sm-2 control-label" for="country">{{ "form.country" | trans({}, 'User') }}</label>
-        <div class="col-sm-10">
-	        <select class="form-control" id="form_search_country" name="advanced_search[country]" data-city-finder="search_country">
+        <label class="col-sm-4 control-label" for="country">{{ "form.country" | trans({}, 'User') }}</label>
+        <div class="col-sm-8">
+	        <select style="background-color:transparent" class="form-control" id="form_search_country" name="advanced_search[country]" data-city-finder="search_country">
 	        	{% for country in countries %}
 	            	<option value="{{ country.value }}" {% if country.value == selectedCountry %}selected{% endif %}>{{ country.name }}</option>
 	            {% endfor %}
@@ -11,10 +21,10 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-2 control-label" for="gender">{{ "form.label.gender" | trans({}, 'UserRegistration') }}</label>
-        <div class="col-sm-10">
-	        <select class="form-control" id="form_search_gender" name="advanced_search[gender]">
-	        	<option value=""></option>
+        <label class="col-sm-4 control-label" for="gender">{{ "form.label.gender" | trans({}, 'UserRegistration') }}</label>
+        <div class="col-sm-8">
+	        <select style="background-color:transparent" class="form-control" id="form_search_gender" name="advanced_search[gender]">
+	        	<option value="">{{ 'gender' | trans }}</option>
 	            <option value="Male" {% if selectedGender == 'Male' %}selected{% endif %}>{{ 'form.gender.male' | trans({}, 'User') }}</option>
 	            <option value="Female" {% if selectedGender == 'Female' %}selected{% endif %}>{{ 'form.gender.female' | trans({}, 'User') }}</option>
 	            <option value="Other" {% if selectedGender == 'Other' %}selected{% endif %}>{{ 'form.gender.other' | trans({}, 'User') }}</option>
@@ -23,17 +33,30 @@
     </div>
 
     <div class="form-group row">
-        <div class="col-sm-offset-2 col-sm-2">
-            <button class="btn btn-success">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                {{ 'button.search'|trans }}
-            </button>
+		{% if optionsDesign is defined and optionsDesign['style'] is defined and optionsDesign['style']=='rightbar' %}
+        	<div class="col-xs-12">
+        {% else %}
+        	<div class="col-sm-offset-4 col-sm-8 col-xs-12">
+        {% endif %}
+        	{% if optionsDesign is defined and optionsDesign['btn-search'] is defined %}
+	        	{% if optionsDesign['btn-search'] == 'white' %}
+		            <button>
+		                <span class="glyphicon glyphicon-search" style="color:white" aria-hidden="true"></span>
+		            </button>
+				{% endif %}
+		    {% else %}
+		        	<button class="btn btn-success">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		                {{ 'button.search'|trans }}
+		            </button>
+            {% endif %}
+            {% if optionsDesign is defined and optionsDesign['btn-delete'] is defined and optionsDesign['btn-delete'] %}
             &nbsp;&nbsp;
             <button value="cancel" class="btn btn-info" id="button_advanced_search_clear" type="button">
 {#                 {{ 'button.clean' | trans }}#}
                 <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
-                
             </button>
+            {% endif %}
         </div>
     </div>
 </form>
