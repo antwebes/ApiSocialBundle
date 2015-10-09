@@ -18,12 +18,14 @@
 	"homepage" : "https://github.com/antwebes/ApiSocialBundle",
 	"license" : "MIT",
 	"require" : {
-		"symfony/framework-bundle" : "~2.3",
-		"antwebes/chatea-client-bundle" : "0.1.27"
+		"antwebes/chatea-client-bundle": "0.1.27",
+		"excelwebzone/recaptcha-bundle": "2.3.x-dev"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "@stable",
 		"mockery/mockery" : "@stable",
+		"symfony/framework-bundle": "v2.3.33",
+		"symfony/dependency-injection": "v2.3.33",
 		"raulfraile/ladybug" : "~1.0"
 	},
 	"autoload" : {

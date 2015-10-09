@@ -33,7 +33,8 @@ class ChannelController extends BaseController
             return $this->redirect($this->generateUrl('channel_list'));
         }
 
-        if($this->pageOneGivenByUrl()){
+
+        if($this->pageOneGivenByUrl($request)){
             $parameters = array();
             if($search != null){
                 $parameters['search']= $search;
@@ -156,6 +157,7 @@ class ChannelController extends BaseController
         //Si estamos con filtros hay que enviar filtros a la pagina siguiente
         $filter = $request->get('filter');
         $search = $request->get('search',null);
+
         if ($filter == 'customize'){
             return $this->renderChannelsCustomizedAction($request, $page, $withPagination, $order, $amount, $size_image);
         }
@@ -244,9 +246,11 @@ class ChannelController extends BaseController
     }
 
     //returns if the the first page was requested by url
-    private function pageOneGivenByUrl()
+    private function pageOneGivenByUrl($request = null)
     {
-        $request = $this->getRequest();
+        if($request == null){
+            $request = $this->getRequest();
+        }
 
         return $request->get('_route') == 'channel_list_page' &&
         $request->get('page') == 1;
@@ -268,7 +272,7 @@ class ChannelController extends BaseController
         }
     }
 
-    private function addFlash($level, $message)
+    protected function addFlash($level, $message)
     {
         $request = $this->getRequest();
 
@@ -277,6 +281,7 @@ class ChannelController extends BaseController
             $message
         );
     }
+
     /**
      * @APIUser
      * @param $slug

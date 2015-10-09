@@ -18,6 +18,7 @@ class UserController extends BaseController
     public function usersAction(Request $request, $page = 1)
     {
         $search = $request->get('search',null);
+        $advancedSearch = $request->get('advanced_search', null);
 
         if($this->pageOneGivenByUrl()){
             return $this->redirect($this->generateUrl('ant_user_user_users'));
@@ -30,6 +31,16 @@ class UserController extends BaseController
             if (array_key_exists('id_affiliate', $globals)) {
                 $filters['affiliate'] = $globals['id_affiliate'];
             }            
+        }
+
+        if($advancedSearch != null){
+            if(isset($advancedSearch['country']) && !empty($advancedSearch['country'])){
+                $filters['country'] = $advancedSearch['country'];
+            }
+
+            if(isset($advancedSearch['gender']) && !empty($advancedSearch['gender'])){
+                $filters['gender'] = $advancedSearch['gender'];
+            }
         }
 
         $usersManager = $this->get('api_users');
@@ -46,7 +57,8 @@ class UserController extends BaseController
             array(
                 'users' => $users,
                 'outstandingUsers' => $outstandingUsers,
-                'search' => $search
+                'search' => $search,
+                'advancedSearch' => $advancedSearch
             )
 
         );
@@ -168,7 +180,47 @@ class UserController extends BaseController
     	return $this->render('ApiSocialBundle:User:message.html.twig',array('user'=>$user));
     }
 
+    /**
+     * 
+     * @param array $options
+     * @param array $optionsDesign | array('btn-delete' : false|true , 'style' : index|rightbar , 'btn-search': 'white | success')
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderAdvancedSearchAction($options = array(), $optionsDesign = array())
+    {
+    	//by default btn delete has exist
+    	if (!array_key_exists('btn-delete', $optionsDesign)){
+    		$optionsDesign['btn-delete'] = true;
+    	}
+    	
+        $countriesPath = $this->container->getParameter('chatea_client.countries_file');
+        $countries = $this->loadCountries($countriesPath);
+        $userOnline = $this->getOnlineUserFromApi();
+        $selectedCountry = '';
+        $selectedGender = '';
 
+        if(isset($options['gender'])){
+            $selectedGender = $options['gender'];
+        }
+
+        if(isset($options['country'])){
+            $selectedCountry = $options['country'];
+        }else if($userOnline != null){
+            $city = $userOnline->getCity();
+
+            if($city !== null){
+                $selectedCountry = $this->findCodeOfCountry($city->getCountry(), $countries);
+            }
+        }
+
+        return $this->render('ApiSocialBundle:User:Common/advanced_user_search.html.twig',
+            array(
+                'countries'			=> $countries,
+                'selectedCountry' 	=> $selectedCountry,
+                'selectedGender' 	=> $selectedGender,
+            	'optionsDesign'		=> $optionsDesign
+            ));
+    }
 
     private function findUserByUsernameOrId($username, $user_id, $asArray)
     {
@@ -226,4 +278,49 @@ class UserController extends BaseController
         return $this->container->getParameter('users_orders');
     }
 
+    private function loadCountries($countriesPath)
+    {
+        $content = json_decode(file_get_contents($countriesPath), true);
+
+        $builder = function($entry){
+            $country = $entry['name'];
+            $value = $entry['country_code'];
+
+            return array('value' => $value, 'name' => $country);
+        };
+
+        return array_map($builder, $content);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getOnlineUserFromApi()
+    {
+        $userOnline = $this->getUser();
+
+        if($userOnline === null){
+            return null;
+        }
+
+        /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
+        $userManager = $this->container->get('api_users');
+
+        $user = $userManager->findById($userOnline->getId());
+
+        return $user;
+    }
+
+    protected function findCodeOfCountry($countryName, $countries)
+    {
+        $country = array_filter($countries, function($country) use ($countryName){
+            return $countryName == $country['name'];
+        });
+
+        if(count($country) > 0){
+            return array_pop($country)['value'];
+        }
+
+        return '';
+    }
 }
