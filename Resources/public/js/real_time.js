@@ -1,3 +1,16 @@
+function RealTimeException(message) {
+    this.message = message;
+    // Use V8's native method if available, otherwise fallback
+    if ("captureStackTrace" in Error)
+        Error.captureStackTrace(this, RealTimeException);
+    else
+        this.stack = (new Error()).stack;
+}
+
+RealTimeException.prototype = Object.create(Error.prototype);
+RealTimeException.prototype.name = "RealTimeException";
+RealTimeException.prototype.constructor = RealTimeException;
+
 function addClassUserOnLineOff(username, messages){
 
     var container = $('[data-js-id="userBadge"]');
@@ -18,7 +31,6 @@ function findUserOnline(api_real_time_endpoint, username, messages) {
         data: {nick: username },
         method: 'GET'
     }).done(function(  data, textStatus, jqXHR ) {
-            //removeClassUserOnLine();
             var dataObjects = jqXHR.responseJSON['hydra:member'];
             var totalItems = jqXHR.responseJSON['hydra:totalItems'];
 
@@ -28,12 +40,7 @@ function findUserOnline(api_real_time_endpoint, username, messages) {
                 addClassUserOnLineOff(username, messages)
             }
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        if ( console && console.log ) {
-            console.log( "Error:" );
-            console.log(jqXHR);
-            console.log( "Error textStatus:", textStatus );
-            console.log( "Error errorThrown:", errorThrown );
-        }
+        throw new RealTimeException(jqXHR.responseText);
     });
 }
 
