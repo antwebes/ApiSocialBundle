@@ -2,6 +2,18 @@
 
 {% trans_default_domain 'User' %}
 
+{% block og_image %}
+{% spaceless %}
+	{% if user.profilePhoto %}
+		{{ user | userProfilePhotoUrl("medium") }}
+	{% else %}
+		{% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+			{{ asset_url }}
+		{% endimage %}
+	{% endif %}
+{% endspaceless %}
+{% endblock %}
+
 {% block header_no_index %} 
 	{% if (affiliate_id is defined) and (affiliate_id is not null) and (user.client.affiliate.id != affiliate_id) %}
 		<meta name="robots" content="noindex"> 
@@ -13,6 +25,11 @@
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
 	{% stylesheets 
             "@ApiSocialBundle/Resources/public/css/custom.css" 
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+    {% stylesheets
+            "@ApiSocialBundle/Resources/public/css/share/share-button.min.css" 
         %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
     {% endstylesheets %}
@@ -28,7 +45,10 @@
 <br/><br/><br/>
     <div class="row">
 	<div class="col-xs-12 col-sm-3">
-		{% include 'ApiSocialBundle:User:Show/_usersSidebar.html.twig' with {'user': user} %}
+		<spam style="margin-left:50%">
+		<share-button>Comparte</share-button>
+		</spam>	
+    	{% include 'ApiSocialBundle:User:Show/_usersSidebar.html.twig' with {'user': user} %}
 	</div>
 	<div class="col-xs-12 col-sm-9">
 		<h1 class="blue">{{ "user.profile_of" | trans({'%username%': user.username | capitalize}) }}</h1>
@@ -81,10 +101,36 @@
 	{% javascripts
 		'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
 		'@ApiSocialBundle/Resources/public/js/real_time.js'
+		'@ApiSocialBundle/Resources/public/js/share/share-button.min.js'
 	%}
 		<script src="{{ asset(asset_url) }}"></script>
    	{% endjavascripts %}
 
+   	<script type="text/javascript">
+	<!--//-->
+	new ShareButton({
+		  url: window.location.href,
+		  config: {button_text: 'aadhuashduasd'},
+		  networks: {
+		    facebook: {
+		      app_id: "abc123"
+		  	  },
+		  	linkedin: {
+			  	enabled: false
+			},
+			googlePlus: {
+				enabled: false
+			},
+			pinterest: {
+				enabled: false
+			},
+			reddit: {
+				enabled: false
+			},
+		  }
+		});
+	
+	</script>
 
     {% if app.user and user.id == app.user.id %}
         {% javascripts '@ApiSocialBundle/Resources/public/js/user_voyeur.js' %}
