@@ -46,6 +46,7 @@ parameters:
         #payments
         show_button_payment: false
         show_users_outstanding: false
+        access_pretty_bundle: default
     container:
         client: 13
         affiliate_name: 'Chat' # add web_param

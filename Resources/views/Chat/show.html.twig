@@ -18,6 +18,6 @@
 {% else %}
     {% set nick = web_param.nick_affiliate ~ '????' %}
 {% endif %}
-{% include "ApiSocialBundle:Chat:script.html.twig" with {enter_channel: channel, web_param.chat_nick: nick } %}
+{% include "ApiSocialBundle:Chat:script.html.twig" with {enter_channel: channel, 'chat_nick': nick } %}
 </body>
 </html>
