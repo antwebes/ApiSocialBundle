@@ -41,17 +41,20 @@ class UserController extends BaseController
             if(isset($advancedSearch['gender']) && !empty($advancedSearch['gender'])){
                 $filters['gender'] = $advancedSearch['gender'];
             }
+//            die(print_r($filters));
         }
 
         $usersManager = $this->get('api_users');
+        $outstandingFilters = $filters;
 
         if($search != null){
+            $outstandingFilters['search'] = $search;
             $users = $usersManager->searchUserByNamePaginated($search, $page, $filter, null, $this->getDefaultOrder());
         }else{
             $users = $usersManager->findAll($page, $filters, null, $this->getDefaultOrder());
         }
 
-        $outstandingUsers = $usersManager->findOutstandingUsers(5);
+        $outstandingUsers = $usersManager->findOutstandingUsers($outstandingFilters);
 
         return $this->render('ApiSocialBundle:User:List/index.html.twig',
             array(

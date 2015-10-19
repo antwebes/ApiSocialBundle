@@ -80,6 +80,10 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->with(1, array('language' => 'en'), null, array('lastLogin' => 'desc', 'hasProfilePhoto' => 'desc'))
             ->willReturn($this->pagerMock);
 
+        $this->mockUserManager->expects($this->once())
+            ->method('findOutstandingUsers')
+            ->with(array('language' => 'en'));
+
         $this->templatingMock->expects($this->once())
             ->method('renderResponse')
             ->willReturn(new Response());
@@ -112,30 +116,6 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testUsersActionSearchAction()
-    {
-        $request = new Request();
-        $request->query->set('search','search_value');
-        $this->container->set('request',$request);
-        $this->container->setParameter('users_orders', array('lastLogin' => 'desc', 'hasProfilePhoto' => 'desc'));
-
-        $this->mockUserManager->expects($this->once())
-            ->method('searchUserByNamePaginated')
-            ->with('search_value', 1, null, null, array('lastLogin' => 'desc', 'hasProfilePhoto' => 'desc'))
-            ->willReturn($this->pagerMock);
-
-        $this->templatingMock->expects($this->once())
-            ->method('renderResponse')
-            ->willReturn(new Response());
-
-        $response = $this->userController->usersAction($request,1);
-
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    /**
-     * @test
-     */
     public function testUsersActionSearchActionWithNoOrderConfigured()
     {
         $request = new Request();
@@ -147,6 +127,10 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->method('searchUserByNamePaginated')
             ->with('search_value', 1, null, null, null)
             ->willReturn($this->pagerMock);
+
+        $this->mockUserManager->expects($this->once())
+            ->method('findOutstandingUsers')
+            ->with(array('search' => 'search_value', 'language' => 'en'));
 
         $this->templatingMock->expects($this->once())
             ->method('renderResponse')
@@ -171,6 +155,10 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->method('findAll')
             ->with(1, array('country' => 'US', 'gender' => 'Male', 'language' => 'en'), null, array('lastLogin' => 'desc', 'hasProfilePhoto' => 'desc'))
             ->willReturn($this->pagerMock);
+
+        $this->mockUserManager->expects($this->once())
+            ->method('findOutstandingUsers')
+            ->with(array('country' => 'US', 'gender' => 'Male', 'language' => 'en'));
 
         $this->templatingMock->expects($this->once())
             ->method('renderResponse')
