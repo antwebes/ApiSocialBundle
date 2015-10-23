@@ -4,6 +4,7 @@ namespace Ant\Bundle\ApiSocialBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class VoteController extends Controller
 {
@@ -13,6 +14,11 @@ class VoteController extends Controller
      */
     public function showVoteAction()
     {
+        $user = $this->getUser();
+
+        if(!$user->isValidated()){
+            throw new AccessDeniedHttpException();
+        }
 
         $request = $this->container->get('request');
         $translator = $this->container->get('translator');
