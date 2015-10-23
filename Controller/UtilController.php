@@ -14,10 +14,10 @@ class UtilController extends Controller {
     	$globals = $twig->getGlobals();
     	$env = $this->container->getParameter("kernel.environment");
     	if ($globals['adsense'] && ($env !='dev')){
-    		$lotery = rand(1, 100);
-    		if ($lotery>60){
+    		$beneficiary = $this->get('ant_api_social.provider.advertising')->getBeneficiary();
+    		if ($beneficiary == 'awc'){
     			return $this->render('ApiSocialBundle:Adsense:adsense-awc.html.twig', array('size'=> $size, 'styles' => $styles));
-    		}else{
+    		}elseif ($beneficiary == 'affiliate'){
     			return $this->render('ApiSocialBundle:Adsense:adsense-affiliate.html.twig', array('size'=> $size, 'styles' => $styles));
     		}
     	}

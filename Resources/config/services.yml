@@ -18,3 +18,7 @@ services:
   ant_api_social.util.photo_profile:
     class: Ant\Bundle\ApiSocialBundle\Util\PhotoProfileDefault
     arguments: [ @filesystem, %ant.api_social.images_dir% ]
+
+  ant_api_social.provider.advertising:
+    class: Ant\Bundle\ApiSocialBundle\Provider\Advertising
+    arguments: []
