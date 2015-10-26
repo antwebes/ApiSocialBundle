@@ -25,6 +25,7 @@
     "delete": "Eliminar",
     "reply": "Responder",
     "sending_message": "Enviando mensaje",
-    "required": "Requerido"
+    "required": "Requerido",
+    "no_permission": "Este usuario no tiene permisos para esta acción"
   }
 }

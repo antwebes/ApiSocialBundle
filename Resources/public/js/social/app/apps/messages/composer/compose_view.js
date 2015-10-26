@@ -139,7 +139,8 @@ define([
                         'subject': 'messages::subject',
                         'The subject is too short': 'messages::subject_too_short',
                         'You can\'t post more messages, limit exceced': 'messages::limit_exceded',
-                        'No recipient specified': 'messages::no_recipient_specified'
+                        'No recipient specified': 'messages::no_recipient_specified',
+                        'This user has no permission for this action': 'messages::no_permission'
                     };
 
                     if(typeof map[msg] != 'undefined'){
