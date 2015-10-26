@@ -105,7 +105,7 @@ class ChannelController extends BaseController
 
     public function showAction($slug)
     {
-        $channel = $this->get('api_channels')->findBySlug($slug);
+        $channel = $this->findApiEntityOrThrowNotFoundException('api_channels', 'findBySlug', $slug);
 
         return $this->render('ApiSocialBundle:Channel:Show/show.html.twig', array('channel' => $channel, 'api_endpoint' => $this->container->getParameter('api_endpoint')));
     }
@@ -118,7 +118,7 @@ class ChannelController extends BaseController
     public function becomeFanAction($slug)
     {
         $channelsManager = $this->get('api_channels');
-        $channel = $channelsManager->findBySlug($slug);
+        $channel = $this->findApiEntityOrThrowNotFoundException('api_channels', 'findBySlug', $slug);
         $user = $this->getUser();
 
         try{
@@ -290,7 +290,7 @@ class ChannelController extends BaseController
     public function removeFanAction($slug)
     {
         $channelsManager = $this->get('api_channels');
-        $channel = $channelsManager->findBySlug($slug);
+        $channel = $this->findApiEntityOrThrowNotFoundException('api_channels', 'findBySlug', $slug);
         $user = $this->getUser();
 
         try{

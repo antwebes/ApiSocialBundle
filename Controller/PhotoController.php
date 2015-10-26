@@ -42,15 +42,11 @@ class PhotoController extends BaseController
      */
     public function showPhotoAction($idUser, $id, $page = 1)
     {
-        $user = $this->get('api_users')->findById($idUser);
+        $user = $this->findApiEntityOrThrowNotFoundException('api_users', 'findById', $idUser);
         $photo = $this->get('api_photos')->findById($id);
 
-        if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
-        }
-
         if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
-            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
+            throw $this->createNotFoundException('THe photo with id ' .$id. ' not exits');
         }
 
         if(!$this->getUser()->isValidated()){
@@ -68,15 +64,11 @@ class PhotoController extends BaseController
      */
     public function removePhotoAction($idUser, $id)
     {
-        $user = $this->get('api_users')->findById($idUser);
+        $user = $this->findApiEntityOrThrowNotFoundException('api_users', 'findById', $idUser, 'The user with id ' .$idUser. ' not exits');
         $photo = $this->get('api_photos')->findById($id);
 
-        if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
-        }
-
         if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
-            throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');
+            throw $this->createNotFoundException('The photo with id ' .$id. ' not exits');
         }
 
         if($this->getUser()->getId() !== $user->getId()){
@@ -105,15 +97,11 @@ class PhotoController extends BaseController
     public function reportPhotoAction(Request $request, $idUser, $id)
     {
         $photosManager = $this->get('api_photos');
-        $user = $this->get('api_users')->findById($idUser);
+        $user = $this->findApiEntityOrThrowNotFoundException('api_users', 'findById', $idUser, 'The user with id ' .$idUser. ' not exits');
         $photo = $photosManager->findById($id);
         $form = $this->createForm(new ReportPhotoType());
         $success = false;
         $apiError = null;
-
-        if($user == null){
-            throw $this->createNotFoundException('THe user with id ' .$idUser, ' not exits');
-        }
 
         if($photo == null || $photo->getParticipant()->getUsername() != $user->getUsername()){
             throw $this->createNotFoundException('THe photo with id ' .$id, ' not exits');

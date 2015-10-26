@@ -48,4 +48,31 @@ class BaseController extends Controller
         return $result;
     }
 
+    /**
+     * Tries to find an entity or throws an NotFoundHttpException
+     * @param $serviceName
+     * @param $finder
+     * @param $params
+     * @param string $message
+     * @return mixed
+     * @throws NotFountHttpException
+     */
+    protected function findApiEntityOrThrowNotFoundException($serviceName, $finder, $params, $message = 'Not Found')
+    {
+        $manager = $this->get($serviceName);
+
+        // if params is not an array make sure it is to pass it to call_user_func_array
+        if(!is_array($params)){
+            $params = array($params);
+        }
+
+        // call the service
+        $entity = call_user_func_array(array($manager, $finder), $params);
+
+        if($entity === null){
+            throw $this->createNotFoundException($message);
+        }
+
+        return $entity;
+    }
 } 

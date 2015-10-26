@@ -43,11 +43,7 @@ class UserProfileController extends BaseController
      */
     public function getUserProfilePhotoAction($username, $size)
     {
-        $user = $this->get('api_users')->findById($username);
-
-        if($user == null){
-            throw new NotFoundHttpException("The user with username  $username,  not exits");
-        }
+        $user = $this->findApiEntityOrThrowNotFoundException('api_users', 'findById', $username);
 
         // if profile photo redirect url api
         if($user->getProfilePhoto() != null){

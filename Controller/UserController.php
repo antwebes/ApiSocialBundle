@@ -12,6 +12,7 @@ use Ant\Bundle\ApiSocialBundle\Form\ReportPhotoType;
 use Symfony\Component\HttpFoundation\Request;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends BaseController
 {
@@ -176,10 +177,8 @@ class UserController extends BaseController
      */
     public function messageAction($id)
     {
-    	$user = $this->get('api_users')->findById($id);
-    	if($user == null){
-    		throw $this->createNotFoundException('THe user with id ' .$id, ' not exits');
-    	}
+    	$user = $this->findApiEntityOrThrowNotFoundException('api_users', 'findById', $id, 'THe user with id ' .$id. ' does not exist');
+
     	return $this->render('ApiSocialBundle:User:message.html.twig',array('user'=>$user));
     }
 
@@ -228,10 +227,12 @@ class UserController extends BaseController
     private function findUserByUsernameOrId($username, $user_id, $asArray)
     {
         if($user_id != null){
-            return $this->get('api_users')->findById($user_id, $asArray);
+            $parametes = array($user_id, $asArray);
         }else{
-            return $this->get('api_users')->findById($username, $asArray);
+            $parametes = array($username, $asArray);
         }
+
+        return $this->findApiEntityOrThrowNotFoundException('api_users', 'findById', $parametes);
     }
 
     private function renderOrRedirect($user, $isXmlHttpRequest)

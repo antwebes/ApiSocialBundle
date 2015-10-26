@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Ant\Bundle\ApiSocialBundle\Controller\UserController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class UserControllerTest
@@ -26,7 +27,6 @@ use Ant\Bundle\ApiSocialBundle\Controller\UserController;
 class UserControllerTest extends \PHPUnit_Framework_TestCase
 {
     private $mockUserManager;
-    private $containerMock;
     private $templatingMock;
     private $pagerMock;
     private $securityContextMock;
@@ -37,10 +37,6 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-
-        $this->containerMock = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
-            ->disableOriginalConstructor()
-            ->getMock();
 
         $this->mockUserManager =
             $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Manager\UserManager')
@@ -139,6 +135,144 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
         $response = $this->userController->usersAction($request,1);
 
         $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function testShowAction()
+    {
+        $request = new Request();
+        $request->query->set('username', 'alex');
+        $request->query->set('user_id', 1);
+
+        $user = new User();
+        $user->setId(1);
+        $user->setUsername('alex');
+        $user->setUsernameCanonical('alex');
+
+        $this->container->set('request',$request);
+        $this->container->setParameter('api_endpoint', 'http://un.api.com/');
+        $this->container->setParameter('api_social.voyeur_limit', 1);
+        $this->container->setParameter('api_social.realtime_endpoint', 'http://realtime.api.com');
+
+
+        $this->mockUserManager->expects($this->once())
+            ->method('findById')
+            ->with(1, false)
+            ->willReturn($user);
+
+        $this->templatingMock->expects($this->once())
+            ->method('renderResponse')
+            ->willReturn(new Response());
+
+        $response = $this->userController->showAction('alex',1);
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function testShowActionAsAjax()
+    {
+        $request = new Request();
+        $request->query->set('username', 'alex');
+        $request->query->set('user_id', 1);
+        $request->headers->set('X-Requested-With', 'XMLHttpRequest');
+
+        $user = new User();
+        $user->setId(1);
+        $user->setUsername('alex');
+        $user->setUsernameCanonical('alex');
+
+        $this->container->set('request',$request);
+        $this->container->setParameter('api_endpoint', 'http://un.api.com/');
+        $this->container->setParameter('api_social.voyeur_limit', 1);
+        $this->container->setParameter('api_social.realtime_endpoint', 'http://realtime.api.com');
+
+
+        $this->mockUserManager->expects($this->once())
+            ->method('findById')
+            ->with(1, true)
+            ->willReturn($user);
+
+        $this->templatingMock->expects($this->once())
+            ->method('renderResponse')
+            ->willReturn(new Response());
+
+        $response = $this->userController->showAction('alex',1);
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function testShowActionRedirect()
+    {
+        $request = new Request();
+        $request->query->set('username', 'alex');
+        $request->query->set('user_id', 1);
+
+        $user = new User();
+        $user->setId(1);
+        $user->setUsername('alex2');
+        $user->setUsernameCanonical('alex2');
+
+        $routerGenerator = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $routerGenerator->expects($this->once())
+            ->method('generate')
+            ->with(
+                'ant_user_user_show',
+                array('username' => $user->getUsernameCanonical(), 'user_id' => $user->getId())
+            )
+            ->will($this->returnValue('http://anhost.com/an-url'));
+
+        $this->container->set('request',$request);
+        $this->container->set('router', $routerGenerator);
+        $this->container->setParameter('api_endpoint', 'http://un.api.com/');
+        $this->container->setParameter('api_social.voyeur_limit', 1);
+        $this->container->setParameter('api_social.realtime_endpoint', 'http://realtime.api.com');
+
+
+        $this->mockUserManager->expects($this->once())
+            ->method('findById')
+            ->with(1, false)
+            ->willReturn($user);
+
+        $response = $this->userController->showAction('alex',1);
+
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function testShowActionOfNonExistingUser()
+    {
+        $request = new Request();
+        $request->query->set('username', 'alex');
+        $request->query->set('user_id', 1);
+
+        $this->container->set('request',$request);
+        $this->container->setParameter('api_endpoint', 'http://un.api.com/');
+        $this->container->setParameter('api_social.voyeur_limit', 1);
+        $this->container->setParameter('api_social.realtime_endpoint', 'http://realtime.api.com');
+
+
+        $this->mockUserManager->expects($this->once())
+            ->method('findById')
+            ->with(1, false)
+            ->willReturn(null);
+
+        try{
+            $response = $this->userController->showAction('alex',1);
+        }catch(NotFoundHttpException $e){
+            return;
+        }
+
+        $this->fail('Expected an NotFoundHttpException exception');
     }
 
     /**
