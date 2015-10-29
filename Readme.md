@@ -47,8 +47,16 @@ Also, you can specify the columns to order the user list with the users_orders o
 api_social:
     users_orders:
         lastLogin: desc
-        hasProfilePhoto: desc    
-        
+        hasProfilePhoto: desc
 ```
+
+The order of the channels list can also be configured under the channels_orders option being the default order by fan desc. To specify for example to order by name asc you should put the following in the config:
+
+```
+api_social:
+    channels_orders:
+        lastLogin: asc
+```
+
 Other parameters:
     realtime_endpoint: http://127.0.0.1:8000

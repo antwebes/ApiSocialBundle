@@ -29,8 +29,13 @@ class ApiSocialExtension extends Extension
             $config['users_orders'] = null;
         }
 
+        if(count($config['channels_orders']) == 0){
+            $config['channels_orders'] = array('fans' => 'desc');
+        }
+
         $container->setParameter('visits_limit', $config['visits_limit']);
         $container->setParameter('users_orders', $config['users_orders']);
+        $container->setParameter('channels_orders', $config['channels_orders']);
         $container->setParameter('api_social.voyeur_limit', $config['voyeur_limit']);
         $container->setParameter('api_social.realtime_endpoint',$config['realtime_endpoint']);
 

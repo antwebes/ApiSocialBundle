@@ -151,11 +151,12 @@ class ChannelController extends BaseController
      * @param null $size_image
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function renderChannelsAction(Request $request, $page = 1, $withPagination = 1, $order = array('name' => 'asc'), $amount = null, $size_image=null)
+    public function renderChannelsAction(Request $request, $page = 1, $withPagination = 1, $amount = null, $size_image=null)
     {
         //Si estamos con filtros hay que enviar filtros a la pagina siguiente
         $filter = $request->get('filter');
         $search = $request->get('search',null);
+        $order = $this->container->getParameter('channels_orders');
 
         if ($filter == 'customize'){
             return $this->renderChannelsCustomizedAction($request, $page, $withPagination, $order, $amount, $size_image);

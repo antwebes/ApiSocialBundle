@@ -11,6 +11,7 @@
 namespace Ant\Bundle\ApiSocialBundle\Tests\Controller;
 
 use Ant\Bundle\ApiSocialBundle\Controller\ChannelController;
+use Ant\Bundle\ApiSocialBundle\DependencyInjection\ApiSocialExtension;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,6 +46,10 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
         $request->attributes->set('_route', 'channel_list_page');
 
         $container = new ContainerBuilder();
+
+        $apiSocialExtension = new ApiSocialExtension();
+        $apiSocialExtension->load(array(), $container);
+
         $container->set('request',$request);
         $container->set('twig',$twigMock);
         $container->set('router', $routerMock);
@@ -86,6 +91,73 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
         $request->query->set('search','search_value');
 
         $container = new ContainerBuilder();
+
+        $apiSocialExtension = new ApiSocialExtension();
+        $apiSocialExtension->load(array(), $container);
+
+        $container->set('request',$request);
+        $container->set('api_channels',$mockChannelManager);
+        $container->set('templating',$templatingMock);
+        $container->set('twig',$twigMock);
+
+        $channelController = new ChannelController();
+        $channelController->setContainer($container);
+
+        $mockChannelManager->expects($this->once())
+            ->method('findAll')
+            ->with(1,array('language'=>'es','partialName'=>'search_value'),null,array('fans' => 'desc'))
+            ->willReturn($pagerMock);
+
+        $pagerMock->expects($this->once())
+            ->method('getResources')
+            ->willReturn($channelCollection);
+
+        $view = 'ApiSocialBundle:Channel:List/_renderChannels.html.twig';
+        $parameters = array('channels'=>$channelCollection,'pager'=>$pagerMock,'size_image'=>'small','search'=>'search_value');
+
+        $templatingMock->expects($this->once())
+            ->method('renderResponse')
+            ->with($view,$parameters,null)
+            ->willReturn(new Response());
+
+        $response = $channelController->renderChannelsAction($request,1,1, null, 'small');
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function renderChannelsActionWithSearchParamWithCustomChannelOrder()
+    {
+        $mockChannelManager =
+            $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Manager\ChannelManager')
+                ->disableOriginalConstructor()
+                ->getMock();
+        $pagerMock =
+            $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Api\Util\Pager')
+                ->disableOriginalConstructor()
+                ->getMock();
+
+        $twigMock =
+            $this->getMockBuilder('Twig_Environment')
+                ->disableOriginalConstructor()
+                ->getMock();
+
+        $templatingMock =
+            $this->getMockBuilder('Symfony\Bundle\TwigBundle\TwigEngine')
+                ->disableOriginalConstructor()
+                ->getMock();
+        $channelCollection = array(new Channel(),new Channel());
+
+        $request = new Request();
+        $request->query->set('search','search_value');
+
+        $container = new ContainerBuilder();
+
+        $apiSocialExtension = new ApiSocialExtension();
+        $apiSocialExtension->load(array(array('channels_orders' => array('name' => 'asc'))), $container);
+
         $container->set('request',$request);
         $container->set('api_channels',$mockChannelManager);
         $container->set('templating',$templatingMock);
@@ -111,7 +183,7 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
             ->with($view,$parameters,null)
             ->willReturn(new Response());
 
-        $response = $channelController->renderChannelsAction($request,1,1,array('name' => 'asc'), null, 'small');
+        $response = $channelController->renderChannelsAction($request,1,1, null, 'small');
 
         $this->assertEquals(200, $response->getStatusCode());
     }

@@ -31,6 +31,11 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         $rootNode->children()
+            ->arrayNode('channels_orders')
+                ->prototype('scalar')->end()
+            ->end();
+
+        $rootNode->children()
             ->integerNode('voyeur_limit')
             ->defaultValue(3)
             ->end();
