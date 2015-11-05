@@ -18,6 +18,7 @@
 			{# begin badge account validated #}
 			{% if user.enabled %}
 				<div data-js-id="userBadge">
+					{% include "ApiSocialBundle:User:Show/_visitscounter.html.twig" with {"user": user} %}
 					<i style="position: absolute; top: 80%; left: 80%;" class="fa fa-check-circle-o fa-3x blue" data-toggle="tooltip" data-placement="right" data-behat="account-verified" title="{{ "user.account-verified" | trans }}"></i>
 				</div>
 
