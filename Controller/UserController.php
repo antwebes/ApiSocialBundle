@@ -48,7 +48,7 @@ class UserController extends BaseController
         $outstandingFilters = $filters;
 
         if($search != null){
-            $outstandingFilters['search'] = $search;
+            $outstandingFilters['partial_name'] = $search;
             $users = $usersManager->searchUserByNamePaginated($search, $page, $filter, null, $this->getDefaultOrder());
         }else{
             $users = $usersManager->findAll($page, $filters, null, $this->getDefaultOrder());

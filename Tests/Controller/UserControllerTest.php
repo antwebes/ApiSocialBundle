@@ -130,7 +130,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->mockUserManager->expects($this->once())
             ->method('findOutstandingUsers')
-            ->with(array('search' => 'search_value', 'language' => 'en'));
+            ->with(array('partial_name' => 'search_value', 'language' => 'en'));
 
         $this->templatingMock->expects($this->once())
             ->method('renderResponse')
