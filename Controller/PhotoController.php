@@ -30,7 +30,14 @@ class PhotoController extends BaseController
             $photos = array();
         }
 
-        return $this->render('ApiSocialBundle:Photo:List/photos.html.twig',array('user'=>$user,'photos'=> $photos, 'voyeur_limit' => $this->container->getParameter('api_social.voyeur_limit')));
+        $paramsToTemplate = array(
+            'user' => $user,
+            'photos'=> $photos,
+            'voyeur_limit' => $this->container->getParameter('api_social.voyeur_limit'),
+            'realtime_endpoint' => $this->container->getParameter('api_social.realtime_endpoint')
+        );
+
+        return $this->render('ApiSocialBundle:Photo:List/photos.html.twig', $paramsToTemplate);
     }
 
     /**
