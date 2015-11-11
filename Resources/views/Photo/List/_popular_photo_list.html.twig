@@ -1,0 +1,13 @@
+{% extends "ApiSocialBundle:Photo:List/_photo_list.html.twig" %}
+
+{% trans_default_domain 'Photos' %}
+
+{% block list_photos_title %}{{ 'photos.popular_photos' | trans }}{% endblock list_photos_title %}
+
+{% block list_photos_photo_item %}
+    {% include "ApiSocialBundle:Photo:List/_photo_item_list.html.twig" with { 'photo': photo, 'showVoteButtons': false } %}
+{% endblock list_photos_photo_item %}
+
+{% block list_photos_nophotos %}
+    {{ "photos.no_popular" | trans() }}
+{% endblock list_photos_nophotos %}

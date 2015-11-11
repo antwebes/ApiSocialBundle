@@ -100,3 +100,11 @@ user_vote:
     path: /votar-foto
     defaults:
         _controller: ApiSocialBundle:Vote:showVote
+
+popular_photos:
+    path: /fotos-populares/{page}
+    defaults:
+        _controller: ApiSocialBundle:Photo:topPhotos
+        page: 1
+    requirements:
+        page: \d+

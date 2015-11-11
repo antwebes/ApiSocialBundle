@@ -8,28 +8,32 @@
     }
 </style>
 <div class="row-fluid">
-    <h2>{{ "user.photos_of_user" | trans({'%username%': user.username}) }}</h2>
+    <h2>{% block list_photos_title %}{{ "user.photos_of_user" | trans({'%username%': user.username}) }}{% endblock list_photos_title %}</h2>
     <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" data-behat="photos">
         {% for photo in photos %}
-            {% include "ApiSocialBundle:Photo:List/_photo_item_list.html.twig" with { 'photo': photo, 'user': user, 'showVoteButtons': showVoteButtons } %}
-            {% if app.user and app.user.id == user.id %}
-                <a data-path="{{ path('ant_user_user_photo_remove', {idUser: user.id, id: photo.id }) }}"
-                   class="pull-left open-DeleteDialog delete-photo skip-photo-swipe"
-                   data-toggle="modal" data-target="#delete-dialog"
-                   data-message="{{ 'user.photo.remove.message' | trans }}"
-                   data-title="{{ 'user.photo.remove.title' | trans }}"
-                   href="#">
-                    <i class="fa fa-trash-o"></i>
-                </a>
-            {% endif %}
+            {% block list_photos_photo_item %}
+                {% include "ApiSocialBundle:Photo:List/_photo_item_list.html.twig" with { 'photo': photo, 'user': user, 'showVoteButtons': showVoteButtons } %}
+                {% if app.user and app.user.id == user.id %}
+                    <a data-path="{{ path('ant_user_user_photo_remove', {idUser: user.id, id: photo.id }) }}"
+                       class="pull-left open-DeleteDialog delete-photo skip-photo-swipe"
+                       data-toggle="modal" data-target="#delete-dialog"
+                       data-message="{{ 'user.photo.remove.message' | trans }}"
+                       data-title="{{ 'user.photo.remove.title' | trans }}"
+                       href="#">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
+                {% endif %}
+            {% endblock list_photos_photo_item %}
         {% else %}
-            {% if app.user.isValidated %}
-                {{ "user.photos.has_not" | trans() }}
-            {% else %}
-                <div class="alert alert-warning">
-                {{ "user.photos.need_confirmate_account" | trans() }}.  <a href="{{ path('confirm_email') }}"> {{'user.activate_account_info' | trans }}</a>
-                </div>
-            {% endif %}
+            {% block list_photos_nophotos %}
+                {% if app.user.isValidated %}
+                    {{ "user.photos.has_not" | trans() }}
+                {% else %}
+                    <div class="alert alert-warning">
+                    {{ "user.photos.need_confirmate_account" | trans() }}.  <a href="{{ path('confirm_email') }}"> {{'user.activate_account_info' | trans }}</a>
+                    </div>
+                {% endif %}
+            {% endblock list_photos_nophotos %}
         {% endfor %}
     </div>
     {% include "ApiSocialBundle:Photo:_photoswipe.html.twig" %}

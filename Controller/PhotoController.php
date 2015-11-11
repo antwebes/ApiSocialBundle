@@ -33,6 +33,14 @@ class PhotoController extends BaseController
         return $this->render('ApiSocialBundle:Photo:List/photos.html.twig',array('user'=>$user,'photos'=> $photos, 'voyeur_limit' => $this->container->getParameter('api_social.voyeur_limit')));
     }
 
+    public function topPhotosAction($page)
+    {
+        $minimumVotesForPopularPhotos = $this->container->getParameter('minimum_votes_for_popular_photos');
+        $photos = $this->get('api_photos')->findAll($page, array('number_votes_greater_equal' => $minimumVotesForPopularPhotos), null, array('score' => 'desc'));
+
+        return $this->render('ApiSocialBundle:Photo:List/popularphotos.html.twig',array('photos'=> $photos));
+    }
+
     /**
      * @param $idUser
      * @param $id
