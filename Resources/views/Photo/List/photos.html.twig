@@ -27,17 +27,21 @@
 
 {% block chatea_body %}
     <div class="container">
-        {% include "ApiSocialBundle:User:_user_tabs.html.twig" %}
-        <br/><br/><br/>
-        {% include "ApiSocialBundle:Photo:List/_photo_list.html.twig" with { 'showVoteButtons': app.user.id != user.id } %}
-        {% include "ApiSocialBundle:Common:delete-dialog.html.twig" %}
+        {% block chatea_photos_body %}
+            {% include "ApiSocialBundle:User:_user_tabs.html.twig" %}
+            <br/><br/><br/>
+            {% include "ApiSocialBundle:Photo:List/_photo_list.html.twig" with { 'showVoteButtons': app.user.id != user.id } %}
+            {% include "ApiSocialBundle:Common:delete-dialog.html.twig" %}
+        {% endblock chatea_photos_body %}
     </div>
 
     <br style="clear:both;" />
 
-    {% if app.user.isValidated %}
-        {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': photos, 'route': 'ant_user_user_photos_show.page', 'routeIndex': 'ant_user_user_photos_show', 'routeParams': {'id': user.id}} %}
-    {% endif %}
+    {% block chatea_photos_pager %}
+        {% if app.user.isValidated %}
+            {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': photos, 'route': 'ant_user_user_photos_show.page', 'routeIndex': 'ant_user_user_photos_show', 'routeParams': {'id': user.id}} %}
+        {% endif %}
+    {% endblock chatea_photos_pager %}
 {% endblock %}
 
 {% block body_js_end %}

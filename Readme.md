@@ -58,5 +58,12 @@ api_social:
         lastLogin: asc
 ```
 
+The minimum number of votes that a photo must have to appear in the top photos list can be configured under the ```minimum_votes_for_popular_photos``` option. Example:
+
+```
+api_social;
+    minimum_votes_for_popular_photos: 5
+```
+
 Other parameters:
     realtime_endpoint: http://127.0.0.1:8000

@@ -26,6 +26,11 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         $rootNode->children()
+            ->integerNode('minimum_votes_for_popular_photos')
+            ->defaultValue(3)
+            ->end();
+
+        $rootNode->children()
             ->arrayNode('users_orders')
                 ->prototype('scalar')->end()
             ->end();

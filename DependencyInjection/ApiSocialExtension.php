@@ -33,6 +33,7 @@ class ApiSocialExtension extends Extension
             $config['channels_orders'] = array('fans' => 'desc');
         }
 
+        $container->setParameter('minimum_votes_for_popular_photos', $config['minimum_votes_for_popular_photos']);
         $container->setParameter('visits_limit', $config['visits_limit']);
         $container->setParameter('users_orders', $config['users_orders']);
         $container->setParameter('channels_orders', $config['channels_orders']);

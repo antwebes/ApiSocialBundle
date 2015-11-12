@@ -24,7 +24,7 @@ routes can be an array of routs or a sigle string
         </a>
     </li>
     <li class="{{ mh.addActiveClassIfCurrent(['ant_user_user_photos_show', 'ant_user_user_photo_show'], 'active') }}">
-        <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}">
+        <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}" data-behat="user-photos">
             <i class="pink fa fa-picture-o bigger-120"></i>
             {{ "user.pictures" | trans }}
         </a>
