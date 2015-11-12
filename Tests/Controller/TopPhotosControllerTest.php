@@ -17,11 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class UserControllerTest
+ * Class TopPhotosControllerTest
  *
  * @package Ant\Bundle\ApiSocialBundle\Tests\Controller
  */
-class PhotoControllerTest extends \PHPUnit_Framework_TestCase
+class TopPhotosControllerTest extends \PHPUnit_Framework_TestCase
 {
     private $mockPhotoManager;
     private $containerMock;
