@@ -18,7 +18,7 @@
 	"homepage" : "https://github.com/antwebes/ApiSocialBundle",
 	"license" : "MIT",
 	"require" : {
-		"antwebes/chatea-client-bundle" : "0.1.29",
+		"antwebes/chatea-client-bundle" : "0.1.30",
 		"excelwebzone/recaptcha-bundle" : "2.3.x-dev"
 	},
 	"require-dev" : {
