@@ -8,20 +8,20 @@
 			<span>{{ user.username }}</span>
 		</div>
 	</div>
-	{% if user.city %}
 	<div class="profile-info-row" data-behat="profile-row">
 
 		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.location" | trans }} </div>
 		<div class="profile-info-value" data-behat="profile-row-value">
             <i class="fa fa-map-marker light-orange bigger-110"></i> &nbsp;
-            {% if user.city != "no_city" %}
-				<span> {{ user.city.name }} {% if user.city.country != 'not-country' %} , {{ user.city.country }} {% endif %}</span>
+            {% if user.city is not null %}
+				<span>
+					{{ user.city.getName(app.request.locale) }}{% if user.city.province is not empty %}, {{ user.city.getProvince(app.request.locale) }}{% endif %}{% if user.city.region is not empty %}, {{ user.city.getRegion(app.request.locale) }}{% endif %}{% if user.city.country is not empty %}, {{ user.city.getCountry(app.request.locale) }}{% endif %}
+				</span>
 			{% else %}
-				<span>{{ user.city.country }}</span>
+				-
 			{% endif %}
 		</div>
 	</div>
-	{% endif %}
 	{% if user.profile %}
 	<div class="profile-info-row" data-behat="profile-row">
 		<div class="profile-info-name" data-behat="profile-row-name"> {{ "user.age" | trans }} </div>
