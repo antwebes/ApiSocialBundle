@@ -43,7 +43,11 @@
                     <p>{% if meta_channel is not null and meta_channel.content %} {{ meta_channel.content | truncate(144)}} {% else %}{{ 'channels.enter_chat_of_for_free' | trans({ '%name%': channel.name}) }}{% endif %}</p>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p class="type-off">{{ 'channels.created_by' | trans }}
+                            <p class="type-off">
+                            	{% set countFans = channel.numberFans %}
+								{% transchoice countFans %}{0} %countFans% fans|{1} 1 fan|]1,Inf[%countFans% fans{% endtranschoice %}
+								|
+								{{ 'channels.created_by' | trans }}
                                 <a href="{{ path('ant_user_user_show', {'username': channel.owner.usernameCanonical, 'user_id': channel.owner.id}) }}">{{ channel.owner }}</a>
                             </p>
                         </div>
