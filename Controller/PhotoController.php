@@ -43,6 +43,12 @@ class PhotoController extends BaseController
     public function topPhotosAction($page)
     {
         $minimumVotesForPopularPhotos = $this->container->getParameter('minimum_votes_for_popular_photos');
+        
+        //ñapa necesaria para no mostrar mas de 5 páginas
+        if ($page > 5){
+        	return $this->redirect($this->generateUrl('popular_photos', array('page'=> 5)));
+        }
+        
         $photos = $this->get('api_photos')->findAll($page, array('number_votes_greater_equal' => $minimumVotesForPopularPhotos), null, array('score' => 'desc'));
 
         return $this->render('ApiSocialBundle:Photo:List/popularphotos.html.twig',array('photos'=> $photos));
