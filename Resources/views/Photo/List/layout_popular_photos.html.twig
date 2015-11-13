@@ -1,0 +1,52 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% trans_default_domain 'Photos' %}
+
+{% block head_meta_description %}{% endblock %}
+{% block head_meta_keywords %}{% endblock %}
+{% block head_title %}{{ 'photos.popular_photos' | trans }}{% endblock %}
+
+{% block head_css %}
+    {{ parent() }}
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
+	{% stylesheets
+	    'bundles/apisocial/lightbox2/css/*'
+	    'bundles/apisocial/photoswipe/default-skin/default-skin.css'
+	    'bundles/apisocial/photoswipe/photoswipe.css'
+    filter='cssrewrite'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+    <style>
+		.my-gallery figcaption {
+		    display: inline-block!important;
+		    width: 125px;
+		}
+	</style>
+{% endblock head_css %}
+
+{% block chatea_body %}
+    <div class="container">
+        {% block chatea_photos_body %}
+        	<h1>{{ 'Fotos mejor valoradas por los usuari@s' | trans }}</h1>
+			{% include "ApiSocialBundle:Photo:List/_popular_photo_list.html.twig" %}
+        {% endblock chatea_photos_body %}
+    </div>
+
+    <br style="clear:both;" />
+    
+    {% block chatea_photos_pager %}
+		{% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': photos, 'route': 'popular_photos', 'routeIndex': 'popular_photos', 'routeParams': {}} %}
+    {% endblock chatea_photos_pager %}
+{% endblock %}
+
+{% block body_js_end %}
+    {{ parent() }}
+    {% javascripts
+    '@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+    {% include "ApiSocialBundle:Common:lazyload.html.twig" %}
+
+{% endblock %}

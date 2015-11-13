@@ -1,13 +1,33 @@
-{% extends "ApiSocialBundle:Photo:List/_photo_list.html.twig" %}
+<style>
+figure a img {
+	height: 150px !important;
+	width: 150px !important;
+}
+</style>
 
 {% trans_default_domain 'Photos' %}
-
-{% block list_photos_title %}{{ 'photos.popular_photos' | trans }}{% endblock list_photos_title %}
-
-{% block list_photos_photo_item %}
-    {% include "ApiSocialBundle:Photo:List/_photo_item_list.html.twig" with { 'photo': photo, 'showVoteButtons': false } %}
-{% endblock list_photos_photo_item %}
-
-{% block list_photos_nophotos %}
-    {{ "photos.no_popular" | trans() }}
-{% endblock list_photos_nophotos %}
+<div class="row-fluid">
+    <h2>{% block list_photos_title %}{{ 'photos.popular_photos' | trans }}{% endblock list_photos_title %}  <small><a href="{{ path("user_vote") }}">{{ 'Tu también puedes ir a votar fotos' | trans }}</a></small></h2>
+    <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" data-behat="photos">
+        {% for photo in photos %}
+            {% block list_photos_photo_item %}
+                {% trans_default_domain 'User' %}			
+				<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+				    <a title="{{ "user.profile_of" | trans({'%username%': photo.participant.usernameCanonical | capitalize}) }}" href="{{ path('ant_user_user_show', {'user_id': photo.participant.id, 'username': photo.participant.usernameCanonical}) }}" itemprop="contentUrl" data-size="600x400">
+				        <img src="{{ photo | photoUrl("medium") }}" itemprop="thumbnail" alt="Image description" />
+				        <span class="visible-xs-block visible-sm-block">{{ photo.participant.usernameCanonical | capitalize }}</span>
+				    </a>
+				    <figcaption itemprop="caption description">
+				        <div>
+				        	{{ "user.photos.votes" | trans }}: <span class="number_votes_photo_{{ photo.id }}">{{ photo.numberVotes }}</span> {{ "user.photos.score" | trans }}: <span class="score_photo_{{ photo.id }}">{{ photo.score | number_format(2) }}</span> 
+				        </div>
+				    </figcaption>
+				</figure>
+            {% endblock list_photos_photo_item %}
+        {% else %}
+            {% block list_photos_nophotos %}
+               {{ "photos.no_popular" | trans() }}
+            {% endblock list_photos_nophotos %}
+        {% endfor %}
+    </div>
+</div>

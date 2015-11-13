@@ -1,15 +1,1 @@
-{% extends "ApiSocialBundle:Photo:List/photos.html.twig" %}
-
-{% trans_default_domain 'Photos' %}
-
-{% block head_meta_description %}{% endblock %}
-{% block head_meta_keywords %}{% endblock %}
-{% block head_title %}{{ 'photos.popular_photos' | trans }}{% endblock %}
-
-{% block chatea_photos_body %}
-    {% include "ApiSocialBundle:Photo:List/_popular_photo_list.html.twig" %}
-{% endblock chatea_photos_body %}
-
-{% block chatea_photos_pager%}
-    {% include 'ApiSocialBundle:Common:pagination.html.twig' with {'pager': photos, 'route': 'popular_photos', 'routeIndex': 'popular_photos', 'routeParams': {}} %}
-{% endblock chatea_photos_pager %}
+{% extends "ApiSocialBundle:Photo:List/layout_popular_photos.html.twig" %}
