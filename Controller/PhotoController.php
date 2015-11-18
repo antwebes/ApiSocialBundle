@@ -99,11 +99,11 @@ class PhotoController extends BaseController
         try{
             $this->get('api_photos')->delete($photo->getId());
 
-            $this->addFlashNotice('notice', $this->translate('user.photo.remove.success'));
+            $this->addFlashNotice('notice', $this->translate('user.photo.remove.success', array(), 'User'));
 
             return $this->redirect($this->generateUrl('ant_user_user_photos_show', array('id' => $user->getId())));
         }catch(\Exception $e){
-            $this->addFlashNotice('error', $this->translate('user.photo.remove.failure'));
+            $this->addFlashNotice('error', $this->translate('user.photo.remove.failure', array(), 'User'));
 
             return $this->redirect($this->generateUrl('ant_user_user_photo_show', array('idUser' => $user->getId(), 'id' => $photo->getId())));
         }
@@ -162,9 +162,9 @@ class PhotoController extends BaseController
         return $this->render('ApiSocialBundle:Photo:Report/reportPhoto.html.twig', $templateVars);
     }
 
-    private function translate($message, $parameters = array())
+    private function translate($message, $parameters = array(), $domain = null)
     {
-        return $this->get('translator')->trans($message, $parameters);
+        return $this->get('translator')->trans($message, $parameters, $domain);
     }
 
     private function addFlashNotice($level, $message)
