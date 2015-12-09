@@ -1,2 +1,3 @@
 user.no_profile_photo: 'No tienes ninguna foto de perfil. Para tener más visitas te sugerimos que subas una foto de perfil.'
 user.no_city: "No tienes ninguna ciudad establecida. Prara tener más visitas te sugerimos que establezcas una ciudad."
+user.photo_with_votes: "Hola %user%, has conseguido que una de tus fotos tenga %votes% votos"
