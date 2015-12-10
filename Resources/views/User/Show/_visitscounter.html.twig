@@ -1,4 +1,4 @@
-<div class="badge">
+<div class="badge" title="{{ 'user.profile.visits' | trans({}, 'User') }}" {% if style_badge is defined %}style="{{ style_badge }}"{% endif %}>
     <span data-behat="user_visits">
         {% if user.profile %} {# check if the user has a profile #}
             {{ user.profile.countVisits }}
@@ -6,5 +6,5 @@
             0 {# the user hasn't a pofile #}
         {% endif %}
     </span>
-    <i class="fa fa-eye" title="{{ 'user.profile.visits' | trans({}, 'User') }}"></i>
-</div>
+    <i class="fa fa-eye"></i>
+</div>&nbsp;&nbsp;
