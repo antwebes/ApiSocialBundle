@@ -1,0 +1,10 @@
+<div class="badge">
+    <span data-behat="user_visits">
+        {% if user.profile %} {# check if the user has a profile #}
+            {{ user.profile.countVisits }}
+        {% else %}
+            0 {# the user hasn't a pofile #}
+        {% endif %}
+    </span>
+    <i class="fa fa-eye" title="{{ 'user.profile.visits' | trans({}, 'User') }}"></i>
+</div>
