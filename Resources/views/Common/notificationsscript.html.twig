@@ -6,6 +6,6 @@
     var notificationText = '{{ 'user.no_profile_photo' | trans({}, 'Notifications') }} <a href="{{ path('chatea_client_update_profile_photo') }}">{{ 'user.edit_profile_photo' | trans({}, 'UserRegistration') }}</a>';
     notifyIfUserHasNoProfilePhoto({{  app.user.id }}, '{{ api_endpoint }}', '{{ app.user.accessToken }}', notificationText);
 
-    var notificationText = '{{ 'user.photo_with_votes' | trans({}, 'Notifications') }} <a href="{{ path('ant_user_user_photos_show', {'id': user.id}) }}"> {{ "user.pictures" | trans({}, 'User') }}</a>';
+    var notificationText = '{{ 'user.photo_with_votes' | trans({}, 'Notifications') }} <a href="{{ path('ant_user_user_photos_show', {'id': app.user.id}) }}"> {{ "user.pictures" | trans({}, 'User') }}</a>';
     notifyPhotoWithMostPhotos({{  app.user.id }}, '{{ api_endpoint }}', '{{ app.user.accessToken }}', notificationText);
 {% endif %}
