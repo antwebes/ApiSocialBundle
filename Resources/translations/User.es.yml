@@ -27,7 +27,7 @@ user.profile.gender.other: -
 user.profile.seeking.women : Mujeres
 user.profile.seeking.men : Hombres
 user.profile.seeking.both : Busco tanto hombres como mujeres
-user.profile.visits: Número de usuarios que han visitado este perfil
+user.profile.visits: Número de usuarios registrados que han visitado este perfil
 user.owner_of_channels: 'Canales de los cuales es propietario'
 user.moderator_of_channels: 'Canales de los cuales es moderador'
 user.fan_of_channels: 'Canales de los cuales es fan'
@@ -37,6 +37,9 @@ user.view_profile: "Ver perfil de "
 user.chats: Canales de %username%
 user.photos.need_confirmate_account: Para ver fotos de usuarios necesitas tener la cuenta validada.
 user.activate_account_info: Aquí tienes toda la información necesaria
+
+user.notifications.go_to_vote_photos: Tú también puedes votar fotos
+
 user.photos.report.title: "Reportar foto"
 user.photos.report.reason_label: Motivo
 user.photos.report.reason_placeholder: "Por favor escribe el motivo para reportar est foto"
