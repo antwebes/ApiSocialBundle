@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    <!--//-->
+            var gaSharedInSocialNetwork = function(network, action, url){
+                return function(){
+                    ga('send', {
+                        hitType: 'social',
+                        socialNetwork: network,
+                        socialAction: action,
+                        socialTarget: url
+                    });
+                }
+            };
+
+            new ShareButton({
+                url: window.location.href,
+                config: {button_text: 'aadhuashduasd'},
+                networks: {
+                    facebook: {
+                        app_id: "abc123",
+                        after: gaSharedInSocialNetwork('Facebook', 'shared', window.location.href)
+                    },
+                    twitter: {
+                        after: gaSharedInSocialNetwork('Twitter', 'shared', window.location.href)
+                    },
+                    linkedin: {
+                        enabled: false
+                    },
+                    googlePlus: {
+                        enabled: false
+                    },
+                    pinterest: {
+                        enabled: false
+                    },
+                    reddit: {
+                        enabled: false
+                    }
+                }
+            });
+
+</script>

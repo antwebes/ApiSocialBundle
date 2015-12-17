@@ -45,9 +45,7 @@
 <br/><br/><br/>
     <div class="row">
 	<div class="col-xs-12 col-sm-3">
-		<spam style="margin-left:50%">
-		<share-button>Comparte</share-button>
-		</spam>	
+		{% include 'ApiSocialBundle:User:Show/_socialbuttons.html.twig' %}
     	{% include 'ApiSocialBundle:User:Show/_usersSidebar.html.twig' with {'user': user} %}
 	</div>
 	<div class="col-xs-12 col-sm-9">
@@ -106,31 +104,7 @@
 		<script src="{{ asset(asset_url) }}"></script>
    	{% endjavascripts %}
 
-   	<script type="text/javascript">
-	<!--//-->
-	new ShareButton({
-		  url: window.location.href,
-		  config: {button_text: 'aadhuashduasd'},
-		  networks: {
-		    facebook: {
-		      app_id: "abc123"
-		  	  },
-		  	linkedin: {
-			  	enabled: false
-			},
-			googlePlus: {
-				enabled: false
-			},
-			pinterest: {
-				enabled: false
-			},
-			reddit: {
-				enabled: false
-			},
-		  }
-		});
-	
-	</script>
+	{% include "ApiSocialBundle:User:Show/_socialbuttons_script.html.twig" %}
 
     {% if app.user and user.id == app.user.id %}
         {% javascripts '@ApiSocialBundle/Resources/public/js/user_voyeur.js' %}
