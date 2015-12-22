@@ -27,6 +27,7 @@ user.profile.seeking.women : Women
 user.profile.seeking.men : Men
 user.profile.seeking.both : Both, men and women
 user.profile.visits: Visits
+user.profile.share: Share
 user.date_of_birth: Date Of Birth
 user.need_validate: You need confirmate your email to do this action
 user.view_profile: "View profile of "

@@ -28,6 +28,7 @@ user.profile.seeking.women : Mujeres
 user.profile.seeking.men : Hombres
 user.profile.seeking.both : Busco tanto hombres como mujeres
 user.profile.visits: Número de usuarios registrados que han visitado este perfil
+user.profile.share: Compartir
 user.owner_of_channels: 'Canales de los cuales es propietario'
 user.moderator_of_channels: 'Canales de los cuales es moderador'
 user.fan_of_channels: 'Canales de los cuales es fan'

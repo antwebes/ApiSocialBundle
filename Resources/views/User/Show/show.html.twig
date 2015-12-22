@@ -14,6 +14,8 @@
 {% endspaceless %}
 {% endblock %}
 
+{% block og_title %}{% include 'ApiSocialBundle:User:Show/meta/title.html.twig' with {'user': user} %}{% endblock %}
+
 {% block header_no_index %} 
 	{% if (affiliate_id is defined) and (affiliate_id is not null) and (user.client.affiliate.id != affiliate_id) %}
 		<meta name="robots" content="noindex"> 
@@ -99,12 +101,12 @@
 	{% javascripts
 		'@ApiSocialBundle/Resources/public/js/jquery/jquery.lazyload.min.js'
 		'@ApiSocialBundle/Resources/public/js/real_time.js'
-		'@ApiSocialBundle/Resources/public/js/share/share-button.min.js'
+		'@ApiSocialBundle/Resources/public/js/share/share-button.js'
 	%}
 		<script src="{{ asset(asset_url) }}"></script>
    	{% endjavascripts %}
 
-	{% include "ApiSocialBundle:User:Show/_socialbuttons_script.html.twig" %}
+	{% include "ApiSocialBundle:User:Show/_socialbuttons_script.html.twig" with {'user': user} %}
 
     {% if app.user and user.id == app.user.id %}
         {% javascripts '@ApiSocialBundle/Resources/public/js/user_voyeur.js' %}

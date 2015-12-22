@@ -1,5 +1,17 @@
+{% trans_default_domain 'User' %}
+
 <script type="text/javascript">
     <!--//-->
+        (function(){
+
+            {% if user.profilePhoto %}
+            var shareImage = "{{ user | userProfilePhotoUrl("medium") }}";
+            {% else %}
+                    {% image '@ApiSocialBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+                        var shareImage = "{{ asset_url }}";
+                    {% endimage %}
+            {% endif %}
+
             var gaSharedInSocialNetwork = function(network, action, url){
                 return function(){
                     ga('send', {
@@ -13,13 +25,20 @@
 
             new ShareButton({
                 url: window.location.href,
+                ui: {
+                    buttonText: '{{ 'user.profile.share' | trans }}'
+                },
                 config: {button_text: 'aadhuashduasd'},
                 networks: {
                     facebook: {
-                        app_id: "abc123",
-                        after: gaSharedInSocialNetwork('Facebook', 'shared', window.location.href)
+                        after: gaSharedInSocialNetwork('Facebook', 'shared', window.location.href),
+                        image: shareImage
                     },
                     twitter: {
+                        after: gaSharedInSocialNetwork('Twitter', 'shared', window.location.href)
+                    },
+                    whatsapp: {
+                        enabled: true,
                         after: gaSharedInSocialNetwork('Twitter', 'shared', window.location.href)
                     },
                     linkedin: {
@@ -37,4 +56,8 @@
                 }
             });
 
+            $('share-button').click(function(){
+                ga('send', 'event', 'social_network', 'click_share', 'user_profile', {{ user.id }});
+            });
+        })();
 </script>
