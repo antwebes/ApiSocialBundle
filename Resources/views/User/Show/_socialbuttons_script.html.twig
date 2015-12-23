@@ -58,9 +58,10 @@
                 }
             });
 
-            $('share-button').click(function(){
-				if (typeof ga !== 'undefined') {
-                	ga('send', 'event', 'social_network', 'click_share', 'user_profile', {{ user.id }});
+            $('share-button').click(function(event){
+                if (typeof ga !== 'undefined' && event.target.nodeName == 'share-button') {
+                    ga('send', 'event', 'social_network', 'click_share', 'user_profile', {{ user.id }});
+                }
             });
         })();
 </script>
