@@ -14,12 +14,14 @@
 
             var gaSharedInSocialNetwork = function(network, action, url){
                 return function(){
-                    ga('send', {
-                        hitType: 'social',
-                        socialNetwork: network,
-                        socialAction: action,
-                        socialTarget: url
-                    });
+					if (typeof ga !== 'undefined') {
+	                    ga('send', {
+	                        hitType: 'social',
+	                        socialNetwork: network,
+	                        socialAction: action,
+	                        socialTarget: url
+	                    });
+					}
                 }
             };
 
@@ -28,7 +30,7 @@
                 ui: {
                     buttonText: '{{ 'user.profile.share' | trans }}'
                 },
-                config: {button_text: 'aadhuashduasd'},
+                config: {},
                 networks: {
                     facebook: {
                         after: gaSharedInSocialNetwork('Facebook', 'shared', window.location.href),
@@ -57,7 +59,8 @@
             });
 
             $('share-button').click(function(){
-                ga('send', 'event', 'social_network', 'click_share', 'user_profile', {{ user.id }});
+				if (typeof ga !== 'undefined') {
+                	ga('send', 'event', 'social_network', 'click_share', 'user_profile', {{ user.id }});
             });
         })();
 </script>
