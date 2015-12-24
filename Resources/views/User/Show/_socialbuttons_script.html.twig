@@ -59,7 +59,7 @@
             });
 
             $('share-button').click(function(event){
-                if (typeof ga !== 'undefined' && event.target.nodeName == 'share-button') {
+                if (typeof ga !== 'undefined' && event.target.nodeName.toLowerCase() == 'share-button') {
                     ga('send', 'event', 'social_network', 'click_share', 'user_profile', {{ user.id }});
                 }
             });
