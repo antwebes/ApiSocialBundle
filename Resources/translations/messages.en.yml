@@ -15,6 +15,7 @@ user.fan_of_channels: 'Fan channels'
 'user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with': '__user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with'
 'Personal info of %username%': 'Personal info of %username%'
 'Personal info of %username%, see photos and chat free with %username%': 'Personal info of %username%, see photos and chat free with %username%'
+user.profile.share.social_networks: 'Profile of %username%, join to greater community of #chat'
 user.account-verified: Account verified
 user.view_all_visitis: "View all"
 user.view_visits.not_premium: "In order to view all users that visited your profile you need to be an outstanded user"

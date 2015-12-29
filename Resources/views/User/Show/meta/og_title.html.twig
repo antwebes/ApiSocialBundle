@@ -1,0 +1,4 @@
+{% trans with {'%username%': user.username} %}
+user.profile.share.social_networks
+{% endtrans %}
+{% if hashtag is defined %} en {{ hashtag }}{% endif %}

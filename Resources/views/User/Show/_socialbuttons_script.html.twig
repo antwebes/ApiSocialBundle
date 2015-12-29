@@ -34,10 +34,12 @@
                 networks: {
                     facebook: {
                         after: gaSharedInSocialNetwork('Facebook', 'shared', window.location.href),
-                        image: shareImage
+                        image: shareImage,
+                        description: '{% include 'ApiSocialBundle:User:Show/meta/og_title.html.twig' with {'user': user} %}'
                     },
                     twitter: {
-                        after: gaSharedInSocialNetwork('Twitter', 'shared', window.location.href)
+                        after: gaSharedInSocialNetwork('Twitter', 'shared', window.location.href),
+                        description: '{% include 'ApiSocialBundle:User:Show/meta/og_title.html.twig' with {'user': user} %}'
                     },
                     whatsapp: {
                         enabled: true,
@@ -54,7 +56,10 @@
                     },
                     reddit: {
                         enabled: false
-                    }
+                    },
+                    email: {
+						enabled: false
+					}
                 }
             });
 
