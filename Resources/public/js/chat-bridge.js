@@ -1,6 +1,6 @@
-var refresh = 10;
+var refresh = 5;
 var refresh_time = parseInt(localStorage.getItem("connection_refresh")) | 0;
-var debug_chat_bride = false;
+var debug_chat_bride = true;
 
 if (window.addEventListener) {
     // Normal browsers
@@ -18,14 +18,14 @@ function handlerChatNotify(e) {
         case "connected":
             refresh_time = parseInt(ev.arguments);
             localStorage.setItem("connection_refresh", refresh_time);
-        break;
+            break;
         case "newprivate":
             $.notify({
                 message: ev.arguments + " te ha enviado un mensaje privado en la página de chat.",
                 enter: 'animated zoomInDown',
                 exit: 'animated zoomOutUp'
             });
-        break;
+            break;
     }
 }
 
@@ -45,6 +45,54 @@ function disableBtn() {
     $("#chatBtnConnect").addClass("btn-success");
 }
 
+function newPrivateButton(target, url, url_message) {
+    var connected = isConnected();
+    $("#chatBtnConnect").text('Chatear con ' +target );
+    setTimeout(function() {
+        $("#chatBtnConnect").removeAttr('disabled');
+        $("#chatBtnConnect").addClass("btn-highlight");
+
+    }, 2000);
+
+
+    $("#chatBtnConnect").click(function() {
+        if( $("#chatBtnConnect").data("offline") === true) {
+            window.location.href = url_message;
+            return;
+        }
+
+        if(isConnected()) {
+
+            localStorage.setItem("data", '{"event": "openPrivate", "arguments": "'+target+'"}');
+
+            $.notify({
+                message: " Abriendo privado con " +target + " dirígite a la pestaña de chat.",
+                enter: 'animated zoomInDown',
+                exit: 'animated zoomOutUp'
+            });
+            disableBtn();
+        } else {
+            var checkConnection = setInterval(function () {
+                if(isConnected()) {
+                    setTimeout(function () {
+                        localStorage.setItem("data", '{"event": "openPrivate", "arguments": "'+target+'"}');
+                        clearInterval(checkConnection);
+                    }, 5000);
+                }
+            }, 5000);
+
+            if(url == undefined) {
+                window.open(window.chat_url+ "?target=" + target);
+            } else {
+                window.open(url);
+            }
+
+            disableBtn();
+        }
+    });
+
+
+}
 
 function newChatButton(target, url) {
     var connected = isConnected();
@@ -61,19 +109,14 @@ function newChatButton(target, url) {
     } else {
         $("#chatBtnConnect").removeAttr('disabled');
         $("#chatBtnConnect").addClass("btn-highlight");
-        if(target.charAt(0) == "#") {
-            $("#chatBtnConnect").text('Chatear en ' +target );
-        } else {
-            $("#chatBtnConnect").text('Chatear con ' +target );
-        }
+        $("#chatBtnConnect").text('Chatear en ' +target );
+
 
         $("#chatBtnConnect").click(function() {
             if(isConnected()) {
-                if(target.charAt(0) == "#") {
-                    localStorage.setItem("data", '{"event": "openChannel", "arguments": "'+target+'"}');
-                } else {
-                    localStorage.setItem("data", '{"event": "openPrivate", "arguments": "'+target+'"}');
-                }
+
+                localStorage.setItem("data", '{"event": "openChannel", "arguments": "'+target+'"}');
+
                 $.notify({
                     message: " Abriendo chat " +target + " dirígite a la pestaña de chat.",
                     enter: 'animated zoomInDown',
@@ -84,7 +127,7 @@ function newChatButton(target, url) {
                 var checkConnection = setInterval(function () {
                     if(isConnected()) {
                         setTimeout(function () {
-                            localStorage.setItem("data", '{"event": "openPrivate", "arguments": "'+target+'"}');
+                            localStorage.setItem("data", '{"event": "openChannel", "arguments": "'+target+'"}');
                             clearInterval(checkConnection);
                         }, 5000);
                     }
