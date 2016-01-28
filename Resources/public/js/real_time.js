@@ -14,7 +14,8 @@ RealTimeException.prototype.constructor = RealTimeException;
 function addClassUserOnLineOff(username, messages){
 
     var container = $('[data-js-id="userBadge"]');
-    container.append('<i data-js-id="userOnLine" class="fa fa-circle fa-1x userOnLineOff badge" title="'+messages.user_off_line+'"> Offline</i>');
+    container.addClass('userOnLineOff');
+    container.append('<i data-js-id="userOnLine" class="fa fa-circle fa-1x " title="'+messages.user_off_line+'"></i> Offline');
     if($("#chatBtnConnect").length) {
         $("#chatBtnConnect").text("Enviar mensaje");
         $("#chatBtnConnect").attr("data-offline", "true");
@@ -25,7 +26,8 @@ function addClassUserOnLineOff(username, messages){
 function addClassUserOnLineOn(username, messages)
 {
     var container = $('[data-js-id="userBadge"]');
-    container.append('<i data-js-id="userOnLine" class="fa fa-circle fa-1x userOnLineOn badge" title="'+messages.user_on_line+'"> Online</i>');
+    container.addClass('userOnLineOn');
+    container.append('<i data-js-id="userOnLine" class="fa fa-circle fa-1x" title="'+messages.user_on_line+'"></i> Online');
 }
 
 function findUserOnline(api_real_time_endpoint, username, messages) {
