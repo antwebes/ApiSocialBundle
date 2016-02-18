@@ -12,12 +12,22 @@ services:
     tags:
       - { name: twig.extension }
 
+  core.twig.is_profile_empty_extension:
+      class: Ant\Bundle\ApiSocialBundle\Twig\Extension\IsProfileEmptyExtension
+      arguments: [ @ant_api_social.util.profile_empty_checker ]
+      tags:
+        - { name: twig.extension }
+
   symfony.component.filesystem:
     class: Symfony\Component\Filesystem\Filesystem
 
   ant_api_social.util.photo_profile:
     class: Ant\Bundle\ApiSocialBundle\Util\PhotoProfileDefault
     arguments: [ @filesystem, %ant.api_social.images_dir% ]
+
+  ant_api_social.util.profile_empty_checker:
+      class: Ant\Bundle\ApiSocialBundle\Util\ProfileEmptyChecker
+      arguments: [ %api_social.profile_properties_to_check% ]
 
   ant_api_social.provider.advertising:
     class: Ant\Bundle\ApiSocialBundle\Provider\Advertising

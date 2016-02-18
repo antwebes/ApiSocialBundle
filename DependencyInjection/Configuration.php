@@ -51,6 +51,11 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
+        $rootNode->children()
+            ->arrayNode('profile_properties_to_check')
+                ->prototype('scalar')->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
