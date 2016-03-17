@@ -245,7 +245,7 @@ class UserController extends BaseController
         }
         $params_to_template = array(
             'user' => $user,
-            'api_endpoint' => $this->container->getParameter('api_endpoint'),
+            'api_endpoint' => $this->container->getParameter('api_social.api_endpoint'),
             'voyeur_limit' => $this->container->getParameter('api_social.voyeur_limit'),
             'realtime_endpoint' => $this->container->getParameter('api_social.realtime_endpoint')
         );

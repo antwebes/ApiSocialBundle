@@ -40,5 +40,6 @@ class ApiSocialExtension extends Extension
         $container->setParameter('api_social.voyeur_limit', $config['voyeur_limit']);
         $container->setParameter('api_social.realtime_endpoint',$config['realtime_endpoint']);
         $container->setParameter('api_social.profile_properties_to_check', $config['profile_properties_to_check']);
+        $container->setParameter('api_social.api_endpoint',$config['api_endpoint']);
     }
 }

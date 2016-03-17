@@ -57,6 +57,10 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
+        $rootNode->children()
+            ->scalarNode('api_endpoint')->end()
+        ;
+
         return $treeBuilder;
     }
 }
