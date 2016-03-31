@@ -60,6 +60,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
         $this->container->set('security.context',$this->securityContextMock);
         $this->container->setParameter('users.language','en');
         $this->container->setParameter('chatea_client.countries_file', $this->countriesPath);
+        $this->container->setParameter('api_social.api_endpoint', 'http://an.api.com');
 
         $this->userController = new UserController();
         $this->userController->setContainer($this->container);
