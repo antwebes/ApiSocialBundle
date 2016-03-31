@@ -52,12 +52,6 @@ class Configuration implements ConfigurationInterface
         ;
 
         $rootNode->children()
-            ->arrayNode('profile_properties_to_check')
-                ->prototype('scalar')->end()
-            ->end()
-        ;
-
-        $rootNode->children()
             ->scalarNode('api_endpoint')->end()
         ;
 
