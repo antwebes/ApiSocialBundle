@@ -92,6 +92,7 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
         $this->container->set('security.token_storage', $tokenStorageMock);
         $this->container->set('security.context', $this->securityContext);
         $this->container->setParameter('api_endpoint', 'http://an.api.com');
+        $this->container->setParameter('channels_orders', array('name' => 'asc'));
 
         $this->channelController = new ChannelController();
         $this->channelController->setContainer($this->container);
@@ -175,7 +176,7 @@ class ChannelControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->mockTemplatingRenderResponse($view, $parameters);
 
-        $response = $this->channelController->renderChannelsAction($request,1,1,array('name' => 'asc'), null, 'small');
+        $response = $this->channelController->renderChannelsAction($request,1,1, null, 'small');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
