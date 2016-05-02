@@ -17,6 +17,10 @@
 				<span>
 					{{ user.city.getName(app.request.locale) }}{% if user.city.province is not empty %}, {{ user.city.getProvince(app.request.locale) }}{% endif %}{% if user.city.region is not empty %}, {{ user.city.getRegion(app.request.locale) }}{% endif %}{% if user.city.country is not empty %}, {{ user.city.getCountry(app.request.locale) }}{% endif %}
 				</span>
+			{% elseif user.country is not null %}
+				<span>
+					{{ user.country.getName(app.request.locale) }}
+				</span>
 			{% else %}
 				-
 			{% endif %}
