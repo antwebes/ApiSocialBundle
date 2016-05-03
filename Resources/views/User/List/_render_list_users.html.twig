@@ -10,18 +10,15 @@
         <span class="label-holder">
             <span class="label label-info arrowed"><strong><i class="fa fa-user"></i> {{ user.username }}</strong></span>
         </span>
-            {% if user.city %}
-                {% if user.city.name != 'no_city' %}
-                    <span class="label-holder">
-                <span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.name }}</span>
-            </span>
-                {% else %}
-                    <span class="label-holder">
-                    <span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.country }}</span>
+            {% if user.city is not null %}
+				<span class="label-holder">
+                	<span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.city.name }}</span>
+            	</span>
+			{% elseif user.country is not null %}
+				<span class="label-holder">
+                    <span class="label label-danger"><i class="fa fa-map-marker"></i> {{ user.country.getName(app.request.locale) }}</span>
                 </span>
-                {% endif %}
-            {% endif %}
-
+			{% endif %}
         </div>
     </a>
 </li>
