@@ -24,9 +24,9 @@ user.photos.has_not: El usuario no tienen ninguna foto
 user.profile.gender.male: Hombre
 user.profile.gender.female: Mujer
 user.profile.gender.other: "-"
-user.profile.seeking.women : Mujeres
-user.profile.seeking.men : Hombres
-user.profile.seeking.both : Busco tanto hombres como mujeres
+user.profile.seeking.women : Socio
+user.profile.seeking.men : Inversor
+user.profile.seeking.both : Networking
 user.profile.visits: Número de usuarios registrados que han visitado este perfil
 user.profile.share: Compartir
 user.owner_of_channels: 'Canales de los cuales es propietario'
