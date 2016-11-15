@@ -30,7 +30,8 @@
     	</div>
 		<div class="col-sm-8 col-xs-12">
 			<h4 class="text-center">{{ 'user.search.advanced' | trans({}, 'User') }}</h4>
-		    {{ render(controller('ApiSocialBundle:User:renderAdvancedSearch', {'options': advancedSearch})) }}
+{#		    {{ render(controller('ApiSocialBundle:User:renderAdvancedSearch', {'options': advancedSearch})) }}#}
+		    {{ render(controller('ApiSocialBundle:User:renderAdvancedNetworkingSearch', {'options': advancedSearch})) }}
 		</div>
 	</div>
 	

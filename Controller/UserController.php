@@ -42,7 +42,9 @@ class UserController extends BaseController
             if(isset($advancedSearch['gender']) && !empty($advancedSearch['gender'])){
                 $filters['gender'] = $advancedSearch['gender'];
             }
-//            die(print_r($filters));
+            if(isset($advancedSearch['seeking']) && !empty($advancedSearch['seeking'])){
+                $filters['seeking'] = $advancedSearch['seeking'];
+            }
         }
 
         $usersManager = $this->get('api_users');
@@ -220,6 +222,32 @@ class UserController extends BaseController
                 'countries'			=> $countries,
                 'selectedCountry' 	=> $selectedCountry,
                 'selectedGender' 	=> $selectedGender,
+            	'optionsDesign'		=> $optionsDesign
+            ));
+    }
+    
+    /**
+     * 
+     * @param array $options
+     * @param array $optionsDesign | array('btn-delete' : false|true , 'style' : index|rightbar , 'btn-search': 'white | success')
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renderAdvancedNetworkingSearchAction($options = array(), $optionsDesign = array())
+    {
+    	//by default btn delete has exist
+    	if (!array_key_exists('btn-delete', $optionsDesign)){
+    		$optionsDesign['btn-delete'] = true;
+    	}
+
+        $selectedSeeking = '';
+
+        if(isset($options['gender'])){
+            $selectedSeeking = $options['gender'];
+        }
+
+        return $this->render('ApiSocialBundle:User:Common/advanced_networking_search.html.twig',
+            array(
+                'selectedGender' 	=> $selectedSeeking,
             	'optionsDesign'		=> $optionsDesign
             ));
     }
