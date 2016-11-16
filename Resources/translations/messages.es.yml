@@ -15,7 +15,7 @@ user.fan_of_channels: 'Canales de los cuales es fan'
 'user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with': '__user, social, chat, details, profile, %username%, photos %username%, befriend %username%, make friends with'
 'Personal info of %username%': 'Perfil de %username%'
 'Personal info of %username%, see photos and chat free with %username%': 'Perfil de %username%, ve fotos y chatea gratis con %username%'
-user.profile.share.social_networks: 'Perfil de %username%, únete a la mayor comunidad hispana de #chat'
+user.profile.share.social_networks: 'Perfil de %username%, en la red de emprendores de #mansPaideia'
 user.account-verified: Cuenta verificada
 user.view_all_visitis: "Ver todas"
 user.view_visits.not_premium: "Para poder ver todos los usuarios que han visitado su perfil usted debe ser un usuario destacado"
