@@ -75,6 +75,7 @@ class PhotoControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->container = new ContainerBuilder();
         $this->container->set('twig', $this->twigMock);
+        $this->container->set('session', $this->session);
         $this->container->set('templating',$this->templatingMock);
         $this->container->set('router', $this->routerMock);
         $this->container->set('api_photos', $this->mockPhotoManager);

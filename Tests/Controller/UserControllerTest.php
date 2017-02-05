@@ -52,12 +52,15 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
                 ->getMock();
         $this->securityContextMock = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
 
+        $tokenStorageMock = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface');
+
         $this->countriesPath = __DIR__ . '/../fixtures/countries.json';
 
         $this->container = new ContainerBuilder();
         $this->container->set('api_users',$this->mockUserManager);
         $this->container->set('templating',$this->templatingMock);
         $this->container->set('security.context',$this->securityContextMock);
+        $this->container->set('security.token_storage',$this->securityContextMock);
         $this->container->setParameter('users.language','en');
         $this->container->setParameter('chatea_client.countries_file', $this->countriesPath);
         $this->container->setParameter('api_social.api_endpoint', 'http://an.api.com');
@@ -167,7 +170,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->method('renderResponse')
             ->willReturn(new Response());
 
-        $response = $this->userController->showAction('alex',1);
+        $response = $this->userController->showAction($request, 'alex',1);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -202,7 +205,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->method('renderResponse')
             ->willReturn(new Response());
 
-        $response = $this->userController->showAction('alex',1);
+        $response = $this->userController->showAction($request, 'alex',1);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -242,7 +245,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->with(1, false)
             ->willReturn($user);
 
-        $response = $this->userController->showAction('alex',1);
+        $response = $this->userController->showAction($request, 'alex',1);
 
         $this->assertEquals(302, $response->getStatusCode());
     }
@@ -268,7 +271,7 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->willReturn(null);
 
         try{
-            $response = $this->userController->showAction('alex',1);
+            $response = $this->userController->showAction($request,'alex',1);
         }catch(NotFoundHttpException $e){
             return;
         }

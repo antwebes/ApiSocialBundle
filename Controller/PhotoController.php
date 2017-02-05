@@ -99,11 +99,11 @@ class PhotoController extends BaseController
         try{
             $this->get('api_photos')->delete($photo->getId());
 
-            $this->addFlashNotice('notice', $this->translate('user.photo.remove.success', array(), 'User'));
+            $this->addFlash('notice', $this->translate('user.photo.remove.success', array(), 'User'));
 
             return $this->redirect($this->generateUrl('ant_user_user_photos_show', array('id' => $user->getId())));
         }catch(\Exception $e){
-            $this->addFlashNotice('error', $this->translate('user.photo.remove.failure', array(), 'User'));
+            $this->addFlash('error', $this->translate('user.photo.remove.failure', array(), 'User'));
 
             return $this->redirect($this->generateUrl('ant_user_user_photo_show', array('idUser' => $user->getId(), 'id' => $photo->getId())));
         }
@@ -165,14 +165,6 @@ class PhotoController extends BaseController
     private function translate($message, $parameters = array(), $domain = null)
     {
         return $this->get('translator')->trans($message, $parameters, $domain);
-    }
-
-    private function addFlashNotice($level, $message)
-    {
-        $this->getRequest()->getSession()->getFlashBag()->add(
-            $level,
-            $message
-        );
     }
 
     private function translateServerError($errorMessage, $translationContext = 'User')

@@ -272,16 +272,6 @@ class ChannelController extends BaseController
         }
     }
 
-    protected function addFlash($level, $message)
-    {
-        $request = $this->getRequest();
-
-        $request->getSession()->getFlashBag()->add(
-            $level,
-            $message
-        );
-    }
-
     /**
      * @APIUser
      * @param $slug

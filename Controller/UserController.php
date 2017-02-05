@@ -21,7 +21,7 @@ class UserController extends BaseController
         $search = $request->get('search',null);
         $advancedSearch = $request->get('advanced_search', null);
 
-        if($this->pageOneGivenByUrl()){
+        if($this->pageOneGivenByUrl($request)){
             return $this->redirect($this->generateUrl('ant_user_user_users'));
         }
         $filters = array('language' => $this->container->getParameter('users.language'));
@@ -77,13 +77,13 @@ class UserController extends BaseController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($username, $user_id = null)
+    public function showAction(Request $request, $username, $user_id = null)
     {
         $user = null;
-        $isXmlHttpRequest = $this->getRequest()->isXmlHttpRequest();
+        $isXmlHttpRequest = $request->isXmlHttpRequest();
         $user = $this->findUserByUsernameOrId($username, $user_id, $isXmlHttpRequest);
 
-        return $this->renderOrRedirect($user, $isXmlHttpRequest);
+        return $this->renderOrRedirect($request, $user, $isXmlHttpRequest);
     }
 
     /**
@@ -235,9 +235,9 @@ class UserController extends BaseController
         return $this->findApiEntityOrThrowNotFoundException('api_users', 'findById', $parametes);
     }
 
-    private function renderOrRedirect($user, $isXmlHttpRequest)
+    private function renderOrRedirect(Request $request, $user, $isXmlHttpRequest)
     {
-        if ($this->mustRedirect($user)){
+        if ($this->mustRedirect($request, $user)){
             return $this->redirect($this->generateUrl(
                 'ant_user_user_show',
                 array('username' => $user->getUsernameCanonical(), 'user_id' => $user->getId()))
@@ -260,16 +260,13 @@ class UserController extends BaseController
     /**
      * @return bool if the the first page was requested by url
      */
-    private function pageOneGivenByUrl()
+    private function pageOneGivenByUrl(Request $request)
     {
-        $request = $this->getRequest();
-
         return $request->get('page') == 1;
     }
 
-    private function mustRedirect($user)
+    private function mustRedirect(Request $request, $user)
     {
-        $request = $this->getRequest();
         $username = $request->get('username');
         $user_id = $request->get('user_id');
 
