@@ -18,7 +18,7 @@
 	"homepage" : "https://github.com/antwebes/ApiSocialBundle",
 	"license" : "MIT",
 	"require" : {
-		"antwebes/chatea-client-bundle" : "dev-mans_networking"
+		"antwebes/chatea-client-bundle" : "dev-mans_networking_sf_28"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "@stable",
